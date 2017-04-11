@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《高性能Mysql》读书笔记——第四章schema与数据类型优化 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>Mysql Schema And Data Type</h2>
+                                <p>第四章schema与数据类型优化</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-10-14T08:01:50.000Z" itemprop="datePublished">
+          2016年10月14日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Mysql/'>Mysql</a>
+    
+    
+	
+</span>
+                <h1>《高性能Mysql》读书笔记——第四章schema与数据类型优化</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、选择数据类型"><span class="toc-text">一、选择数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#零散的注意事项："><span class="toc-text">零散的注意事项：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整型类型"><span class="toc-text">整型类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实数类型"><span class="toc-text">实数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串类型"><span class="toc-text">字符串类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#VARCHAR"><span class="toc-text">VARCHAR:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CHAR"><span class="toc-text">CHAR:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BINARY-VARBINARY"><span class="toc-text">BINARY/VARBINARY:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BLOB-TEXT"><span class="toc-text">BLOB/TEXT:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ENUM"><span class="toc-text">ENUM:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日期类型"><span class="toc-text">日期类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DATETIME"><span class="toc-text">DATETIME:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TIMESTAMP"><span class="toc-text">TIMESTAMP:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录毫秒级时间的办法"><span class="toc-text">记录毫秒级时间的办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#位类型"><span class="toc-text">位类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BIT："><span class="toc-text">BIT：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SET："><span class="toc-text">SET：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、选择标识符的类型"><span class="toc-text">二、选择标识符的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、特殊类型的数据"><span class="toc-text">三、特殊类型的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP地址的存储"><span class="toc-text">IP地址的存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、一些应该避免的情况"><span class="toc-text">四、一些应该避免的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、范式和反范式"><span class="toc-text">五、范式和反范式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-第一范式"><span class="toc-text">1.第一范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-第二范式"><span class="toc-text">2.第二范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-第三范式"><span class="toc-text">3.第三范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-补充范式"><span class="toc-text">4.补充范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范式的优点"><span class="toc-text">范式的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范式的缺点"><span class="toc-text">范式的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反范式"><span class="toc-text">反范式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、缓存表、汇总表、物化视图、计数器表"><span class="toc-text">六、缓存表、汇总表、物化视图、计数器表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、ALTER-TABLE操作优化"><span class="toc-text">七、ALTER TABLE操作优化</span></a></li></ol>
+</div>
+			
+      		<p>本章主要是在讲一些建表时候应该注意的性能优化问题，各种数据类型的选择等。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
+<h2 id="一、选择数据类型"><a href="#一、选择数据类型" class="headerlink" title="一、选择数据类型"></a>一、选择数据类型</h2><h3 id="零散的注意事项："><a href="#零散的注意事项：" class="headerlink" title="零散的注意事项："></a>零散的注意事项：</h3><ul>
+<li>更小的更好：尽量使用可以正确存储数据的最小数据类型但是要确保没有低估需要存储的值的范围，因为在未来修改数据类型是痛苦的工作。</li>
+<li>简单就好：尽量使用简单的数据类型，比如整型优于字符类型，字符类型有字符集和校对规则，因此更加复杂。使用内建日期类型而不是字符串保存日期和时间，用整型存储Ip地址而不是字符串。</li>
+<li>尽量避免NULL：让一个列为可以NULL的会导致耗费很多的存储空间，尤其是那些预计会建立索引的列，可NULL的列会导致索引的统计和值比较更加复杂。</li>
+</ul>
+<h3 id="整型类型"><a href="#整型类型" class="headerlink" title="整型类型"></a>整型类型</h3><p>基本介绍可见这篇文章：<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a></p>
+<ul>
+<li>整数计算一般使用BIGINT，即使在32位环境也是这样</li>
+<li>INT(11)可以指定命令行客户端显示字符的个数，但是对于真正存储值和计算是没有意义的，不会真的限制字符长度</li>
+</ul>
+<h3 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h3><ul>
+<li>FLOAT\DOUBLE类型支持单精度浮点运算和双精度浮点运算，这种计算是近似的，不精确的，这是现行计算机架构的通病，是由底层决定的，不是Mysql自己导致的。</li>
+<li>DECIMAL类型支持精确的计算，存储精确的小数。但是这是有代价的，这种类型的运算比浮点运算慢。 占用空间更多。</li>
+<li>书中推荐使用BIGINT来存储精确数字，比如要精确到0.0001，那么每次存储数字的时候只要乘以一万就可以了。取出数字后再除以一万。这样可以避免浮点运算的精度问题，又不用付出DECIMAL高昂的代价。</li>
+</ul>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><h4 id="VARCHAR"><a href="#VARCHAR" class="headerlink" title="VARCHAR:"></a>VARCHAR:</h4><p>下面这些情况推荐使用VARCHAR</p>
+<ul>
+<li>列的最大长度比平均长度大的多</li>
+<li>需要UTF-8这种变长的字符编码</li>
+<li>列很少更新</li>
+<li>需要保留末尾的空格的列</li>
+</ul>
+<h4 id="CHAR"><a href="#CHAR" class="headerlink" title="CHAR:"></a>CHAR:</h4><p>下面这些情况推荐使用CHAR</p>
+<ul>
+<li>定长的列</li>
+<li>经常更新的列</li>
+<li>非常短的列，比如在单字节字符集的情况下存储Y和N，CHAR只需要一个字节，VARCHAR需要两个。</li>
+</ul>
+<h4 id="BINARY-VARBINARY"><a href="#BINARY-VARBINARY" class="headerlink" title="BINARY/VARBINARY:"></a>BINARY/VARBINARY:</h4><p>下面这些情况推荐使用BINARY/VARBINARY</p>
+<ul>
+<li>需要存储二进制数据并且希望比较时直接比较字节而不是字符</li>
+<li>想要大小写敏感地比较数值(所有的utf8的校对规则都是不支持大小写敏感的，因此你用了utf8的CHAR/VARCHAR是大小写不敏感的)</li>
+</ul>
+<p>VARCHAR既然是变长的，那么VARCHAR(5)和VARCHAR(200)不是一样吗？<br>答案是不一样，虽然他们存储某个字符串时，占用的空间是一样的，但是Mysql在使用内存临时表进行排序或者操作时，以及磁盘临时表来排序时，分配的空间却是与此有关的。<br>因此结论是尽可能地分配真实的字符长度。</p>
+<h4 id="BLOB-TEXT"><a href="#BLOB-TEXT" class="headerlink" title="BLOB/TEXT:"></a>BLOB/TEXT:</h4><p>要存储很大的数据时使用这两种类型，其中，BLOB存储二进制数据，因此可以存储图片甚至是word文档都没问题。<br>TEXT类型就只能存储字符串了，而且有字符集和校对规则。</p>
+<h4 id="ENUM"><a href="#ENUM" class="headerlink" title="ENUM:"></a>ENUM:</h4><p>下面这些情况推荐使用ENUM:</p>
+<ul>
+<li>在表定义之后，ENUM集合不会有变动或者只在末尾增加新的枚举类型，否则只能使用ALTER TABLE来修改字符串集合，这样比较慢，还有其他问题。</li>
+<li>确定这个枚举列不需要和其他CHAR/VARCHAR关联查询，如果有这样的就不推荐，没有就可以用</li>
+</ul>
+<h3 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h3><h4 id="DATETIME"><a href="#DATETIME" class="headerlink" title="DATETIME:"></a>DATETIME:</h4><p>下面这些情况推荐使用DATETIME:</p>
+<ul>
+<li>需要存储1970年以前的时间，或者2037年以后的时间</li>
+<li>需要存储不会根据时区变化的时间</li>
+</ul>
+<h4 id="TIMESTAMP"><a href="#TIMESTAMP" class="headerlink" title="TIMESTAMP:"></a>TIMESTAMP:</h4><p>下面这些情况推荐使用TIMESTAMP:</p>
+<ul>
+<li>默认情况</li>
+<li>不会在意不同时区显示不同时间的情况</li>
+</ul>
+<h4 id="记录毫秒级时间的办法"><a href="#记录毫秒级时间的办法" class="headerlink" title="记录毫秒级时间的办法"></a>记录毫秒级时间的办法</h4><p>Mysql没有日期类型能记录微秒级时间。<br>书中提供了两种方法：</p>
+<ol>
+<li>使用BIGINT存储微秒级的时间戳</li>
+<li>使用DOUBLE存储秒之后的小数部分</li>
+</ol>
+<h3 id="位类型"><a href="#位类型" class="headerlink" title="位类型"></a>位类型</h3><h4 id="BIT："><a href="#BIT：" class="headerlink" title="BIT："></a>BIT：</h4><ul>
+<li>这个类型行为怪异，还是不用的好…………</li>
+</ul>
+<h4 id="SET："><a href="#SET：" class="headerlink" title="SET："></a>SET：</h4><ul>
+<li>适用于不经常改变SET列集合的情况</li>
+</ul>
+<h2 id="二、选择标识符的类型"><a href="#二、选择标识符的类型" class="headerlink" title="二、选择标识符的类型"></a>二、选择标识符的类型</h2><p>有些列是作为标识的，比如性别，比如某个表的id等等，这些列经常被用来寻找其他的列，或者作为外键使用。<br>下面是选择标识列类型的注意事项:</p>
+<ul>
+<li>确保某一种标识一旦选定了类型，就在所有关联的表中使用同一类型，包括UNSIGNED这样的属性。</li>
+<li>在满足值的要求，并充分考虑到未来扩展性的情况下，应使用尽可能小的数据类型，比如存储美国各州的名字(另一张表)的id列，不需要INT，TINYINT就够了。</li>
+<li>整数&gt;ENUM/SET&gt;字符串 整数的性能和扩展性最好，字符串最糟糕，占用很多空间，性能也差的多</li>
+<li>对于MD5(),SHA1(),UUID()这种产生随机字符串的函数要特别注意，这些函数生成的值会导致插入和查询变得很慢</li>
+<li>存储UUID值，要去掉’-‘号，或者用UNHEX()函数转换UUID为16字节的数字，存储在BINATY(16)中。检索时再通过HEX()格式化成十六进制形式。</li>
+</ul>
+<p>tips:书中写，要当心自动生成的schema，包括ORM框架生成的，这些生成的schema没有按照最优的设计来存储数据。</p>
+<h2 id="三、特殊类型的数据"><a href="#三、特殊类型的数据" class="headerlink" title="三、特殊类型的数据"></a>三、特殊类型的数据</h2><h3 id="IP地址的存储"><a href="#IP地址的存储" class="headerlink" title="IP地址的存储"></a>IP地址的存储</h3><p>人们经常用VARCHAR(15)来存储IP地址，更好的实践是用无符号整数来存储，比如UNSIGNED INT来存储。<br>但是IP地址的小数点怎么办呢？<br>Mysql提供了函数来处理这种格式，INET_ATON()可以将IP地址变成无符号整数，INET_NTOA()则可以反过来把无符号整数搞成IP地址。</p>
+<h2 id="四、一些应该避免的情况"><a href="#四、一些应该避免的情况" class="headerlink" title="四、一些应该避免的情况"></a>四、一些应该避免的情况</h2><p>以下设计应该尽量避免：</p>
+<ul>
+<li>太多的列。因为Mysql会在工作时，从存储引擎层和服务器层之间通过行缓冲格式拷贝数据，然后将缓冲内容在服务器端解码成各个列，因此，行太多的话，这一操作的开支非常高。事实上，之前我写的文章里描述过，Mysql根据各个列数据类型的不同，是可以算出一个最大列数的，实际情况支持的列数只会比理论值更少。</li>
+<li>太多关联。书中推荐，追求查询速度和并发性，单个查询最好是12个表以内关联。尤其注意不要使用“实体-属性-值”这种三列设计模式，这种模式会导致很多自关联，甚至有可能超过每次查询61个表这个限制。</li>
+<li>避免过度使用枚举。</li>
+<li>避免在应该使用ENUM的情况下使用SET，比如存储是Y还是N的列。如果不会同时出现YN，就不需要SET类型</li>
+<li>不要太多的NULL，但是也不要不用NULL去用-1这种奇怪的值，如果某些场景非用不可，NULL比起神奇常数是更好的选择。</li>
+</ul>
+<h2 id="五、范式和反范式"><a href="#五、范式和反范式" class="headerlink" title="五、范式和反范式"></a>五、范式和反范式</h2><p>范式是数据库都有的概念，又称规范化。<br>主要是在设计数据库字段时遵循的规范，可以有效地避免一些表的设计问题。<br>范式主要分为，第一范式、第二范式、第三范式、BC范式(又叫第三范式补充范式)、第四范式等。<br>本文主要介绍前三个范式和补充范式。</p>
+<h3 id="1-第一范式"><a href="#1-第一范式" class="headerlink" title="1.第一范式"></a>1.第一范式</h3><p>表中的每个列都是不可再分的列，就满足第一范式。<br>比如联系人表里有电话字段，电话有可能是座机电话，也有可能是移动电话，那么就不符合第一范式的要求，应当将字段分开，变成两个字段，座机电话和移动电话。</p>
+<h3 id="2-第二范式"><a href="#2-第二范式" class="headerlink" title="2.第二范式"></a>2.第二范式</h3><p>表首先要满足第一范式，然后表的每个非主属性完全函数依赖于码，则满足第二范式。<br>解释一下专用术语：</p>
+<ul>
+<li>非主属性，即不在表的主键中的字段，比如订单表的主键是订单id和产品id两者合起来称为一个主键，那么除了订单id和产品id的其他字段就是非主属性。相应地，订单id和产品id就是主属性。</li>
+<li>完全函数依赖，首先解释函数依赖，函数依赖其实就是数学上函数F(x)这样一种关系，给一个x的值，必然得到一个y值。给一个码值，必然得到一个非主属性的值。至于完全函数依赖，那是因为码有可能是由多个属性组成，如果码中的部分属性和该非主属性满足函数依赖关系，就只能叫部分依赖。<br>说通俗点好了，选定了表中组成主键的所有列的值，那么这些列的值组成的集合所对应的非主键列，它们的值都是唯一的。</li>
+<li>码，其实就是通常意义上的主键。(实际上还是有点儿不同的，主码才相当于主键，码相当于键，就是只要它的值能唯一标识一行数据，都可以称为码或者键。在Mysql当中，建立唯一索引的列应该可以称为键)</li>
+</ul>
+<p>第二范式经常使用，当然，前提是你的表的主键由多个列组成，单主键的情况下，只要所有的非主属性函数依赖这个主键就行了。<br>举个例子，订单表里有订单id和商品id两个共同形成主键，如果表中还有字段是商品的单价，那商品的单价只由商品id来决定，不由订单id来决定，显然就是不满足第二范式的。<br>解决方法就是把这些只依赖商品id的字段比如商品单价，拆分出去，拆到一个只有商品id作为主键的表里去。</p>
+<h3 id="3-第三范式"><a href="#3-第三范式" class="headerlink" title="3.第三范式"></a>3.第三范式</h3><p>这个范式比较复杂，大致意思就是说，在满足第二范式的基础上，如果表中不存在非主属性部分依赖或者传递依赖于码，那表满足第三范式。</p>
+<ul>
+<li>部分依赖，上面第二范式已经提到过了，就是码的部分属性能唯一地决定某个属性值，那它就是部分依赖。</li>
+<li>传递依赖，就是A依赖于B，B又依赖于C这种。在这里就是非主属性A依赖于某个属性或属性组B，然后B又依赖于码C，那么这就是传递依赖。</li>
+</ul>
+<p>举例子，学生表里有学生id，学生姓名，系id，系名，系地址。<br>这例子中，学生id是主键，也就是码，学生姓名依赖于学生id，没问题。系id依赖于学生id也没问题。系名呢？系地址呢？事实上，系名和系地址都依赖于系id，然后通过系id依赖于学生id，才传递依赖于学生id。所以系名和系地址是多余的，应该被拆出到新表中。<br>很多人搞混第三范式和第二范式，其实很容易分清。<br>第三范式关注传递依赖，即使一张表不满足第三范式，它所有的依赖，最终还是会依赖到主键上。如果你发现你的表的字段存在传递依赖，但是却只是主键之外的字段相互依赖着玩儿，根本没有主键什么事儿，那这个表肯定是不满足第二范式而不是第三范式。<br>记住，主键可不一定是某个列，主键可以是多个列的集合，这种情况下，虽然你的字段有依赖到组成主键的某些列，但是只要不是组成主键的全部列，那它就不是主键，就不是依赖主键，就不会满足第二范式。<br>主键如果被定义为A和B和C，那么就ABC三者都在一起才能叫主键，少一个都只能叫属性组，和主键没关系。</p>
+<h3 id="4-补充范式"><a href="#4-补充范式" class="headerlink" title="4.补充范式"></a>4.补充范式</h3><p>这个范式是补充第三范式的，又叫BC范式(因Boyce和Codd共同提出而得名)。<br>在第三范式的基础上，它要求任何一个属性对不包含它的码都是完全函数依赖。大概意思就是管你这个列是不是组成主键的列，都必须由主键以及其他键唯一的确定。<br>另外，还要求任何属性不能依赖非码，就是除了主键和其他的键以外，其他的任何列以及它们的组合都不能唯一地去确定另外的一些列。依赖关系不能存在于键之外。<br>补充范式的限制已经强到了令人发指的地步，在日常使用中，很少有全部遵守补充范式的数据库设计出现。<br>然而这还不算最强的，还有第四范式和第五范式。但是它们很少会被人们用到，就不介绍了。</p>
+<h3 id="范式的优点"><a href="#范式的优点" class="headerlink" title="范式的优点"></a>范式的优点</h3><p>范式有优点，所以才会被人们使用，显而易见的优点是最大限度地防止数据库表的冗余设计以节约数据库表的存储空间，防止冗余设计还可以消除某些更新、插入、删除操作带来的麻烦。如数据不一致问题，关联新数据插入问题，关联数据删除问题。</p>
+<h3 id="范式的缺点"><a href="#范式的缺点" class="headerlink" title="范式的缺点"></a>范式的缺点</h3><p>范式的缺点就是将原本放在同一张表的字段分拆成了多张表，导致查询效率降低，需要连接多张表查询才能得到结果。而且，原本可以放在同一张表建立索引的字段也有可能因此享受不到索引的好处。</p>
+<h3 id="反范式"><a href="#反范式" class="headerlink" title="反范式"></a>反范式</h3><p>反范式就是不按照范式的规定来设计表。这样可以避免连接太多表查询。<br>在实际使用中，很少有完全的反范式设计也很少有完全的范式设计。<br>范式和反范式总是共同使用，以此来灵活地解决实际问题。尤其是在一些表上冗余一些字段是很常见的做法，尽管有可能带来数据不一致问题，但是如果能够妥善解决，也是可以接受的。</p>
+<h2 id="六、缓存表、汇总表、物化视图、计数器表"><a href="#六、缓存表、汇总表、物化视图、计数器表" class="headerlink" title="六、缓存表、汇总表、物化视图、计数器表"></a>六、缓存表、汇总表、物化视图、计数器表</h2><p>写的太简单，都略过，之后的章节应该还会详细解释</p>
+<h2 id="七、ALTER-TABLE操作优化"><a href="#七、ALTER-TABLE操作优化" class="headerlink" title="七、ALTER TABLE操作优化"></a>七、ALTER TABLE操作优化</h2><ul>
+<li>ALTER TABLE操作真的非常费时</li>
+<li>费时的原因是常常需要新建表，并将原表数据插入新表，再删除原表，整个过程都是阻塞式的，服务会在这期间不可用</li>
+<li>解决方案有两种：一种是在一台不提供服务的机器上进行ALTER TABLE操作，然后热切换过去;另一种是影子拷贝，建立一张与原表一模一样的影子表，然后影子表的名字改成原表的名字，原表的名字改成其他的，由于改名字的操作时非阻塞的，而且非常快，因此是有效的。</li>
+<li>有时候只是改变某个列的配置，比如默认值等等，可以使用ALTER TABLE XXX.XXX ALTER COLUMN XXXX;使用ALTER COLUMN不要使用MODIFY COLUMN，这样修改操作是非阻塞的。</li>
+<li>骇客做法，书中介绍了一种慎用的方法，就是直接修改存储表结构的.frm文件。创建一个与原表一样的新表，然后修改新表的结构，然后锁住原表，交换两个表的.frm文件，然后解锁原表，删除新表，这样原表的结构就被更改了。</li>
+<li>骇客操作仅限于给列增加AUTO_INCREMENT属性以及增加、移除、或更改ENUM\SET常量。其他情况下，表的数据必须重新构建，光修改表的结构文件是不够的。</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-12-24T13:29:35.503Z" itemprop="datePublished">
+					2016年12月24日 21:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/10/21/mysql-index/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第五章创建高性能的索引
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/09/29/redis-learn/">
+        redis学习笔记 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/10/14/mysql-datatype/" data-title="《高性能Mysql》读书笔记——第四章schema与数据类型优化" data-url="/2016/10/14/mysql-datatype/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第六章 方法 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第六章</h2>
+                                <p>方法</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-03-21T14:25:55.000Z" itemprop="datePublished">
+          2017年3月21日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第六章 方法</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十八条-检查参数的有效性"><span class="toc-text">第三十八条 检查参数的有效性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法的处理"><span class="toc-text">私有方法的处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十九条-必要时进行保护性拷贝"><span class="toc-text">第三十九条 必要时进行保护性拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些要注意的地方"><span class="toc-text">一些要注意的地方</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十条-谨慎设计方法签名"><span class="toc-text">第四十条 谨慎设计方法签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#谨慎选择方法的名称"><span class="toc-text">谨慎选择方法的名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要过于追求提供便利的方法"><span class="toc-text">不要过于追求提供便利的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免过长的参数列表"><span class="toc-text">避免过长的参数列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先使用接口而不是类"><span class="toc-text">优先使用接口而不是类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于boolean参数，要优先使用带有两个元素的枚举类型"><span class="toc-text">对于boolean参数，要优先使用带有两个元素的枚举类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十一条-慎用重载"><span class="toc-text">第四十一条 慎用重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十二条-慎用可变参数"><span class="toc-text">第四十二条 慎用可变参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十三条-返回零长度的集合而不是Null"><span class="toc-text">第四十三条 返回零长度的集合而不是Null</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十四条-为所有导出的API元素编写文档注释"><span class="toc-text">第四十四条 为所有导出的API元素编写文档注释</span></a></li></ol>
+</div>
+			
+      		<p>本章主要介绍一些方法级别的技巧和需要注意的问题。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第三十八条-检查参数的有效性"><a href="#第三十八条-检查参数的有效性" class="headerlink" title="第三十八条 检查参数的有效性"></a>第三十八条 检查参数的有效性</h2><p>关于方法体的第一个原则就是：<strong>应该在错误发生之后尽快检测出错误</strong><br>如果不是这样，那么当错误发生时，很难追踪错误的根源。<br>本条建议就是遵循这个原则，在你的方法体开头立刻检查入参的有效性，抛出含义明确的异常，并且在Java doc文档中指出入参的限制条件以及异常抛出的原因。<br>如果没有这么做，那么你的方法有可能会失败，更糟糕的是，你的方法不会失败，会返回错误的值，错误的值在另一个地方造成失败。</p>
+<h3 id="私有方法的处理"><a href="#私有方法的处理" class="headerlink" title="私有方法的处理"></a>私有方法的处理</h3><p>私有方法并未导出给其他人使用，作为方法的创建者和使用者，你自己能保证入参的正确性，作者的建议是使用断言，即assert关键字。<br>原因是：assert关键字只有在启动时传给解释器-ea这个参数才会生效，这样你自己测试的时候开启断言，用户使用的时候关闭断言，保证了最小的性能开销。<br>事实上，现在看到的更多的做法是，压根不检查入参，只要你保证为调用这个私有方法的方法编写了单元测试，并验证了私有方法不会在所有情况下传入非法入参，不检查入参也是可以接受的。<br>你甚至可以为私有的方法编写单元测试，当然，这需要额外的单元测试框架的支持。<br>另外，在一些检查开销很贵或者不切实际的时候，也可以不必检查入参。有时候，像<code>Collections.sort()</code>这样的方法就隐式地为我们检查了入参，因此，也不必再额外地重复检查。</p>
+<h2 id="第三十九条-必要时进行保护性拷贝"><a href="#第三十九条-必要时进行保护性拷贝" class="headerlink" title="第三十九条 必要时进行保护性拷贝"></a>第三十九条 必要时进行保护性拷贝</h2><p>联想第十五条，可能会比较容易理解本条。<br>本条主要讲的是一个提高代码安全性的技巧，即保护性拷贝。<br>看下面的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> start</div><div class="line">	 *            the beginning of the period</div><div class="line">	 * <span class="doctag">@param</span> end</div><div class="line">	 *            the end of the period; must not precede start</div><div class="line">	 * <span class="doctag">@throws</span> IllegalArgumentException</div><div class="line">	 *             if start is after end</div><div class="line">	 * <span class="doctag">@throws</span> NullPointerException</div><div class="line">	 *             if start or end is null</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start, Date end)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (start.compareTo(end) &gt; <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + end);</div><div class="line">		<span class="keyword">this</span>.start = start;</div><div class="line">		<span class="keyword">this</span>.end = end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Repaired constructor - makes defensive copies of parameters - Page 185</span></div><div class="line">	<span class="comment">// Stops first attack</span></div><div class="line">	<span class="comment">// public Period(Date start, Date end) &#123;</span></div><div class="line">	<span class="comment">// this.start = new Date(start.getTime());</span></div><div class="line">	<span class="comment">// this.end = new Date(end.getTime());</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// if (this.start.compareTo(this.end) &gt; 0)</span></div><div class="line">	<span class="comment">// throw new IllegalArgumentException(start +" after "+ end);</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> start;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Repaired accessors - make defensive copies of internal fields - Page 186</span></div><div class="line">	<span class="comment">// Stops second attack</span></div><div class="line">	<span class="comment">// public Date start() &#123;</span></div><div class="line">	<span class="comment">// return new Date(start.getTime());</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// public Date end() &#123;</span></div><div class="line">	<span class="comment">// return new Date(end.getTime());</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> start + <span class="string">" - "</span> + end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Remainder omitted</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>忽略注释的部分，可以看到，这是一个表示时间范围的类，表面上看起来，域是final的，而且没有提供Setter方法，这应该是一个不可变的类。<br>在构造器中，我们有一个入参检查：<strong><em>结束时间不能大于开始时间</em></strong><br>然而，由于这个类的两个域都是Date，而Date实际上是一个可变类，因此，外部仍然可以通过下述方法，攻击该不可变类，使其实例在创建后被改变：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class Attack &#123;</div><div class="line">	public static void main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">		<span class="comment">// Attack the internals of a Period instance - Page 185</span></div><div class="line">		<span class="built_in">Date</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">		<span class="built_in">Date</span> <span class="keyword">end</span> = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">		Period p = <span class="keyword">new</span> Period(start, <span class="keyword">end</span>);</div><div class="line">		<span class="keyword">end</span>.setYear(<span class="number">78</span>); <span class="comment">// Modifies internals of p!</span></div><div class="line">		<span class="keyword">System</span>.out.println(p);</div><div class="line">	</div><div class="line">		<span class="comment">// Second attack on the internals of a Period instance - Page 186</span></div><div class="line">		start = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">		<span class="keyword">end</span> = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">		p = <span class="keyword">new</span> Period(start, <span class="keyword">end</span>);</div><div class="line">		p.<span class="keyword">end</span>().setYear(<span class="number">78</span>); <span class="comment">// Modifies internals of p!</span></div><div class="line">		<span class="keyword">System</span>.out.println(p);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>要想真正让这个类成为不可变类，只有使用保护性拷贝的方法，在构造器中将对象拷贝一份存在内部的域上，而在Getter方法中也使用拷贝返回给外部用户，即使外部用户改变，也只改变的是拷贝而已。<br>例子见上面的注释部分。</p>
+<h3 id="一些要注意的地方"><a href="#一些要注意的地方" class="headerlink" title="一些要注意的地方"></a>一些要注意的地方</h3><ul>
+<li><strong>第一点</strong>，保护性拷贝一定要在入参检查之前做，因为保护性拷贝实施之前，类仍然处于危险期（英文术语，Time-of-Check/Time-of-Use,TOCTOU），在这个时期检查入参毫无意义，因为在入参检查完毕，保护性拷贝还未开始之前，外界另一个线程有可能会修改掉入参，使其非法。</li>
+<li><strong>第二点</strong>，保护性拷贝不能使用clone方法，因为不能保证clone方法一定返回的是Date对象，也有可能会被恶意的人覆盖，返回不可信的子类，不可信的子类可以在创建的时候将自己创建的实例引用存储一份在内部，然后供恶意攻击者使用，此时，即使使用了保护性拷贝，攻击者仍然能够从外部修改不可变类的内部域。</li>
+<li><strong>第三点</strong>，在Getter方法中可以使用clone方法来进行保护性拷贝，因为此时其内部的域是由你自己生成的，你能确保调用的一定是Date对象的方法，即父类的方法而非不可信子类的。</li>
+<li><strong>第四点</strong>，除了不可变类以外，只要当你接受外部传入的对象，并且一旦该对象传入，你就不能容许它再发生改变时，都应该考虑是否使用保护性拷贝。比如你使用外部传入的对象作为Map的Key，那么它就绝不能变来变去。比如你返回一个数组给客户端用，那么最好返回数组的不可变视图或者保护性拷贝。</li>
+</ul>
+<h2 id="第四十条-谨慎设计方法签名"><a href="#第四十条-谨慎设计方法签名" class="headerlink" title="第四十条 谨慎设计方法签名"></a>第四十条 谨慎设计方法签名</h2><p>下面有一些规则或者需要注意的地方：</p>
+<h3 id="谨慎选择方法的名称"><a href="#谨慎选择方法的名称" class="headerlink" title="谨慎选择方法的名称"></a>谨慎选择方法的名称</h3><p>首先要易懂，其次要保持同一个包相同的命名风格，最后应该选择大众认可的名称。</p>
+<h3 id="不要过于追求提供便利的方法"><a href="#不要过于追求提供便利的方法" class="headerlink" title="不要过于追求提供便利的方法"></a>不要过于追求提供便利的方法</h3><p>每个方法都应该尽其所能。方法太多会使得类难以学习、使用、文档化、测试和维护。对于接口而言，方法太多会加重接口实现者的负担。只有某一项操作经常被用到的时候，才考虑为它提供快捷方式，如果不能确定，还是不提供的好。（注：本文作者不能赞同书中的这种观点，《代码简洁之道》这本书告诉我们，方法应该尽可能地只干一件事，如果很多读者看到了这一条，会误以为作者宣扬把大量的逻辑都塞进同一个方法里，而不是分拆开来，这与一个方法只干一件事的原则违背。事实上，方法既不能什么都想干而变的臃肿，也不能拆分的太凌乱太琐碎。有一个度在里面。通常，多次被使用到的逻辑毫无疑问应该抽出来。仅使用一次但难以理解的逻辑也要抽出方法来，这样可以通过方法名来阐释逻辑）</p>
+<h3 id="避免过长的参数列表"><a href="#避免过长的参数列表" class="headerlink" title="避免过长的参数列表"></a>避免过长的参数列表</h3><p>四个参数是极限。超过四个参数，你就应该考虑是不是应该使用什么办法来降低参数数量。参数不能太多的原因有以下几个：</p>
+<ol>
+<li>没人能记住你的方法的参数列表，除非到声明的地方去看，现代IDE可以让你不用点进去也能看，但是那又怎样？你还是会用错，尤其参数多达10个以上时，IDE的提示框都变的很难看</li>
+<li>超长的参数列表意味着有可能要超多的参数有效性检查，参考第三十八条，当别人看你的方法的时候，前二十行都是该死的有效性检查，对阅读者毫无意义。</li>
+<li>很多个相同类型的参数放在相邻的位置简直是噩梦，不小心搞反了编译器也不会报错，但是运行时会出现难以觉察的错误。</li>
+</ol>
+<p>有几种方法可以降低参数列表的数目：</p>
+<ol>
+<li>将方法分解，每个子方法只包含一部分参数。（如果你成功使用这种方法降低了参数列表，那么说明原来的方法根本就是糟糕的设计，记得吗？方法应该尽可能地只干一件事，如果它被成功拆分了，那么极有可能是它太贪心了，干了很多事）</li>
+<li>使用辅助类来将参数打包，通常使用静态成员类来做，当你发现某一些参数总是成双成对，成群结队出现的时候，说明有一个类应该出现。</li>
+<li>应该使用Builder设计模式（见第二条），不但使用一个类把参数包装起来，还允许用户逐步地设置参数，并最终执行方法。</li>
+</ol>
+<h3 id="优先使用接口而不是类"><a href="#优先使用接口而不是类" class="headerlink" title="优先使用接口而不是类"></a>优先使用接口而不是类</h3><p>不光是参数列表，在任何地方都应该优先考虑使用接口而不是类，否则未来的某一天，你可能会后悔，发现某个方法非常满足你的要求，然而很遗憾它有一个入参问你要HashMap，可你只有一个TreeMap，怎么办？如果它问你要的是Map接口，该多么美好啊。</p>
+<h3 id="对于boolean参数，要优先使用带有两个元素的枚举类型"><a href="#对于boolean参数，要优先使用带有两个元素的枚举类型" class="headerlink" title="对于boolean参数，要优先使用带有两个元素的枚举类型"></a>对于boolean参数，要优先使用带有两个元素的枚举类型</h3><p>这种说法我还是第一次见，作者希望你在传入true或者false这种值的时候，考虑使用枚举类型替代，枚举类型标明true和false真正代表的东西。<br>比如boolean参数的名字叫做<code>isApple</code>，是苹果吗？如果是，你做一个逻辑，如果不是，你就做另一个逻辑。这时你可以用含有苹果和香蕉的枚举类型代替这个boolean参数。<br>这样做的目的是，当未来你的代码又多了一种水果，比如梨，你只需要把梨加入枚举类里就行了，如果你为了兼容梨再加一个参数，那么所有使用这个方法的地方都要改，当然你也可以再写一个方法，那也是个坏主意，因为新方法大多数逻辑都和旧方法很像。</p>
+<h2 id="第四十一条-慎用重载"><a href="#第四十一条-慎用重载" class="headerlink" title="第四十一条 慎用重载"></a>第四十一条 慎用重载</h2><p>重载指的是方法名完全一样，只有参数不同。<br>书中建议我们：</p>
+<ul>
+<li>尽可能地不使用重载（应该使用不同的方法名阐述方法能做的事情）</li>
+<li>如果使用重载，参数个数必须不相同</li>
+<li>参数个数相同的重载方法，必须保证它们的行为一模一样，即使使用它们的程序员调用错了也不会发生什么坏事</li>
+<li>参数个数相同的重载方法，如果参数相互之间一点儿关系都没有，不可以相互转换，不会给使用的人带来”我究竟该使用那个重载方法“的疑惑，那么就可以这么做</li>
+<li>多个构造器不可避免地会面临参数个数相同的重载方法这种问题，这个时候应该使用静态工厂方法替代构造器</li>
+</ul>
+<h2 id="第四十二条-慎用可变参数"><a href="#第四十二条-慎用可变参数" class="headerlink" title="第四十二条 慎用可变参数"></a>第四十二条 慎用可变参数</h2><p>可变参数指的是JDK1.5以后新增的一种方法参数，将<code>...</code>跟在参数类型后面，使得用户可在该位置传入多个相同类型的参数<br>需要注意的地方如下：</p>
+<ul>
+<li>如果用户使用可变参数方法的时候，没传可变参数，那会导致一些问题，所以通常的做法是第一个参数是固定参数，第二个参数起是可变参数，这样能保证用户传入了一个以上的参数</li>
+<li>可变参数由于每次调用方法的时候都会导致一次数组分配和初始化，因此会降低性能。解决办法是提供一个参数、两个参数、三个参数，三个参数加一个可变参数这样的一组重载方法，由于根据经验，95%的方法调用入参都在一个到三个之间，因此只有5%的调用会用到可变参数</li>
+</ul>
+<h2 id="第四十三条-返回零长度的集合而不是Null"><a href="#第四十三条-返回零长度的集合而不是Null" class="headerlink" title="第四十三条 返回零长度的集合而不是Null"></a>第四十三条 返回零长度的集合而不是Null</h2><p>当你的方法返回值是集合的时候，有一种情况你肯定需要面对：即返回结果为空的时候。<br>是返回Null还是返回空的集合？<br>书中推荐返回空的集合。因为返回Null会导致方法调用者忘记做非空判断，从而为隐藏很深的bug创造机会。<br>由于空的集合是一个不可变的集合，可以被共享，因此你可每次返回同一个空的集合。<br>JDK提供了<code>Collections.emptySet、emptyList、emptyMap</code>三个方法，每次返回同一个空的集合或Map，因此也不会产生每次返回都创建新的空数组这样的所谓性能问题。</p>
+<h2 id="第四十四条-为所有导出的API元素编写文档注释"><a href="#第四十四条-为所有导出的API元素编写文档注释" class="headerlink" title="第四十四条 为所有导出的API元素编写文档注释"></a>第四十四条 为所有导出的API元素编写文档注释</h2><p>这个就不详细讲了，总之就是应该编写JAVA Doc文档。<br>由于是使用注解的形式编写，而且现代IDE都自动帮你生成，所以没什么好讲的。<br>注解里面的文字支持Html标签。<br>注意{@code 代码片段}这样的格式可以放进代码片段而不用担心里面用到的Html符号会被识别，并且会以代码的字体渲染文本。<br>还有{@literal 普通文本}也是一样的，只不过是普通文本而非代码片段。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-04-11T15:03:32.489Z" itemprop="datePublished">
+					2017年4月11日 23:03
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/03/12/effective-java-5/">
+        《Effective Java》读书笔记——第五章 枚举和注解 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/03/21/effective-java-6/" data-title="《Effective Java》读书笔记——第六章 方法" data-url="/2017/03/21/effective-java-6/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>redis学习笔记 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>redis学习笔记</h2>
+                                <p></p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-09-29T02:14:04.000Z" itemprop="datePublished">
+          2016年9月29日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/redis/'>redis</a>
+    
+    
+	
+</span>
+                <h1>redis学习笔记</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、redis简介"><span class="toc-text">一、redis简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、环境"><span class="toc-text">二、环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、配置"><span class="toc-text">三、配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、支持的数据类型"><span class="toc-text">四、支持的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-String"><span class="toc-text">1.String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Hashes"><span class="toc-text">2.Hashes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Lists"><span class="toc-text">3.Lists</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Sets"><span class="toc-text">4.Sets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Sorted-Sets"><span class="toc-text">5.Sorted Sets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、命令"><span class="toc-text">五、命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、HyperLogLog类型"><span class="toc-text">六、HyperLogLog类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、发布订阅消息系统"><span class="toc-text">七、发布订阅消息系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、事务"><span class="toc-text">八、事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、脚本"><span class="toc-text">九、脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、管道"><span class="toc-text">十、管道</span></a></li></ol>
+</div>
+			
+      		<p>redis 学习笔记<br><a id="more"></a></p>
+<h2 id="一、redis简介"><a href="#一、redis简介" class="headerlink" title="一、redis简介"></a>一、redis简介</h2><p>redis是开源的、先进的key-value存储系统。<br>它的特性如下：</p>
+<ul>
+<li>redis完全将数据保存在内存里，只用硬盘进行持久化</li>
+<li>和其他Key-value存储系统相比，它支持的数据类型更丰富</li>
+<li>redis可以同步数据到任何数量的从机上</li>
+</ul>
+<p>它的优势如下：</p>
+<ul>
+<li>非常快。大约每秒110000次写和81000读</li>
+<li>支持丰富的数据类型</li>
+<li>原子操作</li>
+<li>很多实用工具，如高速缓存、消息队列(原生支持发布/订阅机制)、临时数据如sessions,page hit counts等的存储</li>
+</ul>
+<h2 id="二、环境"><a href="#二、环境" class="headerlink" title="二、环境"></a>二、环境</h2><p>ubuntu系统安装命令：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$sudo</span> apt-get update</span></div><div class="line"><span class="meta"><span class="meta-keyword">$sudo</span> apt-get install redis-server</span></div></pre></td></tr></table></figure></p>
+<p>启动：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$redis</span>-server</span></div></pre></td></tr></table></figure></p>
+<p>检查是否启动：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$redis</span>-cli</span></div></pre></td></tr></table></figure></p>
+<p>如果成功安装，会进入redis客户端：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>其中<code>6379</code>是redis的端口<br>输入ping，得到回应PONG，说明redis运行正常：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">ping</span></div><div class="line"><span class="selector-tag">PONG</span></div></pre></td></tr></table></figure></p>
+<h2 id="三、配置"><a href="#三、配置" class="headerlink" title="三、配置"></a>三、配置</h2><p>通过修改安装目录下的<code>redis.conf</code>可以修改配置。<br>或者，使用命令来查看或者修改配置：<br>查看：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">CONFIG</span> <span class="selector-tag">GET</span> <span class="selector-tag">CONFIG_SETTING_NAME</span></div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">CONFIG</span> <span class="selector-tag">GET</span> *</div></pre></td></tr></table></figure></p>
+<p>修改：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CONFIG <span class="keyword">SET</span> CONFIG_SETTING_NAME <span class="comment">NEW_CONFIG_VALUE</span></div></pre></td></tr></table></figure></p>
+<h2 id="四、支持的数据类型"><a href="#四、支持的数据类型" class="headerlink" title="四、支持的数据类型"></a>四、支持的数据类型</h2><p>有五种：</p>
+<ul>
+<li>String</li>
+<li>Hashes</li>
+<li>Lists</li>
+<li>Sets</li>
+<li>Sorted Sets</li>
+</ul>
+<h3 id="1-String"><a href="#1-String" class="headerlink" title="1.String"></a>1.String</h3><p>redis中的String是字节的序列，因此是二进制安全的，它们拥有一个已知的与终止字符无关的长度。<br>一个String最大可支持到512Mb的长度(和Mysql比还是差一些，Mysql里面LONGBLOB/TEXT类型最长支持4G)。<br>存储和读取一个String很简单，在redis客户端下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">SET</span> <span class="selector-tag">name</span> "<span class="selector-tag">tutorialspoint</span>"</div><div class="line"><span class="selector-tag">OK</span></div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">GET</span> <span class="selector-tag">name</span></div><div class="line">"<span class="selector-tag">tutorialspoint</span>"</div></pre></td></tr></table></figure></p>
+<p>其中name是key,tutorialspoint是value</p>
+<h3 id="2-Hashes"><a href="#2-Hashes" class="headerlink" title="2.Hashes"></a>2.Hashes</h3><p>是Key-value对的集合。经常用来存储对象，比如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">HMSET</span> <span class="selector-tag">user</span><span class="selector-pseudo">:1</span> <span class="selector-tag">username</span> <span class="selector-tag">tutorialspoint</span> <span class="selector-tag">password</span> <span class="selector-tag">tutorialspoint</span> <span class="selector-tag">points</span> 200</div><div class="line"><span class="selector-tag">OK</span></div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">HGETALL</span> <span class="selector-tag">user</span><span class="selector-pseudo">:1</span></div><div class="line">1) "<span class="selector-tag">username</span>"</div><div class="line">2) "<span class="selector-tag">tutorialspoint</span>"</div><div class="line">3) "<span class="selector-tag">password</span>"</div><div class="line">4) "<span class="selector-tag">tutorialspoint</span>"</div><div class="line">5) "<span class="selector-tag">points</span>"</div><div class="line">6) "200"</div></pre></td></tr></table></figure></p>
+<p>key是user:1,而value是一系列的key-value对，上面例子则代表着一个user的基本信息，就像是对象一样。<br>Hashes类型最高可以支持存储2^32-1个key-value对。</p>
+<h3 id="3-Lists"><a href="#3-Lists" class="headerlink" title="3.Lists"></a>3.Lists</h3><p>是存储string的列表,元素按照插入顺序排序，可以在列表头或者尾插入元素。<br>例子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">lpush</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">redis</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">lpush</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">mongodb</span></div><div class="line">(<span class="selector-tag">integer</span>) 2</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">lpush</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">rabitmq</span></div><div class="line">(<span class="selector-tag">integer</span>) 3</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">lrange</span> <span class="selector-tag">tutoriallist</span> 0 10</div><div class="line">1) "<span class="selector-tag">rabitmq</span>"</div><div class="line">2) "<span class="selector-tag">mongodb</span>"</div><div class="line">3) "<span class="selector-tag">redis</span>"</div></pre></td></tr></table></figure></p>
+<p>同样的，Lists最高可以支持存储2^32-1个String</p>
+<h3 id="4-Sets"><a href="#4-Sets" class="headerlink" title="4.Sets"></a>4.Sets</h3><p>是存储String的集合，你可以增加删除元素，并且用O(1)的时间复杂度来检查某元素是否在集合中。<br>例子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">sadd</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">redis</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">sadd</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">mongodb</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">sadd</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">rabitmq</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">sadd</span> <span class="selector-tag">tutoriallist</span> <span class="selector-tag">rabitmq</span></div><div class="line">(<span class="selector-tag">integer</span>) 0</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">smembers</span> <span class="selector-tag">tutoriallist</span></div><div class="line">1) "<span class="selector-tag">rabitmq</span>"</div><div class="line">2) "<span class="selector-tag">mongodb</span>"</div><div class="line">3) "<span class="selector-tag">redis</span>"</div></pre></td></tr></table></figure></p>
+<p>例子中rabitmq增加了两次，但是只有一个rabitmq被加入，Sets中的元素保证了唯一性<br>同样地，Sets最高支持2^32-1个String</p>
+<h3 id="5-Sorted-Sets"><a href="#5-Sorted-Sets" class="headerlink" title="5.Sorted Sets"></a>5.Sorted Sets</h3><p>和Sets是一样的，唯一的不同是每个元素有一个score来排序。<br>例子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">zadd</span> <span class="selector-tag">tutoriallist</span> 0 <span class="selector-tag">redis</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">zadd</span> <span class="selector-tag">tutoriallist</span> 0 <span class="selector-tag">mongodb</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">zadd</span> <span class="selector-tag">tutoriallist</span> 0 <span class="selector-tag">rabitmq</span></div><div class="line">(<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">zadd</span> <span class="selector-tag">tutoriallist</span> 0 <span class="selector-tag">rabitmq</span></div><div class="line">(<span class="selector-tag">integer</span>) 0</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">ZRANGEBYSCORE</span> <span class="selector-tag">tutoriallist</span> 0 1000</div><div class="line">1) "<span class="selector-tag">redis</span>"</div><div class="line">2) "<span class="selector-tag">mongodb</span>"</div><div class="line">3) "<span class="selector-tag">rabitmq</span>"</div></pre></td></tr></table></figure></p>
+<h2 id="五、命令"><a href="#五、命令" class="headerlink" title="五、命令"></a>五、命令</h2><p>下面是一些常用命令：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;;启动redis客户端并连接本地的redis服务器</span></div><div class="line">$redis-<span class="keyword">cli</span></div><div class="line"><span class="comment">;;启动redis客户端并连接远程的redis服务器</span></div><div class="line">$ redis-<span class="keyword">cli</span> -h host -p port -a password</div><div class="line"><span class="comment">;;例子：</span></div><div class="line">$redis-<span class="keyword">cli</span> -h <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span> -p <span class="number">6379</span> -a <span class="string">"mypass"</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt;</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; PING</div><div class="line">PONG</div><div class="line"><span class="comment">;;删除某个键</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; DEL KEY_NAME</div><div class="line"><span class="comment">;;获取某个键值的序列化版本</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; DUMP tutorialspoint</div><div class="line"><span class="string">"\x00\x05redis\x06\x00S\xbd\xc1q\x17z\x81\xb2"</span></div><div class="line"><span class="comment">;;检查某个键是否存在，存在返回1，否则返回0</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXISTS tutorialspoint-new-key</div><div class="line">(integer) <span class="number">1</span></div><div class="line"><span class="comment">;;设置某个键过期时间，例子60秒后过期，过期了键就会被自动删除</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXPIRE tutorialspoint <span class="number">60</span></div><div class="line">(integer) <span class="number">1</span></div><div class="line"><span class="comment">;;设置某个键以时间戳格式过期的时间点，过了这个时间点，键就被删除</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXPIREAT tutorialspoint <span class="number">1293840000</span></div><div class="line">(integer) <span class="number">1</span></div><div class="line">EXISTS tutorialspoint</div><div class="line">(integer) <span class="number">0</span></div><div class="line"><span class="comment">;;以毫秒级别设置过期时间，例子5000毫秒后过期</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; PEXPIRE tutorialspoint <span class="number">5000</span></div><div class="line">(integer) <span class="number">1</span></div><div class="line"><span class="comment">;;以毫秒级别的时间戳格式设置过期的时间点，过了这个时间点，键就被删除</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; PEXPIREAT tutorialspoint <span class="number">1555555555005</span></div><div class="line">(integer) <span class="number">1</span></div><div class="line"><span class="comment">;;搜出满足pattern的所有键</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; KEYS tutorial*</div><div class="line"><span class="number">1</span>) <span class="string">"tutorial3"</span></div><div class="line"><span class="number">2</span>) <span class="string">"tutorial1"</span></div><div class="line"><span class="number">3</span>) <span class="string">"tutorial2"</span></div><div class="line"><span class="comment">;;将某个键移到指定的数据库，redis里面默认选中编号为0的数据库，数据库没名字只有编号</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; MOVE tutorial1 <span class="number">1</span></div><div class="line"><span class="number">1</span>) (integer) <span class="number">1</span></div><div class="line"><span class="comment">;;得到某个键剩余过期时间，以秒为单位</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXPIRE tutorialname <span class="number">60</span></div><div class="line"><span class="number">1</span>) (integer) <span class="number">1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; TTL tutorialname</div><div class="line"><span class="number">1</span>) (integer) <span class="number">59</span></div><div class="line"><span class="comment">;;得到某个键剩余过期时间，以毫秒为单位</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXPIRE tutorialname <span class="number">1</span></div><div class="line"><span class="number">1</span>) (integer) <span class="number">1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; PTTL tutorialname</div><div class="line"><span class="number">1</span>) (integer) <span class="number">999</span></div><div class="line"><span class="comment">;;去除某个键上面的过期时间</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXPIRE tutorial1 <span class="number">60</span></div><div class="line"><span class="number">1</span>) (integer) <span class="number">1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; TTL tutorial1</div><div class="line"><span class="number">1</span>) (integer) <span class="number">60</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; PERSIST tutorial1</div><div class="line"><span class="number">1</span>) (integer) <span class="number">1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; TTL tutorial1</div><div class="line"><span class="number">1</span>) (integer) -<span class="number">1</span></div><div class="line"><span class="comment">;;随机地得到一个键</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; RANDOMKEY</div><div class="line"><span class="comment">;;重命名一个键，如果键不存在或者新旧名称形同会报错，新名称已存在的键会被覆盖</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; RENAME tutorial1 new-tutorial</div><div class="line"><span class="comment">;;重命名一个键，如果新名称已存在，会返回0，否则返回1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; RENAMENX tutorial1 new-tutorial</div><div class="line">(integer) <span class="number">1</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; RENAMENX tutorial2 new-tutorial</div><div class="line">(integer) <span class="number">0</span></div><div class="line"><span class="comment">;;查看一个键的类型</span></div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; TYPE tutorial1</div><div class="line">string</div></pre></td></tr></table></figure></p>
+<p>……命令太多了，略略略(有空补上)可先查看这个地址：<a href="https://www.tutorialspoint.com/redis/redis_keys.htm" target="_blank" rel="external">tutorialspoint</a></p>
+<h2 id="六、HyperLogLog类型"><a href="#六、HyperLogLog类型" class="headerlink" title="六、HyperLogLog类型"></a>六、HyperLogLog类型</h2><p>这种特殊的类型是解决统计问题的，事实上它是一种算法的应用。<br>假如你要统计每日访问网站的IP地址的量，如果放进Sets里然后统计Sets大小，会非常浪费内存(如果访问量很大)。<br>如果你只是关心最终数据的基数估算值，不要求数据真的存储起来，那用这种类型是比较好的。<br>这种类型每个Key只用12Kb字节就能得到基数的估算值，估算标准差在0.81%。你最高可以统计2^64个项目<br>下面是例子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">PFADD</span> <span class="selector-tag">tutorials</span> "<span class="selector-tag">redis</span>"</div><div class="line">1) (<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">PFADD</span> <span class="selector-tag">tutorials</span> "<span class="selector-tag">mongodb</span>"</div><div class="line">1) (<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">PFADD</span> <span class="selector-tag">tutorials</span> "<span class="selector-tag">mysql</span>"</div><div class="line">1) (<span class="selector-tag">integer</span>) 1</div><div class="line"><span class="selector-tag">redis</span> 127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6379</span>&gt; <span class="selector-tag">PFCOUNT</span> <span class="selector-tag">tutorials</span></div><div class="line">(<span class="selector-tag">integer</span>) 3</div></pre></td></tr></table></figure></p>
+<p>你可以每次都用<code>PFADD</code>命令来将IP地址放入某个key比如ipaddress。<br>然后当你想要统计的时候，运行<code>PFCOUNT ipaddress</code>就行了。</p>
+<h2 id="七、发布订阅消息系统"><a href="#七、发布订阅消息系统" class="headerlink" title="七、发布订阅消息系统"></a>七、发布订阅消息系统</h2><p>很简单，就是客户端订阅频道，就可以接收到其他客户端在该频道发布的消息。<br>见例子：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//某客户端A监听redisChat频道</span></div><div class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; SUBSCRIBE redisChat</div><div class="line"><span class="function"><span class="title">Reading</span></span> messages... (press Ctrl-C to quit)</div><div class="line"><span class="number">1</span>) <span class="string">"subscribe"</span></div><div class="line"><span class="number">2</span>) <span class="string">"redisChat"</span></div><div class="line"><span class="number">3</span>) (<span class="keyword">integer</span>) <span class="number">1</span></div><div class="line"><span class="comment">//客户端B发布一条消息在该频道</span></div><div class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; PUBLISH redisChat <span class="string">"Redis is a great caching technique"</span></div><div class="line">(<span class="keyword">integer</span>) <span class="number">1</span></div><div class="line"><span class="comment">//客户端C发布一条消息在该频道</span></div><div class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; PUBLISH redisChat <span class="string">"Learn redis by tutorials point"</span></div><div class="line">(<span class="keyword">integer</span>) <span class="number">1</span></div><div class="line"><span class="comment">//于是客户端A就能接收到如下消息：</span></div><div class="line"><span class="number">1</span>) <span class="string">"message"</span></div><div class="line"><span class="number">2</span>) <span class="string">"redisChat"</span></div><div class="line"><span class="number">3</span>) <span class="string">"Redis is a great caching technique"</span></div><div class="line"><span class="number">1</span>) <span class="string">"message"</span></div><div class="line"><span class="number">2</span>) <span class="string">"redisChat"</span></div><div class="line"><span class="number">3</span>) <span class="string">"Learn redis by tutorials point"</span></div></pre></td></tr></table></figure></p>
+<h2 id="八、事务"><a href="#八、事务" class="headerlink" title="八、事务"></a>八、事务</h2><p>redis对事务有较好支持性，ACID特性(原子性、一致性、隔离性、持久性)都支持。<br>例子：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//事务开始命令MULTI，结束并执行命令EXEC</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; MULTI</div><div class="line">OK</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; SET tutorial redis</div><div class="line">QUEUED</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; GET tutorial</div><div class="line">QUEUED</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; INCR visitors</div><div class="line">QUEUED</div><div class="line">redis <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">6379</span>&gt; EXEC</div><div class="line"><span class="number">1</span>) OK</div><div class="line"><span class="number">2</span>) <span class="string">"redis"</span></div><div class="line"><span class="number">3</span>) (integer) <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<h2 id="九、脚本"><a href="#九、脚本" class="headerlink" title="九、脚本"></a>九、脚本</h2><p>redis使用Lua脚本语言，例子如下:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">redis <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; EVAL <span class="string">"return &#123;KEYS[1],KEYS[2],ARGV[1],ARGV[2]&#125;"</span> <span class="number">2</span> key1 key2 <span class="keyword">first</span> <span class="keyword">second</span></div><div class="line"><span class="number">1</span>) <span class="string">"key1"</span></div><div class="line"><span class="number">2</span>) <span class="string">"key2"</span></div><div class="line"><span class="number">3</span>) <span class="string">"first"</span></div><div class="line"><span class="number">4</span>) <span class="string">"second"</span></div></pre></td></tr></table></figure></p>
+<h2 id="十、管道"><a href="#十、管道" class="headerlink" title="十、管道"></a>十、管道</h2><p>redis是TCP协议的server，使用管道可以一次执行多条命令，节省时间，提高性能。<br>例子如下：<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(echo -en "PING<span class="symbol">\r</span><span class="symbol">\n</span> SET tutorial redis<span class="symbol">\r</span><span class="symbol">\n</span>GET tutorial<span class="symbol">\r</span><span class="symbol">\n</span>INCR visitor<span class="symbol">\r</span><span class="symbol">\n</span>INCR visitor<span class="symbol">\r</span><span class="symbol">\n</span>INCR visitor<span class="symbol">\r</span><span class="symbol">\n</span>"; sleep 10) | nc localhost 6379</div><div class="line">+PONG</div><div class="line">+OK</div><div class="line">redis</div><div class="line">:1</div><div class="line">:2</div><div class="line">:3</div></pre></td></tr></table></figure></p>
+<p>一次请求执行了6条命令，redis一口气将6条命令的结果都返回给客户端</p>
+<p>十一、在JAVA中使用redis<br>首先要有redis的驱动Jar包(jedis.jar)，这个和其他数据库其实是一样的。</p>
+<p>连接redis服务器的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisJava</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//Connecting to Redis server on localhost</span></div><div class="line">      Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">      System.out.println(<span class="string">"Connection to server sucessfully"</span>);</div><div class="line">      <span class="comment">//check whether server is running or not</span></div><div class="line">      System.out.println(<span class="string">"Server is running: "</span>+jedis.ping());</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>存储并读取Lists类型的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisListJava</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//Connecting to Redis server on localhost</span></div><div class="line">      Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">      System.out.println(<span class="string">"Connection to server sucessfully"</span>);</div><div class="line">      <span class="comment">//store data in redis list</span></div><div class="line">      jedis.lpush(<span class="string">"tutorial-list"</span>, <span class="string">"Redis"</span>);</div><div class="line">      jedis.lpush(<span class="string">"tutorial-list"</span>, <span class="string">"Mongodb"</span>);</div><div class="line">      jedis.lpush(<span class="string">"tutorial-list"</span>, <span class="string">"Mysql"</span>);</div><div class="line">     <span class="comment">// Get the stored data and print it</span></div><div class="line">     List&lt;String&gt; list = jedis.lrange(<span class="string">"tutorial-list"</span>, <span class="number">0</span> ,<span class="number">5</span>);</div><div class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;list.size(); i++) &#123;</div><div class="line">       System.out.println(<span class="string">"Stored string in redis:: "</span>+list.get(i));</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>参考文献：<a href="https://www.tutorialspoint.com/redis/index.htm" target="_blank" rel="external">https://www.tutorialspoint.com/redis/index.htm</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-11-15T13:15:44.011Z" itemprop="datePublished">
+					2016年11月15日 21:15
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/10/14/mysql-datatype/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第四章schema与数据类型优化
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/08/29/mysql-basic/">
+        Mysql基础知识汇总 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/09/29/redis-learn/" data-title="redis学习笔记" data-url="/2016/09/29/redis-learn/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

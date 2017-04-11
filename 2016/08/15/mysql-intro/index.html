@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《高性能Mysql》读书笔记——第一章Mysql架构和历史 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2><strong>MYSQL INTRODUCTION<strong></h2>
+                                <p>高性能Mysql</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-08-15T12:43:16.000Z" itemprop="datePublished">
+          2016年8月15日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Mysql/'>Mysql</a>
+    
+    
+	
+</span>
+                <h1>《高性能Mysql》读书笔记——第一章Mysql架构和历史</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、Mysql是什么"><span class="toc-text">一、Mysql是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、Mysql结构的一些简要介绍"><span class="toc-text">二、Mysql结构的一些简要介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Mysql逻辑架构"><span class="toc-text">1.Mysql逻辑架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-连接管理和安全性"><span class="toc-text">2.连接管理和安全性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-中间层的优化器和查询缓存"><span class="toc-text">3.中间层的优化器和查询缓存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、Mysql面对并发"><span class="toc-text">三、Mysql面对并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-读写锁"><span class="toc-text">1.读写锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-锁粒度"><span class="toc-text">2.锁粒度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、事务是数据库永恒的话题"><span class="toc-text">四、事务是数据库永恒的话题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、四种隔离级别"><span class="toc-text">五、四种隔离级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、死锁"><span class="toc-text">六、死锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、事务日志"><span class="toc-text">七、事务日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八、Mysql中的事务"><span class="toc-text">八、Mysql中的事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-自动提交"><span class="toc-text">1.自动提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-设置隔离级别"><span class="toc-text">2.设置隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-多版本并发控制-MVCC"><span class="toc-text">3.多版本并发控制(MVCC)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九、Mysql的引擎们"><span class="toc-text">九、Mysql的引擎们</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-InnoDB"><span class="toc-text">1.InnoDB:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-MyISAM"><span class="toc-text">2.MyISAM:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Archive："><span class="toc-text">3.Archive：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-CSV引擎："><span class="toc-text">4.CSV引擎：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Memory引擎："><span class="toc-text">5.Memory引擎：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-NDB集群引擎："><span class="toc-text">6.NDB集群引擎：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-XtraDB和PBXT等OLTP类引擎："><span class="toc-text">7.XtraDB和PBXT等OLTP类引擎：</span></a></li></ol></li></ol>
+</div>
+			
+      		<h1 id="一、Mysql是什么"><a href="#一、Mysql是什么" class="headerlink" title="一、Mysql是什么"></a>一、Mysql是什么</h1><p>Mysql是当今世界上最流行的数据库系统。由于强大、灵活、开源免费的特性，Mysql连续几年都雄踞数据库排行榜首位。<br><a id="more"></a></p>
+<h1 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h1><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
+<h1 id="二、Mysql结构的一些简要介绍"><a href="#二、Mysql结构的一些简要介绍" class="headerlink" title="二、Mysql结构的一些简要介绍"></a>二、Mysql结构的一些简要介绍</h1><h2 id="1-Mysql逻辑架构"><a href="#1-Mysql逻辑架构" class="headerlink" title="1.Mysql逻辑架构"></a>1.Mysql逻辑架构</h2><p>分三层：</p>
+<ul>
+<li>最上层：网络层，比如连接处理、授权认证、安全等</li>
+<li>中间层：核心服务层，包括各种查询解析、分析优化、缓存以及各种内置函数等，所有跨存储引擎的功能都在这一层，如存储过程、触发器、视图等。</li>
+<li>最底层：存储引擎层，负责数据的存储和提取，注意，Mysql包含了多套存储引擎，还支持扩展接口来使用外部的第三方引擎，所有的存储引擎都只与中间层交互，相互之间不会通信，每个表都可以设定不同的存储引擎。这是Mysql具有灵活性的优点，当然同时也增加了人们的学习和选择成本。</li>
+</ul>
+<h2 id="2-连接管理和安全性"><a href="#2-连接管理和安全性" class="headerlink" title="2.连接管理和安全性"></a>2.连接管理和安全性</h2><p>每个客户端的连接都会在服务器进程中拥有一个线程，连接的查询在这个线程中单独进行。<br>服务器会负责缓存线程，不需要为连接创建和销毁线程。（5.5版本还支持线程池插件）<br>认证就是SSL和X.509证书认证，安全性具体内容后期会有章节介绍。</p>
+<h2 id="3-中间层的优化器和查询缓存"><a href="#3-中间层的优化器和查询缓存" class="headerlink" title="3.中间层的优化器和查询缓存"></a>3.中间层的优化器和查询缓存</h2><p>中间层有个优化器，负责在解释器解析SQL语句后进行各种优化，比如决定表的读取顺序，选择合适的索引等。<br>该优化器是不关心使用什么存储引擎的，（废话，它在中间层里），但是存储引擎还是会对优化器造成影响，有时候优化器会根据存储引擎返回的信息来作出决策。<br>对于SELECT查询语句，不会直接去存储引擎拿数据，中间层会先看一下查询缓存有没有已经执行过的查询，如果有，就不需要再经过解释优化和执行的整个过程，而是直接去取缓存中的结果集返回。</p>
+<h1 id="三、Mysql面对并发"><a href="#三、Mysql面对并发" class="headerlink" title="三、Mysql面对并发"></a>三、Mysql面对并发</h1><p>和大多数数据库系统一样，面对并发问题，不可避免要使用到锁，因此先简要介绍一下锁的概念吧。</p>
+<h2 id="1-读写锁"><a href="#1-读写锁" class="headerlink" title="1.读写锁"></a>1.读写锁</h2><ul>
+<li>读锁(又称共享锁)：当某资源加读锁时，多个用户都可同时读取该资源，互不干扰，但是不能写入数据；</li>
+<li>写锁(又称排它锁)：当某资源加写锁时，除了持有锁的用户，其他的用户既不能读，也不能写。</li>
+</ul>
+<h2 id="2-锁粒度"><a href="#2-锁粒度" class="headerlink" title="2.锁粒度"></a>2.锁粒度</h2><p>Mysql由于采用了多种存储引擎，每种引擎有自己的锁策略和锁粒度。常见的锁粒度有以下两种：</p>
+<ul>
+<li>表锁：Mysql中最常见的锁策略，开销最小，但是一旦加锁，整张表的数据都将受到锁的影响，不利于高并发。写锁优先级会高于读锁，因此写锁请求有时候会被自动插入到读锁请求队列的前面。中间层有时候也会加表锁，如ALTER TABLE语句。</li>
+<li>行锁：可支持高并发，但是由于锁定的是行，肯定要做很多多余的事情，开销很大。在Mysql中，只有存储引擎实现行锁，中间层不会行锁。InnoDB和XtraDB存储引擎(还有其他一些作者懒得提名字的)实现了行锁。</li>
+</ul>
+<h1 id="四、事务是数据库永恒的话题"><a href="#四、事务是数据库永恒的话题" class="headerlink" title="四、事务是数据库永恒的话题"></a>四、事务是数据库永恒的话题</h1><p>事务就是一组满足ACID特性的查询语句或者工作单元。<br>一个事务只有两个动作：提交(commit)和回退(rollback)</p>
+<ul>
+<li>A(原子性)：原子，顾名思义，曾经被认为是最小的不可分割的元素。事务也是如此，事务中所有的操作不可被分隔成两部分，要么都提交，要么都回退。</li>
+<li>C(一致性)：一个事务无论是提交还是回退，都不会破坏数据库数据状态的一致性。</li>
+<li>I(隔离性)：事务相互之间一点儿关系都没有，谁也不能影响谁</li>
+<li>D(持久性)：事务一旦提交，所做的修改就要永久地改变，即使系统崩溃也不会丢失。</li>
+</ul>
+<p>不是所有的数据库都支持事务的。同样的，Mysql众多的存储引擎中，不是所有的都支持事务的。最常用的InnoDB完美地支持事务。<br>然而，支持事务不一定是好事，有些不需要事务的场景，应该使用不支持事务的引擎，因为，要支持事务，数据库服务器要多做很多事情，这是有开销的，和锁机制一样。</p>
+<h1 id="五、四种隔离级别"><a href="#五、四种隔离级别" class="headerlink" title="五、四种隔离级别"></a>五、四种隔离级别</h1><p>隔离级别是SQL标准定义的，主要针对支持事务的数据库而言，有下面四种：</p>
+<ol>
+<li><strong>READ UNCOMMITTED 未提交读</strong>：这个级别代表即使事务没有提交，事务的更改也可以被其他的事务读到，因此叫未提交读。这是最弱的隔离级别，还未提交的数据有可能回滚，而其他事务却在回滚之前读到了未提交的数据，这种现象叫做<strong>脏读</strong>。大多数情况下，都不推荐使用该隔离级别，会造成数据问题，而性能方面提高不了多少。</li>
+<li><strong>READ COMMITTED 提交读</strong>：大多数数据库默认的隔离级别就是提交读。这个级别代表事务开始后，只能读到其他事务提交后的修改，未提交的修改是不可见的。显然这样就解决了脏读的问题。但是还是会遇到<strong>不可重复读</strong>的问题。<br>不可重复读是说一个事务在读取某数据后，在还未结束前，该数据被其他事务修改了，并且其他事务已经提交。此时事务再次读取数据，会发现自己之前读的数据变了。在一次事务中两次读取同一个数据，结果可能会不一致。</li>
+<li><strong>REPEATABLE READ 可重复读</strong>：Mysql的默认隔离级别。这个级别在提交读的基础上，解决了不可重复读的问题，书中还未指出究竟是如何解决的，但是我觉得应该与读锁有关，如果事务读取某数据的同时上读锁，应该就可以保证整个事务周期内没人能修改自己读取的数据。不过，书中指出这种办法没法解决<strong>幻读</strong>的现象。<br>幻读是指当一个事务在读取某个范围内的数据时，另一个事务在这个范围内插入了一行记录并提交，于是当前一个事务再次读取该范围内的数据时，发现多出了一行，即幻行。<br>由此猜测，解决可重复读的问题，应该是事务对某行数据上了读锁。但是想要解决幻读，可能就要对整张表上读锁。不过，Mysql以及Oracle数据库据说都是使用多版本并发控制(MVCC,后文会介绍)来解决幻读的。</li>
+<li><strong>SERIALIZABLE 序列化</strong>：最严格的隔离级别。强制事务串行地执行，同一时间只有一个事务在执行。因此，脏读、不可重复读、幻读都不会在这个隔离级别出现。该隔离级别会在读取的每一行数据上都加锁，因此会遇到超时和锁争用问题。(注：锁争用问题是书里提到的，但我不认为会遇到这样的问题，因为所有的事务串行运行，在串行的世界里还争用个毛啊，锁都可以不用加了吧。等看了后面详细的章节再来补充这个地方)实际应用很少使用该级别，除非非常需要确保数据的一致性以及不关心高并发性能才考虑使用。</li>
+</ol>
+<h1 id="六、死锁"><a href="#六、死锁" class="headerlink" title="六、死锁"></a>六、死锁</h1><p>死锁就是两个事务互相锁定了对方想要的资源，然后互相等待的情况。<br>遇到这种情况有很多办法来解决。比如InnoDB引擎会检测sql语句是否会造成死锁的循环依赖，如果有就立即返回一个错误。还有就是设置超时等待，如果某个事务等待锁的时间超过了设定值，就放弃锁请求。InnoDB的处理方式是将持有最少行级写锁的事务回滚。死锁这种情况是事务型数据库无法避免的，大多数情况只需重做因死锁回滚的事务就可以了。</p>
+<h1 id="七、事务日志"><a href="#七、事务日志" class="headerlink" title="七、事务日志"></a>七、事务日志</h1><p>貌似是修改数据的时候先修改数据在内存的拷贝，然后把这个修改的行为记录在硬盘上的事务日志中。由于事务日志的写入是顺序I/O操作，会比随机I/O快的多。(因为机械硬盘读写最费时间的就是磁头的定位和移动过程)<br>当数据持久化到事务日志以后，再慢慢地刷写回真正的数据库。即使途中服务器挂了，重启后还是可以根据事务日志来恢复数据。</p>
+<h1 id="八、Mysql中的事务"><a href="#八、Mysql中的事务" class="headerlink" title="八、Mysql中的事务"></a>八、Mysql中的事务</h1><p>Mysql支持事务的引擎有：InnoDB、NDB Cluster、XtraDB和PBXT。当然还有一些其他的，后文会提到。</p>
+<h2 id="1-自动提交"><a href="#1-自动提交" class="headerlink" title="1.自动提交"></a>1.自动提交</h2><p>Mysql默认是自动提交模式。如果你不显式地开始一个事务，那么每次查询都当做一个事务。<br>可以通过以下语句来查看和关闭自动提交模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'AUTOCOMMIT'</span>;</div><div class="line"><span class="keyword">SET</span> AUTOCOMMIT = <span class="number">0</span>;<span class="comment">--1表示启用，0表示禁用</span></div></pre></td></tr></table></figure></p>
+<h2 id="2-设置隔离级别"><a href="#2-设置隔离级别" class="headerlink" title="2.设置隔离级别"></a>2.设置隔离级别</h2><p>可以通过以下语句设置当前会话的隔离级别：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> <span class="keyword">SESSION</span> <span class="keyword">TRANSACTION</span> <span class="keyword">ISOLATION</span> <span class="keyword">LEVEL</span> <span class="keyword">READ</span> COMMITTED;</div></pre></td></tr></table></figure></p>
+<p>整个数据库的隔离级别可在配置文件中设置</p>
+<h2 id="3-多版本并发控制-MVCC"><a href="#3-多版本并发控制-MVCC" class="headerlink" title="3.多版本并发控制(MVCC)"></a>3.多版本并发控制(MVCC)</h2><p>行级锁的变种，可以避免加锁操作，开销更低。<br>能够实现非阻塞地读，写操作也只锁定必要的行。<br>InnoDB的MVCC是通过在表中增加两个隐藏列来实现的。一个列记录创建行时的系统版本号，另一个记录删除行时的系统版本号，在REPEATABLE READ级别下，其行为如下：</p>
+<ul>
+<li>SELECT: 每个事务开始时都会分配到系统版本号，这个事务的查询操作只会查那些创建版本号&lt;=自己的版本号并且删除版本号&gt;自己的版本号或为空的行。这样就能保证查询到的行创建时间早于事务开始时间或者是事务创建的，或者删除时间晚于事务开始时间，事务开始前该行还是没删除的。</li>
+<li>INSERT:插入新行的时候，将事务分配到的版本号赋给创建版本号那个列属性。</li>
+<li>DELETE:同上，删除行的时候，将事务分配到的版本号给删除版本号那个列属性</li>
+<li>UPDATE:实际上是新插入一条记录，然后将事务分配到的版本号赋给旧记录的删除版本号列以及新记录的创建版本号列。</li>
+</ul>
+<p>MVCC只在REPEATEABLE READ和READ COMMITTED两个隔离级别下工作。</p>
+<h1 id="九、Mysql的引擎们"><a href="#九、Mysql的引擎们" class="headerlink" title="九、Mysql的引擎们"></a>九、Mysql的引擎们</h1><p>简单介绍一下优缺点：</p>
+<h2 id="1-InnoDB"><a href="#1-InnoDB" class="headerlink" title="1.InnoDB:"></a>1.InnoDB:</h2><ul>
+<li>优点：Mysql当前的默认引擎，事务型引擎，用MVCC支持高并发，通过间隙锁在REPEATABLE READ级别下就能防止幻读。支持热备份。</li>
+<li>缺点：非常复杂，性能较一些简单的引擎要差一点儿。空间占用比较多。</li>
+</ul>
+<h2 id="2-MyISAM"><a href="#2-MyISAM" class="headerlink" title="2.MyISAM:"></a>2.MyISAM:</h2><ul>
+<li>优点：Mysql 5.1之前版本的默认引擎。全文索引、压缩、空间函数(GIS)、并发插入、某些场景下性能很好</li>
+<li>缺点：非事务型、不支持行锁、崩溃后数据不容易修复</li>
+</ul>
+<h2 id="3-Archive："><a href="#3-Archive：" class="headerlink" title="3.Archive："></a>3.Archive：</h2><ul>
+<li>优点：支持高并发插入，解决不可重复读，针对高速插入和压缩做了优化的简单引擎</li>
+<li>缺点：只支持查询和插入操作，非事务型，仅适合日志和数据采集的应用场景</li>
+</ul>
+<h2 id="4-CSV引擎："><a href="#4-CSV引擎：" class="headerlink" title="4.CSV引擎："></a>4.CSV引擎：</h2><ul>
+<li>优点：有效支持CSV格式文件的导入导出。</li>
+<li>缺点：作者没说</li>
+</ul>
+<h2 id="5-Memory引擎："><a href="#5-Memory引擎：" class="headerlink" title="5.Memory引擎："></a>5.Memory引擎：</h2><ul>
+<li>优点：用来快速地访问数据的，比MyISAM快一个数量级。支持Hash索引，因此查询操作非常快。</li>
+<li>缺点：所有数据保存在内存里，重启只留下表结构。只支持表级锁，并发能力低下。不支持BLOB或TEXT类型的列。且行长度固定，容易导致内存浪费。</li>
+</ul>
+<h2 id="6-NDB集群引擎："><a href="#6-NDB集群引擎：" class="headerlink" title="6.NDB集群引擎："></a>6.NDB集群引擎：</h2><p>作者没有细讲，后文会细讲的吧，总之就是支持建立集群。</p>
+<h2 id="7-XtraDB和PBXT等OLTP类引擎："><a href="#7-XtraDB和PBXT等OLTP类引擎：" class="headerlink" title="7.XtraDB和PBXT等OLTP类引擎："></a>7.XtraDB和PBXT等OLTP类引擎：</h2><ul>
+<li>优点：可完全替代InnoDB,或者高度相似。还额外提供了一些性能优化、可测量性、操作灵活性</li>
+<li>缺点：第三方的引擎，社区支持的存储引擎，可能不能保证质量</li>
+</ul>
+<p>其他就不列举了。<br>想要查看当前使用的引擎：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> <span class="keyword">STATUS</span> <span class="keyword">LIKE</span> <span class="string">'user'</span></div></pre></td></tr></table></figure></p>
+<p>想要更改一个表的引擎：</p>
+<ol>
+<li><p>使用如下语句：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> mytable <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span>;</div></pre></td></tr></table></figure>
+<p> 这种方法转换的话，会非常慢，I/O消耗非常高。原表会加读锁。</p>
+</li>
+<li><p>使用导入导出工具来更改引擎</p>
+</li>
+<li>先创建新表，然后使用INSERT…SELECT语句来导数据，可分批地导，还可在原表加锁保证数据一致性。</li>
+</ol>
+<p>本章结束，下一章：<br>Mysql基准测试</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-12-24T13:25:53.502Z" itemprop="datePublished">
+					2016年12月24日 21:25
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/08/26/mysql-benchmark/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第二章Mysql基准测试
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/04/23/buildBlog/">
+        Hexo博客建设教程以及使用U盘漫游生产环境 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/08/15/mysql-intro/" data-title="《高性能Mysql》读书笔记——第一章Mysql架构和历史" data-url="/2016/08/15/mysql-intro/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

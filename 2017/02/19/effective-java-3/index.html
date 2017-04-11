@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第三章 类和接口 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>Effective Java</h2>
+                                <p>类和接口</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-02-19T10:54:07.000Z" itemprop="datePublished">
+          2017年2月19日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第三章 类和接口</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十三条-使类和成员的可访问性最小化"><span class="toc-text">第十三条 使类和成员的可访问性最小化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十四条-在公有类中使用访问方法而非公有域"><span class="toc-text">第十四条 在公有类中使用访问方法而非公有域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十五条-使可变性最小化"><span class="toc-text">第十五条 使可变性最小化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不可变类有什么优点？"><span class="toc-text">不可变类有什么优点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不可变对象有什么缺点？"><span class="toc-text">不可变对象有什么缺点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何构造一个不可变类？"><span class="toc-text">如何构造一个不可变类？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些告诫"><span class="toc-text">一些告诫</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十六条-复合优于继承"><span class="toc-text">第十六条 复合优于继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#到底继承有哪些缺点？"><span class="toc-text">到底继承有哪些缺点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合是什么？"><span class="toc-text">复合是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么时候还可以用继承？"><span class="toc-text">什么时候还可以用继承？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十七条-设计专为继承而生的类并提供文档说明"><span class="toc-text">第十七条 设计专为继承而生的类并提供文档说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#必须提供文档说明可被覆盖的方法在类中其他方法的使用情况"><span class="toc-text">必须提供文档说明可被覆盖的方法在类中其他方法的使用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#必要时提供额外的protected方法来减轻子类实现者的工作"><span class="toc-text">必要时提供额外的protected方法来减轻子类实现者的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于专为继承而生的类，唯一的测试方法就是编写子类"><span class="toc-text">对于专为继承而生的类，唯一的测试方法就是编写子类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器决不能调用可被覆盖的方法"><span class="toc-text">构造器决不能调用可被覆盖的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同样地，clone和readObject方法绝对不能调用可被覆盖的方法"><span class="toc-text">同样地，clone和readObject方法绝对不能调用可被覆盖的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法"><span class="toc-text">如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个折中的做法"><span class="toc-text">两个折中的做法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十八条-接口优于抽象类"><span class="toc-text">第十八条 接口优于抽象类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#骨架结构"><span class="toc-text">骨架结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口的缺陷"><span class="toc-text">接口的缺陷</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十九条-接口只用于定义类型"><span class="toc-text">第十九条 接口只用于定义类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十条-类层次（即继承）优于标签类"><span class="toc-text">第二十条 类层次（即继承）优于标签类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十一条-用函数对象表示策略"><span class="toc-text">第二十一条 用函数对象表示策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是函数对象？"><span class="toc-text">什么是函数对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书中的例子？"><span class="toc-text">书中的例子？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#策略模式要有接口"><span class="toc-text">策略模式要有接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#策略接口的实现类放在哪儿？"><span class="toc-text">策略接口的实现类放在哪儿？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十二条-优先考虑静态成员类"><span class="toc-text">第二十二条 优先考虑静态成员类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态成员类"><span class="toc-text">静态成员类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非静态成员类"><span class="toc-text">非静态成员类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名类"><span class="toc-text">匿名类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部类"><span class="toc-text">局部类</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要讨论在设计类和接口的时候，要注意的事情以及一些设计原则。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第十三条-使类和成员的可访问性最小化"><a href="#第十三条-使类和成员的可访问性最小化" class="headerlink" title="第十三条 使类和成员的可访问性最小化"></a>第十三条 使类和成员的可访问性最小化</h2><p>这一条来源于面向对象设计的基本概念：封装。<br>这一概念认为，设计良好的模块应该隐藏所有的实现细节，只暴露其API给外部，内部的所有数据和实现都隐藏起来，模块间的互动由API完成。<br>这样做的好处是将模块之间的耦合度尽可能地降低了，在以后的开发中，设计者只需要在改动API的时候考虑到带给用户的影响以及兼容性，而其他隐藏部分的改动，只要不破坏API的约定，那么修改过程就是完全对用户透明的。<br>这么做不会带来性能上的优势，但是使得代码更加容易测试和维护，开发人员无需顾此失彼，只需要专注注意力在一处即可。<br>JAVA这门语言作为面向对象语言的标杆，自然提供了完善的机制来支持封装这一设计理念。<br>所有的顶层类和接口都有两个访问级别：</p>
+<ul>
+<li>包级私有：意味着只有同个包下的类能够访问</li>
+<li>公有：所有类都可访问</li>
+</ul>
+<p>所有的顶层类内部的成员（域、方法、成员类、内部接口）都有四种可能的访问级别：</p>
+<ul>
+<li>私有的：只有该顶层类内部可以访问</li>
+<li>包级私有：只有同一个包下面的类能够访问（默认的访问级别，不写关键字则为该级别）</li>
+<li>受保护的：同一个包下面的类能够访问，顶层类的子类也能够访问</li>
+<li>公有的：所有的类都可以访问</li>
+</ul>
+<p>有了以上这些访问级别的设定，我们所写代码的可见性就可以受到控制。让那些该被看见的类或者方法被看见，不该被看见的类或者方法不要被看见。<br>在上面的访问级别中，当你把顶层类或者接口设置为公有的，那么就代表它开放给用户客户端使用，就代表你有责任永远支持它并保持后续兼容性。<br>如果你设置为包级私有的，也就是在类名前面不加任何相应的关键字，那么就代表它不会开放给用户客户端使用，它是开放给模块内部使用的，你可以随时地修改它，甚至删除它，因为你确信用户不会直接地使用到它，用户甚至都感知不到它的存在。</p>
+<p>类内部的成员则要复杂一些，首先，<strong>所有内部的域，除了不可变常量以外，都应该设置为私有的</strong><br>如果你设置为其他级别，就等于放弃了控制该域的能力，外界可以直接引用该域，你不能在外界引用该域的时候做任何事，也不能在外界改变该域的时候感知并做任何事，你甚至放弃了未来会删除该域的可能性，改名的可能性，线程安全的可能性。<br>另外，注意<code>受保护的</code>这一访问级别，看起来它像是包级私有的孪生兄弟，然而实际上它和公有的一样拥有很强的破坏性。在一个公有的类中设置一个受保护的域，那么任何继承该类的子类都能访问该受保护的域，即使不在同一个包也一样，不怀好意的黑客完全可以使用这个漏洞篡改你以为外界没有机会篡改的数据。<br>你还要注意数组域，数组也绝不能声明为公有的，即使被声明为final也无济于事，因为外界还是可以修改数组内部的对象。</p>
+<h2 id="第十四条-在公有类中使用访问方法而非公有域"><a href="#第十四条-在公有类中使用访问方法而非公有域" class="headerlink" title="第十四条 在公有类中使用访问方法而非公有域"></a>第十四条 在公有类中使用访问方法而非公有域</h2><p>这和上一条没有什么本质上的不同，理由也很简单就是采取封装的设计理念，尽可能地减小与外界的耦合。<br>如果非要让外界访问数据不可，那就提供一个公有的访问方法，作为合法访问数据的唯一途径，来保证即使在未来你想要改变数据的结构，客户端代码仍能有效地获得数据。</p>
+<h2 id="第十五条-使可变性最小化"><a href="#第十五条-使可变性最小化" class="headerlink" title="第十五条 使可变性最小化"></a>第十五条 使可变性最小化</h2><p>本条主要在讲一个叫做<strong>不可变类</strong>的东西，这种类一旦实例化永远不能再被修改，因此它的状态一出生就被确定下来，任何人都不能改变。</p>
+<h3 id="不可变类有什么优点？"><a href="#不可变类有什么优点？" class="headerlink" title="不可变类有什么优点？"></a>不可变类有什么优点？</h3><p>优点如下：</p>
+<ul>
+<li>不可变对象比较简单。它出生后只有一种状态，而可变类可有非常多的状态，随着其内部域的增加，其状态空间指数级增长。由于不可变对象非常简单，几乎不需要程序员额外维护其状态。</li>
+<li>不可变对象本质上是线程安全的，不需要同步。由于不可变对象永远只有一种状态，因此它可以被自由地共享于不同的线程。也无需<strong>保护性拷贝</strong></li>
+<li>不可变对象的内部信息也可以共享，比如BigInteger内部使用符号和数值分开表示的方法，数值使用int数组表示，当使用negate方法时，会得到一个新的BigInteger，它的符号相反，但是数值仍然是相同的int数组，无需复制一个新的数组给新对象。为什么可以这样做？因为确信原来的对象其内部的数组也是不可变的。</li>
+</ul>
+<h3 id="不可变对象有什么缺点？"><a href="#不可变对象有什么缺点？" class="headerlink" title="不可变对象有什么缺点？"></a>不可变对象有什么缺点？</h3><p>不可变对象在某些时候有性能问题。<br>第一种情况是：面对巨大的对象的时候。一个对象内部有一个上万个元素的数组，如果使用不可变对象，即使只是想要改变数组内部的一个元素而已，也要再创建一个新的，内部有上万个元素的数组的对象。这势必造成内存浪费和性能低下。<br>第二种情况是：一系列连续的步骤，每个步骤都会产生一个不可变对象，导致最终步骤结束时产生了无数个中间对象，而它们都被立刻抛弃浪费。这造成了多余的创建对象和回收对象的开销。</p>
+<h3 id="如何构造一个不可变类？"><a href="#如何构造一个不可变类？" class="headerlink" title="如何构造一个不可变类？"></a>如何构造一个不可变类？</h3><p>遵循以下五条规则：</p>
+<ol>
+<li>不提供任何会改变对象状态的方法</li>
+<li>保证类不会被继承，以防止子类假装对象的状态已经改变</li>
+<li>使对象所有的域都是final的</li>
+<li>使所有的域都为私有的</li>
+<li>对于任何可变的对象引用做到互斥访问，即防止其内部的可变对象的引用被外部获取到，从而可以从外部直接改变其内部的可变对象。为此，必须做到不直接使用外部传递的对象引用来初始化对象，不给外部返回任何内部的可变对象引用，如果非要返回给外部，使用保护性拷贝返回给外部拷贝的对象。</li>
+</ol>
+<p>在想办法满足上面第2条的时候，通常简单的选择是使类变为final的，这样子类就没法继承它。<br>还有一种方法，就是使类的所有构造器都为私有的或者包级私有的，用公有静态工厂方法来返回实例。这样子类便没法覆盖父类，还能利用静态工厂的诸多好处。</p>
+<h3 id="一些告诫"><a href="#一些告诫" class="headerlink" title="一些告诫"></a>一些告诫</h3><ol>
+<li>如果类实现了Serializable接口，并且包含可变对象域，就要提供显式的readObject或readResolve方法。否则，攻击者可能通过不可变的类创建出可变的实例</li>
+<li>坚决不要为每个get方法编写set方法，除非有很好的理由让类变为可变的，否则就应该是不可变的</li>
+<li>即使类由于各种原因不能变成不可变的类，也要尽可能地限制其可变性，降低其状态空间中的状态数，从而更容易分析其行为。</li>
+<li>构造器应该一口气完全初始化对象，不应该再构造器或者静态工厂之外提供任何公有的初始化方法，也不应该提供重新初始化的方法。</li>
+</ol>
+<h2 id="第十六条-复合优于继承"><a href="#第十六条-复合优于继承" class="headerlink" title="第十六条 复合优于继承"></a>第十六条 复合优于继承</h2><p>很早以前就听说了复合优于继承的说法，这听起来真的很讽刺，因为JAVA这门语言起初其面向对象和继承的概念令人眼前一亮，可以说是一块招牌，如今人们却被告诫：谨慎地使用继承。</p>
+<h3 id="到底继承有哪些缺点？"><a href="#到底继承有哪些缺点？" class="headerlink" title="到底继承有哪些缺点？"></a>到底继承有哪些缺点？</h3><p>缺点如下：</p>
+<ol>
+<li>继承打破封装性。子类对父类的实现高度依赖。父类可能随着时间的流逝不停地变化，而一旦这些变化被子类所依赖，那么子类就有可能在未来的某一天变得不正常。</li>
+<li>子类覆盖父类的手段并不能为子类带来限制父类的能力。文章中举例说明，如果一个继承集合的子类想要在元素加入集合前做一些条件检查，条件不满足就不让元素插入集合中，为了满足这个要求，子类覆盖了父类所有添加元素到集合中的方法。这听起来很有用，然而子类没想到的是，一年以后，父类又多了几个添加元素到集合中的方法，子类并没有覆盖这些方法，导致非法的元素被插入到集合之中。作者还指出，JDK中Hashtable和Vector就曾经在这个问题上犯过错误，并在后来修复了。</li>
+<li>即使子类仅仅增加新方法而不覆盖父类的方法，继承仍然有脆弱的一面，比如，父类在未来的某一刻新增了一个方法，非常不幸恰好名称和你在子类中起的一模一样，函数签名也一样，返回值不一样的时候压根无法编译通过，而返回值一样的话，就又变成了覆盖。</li>
+<li>子类无法遵守父类中新方法的某些约定，因为在子类编写时，父类的新方法和约定压根还没有面世。</li>
+<li>如果父类的某些方法调用了可被覆盖的方法，子类对方法的覆盖可能影响父类某些方法的行为，而编写子类的程序员无法感知这一点。</li>
+</ol>
+<p>可见，一旦使用了继承，子类和父类就有千丝万缕的关系，斩不断，理还乱。</p>
+<h3 id="复合是什么？"><a href="#复合是什么？" class="headerlink" title="复合是什么？"></a>复合是什么？</h3><p>最早听到复合(composition)的时候，我以为是一种非常牛的了不起的技术，后来才发现，复合只是相当平常甚至是自然的编程方式。<br>几乎所有的人都在不自觉地在某时某刻使用复合这种手法进行编程，只是不知道它原来有个名字叫复合而已。<br>复合就是在新的类中增加一个私有域，它引用现有类的一个实例。<br>新类中的每个实例方法都可以调用其内部引用的类的方法，并返回它的结果，这种被称为<strong>转发(forwarding)</strong>。<br>使用这种结构，新的类依然可以像子类那样，拥有原有类所有的可被访问的方法和域，但是它们的关系不再纠结，相互之间只是调用关系而已。原有类的变更不再立即反映到新类中，除非新类正在使用变更的内容。<br>给出书中的例子:<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForwardingSet</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Set&lt;E&gt; s;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ForwardingSet</span><span class="params">(Set&lt;E&gt; s)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.s = s;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">		s.clear();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">contains</span><span class="params">(o)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">isEmpty</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">size</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Iterator&lt;E&gt; iterator() &#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">add</span><span class="params">(e)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">remove</span><span class="params">(o)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">containsAll</span><span class="params">(c)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? <span class="keyword">extends</span> E&gt; c)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">addAll</span><span class="params">(c)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">removeAll</span><span class="params">(c)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">retainAll</span><span class="params">(c)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Object[] toArray() &#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">toArray</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">toArray</span><span class="params">(a)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">equals</span><span class="params">(o)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">hashCode</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="keyword">public</span> <span class="function">String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">return</span> s.<span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，ForwardingSet类将在内部持有一个Set实例，然后它将Set类的所有方法悉数<strong>转发</strong>，原文又在ForwardingSet类的基础上继承了一个新类，利用新类来实现新逻辑内容，这只是为了与之前的例子对应，事实上，在ForwardingSet中我们也可以实现新的逻辑，而不只是简单地转发原有类的方法。<br>一旦你使用新的逻辑增强了原有类的方法，并返回新的结果，这种模式就叫做<strong>包装</strong>，而新的类也被称为<strong>包装类(wrapper class)</strong>或者叫<strong>装饰器(decorator)</strong>。<br>装饰器模式是设计模式中被广泛使用的一种模式，它几乎没有什么缺点，但是要注意不要用在回调框架中。因为回调通过传递实例自身的引用实现，很容易绕过装饰器造成装饰器失效。</p>
+<h3 id="什么时候还可以用继承？"><a href="#什么时候还可以用继承？" class="headerlink" title="什么时候还可以用继承？"></a>什么时候还可以用继承？</h3><p>继承的脆弱性没有办法通过程序来保证，只能通过程序员自己的抽象认知来保证，即程序员只有百分之百地确定，两个对象间具有<strong>“is a”</strong>关系的时候，才真的使用继承。<br>如果两个对象之间具有A既是B的关系，那么前文提到的继承的脆弱性也会减弱很多。<br>但是要注意的是，有时候你看到父类具有明显的缺陷，那么即使你的新类与父类之间拥有<strong>“is a”</strong>的关系，也要好好想想，你真的愿意将父类的缺陷带到子类中吗？</p>
+<h2 id="第十七条-设计专为继承而生的类并提供文档说明"><a href="#第十七条-设计专为继承而生的类并提供文档说明" class="headerlink" title="第十七条 设计专为继承而生的类并提供文档说明"></a>第十七条 设计专为继承而生的类并提供文档说明</h2><p>虽然继承有着诸多缺点，但是在某些情况下，仍然要求我们去设计一些专为继承而生的类。在编写一些API或者框架的时候尤其有可能碰到。<br>下面是设计一个可以用来继承的类所要注意的问题：</p>
+<h3 id="必须提供文档说明可被覆盖的方法在类中其他方法的使用情况"><a href="#必须提供文档说明可被覆盖的方法在类中其他方法的使用情况" class="headerlink" title="必须提供文档说明可被覆盖的方法在类中其他方法的使用情况"></a>必须提供文档说明可被覆盖的方法在类中其他方法的使用情况</h3><p>即文档说明可覆盖方法的自用性。<br>所有使用到可覆盖方法的地方，都要用文档说明该方法可能被哪个可覆盖方法影响，以告知子类实现者覆盖可能造成的影响。</p>
+<h3 id="必要时提供额外的protected方法来减轻子类实现者的工作"><a href="#必要时提供额外的protected方法来减轻子类实现者的工作" class="headerlink" title="必要时提供额外的protected方法来减轻子类实现者的工作"></a>必要时提供额外的protected方法来减轻子类实现者的工作</h3><p>这种方法也被称为<strong>钩子方法</strong>。<br>书中的例子是：AbstractList中的removeRange方法。<br>该方法的意义在于使得子类更容易提供快速clear子列表(sublist)的方法，如果没有这个方法，子类就要重写整个sublist机制，而现在，它只需要覆盖该方法就行了。</p>
+<h3 id="对于专为继承而生的类，唯一的测试方法就是编写子类"><a href="#对于专为继承而生的类，唯一的测试方法就是编写子类" class="headerlink" title="对于专为继承而生的类，唯一的测试方法就是编写子类"></a>对于专为继承而生的类，唯一的测试方法就是编写子类</h3><p>编写3个以上的子类就能测试一个可继承的类。<br>如果编写子类的过程中，某些地方感到痛苦，那么说明遗漏了一些受保护的成员。<br>如果编写子类的过程中，某些受保护的成员几乎没有用到，那么可能要考虑将其私有化。<br>谨记，一旦为继承而生的类发布，就相当于你做出了永久的承诺，以后再修改会变得非常困难，因为也许有人已经扩展它并且在使用了，所以，发布之前必须<strong>充分</strong>的测试。</p>
+<h3 id="构造器决不能调用可被覆盖的方法"><a href="#构造器决不能调用可被覆盖的方法" class="headerlink" title="构造器决不能调用可被覆盖的方法"></a>构造器决不能调用可被覆盖的方法</h3><p>理由是构造器在调用的时候，先调用父类构造器，然后调用子类构造器，父类构造器的调用被强制在子类构造器的第一行，因此，如果子类覆盖后的方法依赖子类构造器，那么运行时就会出现问题。</p>
+<h3 id="同样地，clone和readObject方法绝对不能调用可被覆盖的方法"><a href="#同样地，clone和readObject方法绝对不能调用可被覆盖的方法" class="headerlink" title="同样地，clone和readObject方法绝对不能调用可被覆盖的方法"></a>同样地，clone和readObject方法绝对不能调用可被覆盖的方法</h3><p>理由同上</p>
+<h3 id="如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法"><a href="#如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法" class="headerlink" title="如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法"></a>如果实现了Serializable接口，必须使readResolve或者writeReplace方法成为受保护方法</h3><p>理由是这两个方法大多数情况下应该被子类覆盖，是其成为受保护的方法是一种显式地提示，提示子类应该考虑覆盖此方法。</p>
+<h3 id="两个折中的做法"><a href="#两个折中的做法" class="headerlink" title="两个折中的做法"></a>两个折中的做法</h3><p>如果你认为一些普通的类，未经设计的类要允许子类去继承，一种折中的做法是确保类中永远不会调用任何可被覆盖的方法。另一种方法是将可被覆盖的方法的实现逻辑全部搬运到一个私有方法里，然后可被覆盖的方法直接调用该私有方法，其他想要调用可被覆盖方法的地方都调用该私有方法，就不用担心子类的覆盖行为了。<br>上面两种折中做法都不是特别完美，不能解决继承所有的缺点，同时第二种方法还会制造多余的方法。</p>
+<h2 id="第十八条-接口优于抽象类"><a href="#第十八条-接口优于抽象类" class="headerlink" title="第十八条 接口优于抽象类"></a>第十八条 接口优于抽象类</h2><p>接口优于抽象类这个说法书中列举了一大堆情况来证明，实际上，或者说本质上的原因是：<br><strong><em>接口允许多继承，抽象类不可以</em></strong><br>不可多继承导致的最核心的问题是：由抽象类构成的继承体系将变得格外庞大臃肿。</p>
+<h3 id="骨架结构"><a href="#骨架结构" class="headerlink" title="骨架结构"></a>骨架结构</h3><p>书中提到了<strong>骨架结构</strong>，这是一种常见的结合接口和抽象类优点的做法。<br>就是配合使用接口和抽象类，为每个接口提供一个抽象类，抽象类实现接口的一些通用的、核心的方法。然后接口实现类的程序员不用逐一实现接口的所有方法，可以选择继承与之匹配的抽象类来直接获得通用的、核心方法的默认实现，只写其他没实现的方法。<br>这种骨架结构的好处是提供了默认方法给后来的程序员去直接用，而不用迫使其实现接口的全部方法。当然，也可以绕过抽象类，直接实现接口。JDK的集合框架就遵循这一结构，每个接口都有一个抽象类供人们使用。<br>注意：骨架结构中的抽象类由于是为了给后面的人继承用的，所以第十七条的规则它也必须都遵守才行。</p>
+<h3 id="接口的缺陷"><a href="#接口的缺陷" class="headerlink" title="接口的缺陷"></a>接口的缺陷</h3><p>接口也不是万能的，它有自己的缺陷。<br>接口最大的缺陷就是一旦发行就不能改变，因为它要求实现它的子类必须完全实现所有的方法，那么如果接口新增一个新的方法，所有之前已经实现该接口的实现类全部都无法编译通过。<br>尽管你可以通过骨架结构中的抽象类来提供一个默认的实现方法，这样那些通过骨架结构继承的子类都获得了该默认实现，它们是可以编译通过的，但是，还是有直接绕过抽象类，去实现接口的子类存在，这些子类就真的是无能为力了。<br>由于接口的这个缺陷，最好发行接口之前充分地去实现它，测试它，确保未来的改变最小化。<br>另外，你还有个办法可以弥补这种缺陷，那就是强迫自己和你的客户们全部升级JDK1.8…………:)，JDK1.8已经允许开发者在接口中提供默认实现，这样接口的缺陷就被弥补了。呵呵。</p>
+<h2 id="第十九条-接口只用于定义类型"><a href="#第十九条-接口只用于定义类型" class="headerlink" title="第十九条 接口只用于定义类型"></a>第十九条 接口只用于定义类型</h2><p>本条主要讲定义接口的目的一定是有个实现类的实例可以通过这个接口来调用，接口代表了某种<strong>类型</strong>，实现类实现接口，便属于这种<strong>类型</strong>，从而可以通过接口来调用实现类的实例。<br>但是作者举出反例，说很多人仅仅使用接口来导出常量，甚至JDK的作者也这么干，这是一种反模式，是不对的。<br>接口里面列举常量是不对的，导出常量应该放在与该常量密切相关的类中，如果有必要，某些常量必须定义成枚举。<br>或者，定义不可实例化的工具类该归纳常量，这种情况下可以使用JDK1.5的静态导入机制略去类名来调用常量。<br>总而言之，接口只用于定义类型，不应该被用来导出常量。</p>
+<h2 id="第二十条-类层次（即继承）优于标签类"><a href="#第二十条-类层次（即继承）优于标签类" class="headerlink" title="第二十条 类层次（即继承）优于标签类"></a>第二十条 类层次（即继承）优于标签类</h2><p>这一条其实讲起来非常容易，作者介绍了一种类叫做标签类，例子如下：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">class Figure &#123;</div><div class="line">	<span class="keyword">enum</span> Shape &#123;</div><div class="line">		RECTANGLE, CIRCLE</div><div class="line">	&#125;;</div><div class="line">	</div><div class="line">	<span class="comment">// Tag field - the shape of this figure</span></div><div class="line">	<span class="keyword">final</span> Shape <span class="built_in">shape</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// These fields are used only if shape is RECTANGLE</span></div><div class="line">	<span class="keyword">double</span> length;</div><div class="line">	<span class="keyword">double</span> <span class="built_in">width</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// This field is used only if shape is CIRCLE</span></div><div class="line">	<span class="keyword">double</span> radius;</div><div class="line">	</div><div class="line">	<span class="comment">// Constructor for circle</span></div><div class="line">	Figure(<span class="keyword">double</span> radius) &#123;</div><div class="line">		<span class="built_in">shape</span> = Shape.CIRCLE;</div><div class="line">		<span class="keyword">this</span>.radius = radius;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Constructor for rectangle</span></div><div class="line">	Figure(<span class="keyword">double</span> length, <span class="keyword">double</span> <span class="built_in">width</span>) &#123;</div><div class="line">		<span class="built_in">shape</span> = Shape.RECTANGLE;</div><div class="line">		<span class="keyword">this</span>.length = length;</div><div class="line">		<span class="keyword">this</span>.<span class="built_in">width</span> = <span class="built_in">width</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">double</span> area() &#123;</div><div class="line">		<span class="keyword">switch</span> (<span class="built_in">shape</span>) &#123;</div><div class="line">		<span class="keyword">case</span> RECTANGLE:</div><div class="line">			<span class="keyword">return</span> length * <span class="built_in">width</span>;</div><div class="line">		<span class="keyword">case</span> CIRCLE:</div><div class="line">			<span class="keyword">return</span> Math.<span class="literal">PI</span> * (radius * radius);</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个标签类我们观察一下发现有如下特点：</p>
+<ul>
+<li>有枚举或者其他形式定义的类型，比如上面的类定义了圆形和矩形。</li>
+<li>一个类完成了所有的事，将不同类型的方法或者它们公有的方法揉在一起在一个类中实现</li>
+<li>由于不同的类型可能需要的是不同的域，在某些类型下，其他类型独有的那些域不得已只能留空，构造器在初始化时不能初始化全部域，因此，无法将全部的域做成final的。</li>
+<li>area方法，这种所有类型都有的方法几乎都要使用到switch语句来判断类型，这种代码被称为样板代码</li>
+</ul>
+<p><strong>附：请注意switch语句，switch语句极有可能是一个反模式信号，如果你发现代码里很多switch语句，那么你就应该认真地考虑是否应该使用继承。</strong></p>
+<p>讲真在面向对象的语言下还使用这种方法真的很蠢，但是有理由相信还是会有很多人这么做。<br>作者给出了使用继承来实现的方法，并阐述了这样做的好处：</p>
+<ul>
+<li>公有的方法在抽象父类中定义，每个子类都有自己的实现，避免了样板代码的产生。</li>
+<li>每个子类只拥有和自己有关的域，因此可以一口气初始化所有域，从而有机会将类做成不可变类，前面有讨论过不可变类的好处。</li>
+<li>继承可以反映多层次的关系，拥有更好的编译时类型检查，很强大的灵活性</li>
+</ul>
+<p>综上所述，尽量避免你自己写出的代码被识别为<strong>标签类</strong>，那真的是一种很Low的面向过程式的写法。而继承要比它强的多。</p>
+<h2 id="第二十一条-用函数对象表示策略"><a href="#第二十一条-用函数对象表示策略" class="headerlink" title="第二十一条 用函数对象表示策略"></a>第二十一条 用函数对象表示策略</h2><p>设计模式中有个著名的策略模式，此条列举了一个实现策略模式的例子。<br>首先要说的是，JDK8以前JAVA是不支持lambda表达式的，所以没有函数式编程的能力。但是函数式编程具有诸多好处，古老的函数式编程在最近又变得流行起来，许多函数式语言又开始风靡。<br>策略模式实际上结合函数式编程更好用，但是即使没有函数式编程，使用函数对象也能表示策略。</p>
+<h3 id="什么是函数对象？"><a href="#什么是函数对象？" class="headerlink" title="什么是函数对象？"></a>什么是函数对象？</h3><p>函数对象就是没有任何域，仅仅导出一个方法的类的实例。由于没有任何域，而且仅导出一个方法，因此这个类的实例可以看做是指向该方法的指针。<br>然后我们将该类的实例作为参数传入其他方法中，就相当于是函数式地编程。毕竟，函数式编程的核心理念就是函数是一等公民，函数可以传来传去。</p>
+<h3 id="书中的例子？"><a href="#书中的例子？" class="headerlink" title="书中的例子？"></a>书中的例子？</h3><p>书中给出的例子是我们熟悉的比较器接口(comparator)，我们在排序的时候，会传一个比较器接口的实例给sort函数，此时比较器接口的实例就是一个函数，传不同的实现类的实例，就相当于是选用了不同的排序策略去实现排序。</p>
+<h3 id="策略模式要有接口"><a href="#策略模式要有接口" class="headerlink" title="策略模式要有接口"></a>策略模式要有接口</h3><p>要注意的是，仅有函数对象是不行的，函数对象必须实现某个接口，这样才能称的上是策略模式，总不能像第二十条反例说的那样，用switch语句去判断来选择策略吧，那样太不OO了。</p>
+<h3 id="策略接口的实现类放在哪儿？"><a href="#策略接口的实现类放在哪儿？" class="headerlink" title="策略接口的实现类放在哪儿？"></a>策略接口的实现类放在哪儿？</h3><p>如果策略接口的实现只使用一次，匿名类就可以。<br>如果策略接口的实现需要重复利用，就使其成为私有静态成员类，并通过公有的静态final域导出。文中举例<code>String.CASE_INSENSITIVE_ORDER</code>就是这样实现的，提供一个忽略大小写的比较器。<br>当然了，如果策略接口的实现需要和多个类有关，没有明确的归属，不要使其成为成员类，放在外面比较好，并将其做成线程安全的单例。</p>
+<h2 id="第二十二条-优先考虑静态成员类"><a href="#第二十二条-优先考虑静态成员类" class="headerlink" title="第二十二条 优先考虑静态成员类"></a>第二十二条 优先考虑静态成员类</h2><p>本条作者详细介绍了四种嵌套类：静态成员类、非静态成员类、匿名类、局部类。<br>后三种又被称为内部类。<br>下面分开做简短介绍，这属于JAVA基础，不详细展开。</p>
+<h3 id="静态成员类"><a href="#静态成员类" class="headerlink" title="静态成员类"></a>静态成员类</h3><p>静态成员类除了被声明在了类的内部以外，它和任何顶层类没有本质区别。它只是”恰巧“被定义在了类的内部。<br>恰巧？不，你不应该随意地定义类的位置，静态成员类还拥有一种额外的能力，就是可以获得其外围类的<strong>私有</strong>静态成员。所有的成员类都应该为了服务外围类而定义，如果你定义的成员类和外围类压根没什么关系，那么就不要这么做。<br>另外，静态成员类被声明成私有的话，它就只能在外围类的范围内被访问了。</p>
+<h3 id="非静态成员类"><a href="#非静态成员类" class="headerlink" title="非静态成员类"></a>非静态成员类</h3><p>和静态成员类只差一个static修饰符，但是却又天壤之别。<br>首先，它必须依赖外围类的实例而存在。一个非静态成员类的实例必然关联一个外围类的实例，这导致该实例占用更多的内存来维护与外围类实例的关系，保留外围类的引用，导致外围类不能被适时地回收。<br>其次，它可以访问外围类实例的所有成员，包括私有的。<br>和静态成员类一样，如果被声明成私有的话，它就只能在外围类的范围内被访问了。<br>它不能包含任何静态成员。</p>
+<h3 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h3><p>匿名类在使用的地方来声明，声明的同时就被实例化。<br>匿名类没有名字，无法继承，无法实现多个接口，没有外围类，必须保持简短以增加代码可读性。<br>匿名类不能包含静态成员。</p>
+<h3 id="局部类"><a href="#局部类" class="headerlink" title="局部类"></a>局部类</h3><p>很少用到，任何局部变量可以声明的地方都能声明局部类。<br>它有名字，与匿名类不同，它可以继承，可以实现多个接口。<br>它的访问范围仅仅局限在声明它的方法内部。<br>局部类也不能包含静态成员。也必须保持简短以增加代码可读性。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-21T14:29:23.916Z" itemprop="datePublished">
+					2017年3月21日 22:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/03/02/effective-java-4/" style="float: left;">
+        ← 《Effective Java》读书笔记——第四章 泛型
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/02/11/effective-java-2/">
+        《Effective Java》读书笔记——第二章 所有对象通用方法 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/02/19/effective-java-3/" data-title="《Effective Java》读书笔记——第三章 类和接口" data-url="/2017/02/19/effective-java-3/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

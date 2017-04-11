@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《高性能Mysql》读书笔记——第五章创建高性能的索引 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>Mysql Index</h2>
+                                <p>第五章创建高性能的索引</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-10-21T09:46:05.000Z" itemprop="datePublished">
+          2016年10月21日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Mysql/'>Mysql</a>
+    
+    
+	
+</span>
+                <h1>《高性能Mysql》读书笔记——第五章创建高性能的索引</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、索引基础"><span class="toc-text">一、索引基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-索引的概念"><span class="toc-text">1.索引的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-索引的类型"><span class="toc-text">2.索引的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B-Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mysql中索引使用B-树的情况"><span class="toc-text">Mysql中索引使用B+树的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#InnoDB引擎的索引结构："><span class="toc-text">InnoDB引擎的索引结构：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MyISAM引擎的索引结构："><span class="toc-text">MyISAM引擎的索引结构：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash索引简单介绍"><span class="toc-text">Hash索引简单介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于自建哈希索引的小技巧"><span class="toc-text">关于自建哈希索引的小技巧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引的优点"><span class="toc-text">索引的优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、高性能索引策略"><span class="toc-text">二、高性能索引策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-避免表达式"><span class="toc-text">1.避免表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-前缀索引和索引选择性"><span class="toc-text">2.前缀索引和索引选择性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-创建合适的多列索引"><span class="toc-text">3.创建合适的多列索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-按主键顺序插入行"><span class="toc-text">4.按主键顺序插入行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-覆盖索引"><span class="toc-text">5.覆盖索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-使用索引扫描排序"><span class="toc-text">6.使用索引扫描排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-重复或者冗余的索引"><span class="toc-text">7.重复或者冗余的索引</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要是介绍索引的基础知识以及创建和维护索引的过程中需要注意的性能优化问题。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
+<h2 id="一、索引基础"><a href="#一、索引基础" class="headerlink" title="一、索引基础"></a>一、索引基础</h2><h3 id="1-索引的概念"><a href="#1-索引的概念" class="headerlink" title="1.索引的概念"></a>1.索引的概念</h3><p>索引的概念解释起来很简单，新华字典你要查一个字，字典前面的目录就是一个索引。索引的目的就是加速查找的操作，减少全表扫描造成的服务器开销。</p>
+<h3 id="2-索引的类型"><a href="#2-索引的类型" class="headerlink" title="2.索引的类型"></a>2.索引的类型</h3><p>索引有很多种，综合起来大概有如下这些：</p>
+<ul>
+<li>B-Tree</li>
+<li>Hash</li>
+<li>R-Tree</li>
+<li>全文索引</li>
+</ul>
+<h4 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h4><p>大多数索引都是这个类型，或者B+Tree(InnoDB引擎就是这个)。<br>B树和B+树实际上是数据结构，因此要介绍这种类型的索引，首先需要了解这种数据结构。</p>
+<p><code>B树数据结构介绍</code>：<br>有关B树的数据结构的详细介绍，可以看<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.02.md" target="_blank" rel="external">这篇文章</a>，作者将大量精品的教程文章托管在github上，非常厉害(还出书了呢)。<br>篇幅有限，我这里就根据上面这篇文章的内容写一个简化版。</p>
+<p>首先，树这种结构，应该算是计算机数据结构里比较复杂的一种。顾名思义，它的结构像一颗树(倒过来的树……)，由一个根节点向下生长，一个根节点有多个子节点，每个子节点又有很多子节点，那些没有子节点的子节点就被称为叶子节点。<br>事实上，这种结构在我们日常使用中是很常见的，仔细想想就会发现，我们使用的操作系统正是使用树这种结构来管理文件的，打开我们的资源管理器，你就能看到一颗树。<br>但是要想把树这种结构用在索引里，可不是简单的普通的树就能搞定的。如何能够以最少的开销获得最快速的查找？在普通的树里查找会比链表或者数组快吗？<br>于是计算机领域的科学家们发明了各种各样的树：二叉查找树、平衡二叉查找树、红黑树以及接下来要讲的B树。<br>B树全名是<strong>平衡多路查找树</strong>（b是英文单词balanced，平衡的）。<br>由名字可以知道下面这些事实：</p>
+<ul>
+<li>B树是一颗平衡树。什么是平衡树？就是左子树和右子树的高度差不超过1，且左右子树的子树们也满足这个条件。这样说可能太抽象了，你还是在脑海里想象一颗真正的树吧，然后想象这棵树左半边和右半边发育的程度差不多，那它就是一颗<strong>平衡树</strong>。如果这棵树左边阳光比较充足，它左半边生长的特别茂盛高大，右半边生长的很慢很稀疏，你懂得，这是一颗<strong>不平衡的树</strong>。</li>
+<li>B树是一颗多叉树。和二叉树相对，B树是多叉的。二叉树要求树中所有的节点子节点都不能超过2。B树没有这个限制。</li>
+</ul>
+<p>B树结构之所以被选中用做索引，是因为索引也是很大的，是需要放在硬盘上的，而现在大多数的机械硬盘和内存比起来都是非常慢的，要在一排碟片中找到想要的数据，磁头需要寻道移动到合适的位置，结构就像你们在电影里看到的很多欧美老式留声机一样。如果数据不能合理地归放，查找一次数据就会造成磁头频繁地在碟片上方移动，移动耗费的时间代价是非常大的。<br>后文可以看到，B树这种结构降低了磁头移动的次数，从而显著降低查找时间。</p>
+<p>废话了这么多，让我们直观地看一下B树结构：<br><img src="/2016/10/21/mysql-index/btree.jpg" alt="B-Tree" title="B-Tree"><br>这是一棵4阶的B树。阶的定义就是这个树每个节点至多拥有的子节点数，如果是4阶则至多拥有4个子节点。阶必须大于等于2，否则没意义。<br>然后我们罗列一下如下B树定义：</p>
+<ul>
+<li>根节点至少有两个子节点，或者整个树只有根节点本身。</li>
+<li>这是4阶的树，因此每个节点至多有4个子节点。如果是M阶，那就至多M个子节点。</li>
+<li>每个节点至少有M/2个子节点，M/2向上取整，根节点和叶子节点除外。</li>
+<li>实际上上图没有画出叶子节点，在各类搜索树中，叶子节点通常是NULL，这样当搜索过程搜到了NULL，或者NULL指针，那就说明树里不包含要搜索的值，因为已经搜到叶子节点了还没搜到值。</li>
+<li>4阶的树每个节点都至多只能有3个关键字，而且我们可以很容易的看出，每个节点的关键字数总是等于子节点-1。因此M阶树每个节点至多M-1个关键字。至少呢？至少M/2-1个呗(M/2向上取整)，总之就是比子节点数少1个。</li>
+<li>节点中的关键字是有排列顺序的，一般按照升序排列，然后它们之间插入指向子节点的指针。举例，上图中QTX节点就是按照字母升序排列的，它们中间插入了指向子节点的指针。而且Q前面的指针指向的子节点，它的关键字一定全部小于Q，Q后面的指针指向的子节点，它的关键字一定大于Q且小于T。以此类推。</li>
+</ul>
+<p>下面是我们搜索字母R的过程：</p>
+<ol>
+<li>字母R与根节点M比较，大于M，因此R一定在M的右子树里。</li>
+<li>字母R与M的右子节点QTX依序比较。可知Q&lt;R&lt;T。因此，R一定在Q和T之间的子树里。</li>
+<li>字母R与RS子节点依序比较，第一个关键字就是R，说明找到了要查找的关键字。</li>
+</ol>
+<p>整个过程只用了3步，而索引的设计者会充分地利用硬盘存储的特性，使得你在使用索引的时候，从硬盘里恰好就是读取3次。每次读取一整块内容到内存里，而这一整块内容恰好就是一个节点包含的内容。<br>你肯定会问一个问题：<strong>为啥每个节点至多只有M-1个关键字，如果我插入新的关键字到一个已经满的节点里，会怎样？</strong><br>答案是：B树的这个节点需要进行裂变的过程，裂变成两个节点，然后多余出来的一个关键字，上升到父节点去。如果父节点也满了，就把父节点也分裂，再向上提关键字，如果根节点也满了，就会出现新的根节点，原根节点裂变，树的高度+1。详情请看那篇文章。</p>
+<p>B树高度公式：<br><img src="/2016/10/21/mysql-index/gongshi.gif" alt="公式" title="公式"><br>其中m代表阶数，N代表关键字总数。m/2要向上取整。</p>
+<p>另外，你应该可以知道，B树查询的时间复杂度是O(log2n)。由于我的markdown暂时没开公式功能，这个是以2为底……</p>
+<p><code>B+树数据结构介绍</code>：<br>和B树相比，B+树针对应用场景做了一些改变，或者可以说是优化……<br>B+树结构如下：<br><img src="/2016/10/21/mysql-index/b+tree.png" alt="B+Tree" title="B+Tree"><br>然后我们可以看出它和B树相比有如下变化：</p>
+<ul>
+<li>它的叶子节点不再是NULL了，而是保存了完整数据的节点(也有可能只保存指向数据的指针)，比如上图中1到7完整的7个数据都保存在叶子节点中。</li>
+<li>它的非叶子节点变成了纯粹的索引节点，保存着索引数据，而索引数据只起到索引的作用，最终获取数据是在叶子节点进行的。</li>
+<li>叶子节点内部的关键字是按照升序排列的，而且叶子节点之间也通过指针连接在了一起。</li>
+</ul>
+<p>这样有什么好处呢？<br>可以看到，B+树利用叶子节点将数据给弄到了一起，使得B树拥有了链表的特性。这种特性对范围查询支持的比较好。<br>举个例子，如果你要查询树中大于3的全部数据，在一个普通的B树里，怎么做？<br>如果在上面的B+树里，事情就简单的多，首先找到数据3，就和B树的查询过程是一样的，当你找到了数据3，那么接下来就是使用叶子节点们形成的链表，依次遍历叶子节点，就能取到3以后所有的数据了，这样的时间复杂度才是O(n)。</p>
+<h4 id="Mysql中索引使用B-树的情况"><a href="#Mysql中索引使用B-树的情况" class="headerlink" title="Mysql中索引使用B+树的情况"></a>Mysql中索引使用B+树的情况</h4><p>Mysql的两个主要引擎InnoDB和MyISAM都使用B+树来组织索引。<br>但是它们的结构略有不同。</p>
+<h5 id="InnoDB引擎的索引结构："><a href="#InnoDB引擎的索引结构：" class="headerlink" title="InnoDB引擎的索引结构："></a><strong>InnoDB引擎的索引结构：</strong></h5><p>对于主索引(即主键索引)，InnoDB的索引如下图：<br><img src="/2016/10/21/mysql-index/innodb1.png" alt="聚簇索引" title="聚簇索引"><br>这种索引结构被称为聚簇索引，它有以下特点：</p>
+<ul>
+<li>可以看到，InnoDB的主索引是B+树，注意，这个图画的有问题，每个节点的最左边应该也有指针</li>
+<li>主索引的叶子节点正是数据表，数据既是索引，索引既是数据。</li>
+<li>由于上一条特性，可以说InnoDB的每张表都至少有一个索引，正因如此，必须为表指定主键，如果你没有显式指定主键，引擎会从你的唯一非空索引中选择一个代替，如果选择不出来，就创建隐藏的列来作为主键。</li>
+<li>可以知道，主键最好选择数字类型的列，而且最好是有自增规律的列。因为，如果主键是具有自增规律的列，B+树构造的过程就会减少很多次重新构建子树的过程从而减少开销。由于InnoDB在硬盘上的存储方式，还可能有效减少频繁分页产生的碎片。(使用随机UUID作为主键是这里的反例，如果害怕顺序的id有安全性问题，可在应用层对id进行加解密)</li>
+<li>一个表只能有一个聚簇索引，因为数据只能存放在一个地方。</li>
+</ul>
+<p>对于辅助索引(除了主索引以外的其他索引)，InnoDB的索引如下图：<br><img src="/2016/10/21/mysql-index/innodb2.png" alt="辅助索引" title="辅助索引"><br>这种索引结构有以下特点：</p>
+<ul>
+<li>也是一个B+树，注意，和上图一样，每个节点最左边应该也有指针</li>
+<li>叶子节点不再是数据表，而是索引的列，当通过B+树找到了某一个记录后，引擎将得到一个主键值，然后使用主键值再到主索引里面找到真正的数据行。因此，辅助索引总是要进行两次B+树查找</li>
+<li>之所以得到的是主键值而不是物理地址的指针，是为了解决数据插入时维护索引代价高的问题。如果辅助索引保存的是主键值，那么任何数据的插入和删除操作都不需要费力去维护辅助索引。</li>
+<li>可以知道，为什么主键选择数字类型的列，而不是字符串，因为字符串类型的列占用更多的空间，主键越大，辅助索引们会跟着更大。</li>
+</ul>
+<h5 id="MyISAM引擎的索引结构："><a href="#MyISAM引擎的索引结构：" class="headerlink" title="MyISAM引擎的索引结构："></a><strong>MyISAM引擎的索引结构：</strong></h5><p>这个引擎的索引结构就简单直接多了，主索引和其他的辅助索引结构都如下：<br><img src="/2016/10/21/mysql-index/myisam.png" alt="myisam" title="myisam"><br>这种索引结构是非聚簇索引，有以下特点：</p>
+<ul>
+<li>使用B+树，注意，每个节点最左边应该也有指针</li>
+<li>叶子节点存储的不是数据，是数据行的物理地址</li>
+<li>主索引和辅助索引都是这样，唯一的区别是主索引必须非空唯一，辅助索引没有这个限制</li>
+</ul>
+<h4 id="Hash索引简单介绍"><a href="#Hash索引简单介绍" class="headerlink" title="Hash索引简单介绍"></a>Hash索引简单介绍</h4><p>这种索引是用哈希表来存储索引数据的。<br>一般很少使用，Mysql的Memory引擎默认索引就是这种。(其实也很好理解，哈希结构更适用于在内存中存储，而上述的聚簇索引和B+树，一旦脱离了硬盘，在内存中存储，它们的优势便没有了)</p>
+<ul>
+<li>哈希索引的原理很简单，就是针对索引列计算哈希值，然后查找数据的时候根据搜索条件计算出的哈希值来在哈希表中检索数据。</li>
+<li>哈希表的查找效率是非常出名的O(1)，即在常数时间内就能拿到数据。</li>
+<li>哈希冲突是哈希表常见的问题，Mysql中的哈希索引和JAVA中的HashMap处理方式一样，一旦遇到哈希冲突，就将冲突的数据组成链表放在同一个哈希槽(桶)中。<br>举个例子，假设数据Amy和数据bill都得到了哈希值332，那么Amy和bill都会和哈希值332关联，并且组成一个链表。当用户查找数据bill时，引擎会先根据bill算出哈希值332，然后到相应地位置找到332对应的数据，即Amy和bill组成的链表。然后在链表上顺序查找，先找到Amy，发现不是要找的值，再找到bill并返回。</li>
+<li>哈希索引不是按照数据顺序存储的，因此不能用于排序</li>
+<li>哈希索引不支持部分索引列的匹配查找，要想使用索引，那么索引中的列都要指定才行。</li>
+<li>哈希索引只支持等值查询，不支持范围查询</li>
+<li>哈希索引在某些重复数值很多，选择性差的列上，不可避免地要遇到哈希冲突问题，哈希冲突严重时，查询效率会下降。</li>
+<li>InnoDB引擎虽然不支持哈希索引，但是却具有一种叫做“自使用哈希索引”的功能，在某些索引值使用的非常频繁时，它会在B+树结构之上建立哈希索引，从而得到哈希索引的一些好处，这个功能是完全自动地，用户不需要控制也无需关心。当然，可以关闭。</li>
+</ul>
+<h4 id="关于自建哈希索引的小技巧"><a href="#关于自建哈希索引的小技巧" class="headerlink" title="关于自建哈希索引的小技巧"></a><code>关于自建哈希索引的小技巧</code></h4><p>虽然存储引擎不支持哈希索引，但是我们还是可以手工地利用起哈希索引。<br>书中举了个例子：<br>假如存储URL在数据库里，然后要查询URL，由于URL非常长，在这个字段上创建索引会得到较大体积的索引。<br>正常情况有如下查询语句：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> url <span class="keyword">WHERE</span> url=<span class="string">"http://www.mysql.com"</span></div></pre></td></tr></table></figure></p>
+<p>为了利用哈希索引的便利，可以新增一个被索引列，如url_crc列，来记录url的哈希值，查询语句就变成如下：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> url <span class="keyword">WHERE</span> url=<span class="string">"http://www.mysql.com"</span> <span class="keyword">AND</span> url_crc=CRC32(<span class="string">"http://www.mysql.com"</span>);</div></pre></td></tr></table></figure></p>
+<p>CRC32是一个哈希函数，你也可以定义自己的哈希函数，以得到更离散的哈希值。<br>这个方法即使遇到选择性很差的情况，也有比较显著的查询速度提升，但是有个问题就是要确保哈希列的值被维护的很好。<br>书中给出了方法是写一个触发器在更新和插入的时候来设置哈希列的值。<br>别忘了WHERE条件句中一定要有url的真实值，以应对哈希冲突时查出多个行的情况。</p>
+<p>R-Tree索引和全文索引由于使用场景有限，书中介绍的不详细，故这里不做介绍。</p>
+<h4 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h4><p>总结下来就是如下三条：</p>
+<ol>
+<li>索引大大减少了服务器需要扫描的数据量</li>
+<li>索引帮助服务器避免排序和临时表</li>
+<li>索引可以将随机I/O变为顺序I/O</li>
+</ol>
+<p>索引并不是在所有的场景下都应该使用，一些记录数不会超过2000条的表，完全不需要创建索引。一些规模巨大的表，也必须使用分区技术而不是直接使用索引。</p>
+<h2 id="二、高性能索引策略"><a href="#二、高性能索引策略" class="headerlink" title="二、高性能索引策略"></a>二、高性能索引策略</h2><h3 id="1-避免表达式"><a href="#1-避免表达式" class="headerlink" title="1.避免表达式"></a>1.避免表达式</h3><p>Mysql有个限制，就是如果你的查询语句里，索引列是在表达式中的，或者函数中的，那引擎是不会使用索引的。<br>比如下列SQL语句都无法使用索引：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt;<span class="keyword">SELECT</span> actor_id <span class="keyword">FROM</span> sakila.actor <span class="keyword">WHERE</span> actor_id + <span class="number">1</span> = <span class="number">5</span>;</div><div class="line">mysql&gt;<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> sakila.<span class="keyword">order</span> <span class="keyword">WHERE</span> TO_DAYS(CURRENT_DATE) - TO_DAYS(date_col) &lt;= <span class="number">10</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="2-前缀索引和索引选择性"><a href="#2-前缀索引和索引选择性" class="headerlink" title="2.前缀索引和索引选择性"></a>2.前缀索引和索引选择性</h3><p>首先介绍索引的选择性：<br>索引的选择性=不重复的索引值/数据表的记录总数<br>选择性的值在0到1之间。越大越好。<br>我们可以使用COUNT函数来计算某个索引列的选择性：<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; <span class="built_in">SELECT</span> <span class="built_in">COUNT</span>(DISTINCT city)/<span class="built_in">COUNT</span>(*) <span class="keyword">FROM</span> sakila.city_demo;</div></pre></td></tr></table></figure></p>
+<p>选择性有什么用？<br>书中提出了前缀索引，和之前提到的自建哈希索引一样，前缀索引也是为了解决在一些很长的字符列上建立索引的情况的。<br>前缀索引，顾名思义，就是只取字符串的前几位来建立索引，从而缩小索引的体积。<br>但是到底要取前几位呢？这就需要索引选择性来帮忙。<br>先算出完整字符串的索引选择性，然后从前1位开始，逐渐增加位数来计算截取位数后的列的选择性，比如：<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; <span class="built_in">SELECT</span> <span class="built_in">COUNT</span>(DISTINCT LEFT(city, <span class="number">3</span>))/<span class="built_in">COUNT</span>(*) <span class="keyword">FROM</span> sakila.city_demo;</div></pre></td></tr></table></figure></p>
+<p>如果完整字符串的选择性是0.532，而截取前3个字符的选择性已经接近这个数值，那么我们可以认为使用前3个字符的前缀索引可以替代整个字符串的索引使用。<br>上面选择性的计算实际上是一个平均值，我们知道有时候平均值不能反映真实情况，尤其是数据的方差特别大的时候，因此，我们还要将每个数据的COUNT情况统计一下，如果数据分布非常不均匀，那么还是需要增加前缀索引的字符数，来保证数据分布平均。<br>说了这么多，一旦选定前缀索引的字符数，如果创建前缀索引呢？使用如下命令：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; ALTER <span class="keyword">TABLE</span> sakila.city_demo <span class="comment">ADD KEY (city(7))</span>;</div></pre></td></tr></table></figure></p>
+<p>前缀索引的缺点：无法再用来排序和分组，无法用前缀索引做覆盖扫描(后文会讲)</p>
+<h3 id="3-创建合适的多列索引"><a href="#3-创建合适的多列索引" class="headerlink" title="3.创建合适的多列索引"></a>3.创建合适的多列索引</h3><p>如果你有多个列，你是选择在每个列上创建一个索引还是创建一个包含多个列的多列索引？<br>书中给出答案是，在每个列上都创建索引是一种糟糕的做法，早期的Mysql根本不支持使用多个索引来优化一次查询的结果，除非你使用UNION ALL语句来将查询拆分成两个，并合并最终结果。<br>新一些的版本(5.0以及之后版本)，会使用多个单列索引来优化一次查询，但是本质上，还是使用每个单列索引先查出结果，再自动合并。</p>
+<p>当你使用多列索引的时候，列的顺序至关重要。<br>首先，在B+Tree的索引中，列的顺序非常关键，如果你定义了一个索引是：<br>(id,sex,age)<br>那么你的查询语句只有以下几种情况能使用到这个索引：</p>
+<ul>
+<li>查询id,sex,age全部三个值的精确匹配值，如WHERE id = 1 AND sex = 1 AND age = 18;</li>
+<li>查询id，即索引列中的最左索引列。如果你的查询语句里没有id，而是sex=1或者age=18，抱歉，引擎不会使用这个索引，因为你“跳过了”最左边的索引列</li>
+<li>如果遇到某个列查询的是范围值，那么排在这个列后面的列就不会再使用索引了。比如你使用id=1 AND sex&gt;1的条件，那么索引是可以被使用的，但是当你使用id=1 AND sex&gt;1 AND age=18，索引就无法对age使用了。引擎会返回给Mysql的服务器层使用id=1 AND sex&gt;1搜索到的结果，然后服务器层再根据age=18过滤出最终结果。</li>
+<li>有时候为了强制让引擎使用自己想要的索引，可以把那些被自己“跳过”的列补上，前提是这个列本来的候选值就不多。比如sex只有0和1两个值，为了使用上面的索引，可以这么用：WHERE id = 1 AND sex = 0 AND sex = 1 AND age = 18;</li>
+</ul>
+<h3 id="4-按主键顺序插入行"><a href="#4-按主键顺序插入行" class="headerlink" title="4.按主键顺序插入行"></a>4.按主键顺序插入行</h3><p>这个前面已经说过了，必须定义合理的主键，来让引擎按照顺序插入数据，如果引擎是随机地在不同位置插入数据，得到的结果就是频繁的随机I/O，频繁的页分裂操作和碎片。<br>自增的数字主键是mysql官方推荐的做法。</p>
+<h3 id="5-覆盖索引"><a href="#5-覆盖索引" class="headerlink" title="5.覆盖索引"></a>5.覆盖索引</h3><p>如果一个索引包含了所有要查询的字段的值，就称为覆盖索引。<br>覆盖索引使得引擎不需要从数据行中获取数据而是直接利用索引获取数据，因此查询要更快。<br>使用EXPLAIN语句可以知道一个查询是否使用了覆盖索引。<br>比如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> store_id,film_id <span class="keyword">FROM</span> sakila,inventory</div></pre></td></tr></table></figure></p>
+<p>就能得到查询的一些关键信息，其中有一列叫做Extra，如果它的值是Using index，说明引擎使用到了覆盖索引。<br>很多人的SELECT语句喜欢使用星号，或者在ORM中整个对象查出，实际上，为了使用覆盖索引带来的好处，SELECT处应该只写想要搜出的字段，否则引擎不会使用覆盖索引。<br>另外，使用延迟关联的技巧，也可以在一些无法使用覆盖索引的查询中使用覆盖索引。(这个技巧不是所有时候都适用，就不写了)</p>
+<h3 id="6-使用索引扫描排序"><a href="#6-使用索引扫描排序" class="headerlink" title="6.使用索引扫描排序"></a>6.使用索引扫描排序</h3><p>索引不但可以加快查询速度，还可以帮助引擎排序，下面是一些使用索引排序的限制条件：</p>
+<ul>
+<li>索引顺序必须和ORDER BY子句一模一样，列的排序方向(升序还是降序)也要一样</li>
+<li>关联多个表查询时，只有ORDER BY子句引用的字段都是第一个表中的字段时才能使用索引排序</li>
+<li>需要满足索引的最左前缀要求(即最左边开始字段要一个一个匹配上，不可“跳过”，见上文<strong>创建合适的多列索引</strong>)</li>
+<li>如果前面的列是常量就可以不满足最左前缀要求</li>
+</ul>
+<h3 id="7-重复或者冗余的索引"><a href="#7-重复或者冗余的索引" class="headerlink" title="7.重复或者冗余的索引"></a>7.重复或者冗余的索引</h3><p>应该避免如下这些重复或者冗余的索引，发现后应该删除它们</p>
+<ul>
+<li>UNIQUE,INDEX以及主键PRIMARY KEY实际上本质都是索引，唯一索引，索引，主键这三种类型的索引是一样的，如果对于某个字段或者字段集合，已经有了这三种索引的其中一种，那么就不要再创建其他的。比如KEY(ID),UNIQUE(ID)这两个索引是重复的，没必要。</li>
+<li>索引(A,B)和索引(A)是重复的，索引(A)是前者的最左前缀索引。但是索引(B)、索引(B,A)与索引(A,B)就不是重复的，哈希索引或者全文索引这种不同类型也不算重复的。</li>
+<li>索引(A,ID)其中ID是主键。这种是冗余的索引，因为所有辅助索引里面隐含地包含着主键，没必要特意加上主键。</li>
+</ul>
+<p>有时候也有例外，比如扩展已有的索引导致其他使用已有索引的查询变慢。甚至导致本来能使用索引的查询变得不能使用查询，那么创建冗余的索引是可以接受的。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-12-28T13:39:17.995Z" itemprop="datePublished">
+					2016年12月28日 21:39
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/11/11/mysql-query/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第六章查询性能优化
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/10/14/mysql-datatype/">
+        《高性能Mysql》读书笔记——第四章schema与数据类型优化 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/10/21/mysql-index/" data-title="《高性能Mysql》读书笔记——第五章创建高性能的索引" data-url="/2016/10/21/mysql-index/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

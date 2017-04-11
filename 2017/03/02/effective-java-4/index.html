@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第四章 泛型 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第四章</h2>
+                                <p>泛型</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-03-02T12:49:04.000Z" itemprop="datePublished">
+          2017年3月2日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第四章 泛型</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十三条-请不要在新代码中使用原生态类型（请使用泛型）"><span class="toc-text">第二十三条 请不要在新代码中使用原生态类型（请使用泛型）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十四条-消除非受检警告"><span class="toc-text">第二十四条 消除非受检警告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十五条-列表优先于数组"><span class="toc-text">第二十五条 列表优先于数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十六条-优先考虑泛型"><span class="toc-text">第二十六条 优先考虑泛型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十七条-优先考虑泛型方法"><span class="toc-text">第二十七条 优先考虑泛型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型参数列表和泛型域"><span class="toc-text">泛型参数列表和泛型域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型方法"><span class="toc-text">泛型方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十八条-利用有限通配符来提升API的灵活性"><span class="toc-text">第二十八条 利用有限通配符来提升API的灵活性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种有限通配符"><span class="toc-text">两种有限通配符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产者和消费者"><span class="toc-text">生产者和消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要把有限通配符用在返回值里"><span class="toc-text">不要把有限通配符用在返回值里</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二十九条-优先考虑类型安全的异构容器"><span class="toc-text">第二十九条 优先考虑类型安全的异构容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要讲JDK1.5加入的新特性——泛型。涉及泛型的使用，教你最大限度地使用泛型的优势而又不使事情复杂化。</p>
+<a id="more"></a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第二十三条-请不要在新代码中使用原生态类型（请使用泛型）"><a href="#第二十三条-请不要在新代码中使用原生态类型（请使用泛型）" class="headerlink" title="第二十三条 请不要在新代码中使用原生态类型（请使用泛型）"></a>第二十三条 请不要在新代码中使用原生态类型（请使用泛型）</h2><p>如同我括号里写的那样，本条的主旨就一句话：请尽可能地使用泛型。<br>理由也很简单，在泛型面世之前，JAVA是一个类型不安全的语言。当然即使泛型面世之后，你使用了泛型，JAVA也只能达到勉强类型安全。<br>为什么我这么说？看如下代码：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">       List&lt;<span class="keyword">Object</span>&gt; a = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">Object</span>&gt;();</div><div class="line">       a.<span class="built_in">add</span>(<span class="string">"a"</span>);</div><div class="line">       a.<span class="built_in">add</span>(<span class="number">3</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString1 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">0</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString2 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>由于Object的存在，泛型的类型安全也没法百分之百保证，第6行抛出了<code>ClassCastException</code>，所以想要往列表里放东西，那就把泛型的参数类型写到具体的类而不是偷懒写Object，否则，列表里可能会不小心放进不同类型的东西，而编译器无法提前告诉你。<br>泛型的使用可以使运行时抛出的<code>ClassCastException</code>提前到编译期就告诉你哪儿不对。<br>而JAVA是典型的静态语言，编译器的编译期检查给予JAVA强大的稳定性，能把错误提前暴露在编译期，是JAVA这种语言的优势，不要浪费。<br>作者坦言，如果不是因为泛型推出的太迟，为了能向下兼容，JDK1.5的作者们会让代码只能使用泛型。</p>
+<h2 id="第二十四条-消除非受检警告"><a href="#第二十四条-消除非受检警告" class="headerlink" title="第二十四条 消除非受检警告"></a>第二十四条 消除非受检警告</h2><p>这条主要讲，好了，你终于用上泛型了，但是你是新手，还不会写，编译器就各种给你报警告。<br>怎么办呢？<br>作者建议你耐心下来，一个一个地消除警告，不要忽视它们或者放弃泛型。<br>但是有时候呢，会碰到确信没有类型安全问题的代码，编译器也会有非受检警告，比如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@SuppressWarnings(<span class="string">"unchecked"</span>)</div><div class="line">   <span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">       <span class="keyword">if</span> (a.length &lt; <span class="keyword">size</span>)</div><div class="line">           <span class="comment">// Make a new array of a's runtime type, but my contents:</span></div><div class="line">           <span class="keyword">return</span> (T[]) Arrays.copyOf(elementData, <span class="keyword">size</span>, a.getClass());</div><div class="line">       System.arraycopy(elementData, <span class="number">0</span>, a, <span class="number">0</span>, <span class="keyword">size</span>);</div><div class="line">       <span class="keyword">if</span> (a.length &gt; <span class="keyword">size</span>)</div><div class="line">           a[<span class="keyword">size</span>] = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">return</span> a;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>这个代码是JDK的源码，如果没有<code>@SuppressWarnings(&quot;unchecked&quot;)</code>的话，第5行有return的那句话会有非受检警告。<br>所以如果你确信没有类型安全问题，那你可以用上面这个注解来消除警告。<br>不过，作者不建议把注解加在方法上，试想如果以后这个方法变了，又出现了一个警告，而这个警告警告的内容真的有类型安全问题，却被注解给消除掉了，你的一句注解，有可能会坑了后面修改这个方法的程序员。<br>因此作者建议把返回的东西声明个局部变量出来，然后<code>@SuppressWarnings(&quot;unchecked&quot;)</code>这个注解只加在局部变量上，然后上面还要用注释解释清楚为什么你确信这句话是类型安全的，以供后面的人参考。</p>
+<p>PS：题外话。讲真，目前看到这里感觉这本书作者真心牛逼，虽然语气平淡，但是通篇举出很多反例都直接拿JDK源码，一种王之藐视从书中渗透出来。然后我去查了一下，发现作者正是自己举出的很多反例的代码作者，比如集合框架，也就是上面的反例。原来作者在自黑啊，我擦……</p>
+<h2 id="第二十五条-列表优先于数组"><a href="#第二十五条-列表优先于数组" class="headerlink" title="第二十五条 列表优先于数组"></a>第二十五条 列表优先于数组</h2><p>本条主要说，尽量不要将数组和泛型混合使用，会非常混乱和糟糕。<br>因为数组是没有泛型的，支持数组泛型会导致类型安全问题，因此JDK的作者们没有选择这么做，详情请看原书，不解释。<br>由于数组是没有泛型的，所以数组和泛型混合使用会遇到莫名其妙的编译器警告，如果你遇到了编译器错误或者警告，改用列表List来代替数组，尽管牺牲了性能和简洁性，但是你获得了更高的类型安全性和互用性。</p>
+<h2 id="第二十六条-优先考虑泛型"><a href="#第二十六条-优先考虑泛型" class="headerlink" title="第二十六条 优先考虑泛型"></a>第二十六条 优先考虑泛型</h2><p>这条基本上没什么实质性的内容，只是前几条的扩展，讲述了考虑将一些符合条件的类做成泛型类的例子。<br>唯一需要注意的是，第二十五条说，列表优先于数组，但是作者这里没有这么用，而是在确保数组的引用不会传给外部的情况下，自己保证类型安全并使用<code>@suppresswarnings(&quot;unchecked&quot;)</code>注解。<br>作者解释之所以这样是因为，他写的可是JDK，在写JDK的某些类的时候，也许List还没诞生呢。比如在写ArrayList的时候，也即List本身的时候，总不能调用正在创造的东西吧。</p>
+<h2 id="第二十七条-优先考虑泛型方法"><a href="#第二十七条-优先考虑泛型方法" class="headerlink" title="第二十七条 优先考虑泛型方法"></a>第二十七条 优先考虑泛型方法</h2><p>上面几条基本上都是说你该使用泛型的，而这一条开始，作者讲述了一些泛型的用法或者概念。本条主要讲述的是泛型方法。<br>我按照泛型的几种使用情况分类说明。</p>
+<h3 id="泛型参数列表和泛型域"><a href="#泛型参数列表和泛型域" class="headerlink" title="泛型参数列表和泛型域"></a>泛型参数列表和泛型域</h3><p>前面的几条基本上都在讲泛型域的情况，即下面这种情况：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleList</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">private</span> List&lt;E&gt; elements;</div><div class="line">		</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ExampleList</span><span class="params">()</span> </span>&#123;</div><div class="line">		elements = <span class="keyword">new</span> ArrayList&lt;E&gt;();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function">E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;		</div><div class="line">		<span class="function"><span class="keyword">return</span> elements.<span class="title">get</span><span class="params">(index)</span></span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为了演示我省略了很多东西，你只需要看的明白是怎么回事就行。<br>首先类名的右边多了一个尖括号括起来的东西，<code>&lt;E&gt;</code>就是泛型的<strong>类型参数列表</strong>，它定义了一个叫E的参数，该参数可以是任何非原始类型。<br>然后其内部的域<code>elements</code>便可以被改成<code>List&lt;E&gt;</code>，即泛型化的列表类，这样的修改使得演示的这个类可以和List一样，支持各种各样不同的类型。用户在使用的时候就可以指明具体想要的类型。<br>这样的域就是泛型域，当然,如果你有多个域，那么你也可以有多个参数：<code>&lt;E,T,S&gt;</code>这样子。<br>有了泛型，我们就可以使用下面的语句：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">    ExampleList&lt;<span class="keyword">String</span>&gt; exampleList = <span class="keyword">new</span> ExampleList&lt;<span class="keyword">String</span>&gt;();</div><div class="line">    <span class="keyword">String</span> s = exampleList.<span class="built_in">get</span>(<span class="number">3</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，由于get方法的返回值也指定为了E这个参数，所以在使用get方法的时候，返回值会自动地转为我们指定的类型。<br>编译器知道我们想要E成为String，因为我们指定了参数列表E的具体值，那么编译器也知道我们的get方法返回的是一个String类型，由于E一旦确定就始终是不可变的，因此保证了在后续的过程中E都代表String，这一限制保证了类型安全。</p>
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>上面的例子是泛型域的例子，我们再举个泛型方法的例子：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Example</span> &#123;</div><div class="line">	</div><div class="line">    <span class="keyword">public</span> &lt;E&gt; <span class="function">E <span class="title">getE</span>(<span class="params">E input</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> input;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>类型参数列表改到了方法体里，处在返回值的前面。然后该方法便可以在使用的时候指定返回类型：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">       Example example = <span class="keyword">new</span> Example();</div><div class="line">       <span class="keyword">String</span> aa = example.getE(<span class="string">"aa"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>在这个使用的例子中，并没有显式地使用尖括号来指定类型，那么编译器是怎么知道返回类型的呢？<br>编译器使用了一种叫做类型推导的概念，它从你的入参或者返回值中推导出了E应该是什么类型的值(此处是根据返回值推导出来的，不信修改”aa”为int类型试试，编译器会报告入参应该是String类型)。</p>
+<h2 id="第二十八条-利用有限通配符来提升API的灵活性"><a href="#第二十八条-利用有限通配符来提升API的灵活性" class="headerlink" title="第二十八条 利用有限通配符来提升API的灵活性"></a>第二十八条 利用有限通配符来提升API的灵活性</h2><h3 id="两种有限通配符"><a href="#两种有限通配符" class="headerlink" title="两种有限通配符"></a>两种有限通配符</h3><p>考虑泛型的参数，会发现一个缺陷，那就是泛型的参数太严格了，泛型缺乏协变性。<br>比如：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">pushAll</span><span class="params">(Iterable&lt;E&gt; src)</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (E e : src)</div><div class="line">			push(e);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法定义在一个Stack<e>类中，如果我们在使用的过程中定义如下：<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Stack</span>&lt;<span class="keyword">Number</span>&gt; numberStack = new <span class="keyword">Stack</span>&lt;<span class="keyword">Number</span>&gt;();</div></pre></td></tr></table></figure></e></p>
+<p>此时Stack对象的泛型参数便被固定下来了，它是Number，然而，在使用的过程中，我们可能想要把它的子类比如Integer调用上面的pushAll方法放进某个列表中，很遗憾，做不到。<br>因为泛型参数是不可变的，一旦固定下来，就只能接受声明的类型，其子类型和父类型都不能接受。</p>
+<p>JDK的设计者们提供了一种有限通配符的概念来解决这个问题，把上面的方法改成下面这样：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">pushAll</span><span class="params">(Iterable&lt;? <span class="keyword">extends</span> E&gt; src)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (E e : src)</div><div class="line">		push(e);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此时就完全没有问题了，<code>? extends</code>代表任何E的子类型，包括E在内。由于JDK的设计者们不希望新增一个保留字，所以此处用了extends，它和继承不太一样，它代表的概念更加广泛，可以是某个类的子类，或者某个接口的实现类，或者直接是类本身。<br>同样地，我们还有一个pop方法也遇到了类似的问题：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">popAll</span>(<span class="params">Collection&lt;E&gt; dst</span>) </span>&#123;</div><div class="line">	<span class="keyword">while</span> (!isEmpty())</div><div class="line">		dst.<span class="keyword">add</span>(pop());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法遇到的问题与上面刚好相反，假设我们声明E是Integer类型，但是却想要传入一个Collection<number>类型来接受pop的Integer，很遗憾，不能这么做。<br>进行下面的改造：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">popAll</span><span class="params">(Collection&lt;? <span class="keyword">super</span> E&gt; dst)</span> </span>&#123;</div><div class="line">	<span class="keyword">while</span> (!isEmpty())</div><div class="line">		dst.add(pop());</div><div class="line">&#125;</div></pre></td></tr></table></figure></number></p>
+<p>现在，<code>? super</code>代表任何E或者E的父类，就可以轻松放入Integer了。</p>
+<h3 id="生产者和消费者"><a href="#生产者和消费者" class="headerlink" title="生产者和消费者"></a>生产者和消费者</h3><p>使用有限通配符会非常的绕，很多人摸不清到底什么时候使用extends，什么时候使用super。<br>书中给出一个技巧：</p>
+<ul>
+<li>如果方法是一个生产者，那么就使用extends</li>
+<li>如果方法是一个消费者，那么就使用super</li>
+<li>如果方法既是生产者，又是消费者，那么就直接使用E，而不用extends或者super。</li>
+</ul>
+<h3 id="不要把有限通配符用在返回值里"><a href="#不要把有限通配符用在返回值里" class="headerlink" title="不要把有限通配符用在返回值里"></a>不要把有限通配符用在返回值里</h3><p>有限通配符对于用户来说应该尽可能是无形的，如果使用有限通配符在返回值里，那么用户也就必须要考虑有限通配符了，这不是很好的范式。</p>
+<h2 id="第二十九条-优先考虑类型安全的异构容器"><a href="#第二十九条-优先考虑类型安全的异构容器" class="headerlink" title="第二十九条 优先考虑类型安全的异构容器"></a>第二十九条 优先考虑类型安全的异构容器</h2><p>首先要谈谈什么是异构容器，异构容器指的是能够存放不同类型对象的容器。<br>比如我们平时使用<code>List&lt;String&gt;</code>的时候，那么这个列表就只能存放String类型的对象，不能存放其他对象。<br>而异构容器可以存放任何类型的对象，类型安全的异构容器则是指，无论你存放什么类型的对象，当你取出时，类型安全由容器保证，你不用手动转换得到的东西的类型。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>明白了什么是类型安全的异构容器，直接看例子吧：<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Favorites &#123;</div><div class="line">	<span class="comment">// Typesafe heterogeneous container pattern - implementation</span></div><div class="line">	<span class="keyword">private</span> Map&lt;Class&lt;?&gt;, Object&gt; favorites = <span class="keyword">new</span> HashMap&lt;Class&lt;?&gt;, Object&gt;();</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> putFavorite(Class&lt;T&gt; <span class="class"><span class="keyword">type</span>, <span class="title">T</span> <span class="title">instance</span>) &#123;</span></div><div class="line">		<span class="keyword">if</span> (<span class="class"><span class="keyword">type</span> </span>== <span class="keyword">null</span>)</div><div class="line">			throw <span class="keyword">new</span> NullPointerException(<span class="string">"Type is null"</span>);</div><div class="line">		favorites.put(<span class="class"><span class="keyword">type</span>, <span class="title">instance</span>);</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> &lt;T&gt; T getFavorite(Class&lt;T&gt; <span class="class"><span class="keyword">type</span>) &#123;</span></div><div class="line">		<span class="keyword">return</span> <span class="class"><span class="keyword">type</span>.<span class="title">cast</span></span>(favorites.get(<span class="class"><span class="keyword">type</span>));</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Typesafe heterogeneous container pattern - client</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</div><div class="line">		Favorites f = <span class="keyword">new</span> Favorites();</div><div class="line">		f.putFavorite(String.<span class="keyword">class</span>, <span class="string">"Java"</span>);</div><div class="line">		f.putFavorite(Integer.<span class="keyword">class</span>, <span class="number">0xcafebabe</span>);</div><div class="line">		f.putFavorite(Class.<span class="keyword">class</span>, Favorites.<span class="keyword">class</span>);</div><div class="line">	</div><div class="line">		String favoriteString = f.getFavorite(String.<span class="keyword">class</span>);</div><div class="line">		int favoriteInteger = f.getFavorite(Integer.<span class="keyword">class</span>);</div><div class="line">		Class&lt;?&gt; favoriteClass = f.getFavorite(Class.<span class="keyword">class</span>);</div><div class="line">		System.out.printf(<span class="string">"%s %x %s%n"</span>, favoriteString, favoriteInteger,</div><div class="line">				favoriteClass.getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Favorites类为我们提供了一个类型安全的异构容器，你可以放进任何类型的对象到容器中，然后取出时，容器会给你相应类型的对象。<br>注意这主要是通过Class这个JDK原生的类来实现的，它被称作<code>类型令牌</code>。<br>具体的细节不再赘述。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-21T14:29:33.640Z" itemprop="datePublished">
+					2017年3月21日 22:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/03/12/effective-java-5/" style="float: left;">
+        ← 《Effective Java》读书笔记——第五章 枚举和注解
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/02/19/effective-java-3/">
+        《Effective Java》读书笔记——第三章 类和接口 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/03/02/effective-java-4/" data-title="《Effective Java》读书笔记——第四章 泛型" data-url="/2017/03/02/effective-java-4/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

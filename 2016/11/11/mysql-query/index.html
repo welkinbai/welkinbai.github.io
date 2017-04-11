@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《高性能Mysql》读书笔记——第六章查询性能优化 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第六章</h2>
+                                <p>查询性能优化</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-11-11T07:15:14.000Z" itemprop="datePublished">
+          2016年11月11日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Mysql/'>Mysql</a>
+    
+    
+	
+</span>
+                <h1>《高性能Mysql》读书笔记——第六章查询性能优化</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、查询优化注意事项"><span class="toc-text">一、查询优化注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、一个复杂的查询还是多个简单的查询"><span class="toc-text">二、一个复杂的查询还是多个简单的查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、分批查询"><span class="toc-text">三、分批查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、分解关联查询"><span class="toc-text">四、分解关联查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、整个查询流程简介"><span class="toc-text">五、整个查询流程简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-整个宏观的流程图"><span class="toc-text">1.整个宏观的流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mysql客户端-服务器通信协议"><span class="toc-text">2.Mysql客户端/服务器通信协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-查询缓存"><span class="toc-text">3.查询缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-解析器"><span class="toc-text">4.解析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-预处理器"><span class="toc-text">5.预处理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-查询优化器"><span class="toc-text">6.查询优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-如何进行关联查询"><span class="toc-text">7.如何进行关联查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-查询优化器的提示-hint"><span class="toc-text">8.查询优化器的提示(hint)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、优化特定类型的查询"><span class="toc-text">六、优化特定类型的查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-COUNT"><span class="toc-text">1.COUNT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-关联查询"><span class="toc-text">2.关联查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-子查询"><span class="toc-text">3.子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-LIMIT"><span class="toc-text">4.LIMIT</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要介绍写查询语句时候要注意的问题，并详细介绍了查询过程中Mysql各个部分做了什么，流程是什么。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
+<p>本章内容实际上是非常重要的，但是我认为这本书写的并不好，也许是翻译问题，也许是印刷问题，有些地方模糊不清，有些地方前后矛盾，所以遇到这种地方只得跳过或者简单阐述。</p>
+<h2 id="一、查询优化注意事项"><a href="#一、查询优化注意事项" class="headerlink" title="一、查询优化注意事项"></a>一、查询优化注意事项</h2><p>思考一个查询为何如此慢的时候主要有如下几条：</p>
+<ul>
+<li>可能在查询不需要的记录，比如查询大量的数据到应用服务器，然后在代码里只拿取前几条，抛弃剩余的几万条数据</li>
+<li>多表关联查询语句，返回全部的列而不是需要的列</li>
+<li>SELECT <em>，据说SELECT后面跟着</em>的都应该好好审视是否真的需要全部拿出数据。（现在大量地使用ORM框架，情况就不一样了，你不可能只让ORM框架拿一个实体的一部分内容，一般查询都是一整个对象拿出来。不过大多数ORM框架都在应用层做了一次缓存，拿一次之后，效率就很高了，事实上这又是另一个问题了，缓存可是要耗费内存的，内存不够用也是白搭）</li>
+<li>重复查询相同的数据而不知道缓存高频数据。（我觉得这个也要看情况的吧，现在网络很快了，如果我们忽略网络消耗，这种被反复查询的数据，或者说反复运行的SQL都是被Mysql缓存起来的，既然Mysql已经帮我们在数据库的出口处做了缓存，我们何必再在服务器的入口处再做一次缓存呢，当然，还是要根据实际情况来决定）</li>
+<li>检查Mysql是否在扫描额外的记录，扫描的行数是否远大于返回的行数，如果是这样，那说明这个查询可能写的糟透了。扫描的行数一般在返回的行数的1倍到10倍之间是正常的。(可以用explain语句来查看Mysql预估会扫描多少行)</li>
+<li>检查索引以及覆盖索引是否被使用，如果有机会使用，为什么没被使用</li>
+</ul>
+<h2 id="二、一个复杂的查询还是多个简单的查询"><a href="#二、一个复杂的查询还是多个简单的查询" class="headerlink" title="二、一个复杂的查询还是多个简单的查询"></a>二、一个复杂的查询还是多个简单的查询</h2><p>答案是后者。<br>还是那句话，现在网络以及非常快了，网络不再是很大的瓶颈，如果一个复杂的查询能被拆分成多个简单的查询，肯定是要拆分的好。<br>但是也别太过了，如果能在一条查询里完成，并且性能并不差，那就没有理由拆开。</p>
+<h2 id="三、分批查询"><a href="#三、分批查询" class="headerlink" title="三、分批查询"></a>三、分批查询</h2><p>有时候一个大的查询可以分批地执行，比如删除数据。</p>
+<h2 id="四、分解关联查询"><a href="#四、分解关联查询" class="headerlink" title="四、分解关联查询"></a>四、分解关联查询</h2><p>这个和第二条理由差不多，只不过是更具体的一种情况。(所以你可以知道这章写的有多乱)<br>书中列出了这样做的好处：</p>
+<ul>
+<li>让缓存效率更高，多表关联的话，只要有一个表变化，缓存就不能用了，拆分成几个表的查询，然后在应用服务器这边整合，就可以保证缓存效率更高。</li>
+<li>查询分解后，减少锁竞争，因为同一时间锁住的表更少</li>
+<li>在应用层做关联，扩展性好，容易拆分数据库</li>
+<li>Mysql的关联是嵌套关联，一层一层地关联，效率低下，扫描到的数据更多。后文有讲</li>
+</ul>
+<h2 id="五、整个查询流程简介"><a href="#五、整个查询流程简介" class="headerlink" title="五、整个查询流程简介"></a>五、整个查询流程简介</h2><h3 id="1-整个宏观的流程图"><a href="#1-整个宏观的流程图" class="headerlink" title="1.整个宏观的流程图"></a>1.整个宏观的流程图</h3><p>Hexo博客引擎带的这几款Markdown插件都不能很好的支持流程图，所以我就用其他工具画一下。</p>
+<img src="/2016/11/11/mysql-query/query.png" alt="查询流程" title="查询流程">
+<p>如图：</p>
+<ol>
+<li>客户端发送一条查询给Mysql服务器</li>
+<li>服务器先检查查询缓存，看是不是之前已经查过了，如果命中缓存，就立刻返回结果，否则就进入下一阶段</li>
+<li>解析器解析查询语句，生成解析树，预处理器再进行一些必要检查，进一步生成解析树</li>
+<li>查询优化器开始根据解析树的结果，计算各种查询计划的好坏，最终生成一份Mysql认为最优的查询计划</li>
+<li>查询执行引擎根据查询计划，调用底层的存储引擎的api来进行查询，并返回数据结果给客户端，同时缓存查询结果到查询缓存</li>
+</ol>
+<p>下面分别就图上的各个部分进行介绍</p>
+<h3 id="2-Mysql客户端-服务器通信协议"><a href="#2-Mysql客户端-服务器通信协议" class="headerlink" title="2.Mysql客户端/服务器通信协议"></a>2.Mysql客户端/服务器通信协议</h3><ul>
+<li>客户端与服务器之间的通信是半双工的，同一时刻只有一边在发数据另一边在接受数据</li>
+<li>书中写的其他段落全是无组织的废话，略过</li>
+<li>使用<code>SHOW FULL PROCESSLIST</code>命令可以得到Mysql服务器当前的状态，状态有以下几种：<ul>
+<li>Sleep：线程正在等待客户端发新的请求</li>
+<li>Query: 线程正在查询或者正在返回结果给客户端</li>
+<li>Locked: 线程正在等待表锁</li>
+<li>Analyzing and statistics：线程正在收集统计信息，并生成查询的执行计划</li>
+<li>Copying to tmp table [on disk]：线程正在将结果集放进一个临时表中，如果哟on disk标记，说明正在将内存临时表放到硬盘上</li>
+<li>Sorting result：正在对结果集排序</li>
+<li>Sending data：正在向客户端返回数据或者线程正在生成结果集，或者在多个状态之间传送数据(这个地方就非常的有歧义，比如向客户端返回数据和query状态的正在返回结果给客户端有什么区别？在多个状态之间传送数据，状态是什么东西？还能传送数据)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-查询缓存"><a href="#3-查询缓存" class="headerlink" title="3.查询缓存"></a>3.查询缓存</h3><p>没啥好说的，就是前面解释的，在Mysql服务器入口处有个查询缓存，如果查询已经执行过一次了，那么直接返回之前的结果。注意这个缓存的命中过程是由一个大小写敏感的哈希查找实现的，那么有可能同一个查询中的字母你换了大小写就会不命中缓存，作者没有试验过，书中也没有特别提起过，但是书中提到，只要有一个字节不同，缓存就不会命中。<br>查询缓存即使命中也会先检查用户的权限，权限没有问题就直接跳过后续阶段，返回数据了。整个过程都没有下到引擎层去取数据。</p>
+<h3 id="4-解析器"><a href="#4-解析器" class="headerlink" title="4.解析器"></a>4.解析器</h3><p>用来对SQL语句中的关键字进行解析，验证关键字是否正确，顺序是否使用对了，引号是否能匹配等等。最终生成一颗解析树。解析树就不深究了，和索引章节介绍的类似，是以一种树的结构来存储解析的结果。</p>
+<h3 id="5-预处理器"><a href="#5-预处理器" class="headerlink" title="5.预处理器"></a>5.预处理器</h3><p>进一步验证，比如验证表和列是否存在，解析名字和别名，验证权限等。<br>解析器和预处理器做的事肯定要比书中写的多得多，而且肯定也非常复杂，很遗憾书中并没有更深入的介绍。<br>有一篇文章叫做：<a href="http://blog.jobbole.com/100349" target="_blank" rel="external">如果有人问你数据库的原理，叫他看这篇文章</a> 讲的非常全面和详细，对解析器预处理器优化器底层的算法都有一些探究，而且原文浅显易懂，翻译质量还行，墙裂建议看完。</p>
+<h3 id="6-查询优化器"><a href="#6-查询优化器" class="headerlink" title="6.查询优化器"></a>6.查询优化器</h3><p>优化器主要是根据解析树来生成执行计划。<br>这个优化器是基于成本的优化器，它会试图预测查询各种执行计划的执行成本，然后找到成本最小的一个。<br>使用<code>SHOW STATUS LIKE &#39;Last_query_cost&#39;</code>语句可以查看上一次查询语句优化器算出来的成本。其中，Value表示优化器认为需要做xxx个数据页的随机查找才能完成查询，即这个成本主要是IO的成本。<br>优化器评估这个值主要是参考一系列的统计信息，而且在评估的时候是不计缓存的，假设任何一次读取数据都需要磁盘IO。<br>我们可以知道，优化器只能尽可能地做出一个靠近最优执行计划的决定，但是有时候还是无法真的选出最优的执行计划，比如：</p>
+<ul>
+<li>统计信息是错的</li>
+<li>没考虑缓存，也没想过有些页面可能已经在内存中，估算是不精准的</li>
+<li>对于我们来说，执行时间最短才是最优，而优化器认为执行成本最小是最优，因此优化器选择的执行计划可能执行时间并不如你期望的那样</li>
+<li>优化器不会考虑存储过程，自定义函数之类的这种操作的成本</li>
+<li>有时候可选的执行计划是个天文数字，优化器不可能算的完，只能搞搞什么贪婪算法估算一下，有可能错过最优的执行计划</li>
+</ul>
+<p>优化器还会篡改你的SQL语句，把你的SQL语句改成它认为比较好的样子:(也许解析器和预处理器也会干这事儿，书中没提)</p>
+<ul>
+<li>优化器会重新定义关联表的顺序</li>
+<li>将外连接转化成内连接</li>
+<li>使用等价变换原则，比如<code>(a&lt;b and b=c) and a=5</code>变成<code>(b&gt;5 and b=c and a=5)</code></li>
+<li>优化COUNT(),MAX(),MIN()。因为索引如果是B+树的话，实际上已经是一个排序好的结果，max对应最后一个，min对应第一个节点，因此Mysql会直接优化表达式为一个常数。不带条件的COUNT(*)函数则在MyISAM引擎中非常快，因为这个引擎为每个表维护了一个值,直接拿就行</li>
+<li>优化器可以将表达式变成常数，比如数学表达式，甚至将一个查询转化成常数（不明白，既然如此，那为什么数学表达式用在了索引列上还会导致索引列无法使用索引，真矛盾啊）</li>
+</ul>
+<p>优化器还会进行如下优化：</p>
+<ul>
+<li>提前终止查询，一旦发现不成立的条件，立刻返回结果。比如where条件句写到xxx is null，在关联查询的时候如果优化器发现xxx不满足条件，立刻查下一个xxx的关联情况，不会再继续浪费时间</li>
+<li>等值传播，如果两个列的值通过等式关联，在关联语句中Mysql自动将其中一个列的where条件传递给另一个列。SELECT …… A=B …… WHERE A&gt;500这种，B肯定也是大于500才能满足条件。</li>
+<li>IN()是先排序然后通过二分查找的方式来做的，不像其他数据库是用等价OR子句来做。时间复杂度由O(n)升到O(logn)</li>
+</ul>
+<p>优化器还有很多优化，每个Mysql版本不一样优化器的行为也会有差异，我觉得这个地方还是要利用一些技巧具体问题具体分析，比如使用Explain，并且如果是DBA的话，有必要将所使用的对应版本的Mysql官方文档好好看看。</p>
+<h3 id="7-如何进行关联查询"><a href="#7-如何进行关联查询" class="headerlink" title="7.如何进行关联查询"></a>7.如何进行关联查询</h3><p>Mysql的关联查询是最简单的嵌套循环查询。<br>如下图：<br><img src="/2016/11/11/mysql-query/qiantao.jpg" alt="嵌套循环查询" title="嵌套循环查询"><br>说白了就是一个表一个表地查。<br>第一个表的结果查完，放到临时表里，然后查第二个表，第二个表和临时表的结果匹配的，再放到另一个临时表里，继续查，如果查第三个表，发现没有匹配的，回朔上一个临时表查。<br>遇到右外连接，会自动转换为等效的左外连接来进行。<br>优化器会改变关联顺序，来以最小的嵌套循环次数完成关联查询。<br>关于关联查询的详情，书中介绍的乱七八糟，还是看我之前分享的那篇文章吧。</p>
+<h3 id="8-查询优化器的提示-hint"><a href="#8-查询优化器的提示-hint" class="headerlink" title="8.查询优化器的提示(hint)"></a>8.查询优化器的提示(hint)</h3><p>查询的时候，可以加一些关键字来提示优化器按照你想要的方式优化，但是说实话，大多数hint关键字我们都用不着，或者用不上。<br>STRAIGHT_JOIN：固定关联顺序<br>SQL_SMALL_RESULT/SQL_BIG_RESULT：告诉优化器对group by 和 distinct查询如何使用临时表。如果是SMALL就放内存里，如果BIG就放磁盘里。<br>SQL_CACHE/SQL_NO_CACHE：是否缓存在查询缓存中<br>USE INDEX\IGNORE INDEX\FORCE INDEX：强制使用某索引或不使用某索引</p>
+<h2 id="六、优化特定类型的查询"><a href="#六、优化特定类型的查询" class="headerlink" title="六、优化特定类型的查询"></a>六、优化特定类型的查询</h2><h3 id="1-COUNT"><a href="#1-COUNT" class="headerlink" title="1.COUNT"></a>1.COUNT</h3><p>据说性能排序是这样的：COUNT(*) &gt; COUNT(id)<br>有时候不要精确的值的话，可以用Explain估算的行数代替<br>书里有句话说的挺好：“快速、精确、简单”，三者永远只能满足其二…………</p>
+<h3 id="2-关联查询"><a href="#2-关联查询" class="headerlink" title="2.关联查询"></a>2.关联查询</h3><ul>
+<li>确保ON或者USING子句上的列有索引，尤其是关联顺序中的第二个表</li>
+<li>确保GROUP BY 和ORDER BY中的表达式只涉及到一个表中的列</li>
+<li>升级版本的时候，需要关注以前的关联语句，有可能发生变化</li>
+</ul>
+<h3 id="3-子查询"><a href="#3-子查询" class="headerlink" title="3.子查询"></a>3.子查询</h3><p>书中给出的建议是尽可能使用关联查询代替。猜测这么建议最主要的原因是到5.5版本为止，子查询得到的临时表都是没索引的。但是以后的版本似乎修复了这个问题。</p>
+<h3 id="4-LIMIT"><a href="#4-LIMIT" class="headerlink" title="4.LIMIT"></a>4.LIMIT</h3><p>避免使用偏移量，因为偏移量特别大的时候，其实Mysql还是把之前的数据都搜出来，然后再丢掉。最好用where条件句来做分页的事。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-12-24T13:29:54.878Z" itemprop="datePublished">
+					2016年12月24日 21:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/11/15/mysql-advance/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第七章Mysql高级特性
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/10/21/mysql-index/">
+        《高性能Mysql》读书笔记——第五章创建高性能的索引 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/11/11/mysql-query/" data-title="《高性能Mysql》读书笔记——第六章查询性能优化" data-url="/2016/11/11/mysql-query/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

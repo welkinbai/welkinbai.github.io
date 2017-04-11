@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《高性能Mysql》读书笔记——Explain命令详解 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>《高性能Mysql》读书笔记</h2>
+                                <p>Explain命令详解</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-02-08T08:27:26.000Z" itemprop="datePublished">
+          2017年2月8日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Mysql/'>Mysql</a>
+    
+    
+	
+</span>
+                <h1>《高性能Mysql》读书笔记——Explain命令详解</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Explain简介"><span class="toc-text">一、Explain简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Explain结果集中的列"><span class="toc-text">二、Explain结果集中的列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#id"><span class="toc-text">id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select-type"><span class="toc-text">select_type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table"><span class="toc-text">table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type"><span class="toc-text">type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#possible-key"><span class="toc-text">possible_key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key"><span class="toc-text">key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-len"><span class="toc-text">key_len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rows"><span class="toc-text">rows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filtered"><span class="toc-text">filtered</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extra"><span class="toc-text">Extra</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要讲解Mysql中一个非常有用的命令<code>Explain</code>，该命令为我们解释Mysql在执行某条语句时的执行计划。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a><br>8.<a href="/2017/02/08/mysql-explain/" title="《高性能Mysql》读书笔记——Explain命令详解">《高性能Mysql》读书笔记——Explain命令详解</a></p>
+<h2 id="一、Explain简介"><a href="#一、Explain简介" class="headerlink" title="一、Explain简介"></a>一、Explain简介</h2><p>通过在要执行的SQL语句前增加<code>explain</code>这样的命令，Mysql不会执行SQL语句而是返回这个语句的执行计划的一些信息。<br>该命令在某些时候可以帮助我们快速地得知SQL语句有什么问题，有没有可以优化的地方。<br>但是请注意该命令返回的信息并不总是说出真相。<br>一个简单的explain语句可能像下面这样：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p>它返回一行或者多行数据，每一个都是执行计划的一个步骤，而且是按照执行计划执行的顺序排列。<br>结果如下：<br><img src="/2017/02/08/mysql-explain/1.png" alt="1.png" title=""></p>
+<p>Explain命令有诸多限制，有时候甚至返回的结果与真相相差很远：</p>
+<ul>
+<li>没法告诉用户触发器、存储过程会对查询造成什么影响</li>
+<li>没法支持存储过程的解释</li>
+<li>不会告诉你查询执行中做的特定优化</li>
+<li>对内存排序和临时文件都使用”filesort”来表示，对磁盘和内存中的临时表都使用”Using temporary”来表示，导致用户没法详细地分清这些情况</li>
+<li>不能解释除了select以外的其他语句，比如update、insert、delete等（5.6版本之后貌似可以了）</li>
+</ul>
+<h2 id="二、Explain结果集中的列"><a href="#二、Explain结果集中的列" class="headerlink" title="二、Explain结果集中的列"></a>二、Explain结果集中的列</h2><h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>就是一个编号，代表子查询在SQL语句中的位置（官方文档也没有详细说明到底代表啥意思，但是感觉像是SELECT关键字出现在SQL语句中的位置）。<br>有时候id有可能都是1（关联查询中），有时候还有可能是Null(在使用union语句的时候)。</p>
+<h3 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h3><p>显示了查询的类型，是一个简单查询还是复杂查询，是哪种复杂查询。<br>可能出现的值有如下这些（5.6版本）：</p>
+<ul>
+<li>SIMPLE:简单查询，标识查询不包含任何子查询或者UNION语句</li>
+<li>PRIMARY:复杂查询的外层查询，一般都在第一行，代表这是一个复杂查询的最外层查询</li>
+<li>SUBQUERY:复杂查询的子查询，指不在FROM子句中的那些</li>
+<li>DEPENDENT SUBQUERY:复杂查询中，依赖外部查询的子查询</li>
+<li>DERIVED:在FROM子句中的子查询</li>
+<li>UNION:复杂查询中，UNION子句第二个或之后的子查询（第一个被标为PRIMARY）</li>
+<li>DEPENDENT UNION:复杂查询中，依赖外部查询的UNION子句查询</li>
+<li>UNION RESULT:复杂查询中，UNION的结果，这是一个从匿名临时表检索最终结果的查询</li>
+<li>MATERIALIZED:复杂查询中，物化视图子句</li>
+<li>UNCACHEABLE SUBQUERY:不可缓存的子查询</li>
+<li>UNCACHEABLE UNION:不可缓存的UNION子查询</li>
+</ul>
+<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><p>表示对应行的语句访问哪个表。<br>如果是关联查询，你会发现id都是1，但是从上往下的顺序还是代表了关联语句的执行顺序，有时你会看到explain的结果中的顺序与你想象的不一样，不用怀疑，语句的确是按照结果中的顺序执行的，引擎对你的语句进行了优化，因此执行顺序有了变更。<br>在FROM子句中有子查询时，该子查询的table字段一般的都是<derivedx>其中X指的是id，一般都是其后面一行的子查询的id。<br>另外UNION RESULT行的table会显示成<unionx,y……>,其中X,Y等指的是参与UNION的子句。</unionx,y……></derivedx></p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>这一列非常重要，表示了Mysql究竟采取何种方法来访问数据，通常能够在一定程度上反映查询语句的性能。<br>可能出现的值有如下这些，性能从最差到最优（5.6版本）：</p>
+<ul>
+<li>ALL：全表扫描，最惨的性能，从数据表中逐行查找数据。除非使用了LIMIT或者在Extra列中有”Using distinct/not exists”字样</li>
+<li>index：全表扫描的进阶版，按索引顺序全表扫描，通常性能和全表扫描没什么区别，除非Extra列中有”Using index”字样，那说明使用了覆盖索引，这种情况下要快于ALL，因为直接扫描索引就能获取数据，而索引通常比表小的多。如果所要查询的列是某个索引的一部分，通常会出现这种查询。</li>
+<li>range：范围扫描，比index强一些，因为它是从索引的某个点开始的，用不着遍历全部索引。一些带有BETWEEN，各种比较符号的语句容易出现这种类型，但是要特别注意IN和OR，这也会显示成range，但是其性能跟index差不多。</li>
+<li>index_subquery：索引替换子查询，如果有这样的语句<code>SELECT * FROM table WHERE value IN(SELECT key_column FROM table where xxx)</code>，IN后面的语句会被索引直接代替，来提高效率。</li>
+<li>unique_subquery：唯一索引替换子查询，和上面的相同，只不过是使用唯一索引来替换IN后面的子句</li>
+<li>index_merge：以前Mysql一次查询只能使用一个索引来优化，好像从5.5版本开始，Mysql支持多个索引同时优化，本质上是每个索引单独使用，再通过某种算法来合并结果。</li>
+<li>ref_or_null：类似于下面要介绍的ref类型，但是Mysql做了额外的搜索，为了找到那些包含NULL值的行，通常这样的语句比较容易出现这个类型：<code>SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL</code>。</li>
+<li>fulltext：全文索引使用时会出现此类型。</li>
+<li>ref：当使用除了主键索引、唯一索引以外的索引来匹配值时，或者使用了最左前缀索引（包括唯一索引和主键的），就会出现这个类型。例子如下：<br><code>SELECT * FROM ref_table WHERE key_column=expr</code><br><code>SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.key_column</code><br><code>SELECT * FROM ref_table,other_table WHERE ref-table.key_column_part1=other_table.column AND ref_table.key_column_part2=1</code></li>
+<li>eq_ref：当使用了主键索引，唯一索引等只会唯一地找出一条记录的情况，这种类型就会出现，这种类型的性能相当好。</li>
+<li>const：当查询唯一地匹配一条记录，并且使用主键等于常数或者唯一索引等于某常数作为查询条件时，Mysql会视查询出来的值为常数，这种类型非常快。比如：<code>SELECT * FROM tbl_name WHERE primary_key = 1;</code></li>
+<li>system：表只有一行记录且为系统表，Mysql官方没有给出出现这个类型的例子</li>
+</ul>
+<h3 id="possible-key"><a href="#possible-key" class="headerlink" title="possible_key"></a>possible_key</h3><p>查询<strong><em>可能</em></strong>会用到的索引</p>
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>显示查询最终使用到的索引，如果该索引没有出现在possible_key里，那么它可能是一个覆盖索引。<br>如果显示的是NULL，很遗憾没有任何索引被用到，说明查询的性能可能会很差。</p>
+<h3 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a>key_len</h3><p>显示查询时使用到的索引的字节数，根据这个值可以判断出来究竟使用了索引里的哪些列。<br>可以为NULL的列会比不能为NULL的列多一个字节。</p>
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>显示哪些列或者常量被用来跟key中显示的索引进行比较，从而获取结果。<br>如果显示func，则说明是某些function的结果被用来进行比较。</p>
+<h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><p>显示Mysql引擎认为它要获得结果预计要扫描的行数。这是一个估计值，可能不是很精确。<br>注意这个值<strong><em>不是</em></strong>结果集的行数，还要知道有很多优化手段没能影响这个值，因此可能最终执行时不必读取这么多行记录。<br>如果有多行结果，将多行的rows相乘可以得到一条完整语句执行预计要扫描的行数。</p>
+<h3 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a>filtered</h3><p>使用<code>EXPLAIN EXTENDED</code>才会显示的列，用百分比表示有多少行会被过滤出来去与之前的表关联<br>rows * filtered / 100 就能得到行数</p>
+<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><p>显示额外信息的列。有以下这些可能出现的字段：</p>
+<ul>
+<li>Using index：代表使用了覆盖索引。</li>
+<li>Using where：代表使用了where条件句中的条件进一步地过滤，如果没有显示这个而且查询类型是ALL或者index，那说明SQL写的很差，需要优化。除非你真的就想要全表扫描。</li>
+<li>Using temporary：代表为了得到结果，Mysql不得不创建一个临时表，将结果放在临时表里，在GROUP BY和ORDER BY使用的时候经常出现这个。</li>
+<li>Using filesort：代表索引不能满足排序的需求，于是一种文件排序算法被使用，至于使用的是哪种算法（一共有3种算法），是在内存还是磁盘上进行排序（结果集比较小的情况下可能在内存中完成排序），这个字段不会告诉你这些信息。</li>
+</ul>
+<p>可选字段非常之多，如果想要看完整的版本，请移步官方文档：<br><a href="https://dev.mysql.com/doc/refman/5.6/en/explain-output.html#explain-extra-information" title="external" target="_blank" rel="external">Mysql官方文档</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-02-27T15:49:49.172Z" itemprop="datePublished">
+					2017年2月27日 23:49
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/02/11/effective-java-2/" style="float: left;">
+        ← 《Effective Java》读书笔记——第二章 所有对象通用方法
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/01/19/effective-java-1/">
+        《Effective Java》读书笔记——第一章 创建和销毁对象 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/02/08/mysql-explain/" data-title="《高性能Mysql》读书笔记——Explain命令详解" data-url="/2017/02/08/mysql-explain/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

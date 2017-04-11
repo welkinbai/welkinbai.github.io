@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第五章 枚举和注解 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第五章</h2>
+                                <p>枚举和注解</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-03-12T07:24:07.000Z" itemprop="datePublished">
+          2017年3月12日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第五章 枚举和注解</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十条-用enum代替int常量"><span class="toc-text">第三十条 用enum代替int常量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#int常量为什么不好？"><span class="toc-text">int常量为什么不好？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举类型的优点"><span class="toc-text">枚举类型的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举的例子"><span class="toc-text">枚举的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举的缺点"><span class="toc-text">枚举的缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十一条-用实例域代替序数"><span class="toc-text">第三十一条 用实例域代替序数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十二条-用EnumSet代替位域"><span class="toc-text">第三十二条 用EnumSet代替位域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十三条-用EnumMap代替序数索引"><span class="toc-text">第三十三条 用EnumMap代替序数索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十四条-用接口模拟可伸缩的枚举"><span class="toc-text">第三十四条 用接口模拟可伸缩的枚举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十五条-注解优先于命名模式"><span class="toc-text">第三十五条 注解优先于命名模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是命名模式？"><span class="toc-text">什么是命名模式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注解的优点"><span class="toc-text">注解的优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十六条-坚持使用override注解"><span class="toc-text">第三十六条 坚持使用override注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三十七条-用标记接口定义类型"><span class="toc-text">第三十七条 用标记接口定义类型</span></a></li></ol>
+</div>
+			
+      		<p>本章主要介绍在使用枚举和注解这两种类型时要注意的问题。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第三十条-用enum代替int常量"><a href="#第三十条-用enum代替int常量" class="headerlink" title="第三十条 用enum代替int常量"></a>第三十条 用enum代替int常量</h2><p>本条主要是讲枚举类型enum的优缺点。</p>
+<h3 id="int常量为什么不好？"><a href="#int常量为什么不好？" class="headerlink" title="int常量为什么不好？"></a>int常量为什么不好？</h3><p>枚举类型还不存在之前(JDK1.5才引入枚举类型)，大多数程序都使用下面的int常量形式代替枚举：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_FUJI = <span class="number">0</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_PIPPIN = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>它的缺点如下：</p>
+<ul>
+<li>没有类型安全可言，即使误传了编译器也不会给予任何警告</li>
+<li>没有自己的命名空间，导致不同的枚举类型必须加上前缀区分，比如上面的<code>APPLE_</code>就是前缀</li>
+<li>无法打印出int常量的名字，导致在日志中看到的是int常量的数字而不是友好可读的字符串。</li>
+<li>有人将int常量用String常量代替来解决上条的打印问题，然而，基于字符串的枚举常量在比较的时候性能糟糕，而且很容易被人误用字面量代替，导致产生大量硬编码。何况字符串的常量也不能解决前两个问题。</li>
+</ul>
+<h3 id="枚举类型的优点"><a href="#枚举类型的优点" class="headerlink" title="枚举类型的优点"></a>枚举类型的优点</h3><p>优点如下：</p>
+<ul>
+<li>类型安全</li>
+<li>有自己的命名空间</li>
+<li>实例受控，每个枚举类型的枚举元素都是全局唯一的，且为final的，客户端既不能新建也不能修改或者继承它们（基于这个特性，在比较两个枚举元素的时候，你可以直接使用<code>==</code>运算符，因为每个枚举元素的对象都是全局唯一的，如果两个枚举元素相等，那么它们的对象肯定是同一个对象。反之亦然）</li>
+<li>允许添加任意的方法和域</li>
+<li>枚举类型也可以实现接口，可以有抽象方法</li>
+<li>枚举类型默认重写了toString方法，使你可以直接打印出枚举的名称</li>
+</ul>
+<h3 id="枚举的例子"><a href="#枚举的例子" class="headerlink" title="枚举的例子"></a>枚举的例子</h3><p>给一个枚举的例子出来：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Planet &#123;</div><div class="line">	MERCURY(<span class="number">3.302e+23</span>, <span class="number">2.439e6</span>), VENUS(<span class="number">4.869e+24</span>, <span class="number">6.052e6</span>), EARTH(<span class="number">5.975e+24</span>,</div><div class="line">			<span class="number">6.378e6</span>), MARS(<span class="number">6.419e+23</span>, <span class="number">3.393e6</span>), JUPITER(<span class="number">1.899e+27</span>, <span class="number">7.149e7</span>), SATURN(</div><div class="line">			<span class="number">5.685e+26</span>, <span class="number">6.027e7</span>), URANUS(<span class="number">8.683e+25</span>, <span class="number">2.556e7</span>), NEPTUNE(<span class="number">1.024e+26</span>,</div><div class="line">			<span class="number">2.477e7</span>);</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">double</span> mass; <span class="comment">// In kilograms</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">double</span> radius; <span class="comment">// In meters</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">double</span> surfaceGravity; <span class="comment">// In m / s^2</span></div><div class="line">	</div><div class="line">	<span class="comment">// Universal gravitational constant in m^3 / kg s^2</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> G = <span class="number">6.67300E-11</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// Constructor</span></div><div class="line">	Planet(<span class="keyword">double</span> mass, <span class="keyword">double</span> radius) &#123;</div><div class="line">		<span class="keyword">this</span>.mass = mass;</div><div class="line">		<span class="keyword">this</span>.radius = radius;</div><div class="line">		surfaceGravity = G * mass / (radius * radius);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">double</span> <span class="title">mass</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mass;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">double</span> <span class="title">radius</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> radius;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">double</span> <span class="title">surfaceGravity</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> surfaceGravity;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">double</span> <span class="title">surfaceWeight</span><span class="params">(<span class="keyword">double</span> mass)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mass * surfaceGravity; <span class="comment">// F = ma</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="枚举的缺点"><a href="#枚举的缺点" class="headerlink" title="枚举的缺点"></a>枚举的缺点</h3><p>装载和初始化枚举时，有空间和时间的成本。但是，如书中所说，除了受资源约束的设备，如手机和烤面包机，在实践中不必在意这个问题……</p>
+<h2 id="第三十一条-用实例域代替序数"><a href="#第三十一条-用实例域代替序数" class="headerlink" title="第三十一条 用实例域代替序数"></a>第三十一条 用实例域代替序数</h2><p>本条讲枚举类型默认带一个方法：<code>ordinal()</code>，这个方法返回枚举常量在枚举中定义的时候的序号（当然是从0开始的）。<br>然后很多人非常愉快地使用这个方法来返回常量的序号，并用这个序号做逻辑。<br>书中指出：<strong>不建议</strong>这么做。<br>因为枚举常量的位置会变，这是无法保证的。而且想要再添加一个与已经用过的序号有所关联的枚举常量，就难了。<br>应该使用实例域来代替这种不靠谱的方法：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">enum</span> <span class="title">Ensemble</span> &#123;</span></div><div class="line">	SOLO(<span class="number">1</span>), DUET(<span class="number">2</span>), TRIO(<span class="number">3</span>), QUARTET(<span class="number">4</span>), QUINTET(<span class="number">5</span>), SEXTET(<span class="number">6</span>), SEPTET(<span class="number">7</span>), OCTET(</div><div class="line">			<span class="number">8</span>), DOUBLE_QUARTET(<span class="number">8</span>), NONET(<span class="number">9</span>), DECTET(<span class="number">10</span>), TRIPLE_QUARTET(<span class="number">12</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> final int numberOfMusicians;</div><div class="line">	</div><div class="line">	Ensemble(int size) &#123;</div><div class="line">		this.numberOfMusicians = size;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public int numberOfMusicians() &#123;</div><div class="line">		<span class="keyword">return</span> numberOfMusicians;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="第三十二条-用EnumSet代替位域"><a href="#第三十二条-用EnumSet代替位域" class="headerlink" title="第三十二条 用EnumSet代替位域"></a>第三十二条 用EnumSet代替位域</h2><p>本条主要讲的是JDK提供了一个叫做<code>EnumSet</code>的类，可以为我们提供多个枚举常量的集合，并且轻松实现交集并集等操作。<br>它的底层在枚举元素数小于64个时，使用的是long类型实现的位域来进行操作的，因此在小于64个元素的时候，它和传统的利用位域实现的集合性能相当。</p>
+<h2 id="第三十三条-用EnumMap代替序数索引"><a href="#第三十三条-用EnumMap代替序数索引" class="headerlink" title="第三十三条 用EnumMap代替序数索引"></a>第三十三条 用EnumMap代替序数索引</h2><p>本条主要讲的是jdk提供了一个叫做<code>EnumMap</code>的类，如果我们要用枚举作为键来归类某些东西，最好使用<code>Enummap</code>这个类而不是用<code>ordinal</code>方法去得到枚举常量的序数来作为键。</p>
+<h2 id="第三十四条-用接口模拟可伸缩的枚举"><a href="#第三十四条-用接口模拟可伸缩的枚举" class="headerlink" title="第三十四条 用接口模拟可伸缩的枚举"></a>第三十四条 用接口模拟可伸缩的枚举</h2><p>本条主要是讲，一旦枚举常量确定下来，并被客户端使用，就很难再扩展，因为枚举类型是不支持继承的。<br>但是枚举是可以实现接口的，一旦你的枚举实现了接口，并且客户端在调用的时候是使用接口来调用的，那么在后期，你可以再创建一个枚举类来实现相同的接口，提供扩展功能。<br>这样对于客户端来说是透明的，也没有修改和伤害原来的枚举。</p>
+<h2 id="第三十五条-注解优先于命名模式"><a href="#第三十五条-注解优先于命名模式" class="headerlink" title="第三十五条 注解优先于命名模式"></a>第三十五条 注解优先于命名模式</h2><p>本条主要是在说注解的好处。</p>
+<h3 id="什么是命名模式？"><a href="#什么是命名模式？" class="headerlink" title="什么是命名模式？"></a>什么是命名模式？</h3><p>junit3.x版本使用的就是命名模式，必须每个测试方法都以test开头，然后作者给出了它的缺点：</p>
+<ol>
+<li>拼错了，写成tsetXXX，编译器完全不会发现</li>
+<li>无法确保它们只应用于相应的程序元素上（就是定位性差）</li>
+<li>没有提供将参数值和程序关联起来的好方法（就是不支持任意地参数值来增强功能）</li>
+</ol>
+<h3 id="注解的优点"><a href="#注解的优点" class="headerlink" title="注解的优点"></a>注解的优点</h3><p>注解的优点就很好列举了，上面所有的缺点反过来就是注解的优点。<br>书中通过循序渐进地方式为我们提供了一个通过注解驱动的迷你测试框架的例子，这里就不赘述了。</p>
+<h2 id="第三十六条-坚持使用override注解"><a href="#第三十六条-坚持使用override注解" class="headerlink" title="第三十六条 坚持使用override注解"></a>第三十六条 坚持使用override注解</h2><p>理由如下：</p>
+<ul>
+<li>它可以保证当你想要覆盖父类的方法的时候，你真的覆盖成功了，如果覆盖失败了，编译器会告诉你</li>
+<li>现代IDE有一种机制，当你没有使用override注解，却不小心把父类的某个方法给覆盖了，IDE会报错给你</li>
+</ul>
+<p>总之使用override注解就对了。反正有IDE帮你自动生成，又没有坏处。</p>
+<h2 id="第三十七条-用标记接口定义类型"><a href="#第三十七条-用标记接口定义类型" class="headerlink" title="第三十七条 用标记接口定义类型"></a>第三十七条 用标记接口定义类型</h2><p>标记接口就是没有定义方法的接口，比如<code>Serializable</code>接口</p>
+<p>书中讨论了标记接口和标记注解的优缺点，并提出了何时使用标记注解何时使用标记接口。<br>下面就何时使用标记接口做个说明：</p>
+<ul>
+<li>只用来标记类或者接口而不是其他东西的时候</li>
+<li>想要永远限制标记只用于特殊接口，可用标记接口继承那个特殊接口</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-21T14:29:43.858Z" itemprop="datePublished">
+					2017年3月21日 22:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/03/21/effective-java-6/" style="float: left;">
+        ← 《Effective Java》读书笔记——第六章 方法
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/03/02/effective-java-4/">
+        《Effective Java》读书笔记——第四章 泛型 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/03/12/effective-java-5/" data-title="《Effective Java》读书笔记——第五章 枚举和注解" data-url="/2017/03/12/effective-java-5/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

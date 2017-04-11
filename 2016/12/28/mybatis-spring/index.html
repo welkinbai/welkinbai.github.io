@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>MyBatis整合Spring框架 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>MyBatis and Spring</h2>
+                                <p>让MyBatis更简单</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-12-28T13:41:48.000Z" itemprop="datePublished">
+          2016年12月28日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/MyBatis/'>MyBatis</a>
+    
+    
+	
+</span>
+                <h1>MyBatis整合Spring框架</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、准备工作"><span class="toc-text">一、准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、QuickStart-Demo（快速开始的例子）"><span class="toc-text">二、QuickStart Demo（快速开始的例子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、配置详解"><span class="toc-text">三、配置详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SqlSessionFactoryBean"><span class="toc-text">1.SqlSessionFactoryBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-事务"><span class="toc-text">2.事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-自动扫描Mapper"><span class="toc-text">3.自动扫描Mapper</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要介绍MyBatis与Spring框架的整合。<br><a id="more"></a><br>说实话，想要完美的终结MyBatis系列文章，少不了要介绍如何将MyBatis整合进Spring。虽然在第一篇中我已经提到了一些，但是不够详细。<br>关于Spring，想必熟悉JAVA的人都不陌生，它已经拿下了JAVA框架世界的头牌宝座，无人能与之争锋了。</p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/12/03/mybatis-intro/" title="MyBatis介绍">MyBatis介绍</a><br>2.<a href="/2016/12/08/mybatis-mapper/" title="MyBatis Mapper映射文件中的SQL配置">MyBatis Mapper映射文件中的SQL配置</a><br>3.<a href="/2016/12/21/mybatis-dynamic/" title="MyBatis 动态SQL">MyBatis 动态SQL</a><br>4.<a href="/2016/12/28/mybatis-spring/" title="MyBatis整合Spring框架">MyBatis整合Spring框架</a><br>5.<a href="/2017/01/15/mybatis-test/" title="MyBatis的测试项目">MyBatis的测试项目</a></p>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><p>想要将MyBatis和Spring整合到一起，让他们协作，需要新加入一个依赖包：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这个包是MyBatis社区产物，官方给的解释是，Spring3已经做完了的时候，MyBatis3还没做完，因此非常可惜，Spring官方并没有原生支持MyBatis。于是MyBatis社区就自己实现了一个包，来整合两者。似乎这个包工作的很好，Spring在后续的版本里也干脆就没再支持MyBatis。</p>
+<p>这里在引入前对一下自己的版本：</p>
+<table>
+<thead>
+<tr>
+<th>MyBatis-Spring</th>
+<th>MyBatis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.0 and 1.0.1</td>
+<td>3.0.1 to 3.0.5    </td>
+</tr>
+<tr>
+<td>1.0.2</td>
+<td>3.0.6    </td>
+</tr>
+<tr>
+<td>1.1.0 or higher</td>
+<td>3.1.0 or higher    </td>
+</tr>
+<tr>
+<td>1.3.0 or higher</td>
+<td>3.4.0 or higher    </td>
+</tr>
+</tbody>
+</table>
+<h2 id="二、QuickStart-Demo（快速开始的例子）"><a href="#二、QuickStart-Demo（快速开始的例子）" class="headerlink" title="二、QuickStart Demo（快速开始的例子）"></a>二、QuickStart Demo（快速开始的例子）</h2><p>我在第一篇文章里有介绍过，和Spring整合起来其实其他的都没变，只是获得<code>SqlSessionFactory</code>的方法变了。<br>以前需要自己在JAVA代码里获得，现在只需要配置一下，Spring直接帮你注入。然后用AOP拦截你的Mapper接口，使你用的时候也无需使用<code>SqlSession</code>，直接使用Mapper接口。<br>废话不多说，看demo:<br>第一步、在Spring配置文件中加上这一行：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第二步、定义一个这样的接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</div><div class="line">  <span class="meta">@Select</span>(<span class="string">"SELECT * FROM users WHERE id = #&#123;userId&#125;"</span>)</div><div class="line">  <span class="function">User <span class="title">getUser</span><span class="params">(@Param(<span class="string">"userId"</span>)</span> String userId)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第三步、在Spirng配置文件中再加上这一行：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userMapper"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperInterface"</span> <span class="attr">value</span>=<span class="string">"org.mybatis.spring.sample.mapper.UserMapper"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sqlSessionFactory"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第四步、配置好了，你可以这么用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooServiceImpl</span> <span class="keyword">implements</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">	</div><div class="line"><span class="keyword">private</span> UserMapper userMapper;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserMapper</span><span class="params">(UserMapper userMapper)</span> </span>&#123;</div><div class="line">  <span class="keyword">this</span>.userMapper = userMapper;</div><div class="line">&#125;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">public</span> User <span class="title">doSomeBusinessStuff</span><span class="params">(String userId)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.userMapper.getUser(userId);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>解释一下，第一步在Spring配置文件增加的sqlSessionFactory配置就是告诉Spring自动注入sqlSessionFactory的。你必须为它指定一个dataSource，相信如果你的项目本来就使用Spring，那DataSource应该已经配置过了，任何可以被Spring用的DataSource都可以。<br>这个Bean还有一些功能，比如妥善地帮你在查询结束后关掉SqlSession，总之，你不需要关心任何框架层面的东西，只需要写你的Mapper就行了。<br>第二步是我之前文章讲过的Mapper接口。<br>第三步是告诉Spring，我这里有个Mapper，你要帮我变成一个Bean，并且用sqlSessionFactory来创建，我随时要用。到后面会讲，你可以配置告诉Spring去扫描某个路径下所有的Mapper，默认把它们都注入成bean。<br>然后第四步，你可以使用Spring的依赖注入，将你的Mapper注入到任何地方，然后使用它的方法来查询数据。虽然你没有实现这个接口，但是MyBatis会帮你实现，然后查询出数据。</p>
+<h2 id="三、配置详解"><a href="#三、配置详解" class="headerlink" title="三、配置详解"></a>三、配置详解</h2><p>下面详细地介绍一下配置，上面的demo只是列出了最简单的情况。</p>
+<h3 id="1-SqlSessionFactoryBean"><a href="#1-SqlSessionFactoryBean" class="headerlink" title="1.SqlSessionFactoryBean"></a>1.SqlSessionFactoryBean</h3><p>我们刚才讲到，整合的最核心部分就是在Spring的配置文件里加上下面这句话：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>实际上，这只是最小集，还有一些属性可以配置：</p>
+<ul>
+<li><code>configLocation</code>：用来指定你的mybatis的配置文件放在哪儿，需要注意的是，在第一篇文章里讲到的配置文件里，environment相关的节点都不需要指定，因为指定也没用。</li>
+<li><code>configuration</code>:从1.3.0版本起，支持直接使用这个节点来修改MyBatis的配置，你就不需要外部的xml文件了</li>
+<li><code>mapperLocations</code>: 非常重要的配置，指定你的mapper的xml映射文件都放在哪儿，如果和接口没有放在一个目录下，那你必须要指定这个值，你可以使用ant风格的路径来指定，你还可以指定多个。</li>
+<li><code>databaseIdProvider</code>：用来指定使用哪个类型的数据库源，之前已经介绍过了，不详细介绍，下面有例子</li>
+</ul>
+<p>最大集可能长这个样子：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"vendorProperties"</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertiesFactoryBean"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"SQL Server"</span>&gt;</span>sqlserver<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"DB2"</span>&gt;</span>db2<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"Oracle"</span>&gt;</span>oracle<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"MySQL"</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"databaseIdProvider"</span> <span class="attr">class</span>=<span class="string">"org.apache.ibatis.mapping.VendorDatabaseIdProvider"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span> <span class="attr">ref</span>=<span class="string">"vendorProperties"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperLocations"</span> <span class="attr">value</span>=<span class="string">"classpath*:sample/config/mappers/**/*.xml"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span> <span class="attr">value</span>=<span class="string">"classpath:sample/config/mybatisconfig.xml"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseIdProvider"</span> <span class="attr">ref</span>=<span class="string">"databaseIdProvider"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="2-事务"><a href="#2-事务" class="headerlink" title="2.事务"></a>2.事务</h3><p>最神奇的地方来了，使用了mybatis-spring的包以后，你什么都不用改，MyBatis直接就用起你的Spring的事务管理器啦，简直棒呆：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上面举例的是Spring通常配置事务管理器的方式。注意，此处的dataSource和之前我们配置给SqlSessionFactoryBean的必须一致，否则事务失效。<br>然后你就可以尽情地使用Spring的声明式事务了，不管是AOP还是注解，都可以起作用，事务结束的时候，MyBatis会自动提交或者回滚。<br>需要注意的是，如果你使用spring的事务，那么你就不能再做任何手工的诸如<code>SqlSession.commit()</code>这种事，如果你做了，会抛错。<br>任何不在事务范围之内的查询，都会自动提交。</p>
+<h3 id="3-自动扫描Mapper"><a href="#3-自动扫描Mapper" class="headerlink" title="3.自动扫描Mapper"></a>3.自动扫描Mapper</h3><p>前面demo里第三步，我们需要告诉Spring我有哪些Mapper，并且使用MapperFactoryBean这个强大的类来处理Mapper，尽管如此，你可能有几百万个Mapper（夸张的修辞手法），难道都要一个一个配置？<br>Spring有个自动扫描的概念，如果你熟悉Spring，你肯定知道，我们还可能有几百万个Bean，不可能每个都配置在xml里，因此Spring本来就支持自动扫描注解来注入Bean。<br>MyBatis-spring的开发者们沿用了这一做法，你只需要在Spring的配置文件里加入一行代码（当然还要增加一下xml命名空间）：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">  <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">  <span class="attr">xmlns:mybatis</span>=<span class="string">"http://mybatis.org/schema/mybatis-spring"</span></div><div class="line">  <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></div><div class="line">  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">  http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd"&gt;</div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">mybatis:scan</span> <span class="attr">base-package</span>=<span class="string">"org.mybatis.spring.sample.mapper"</span> /&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>以下是一些要点：</p>
+<ul>
+<li>你可以使用逗号或者分号分隔多个包名</li>
+<li>扫描是递归的</li>
+<li>不想把指定包下面所有的接口都扫描进去？使用<code>annotation</code>属性指定有特殊的注解才扫描，使用<code>marker-interface</code>属性，可以指定拥有特殊的父接口的那些接口才扫描</li>
+<li>想更改扫描到的mapper的bean的名字？在mapper上使用<code>org.springframework.stereotype.Component</code>或者<code>javax.inject.Named</code>注解</li>
+</ul>
+<p>还有另外两种自动扫描的配置方法，此处就不介绍了，详情请见官网。</p>
+<p>没啦，愉快地结束。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-02-19T07:56:04.231Z" itemprop="datePublished">
+					2017年2月19日 15:56
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/01/15/mybatis-test/" style="float: left;">
+        ← MyBatis的测试项目
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/12/21/mybatis-dynamic/">
+        MyBatis 动态SQL →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/12/28/mybatis-spring/" data-title="MyBatis整合Spring框架" data-url="/2016/12/28/mybatis-spring/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

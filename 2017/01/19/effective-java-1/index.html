@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第一章 创建和销毁对象 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>Effective Java</h2>
+                                <p>创建和销毁对象</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-01-19T14:40:59.000Z" itemprop="datePublished">
+          2017年1月19日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第一章 创建和销毁对象</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一条-用静态工厂方法代替构造器"><span class="toc-text">第一条 用静态工厂方法代替构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态工厂方法大概长下面这样："><span class="toc-text">静态工厂方法大概长下面这样：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二条-遇到多个构造器参数时考虑使用构建器（Builder）"><span class="toc-text">第二条 遇到多个构造器参数时考虑使用构建器（Builder）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#层叠构造器"><span class="toc-text">层叠构造器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaBean模式"><span class="toc-text">JavaBean模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Builder模式"><span class="toc-text">Builder模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三条-单例模式的三种实现方法"><span class="toc-text">第三条 单例模式的三种实现方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#私有构造器加公有final域"><span class="toc-text">私有构造器加公有final域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有构造器加静态工厂方法"><span class="toc-text">私有构造器加静态工厂方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举单例，单例中的战斗例！"><span class="toc-text">枚举单例，单例中的战斗例！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四条-使用私有构造器来防止实例化"><span class="toc-text">第四条 使用私有构造器来防止实例化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五条-避免创建多余的对象"><span class="toc-text">第五条 避免创建多余的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String字面量"><span class="toc-text">String字面量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重用不可变对象"><span class="toc-text">重用不可变对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重用可变的但是已知不会被修改的对象"><span class="toc-text">重用可变的但是已知不会被修改的对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适配器对象-view对象"><span class="toc-text">适配器对象/view对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动装箱带来的祸害"><span class="toc-text">自动装箱带来的祸害</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六条-消除过期的对象引用"><span class="toc-text">第六条 消除过期的对象引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是过期的对象引用？"><span class="toc-text">1.什么是过期的对象引用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-过期对象引用有什么危害？"><span class="toc-text">2.过期对象引用有什么危害？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-如何避免这一情况？"><span class="toc-text">3.如何避免这一情况？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-过期对象引用的规律或常见来源"><span class="toc-text">4.过期对象引用的规律或常见来源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七条-避免使用终结方法"><span class="toc-text">第七条 避免使用终结方法</span></a></li></ol>
+</div>
+			
+      		<p>本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。<br><a id="more"></a><br>本系列是著名JAVA必读书籍之一的《Effective JAVA》的读书笔记，注意，本书不适合没有JAVA基础或者编程经验的人阅读。属于高级教程。</p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第一条-用静态工厂方法代替构造器"><a href="#第一条-用静态工厂方法代替构造器" class="headerlink" title="第一条 用静态工厂方法代替构造器"></a>第一条 用静态工厂方法代替构造器</h2><h3 id="静态工厂方法大概长下面这样："><a href="#静态工厂方法大概长下面这样：" class="headerlink" title="静态工厂方法大概长下面这样："></a>静态工厂方法大概长下面这样：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> MyClass(arg1, arg2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>为什么要用上面的方法来获得对象的实例呢？用构造器不就好了吗？<br>理由有如下几点：</p>
+<ol>
+<li>静态工厂方法有名称！构造器必须和类同名，这意味着，两个或者两个以上的构造器存在的时候，你只能通过它们的参数来区分它们。而很多时候，调用者会不小心把参数的顺序搞混！<br>如果使用带有合适名称的静态工厂方法，一切就都迎刃而解咯。</li>
+<li>静态工厂方法可以用来返回缓存的对象实例。如果你调用了构造器，不管你愿意或者不愿意，构造器都将扔给你一个新对象。静态工厂方法可以编写地更加灵活，使得针对同样的入参，总是返回同一个对象。<br>可以参考Boolean.valueOf(boolean)</li>
+<li>可以返回原返回类型的任何子类型的对象，从而拥有更大灵活性。<br>举例：<ul>
+<li>比如Collections类，该类可以返回一些不可变的集合对象，这些对象都以私有内部类的形式定义，而由于该类的构造器被私有化，因此任何人都不能去new一个Collections类，所以它为我们提供一系列静态工程方法的同时，防止任何人去修改它本身和它返回的东西。<br>Collections使用静态工厂方法的模式值得我们借鉴。当我们为某个接口提供预设的实现而又不想让这实现公有化时，可以使用这种模式来仅仅返回实例。</li>
+<li>静态工厂方法除了可以返回私有的子对象以外，还可以根据情况，动态地返回子对象。比如EnumSet，竟然根据枚举类型的大小返回不同的结果，如果元素&lt;=64个，就返回RegularEnumSet，超过了就使用JumboEnumSet的实例。    </li>
+</ul>
+</li>
+<li>静态工厂方法可以做类型推导，从而在创建参数化类型实例的时候，是代码更简洁，比如：</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; m = <span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt;();</div></pre></td></tr></table></figure>
+<p>注：书中在举例的时候，JAVA才出到1.6版本，因此才会提及这个特性，实际上，类型推导在1.7版本JDK已经帮我们实现了，后面的new语句不需要再声明类型，只需要<code>new HashMap&lt;&gt;()</code>就可以了。<br>可以用静态工厂方法：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K,V&gt; HashMap&lt;K,V&gt; <span class="keyword">new</span><span class="type">Instance</span>()&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="type">HashMap</span>&lt;K,V&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>来这样做类型推导:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; m = HashMap.newInstance();</div></pre></td></tr></table></figure></p>
+<p>注：虽然1.6版本的JAVA集合框架都没有实现类型推导，但是谷歌著名的GUAVA工具框架用静态工厂方法帮我们实现了。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>任何设计都有其缺点，静态工厂方法也是有缺点的，缺点如下：</p>
+<ol>
+<li>静态工厂方法要想实现上面优点中的第3点，返回内部类或者子类，首先，该内部类或者子类需要有public或者protected类型的构造器才行，这就导致我们无法做到任何人只能通过我们提供的静态工厂方法来获得实例，他们也可以想办法使用其他办法获得。另一方面也意味着没有非私有化构造器的类是不能用静态工厂方法来返回的，也就无法像Collections那样方便地提供一系列方法返回实例了。</li>
+<li>静态工厂方法和其他静态方法没有任何区别，调用者只能依靠名字来区分它们。为了解决这个问题，我们必须遵守好的命名规范，尽可能地告诉调用者，我这是静态工厂方法，用我这个方法，是可以得到某某某的实例的：<ul>
+<li>valueof</li>
+<li>of</li>
+<li>getInstance</li>
+<li>newInstance</li>
+<li>getType</li>
+<li>newType</li>
+</ul>
+</li>
+</ol>
+<h2 id="第二条-遇到多个构造器参数时考虑使用构建器（Builder）"><a href="#第二条-遇到多个构造器参数时考虑使用构建器（Builder）" class="headerlink" title="第二条 遇到多个构造器参数时考虑使用构建器（Builder）"></a>第二条 遇到多个构造器参数时考虑使用构建器（Builder）</h2><p>本条主要是讲遇到一个对象有几十个域（Field）时，构造器的入参可多达几十个，前面第一条的静态工厂方法也无法解决这个问题。<br>书中先给出了一系列我们平常最喜欢用的、拙劣的实现手段。</p>
+<h3 id="层叠构造器"><a href="#层叠构造器" class="headerlink" title="层叠构造器"></a>层叠构造器</h3><p>就是那种一堆构造器，每个构造器都比上一个多一个入参，最终有一个非常全面的构造器，包含所有的入参。代码如下：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">ClassForShowTelescopingConstructor</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field1;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field2;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field3;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field4;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, field2, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2, <span class="keyword">int</span> field3</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, field2, field3, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2, <span class="keyword">int</span> field3, <span class="keyword">int</span> field4</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">            <span class="keyword">this</span>.field2 = field2;</div><div class="line">            <span class="keyword">this</span>.field3 = field3;</div><div class="line">            <span class="keyword">this</span>.field4 = field4;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>如果你曾经为写出上面这样的代码而沾沾自喜，觉得很厉害的样子，那你就可以抽自己一嘴巴子了，作者已经抽过了T_T<br>这个模式有两个致命缺点：</p>
+<ol>
+<li>随着参数的增加，排列组合的可能性几何增长，你根本不可能提供所有的参数的排列的构造器，于是调用者不得不调用距离他想要的构造器最相近的那一个，然后把多余的参数都塞上0、null这种状态。即便真的巧合遇到他想要的，但是他还是不知道，你已经背地里帮他把其他的参数都塞了一堆0、null这样的数值进去了……这真的是一种好的做法吗？</li>
+<li>数量繁多的构造器在IDE的自动补全列表里会撑开一个长长的名字一模一样的名单，调用者不得不小心翼翼并猜测哪个才是他想要的，或者干脆点进去看一眼源代码，否则，他极有可能搞混两个类型相同参数的顺序，或者调用到了他根本不想要的那一个。而这一切编译器不会提前发现错误……</li>
+</ol>
+<h3 id="JavaBean模式"><a href="#JavaBean模式" class="headerlink" title="JavaBean模式"></a>JavaBean模式</h3><p>这是当今Web领域最流行的一种构造对象的方式。<br>不可否认，至少这种模式已经能够解决上面层叠构造器的麻烦，为我们提供一个清晰可读的代码：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">ClassForShowJavaBean</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field1;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field2;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field3;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field4;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowJavaBean</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField1</span>(<span class="params"><span class="keyword">int</span> field1</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField2</span>(<span class="params"><span class="keyword">int</span> field2</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field2 = field2;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField3</span>(<span class="params"><span class="keyword">int</span> field3</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field3 = field3;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField4</span>(<span class="params"><span class="keyword">int</span> field4</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field4 = field4;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line"><span class="keyword">class</span> <span class="title">ClassMain</span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">            ClassForShowJavaBean classForShowJavaBean = <span class="keyword">new</span> ClassForShowJavaBean();</div><div class="line">            classForShowJavaBean.setField1(<span class="number">1</span>);</div><div class="line">            classForShowJavaBean.setField2(<span class="number">2</span>);</div><div class="line">            classForShowJavaBean.setField3(<span class="number">3</span>);</div><div class="line">            classForShowJavaBean.setField4(<span class="number">4</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>由于Spring框架和JSON的流行，这种模式现在在Web项目中很常见。但是书中还是指出了不足的地方：</p>
+<ol>
+<li>这种方法没法保证调用者在对象完全构造完毕的时候才使用对象，构造的过程是分离的，分很多步，而这可能导致对象处于一种不一致的状态，使用不一致状态的对象可能导致难以察觉的错误。（其实简单点儿说就是，这种模式没法一次就构造出可以使用的对象，需要分成多步，从而造成不一致性）</li>
+<li>这种方法导致无法轻易将类做成不可变的对象，因为它要求我们必须提供Setter方法，从而给予外人改变其域值的机会，这在多线程程序中会有问题。</li>
+</ol>
+<h3 id="Builder模式"><a href="#Builder模式" class="headerlink" title="Builder模式"></a>Builder模式</h3><p>这是设计模式中非常著名的一种模式，它长下面这个样子：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForShowBuilder</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> int field1;</div><div class="line">    <span class="keyword">private</span> int field2;</div><div class="line">    <span class="keyword">private</span> int field3;</div><div class="line">    <span class="keyword">private</span> int field4;</div><div class="line">	</div><div class="line">    <span class="keyword">private</span> ClassForShowBuilder(Builder builder) &#123;</div><div class="line">        <span class="keyword">this</span>.field1 = builder.field1;</div><div class="line">        <span class="keyword">this</span>.field2 = builder.field2;</div><div class="line">        <span class="keyword">this</span>.field3 = builder.field3;</div><div class="line">        <span class="keyword">this</span>.field4 = builder.field4;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="keyword">public</span> static <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> int field1;</div><div class="line">        <span class="keyword">private</span> int field2;</div><div class="line">        <span class="keyword">private</span> int field3;</div><div class="line">        <span class="keyword">private</span> int field4;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder(int field1) &#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field2(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field2 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field3(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field3 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field4(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field4 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> ClassForShowBuilder build()&#123;</div><div class="line">            <span class="keyword">return</span> new ClassForShowBuilder(<span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用起来非常简洁：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="type">ClassMain</span> &#123;</span></div><div class="line">        public static void main(<span class="type">String</span>[] <span class="title">args</span>) &#123;</div><div class="line">            <span class="type">ClassForShowBuilder</span> classBuilded = new <span class="type">ClassForShowBuilder</span>.<span class="type">Builder</span>(1).field2(2).field3(3).field4(4).build();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>用这种模式即解决了层叠构造器糟糕的可读性，又解决了JavaBean的安全隐患，我们得到了不可变的对象。<br>还可以在构建的过程中，检查入参的合法性，或者最终build()方法构造对象时，检查拷贝之后的参数的合法性。<br>注意：使用这种模式的时候，构建器Builder的Setter方法不能有顺序依赖。<br>另外，构建器随着参数数目的增加，缺点也是很显然的：太过冗长（好在现在IDE可以为我们自动生成构建器类）</p>
+<h2 id="第三条-单例模式的三种实现方法"><a href="#第三条-单例模式的三种实现方法" class="headerlink" title="第三条 单例模式的三种实现方法"></a>第三条 单例模式的三种实现方法</h2><p>什么是单例，顾名思义，单个实例的意思。就是采取一种手段让类的实例在整个ClassLoader范围内只拥有一个，任何调用者调用的都是同一个对象，一些系统级的组件通常会使用单例模式。<br>本书在该节介绍了单例模式的三种实现方法，让我来一一介绍:</p>
+<h3 id="私有构造器加公有final域"><a href="#私有构造器加公有final域" class="headerlink" title="私有构造器加公有final域"></a>私有构造器加公有final域</h3><p>实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForSingleton</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton INSTANCE = <span class="keyword">new</span> ClassForSingleton();</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">ClassForSingleton</span><span class="params">()</span></span>&#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>私有的构造器导致除了类本身任何人没有机会调用构造器，就没有机会创建实例对象。<br>公有静态final域则保证了在类被第一次加载的时候，调用私有构造器得到一个实例，并且是全局可访问的唯一实例。<br>然后我们就可以通过<code>ClassForSingleton.INSTANCE</code>来获得单例啦。</p>
+<h3 id="私有构造器加静态工厂方法"><a href="#私有构造器加静态工厂方法" class="headerlink" title="私有构造器加静态工厂方法"></a>私有构造器加静态工厂方法</h3><p>实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForSingleton</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton INSTANCE = <span class="keyword">new</span> ClassForSingleton();</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">ClassForSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (INSTANCE != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"the class is singleton!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> INSTANCE;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>和刚才的区别在于我们的静态final域变成私有的了，外部不能直接调用，想要调用就要使用静态工厂方法。<br>这个模式的好处是我们可以在晚些时候修改静态工厂方法的内部实现，为单例的获取过程添加更多逻辑，比如为每个线程提供单例而非整个ClassLoader范围，再比如后悔了，不要单例了，也是可以做到的。而这些改变不需要调用方做任何随之进行的改变。<br>还有个优势是能够很好地支持泛型，做类型推导，这在之前已经讲过了。</p>
+<p>细心的你肯定发现了，这里的私有构造器也有一些变化，这种变化也可以用在上一种方法里。为什么要检测INSTANCE是否为空呢？我们不是已经使用私有构造器阻止任何人来创建实例了吗？难道有人能够跨越<code>private</code>这个声明的权限，从类以外的地方调用私有构造器？<br>还真有……JAVA的反射机制为各种各样的框架开发者提供了便利，弥补了一些JAVA语言本身的缺陷，然而，也带来了安全隐患，它给不怀好意的人一种途径，可以从外部调用某个类的私有方法。<br>想要真正实现单例，你还要注意序列化问题。<br>如果你的单例是个可序列化的单例，那么你必须实现<code>Serializable</code>接口，然而，实现了这个接口后，单例便被破坏。如何避免这一情况？书中给出了方法，但是第77条时还会再重复，我不打算写出。下面有一种更好的办法可以实现真正防御力顶天的单例。</p>
+<h3 id="枚举单例，单例中的战斗例！"><a href="#枚举单例，单例中的战斗例！" class="headerlink" title="枚举单例，单例中的战斗例！"></a>枚举单例，单例中的战斗例！</h3><p>实现如下：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">enum</span> <span class="title">EnumForSingleton</span>&#123;</span></div><div class="line">        INSTANCE;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>看见了没？什么叫做简洁……它是单例，它不可被反射攻击，它也不可被序列化手段攻击，它坚如磐石。<br>这种神一般的单例实现仅有两个问题：</p>
+<ol>
+<li>你的应用程序必须使用JDK1.5或以上的版本（这年头还有人使用1.5以下的嘛？使用1.5以下的版本也太……）</li>
+<li>如果在编译期时你还不知道单例的那个唯一实例是什么样子的，那么使用这种方式也没法实现单例。</li>
+</ol>
+<h2 id="第四条-使用私有构造器来防止实例化"><a href="#第四条-使用私有构造器来防止实例化" class="headerlink" title="第四条 使用私有构造器来防止实例化"></a>第四条 使用私有构造器来防止实例化</h2><p>实在不明白这一条为什么不放在上一条的前面。<br>这一条其实解释起来就一句话：<br>在诸如Collections、Math等只包含静态方法和静态域的类中，显式地使用私有构造器来阻止人们实例化这个类，因为这个类的作用就是让人们通过<code>类名.方法名</code>的形式调用写好的过程方法的。人们不需要也不应该去实例化这些类。<br>个人认为，除了一些保存全局常量的类，还有一些工具类，其他任何类都不应该被构建成这种只包含静态方法和静态域的类，从而滥用静态方法和静态变量。<br>尤其是静态方法，臭名昭著地破坏面向对象地编程模式，使得JAVA的代码变得过于C化，滥用静态方法会让程序员不自觉地开始使用面向过程地方式编写程序。</p>
+<h2 id="第五条-避免创建多余的对象"><a href="#第五条-避免创建多余的对象" class="headerlink" title="第五条 避免创建多余的对象"></a>第五条 避免创建多余的对象</h2><p>书中列举了如下几种情况：</p>
+<h3 id="String字面量"><a href="#String字面量" class="headerlink" title="String字面量"></a>String字面量</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">String</span> a = <span class="keyword">new</span> <span class="keyword">String</span>(<span class="string">"test"</span>)</div></pre></td></tr></table></figure>
+<p>像上面这样的写法就是错误的，字面量<code>&quot;test&quot;</code>本身就是一个String的实例，而且由于JAVA设计者认为String会被经常使用到，所以做了一个对象池，所有的<code>&quot;test&quot;</code>字面量都是代表的同一个对象，同一个实例，同一块内存地址，没必要用上面的代码新建对象。<br>永远直接使用<code>&quot;xxx&quot;</code>的形式来得到String对象。</p>
+<h3 id="重用不可变对象"><a href="#重用不可变对象" class="headerlink" title="重用不可变对象"></a>重用不可变对象</h3><p>使用静态工厂方法，在调用方获取对象的时候返回已经创建过的不可变对象，比如<code>Boolean.valueof()</code>方法就会返回已经创建好的<code>Boolean.True</code>或者<code>Boolean.False</code></p>
+<h3 id="重用可变的但是已知不会被修改的对象"><a href="#重用可变的但是已知不会被修改的对象" class="headerlink" title="重用可变的但是已知不会被修改的对象"></a>重用可变的但是已知不会被修改的对象</h3><p>书中举例Calendar对象，很多人在使用这个对象的时候，不小心把<code>Calendar.getInstance()</code>方法写在了循环体的里面，那真是一种糟糕的做法。<br>如果最终得到的Date是个确定的，不会变的日期，为什么不写在循环体的外面呢？</p>
+<h3 id="适配器对象-view对象"><a href="#适配器对象-view对象" class="headerlink" title="适配器对象/view对象"></a>适配器对象/view对象</h3><p>Map接口中有个<code>keySet()</code>方法返回的就是一个适配器对象或者叫做视图对象（view），如果看源代码你会发现，每次使用该方法，返回的对象都是同一个。</p>
+<h3 id="自动装箱带来的祸害"><a href="#自动装箱带来的祸害" class="headerlink" title="自动装箱带来的祸害"></a>自动装箱带来的祸害</h3><p>考虑下面的代码：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</div><div class="line">        Long <span class="keyword">sum</span> = <span class="number">0</span>L;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</div><div class="line">            <span class="keyword">sum</span> += i;</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="keyword">sum</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>这是一段计算所有int值的总和的代码，由于所有int值的总和超出了int可承受的范围，所以sum使用了long型。可惜，写错了一个字母。<br>sum的类型应该声明为基本类型long而不是装箱类型Long。<br>有什么问题呢？<br>在第4行代码处，每次做加法，都会生成一个Long对象，这个循环为我们生成了大约2的31次方个对象，而这些对象做完加法立即就被抛弃了。<br>改为long以后，性能可以提升好几倍。</p>
+<h2 id="第六条-消除过期的对象引用"><a href="#第六条-消除过期的对象引用" class="headerlink" title="第六条 消除过期的对象引用"></a>第六条 消除过期的对象引用</h2><p>JAVA这种语言一般情况下是不会出现内存泄漏问题的，但是这不代表程序员就可以不用管这件事。<br>当我们的对象内部持有过期的对象引用时，就会发生内存泄漏。</p>
+<h3 id="1-什么是过期的对象引用？"><a href="#1-什么是过期的对象引用？" class="headerlink" title="1.什么是过期的对象引用？"></a>1.什么是过期的对象引用？</h3><p>通常指的是对象内部的某个域，这个域所引用的对象你已经不需要了，但是没有及时地解除引用。<br>比如下面这个类：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class Stack &#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">Object</span>[] elements;</div><div class="line">	<span class="keyword">private</span> <span class="built_in">int</span> <span class="built_in">size</span> = <span class="number">0</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">16</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Stack() &#123;</div><div class="line">		elements = <span class="keyword">new</span> <span class="keyword">Object</span>[DEFAULT_INITIAL_CAPACITY];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> push(<span class="keyword">Object</span> e) &#123;</div><div class="line">		ensureCapacity();</div><div class="line">		elements[<span class="built_in">size</span>++] = e;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">Object</span> pop() &#123;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">size</span> == <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</div><div class="line">		<span class="keyword">return</span> elements[--<span class="built_in">size</span>];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * Ensure space for at least one more element, roughly doubling the capacity</div><div class="line">	 * each time the array needs to grow.</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> <span class="keyword">void</span> ensureCapacity() &#123;</div><div class="line">		<span class="keyword">if</span> (elements.length == <span class="built_in">size</span>)</div><div class="line">			elements = Arrays.copyOf(elements, <span class="number">2</span> * <span class="built_in">size</span> + <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果Stack对象是一个存活时间很长的对象，那么它所持有的数组<code>elements</code>将和它的寿命一样长，然后，数组<code>elements</code>内部的对象，即使是已经被pop的对象（实际上它们还存在于数组中），寿命也会和它一样长。<br>既然你已经pop了数组的对象，那么光移动size指针是不够的，你还应该把数组中相应的位置清空，否则数组中相应的位置就持有一个过期的引用。</p>
+<h3 id="2-过期对象引用有什么危害？"><a href="#2-过期对象引用有什么危害？" class="headerlink" title="2.过期对象引用有什么危害？"></a>2.过期对象引用有什么危害？</h3><p>内存泄漏。原因很简单，垃圾回收机制不会回收仍然被引用的对象，即使这些对象你不需要了，但是垃圾回收机制可不知道，既然你还在引用它，那么有理由认为你还需要它。</p>
+<h3 id="3-如何避免这一情况？"><a href="#3-如何避免这一情况？" class="headerlink" title="3.如何避免这一情况？"></a>3.如何避免这一情况？</h3><p>书中指出，不必为这种情况过于担忧，有些人对每个对象的引用都小心翼翼地在不需要的时候置为Null，这完全没有必要，会令程序代码混乱。<br>事实上，这种过期的对象引用发生的地方是有规律可循的，一旦掌握规律，就可以在该小心的时候小心，该大胆的时候大胆。</p>
+<h3 id="4-过期对象引用的规律或常见来源"><a href="#4-过期对象引用的规律或常见来源" class="headerlink" title="4.过期对象引用的规律或常见来源"></a>4.过期对象引用的规律或常见来源</h3><ul>
+<li>上面举的例子之所以出现过期对象引用，是因为<code>Stack</code>类<strong><em>自己管理内存</em></strong>，所以如果你的类自己在内部拥有类似<code>array</code>、<code>List</code>、<code>Map</code>这种东西，那么就要小心了。</li>
+<li>缓存也是常见的原因，如果你要实现缓存，那么就要考虑所缓存的对象的存活时间</li>
+<li>监听器或者其他回调，如果注册了回调方法，通常如果你不显式地去取消注册，回调方法会在你写的类中积聚。事实上这条和上一条都是第一条的特殊情况，所谓的注册回调方法，不过是将回调方法放在类内部的某个<code>List</code>或者<code>Map</code>里而已。缓存也是如此。</li>
+</ul>
+<h2 id="第七条-避免使用终结方法"><a href="#第七条-避免使用终结方法" class="headerlink" title="第七条 避免使用终结方法"></a>第七条 避免使用终结方法</h2><p>我想题目已经说得很清楚了，避免使用<code>xxx.finalize()</code>方法，因为JVM不保证终结方法立刻执行，没人能保证终结方法在什么时候执行，不同JVM的实现可能终结方法执行的行为和时机完全不同。终结方法还有严重性能损失。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-21T14:29:02.440Z" itemprop="datePublished">
+					2017年3月21日 22:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/02/08/mysql-explain/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——Explain命令详解
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/01/18/anti-pattern/">
+        有趣的反面模式 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/01/19/effective-java-1/" data-title="《Effective Java》读书笔记——第一章 创建和销毁对象" data-url="/2017/01/19/effective-java-1/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

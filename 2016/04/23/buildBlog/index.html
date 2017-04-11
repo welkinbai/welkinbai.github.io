@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Hexo博客建设教程以及使用U盘漫游生产环境 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2><strong>Hexo</stong></h2>
+                                <p>博客建设教程以及使用U盘漫游生产环境</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-04-23T04:00:54.000Z" itemprop="datePublished">
+          2016年4月23日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/教程/'>教程</a>,
+    
+    <a href='/tags/Hexo/'>Hexo</a>
+    
+    
+	
+</span>
+                <h1>Hexo博客建设教程以及使用U盘漫游生产环境</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、选择Hexo博客引擎"><span class="toc-text">一、选择Hexo博客引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、选择第三方代码托管库以及相应的page服务"><span class="toc-text">二、选择第三方代码托管库以及相应的page服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、访问Hexo官网得到Hexo"><span class="toc-text">三、访问Hexo官网得到Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、使用Hexo搭建本地生产环境"><span class="toc-text">四、使用Hexo搭建本地生产环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、配置博客"><span class="toc-text">五、配置博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、写作"><span class="toc-text">六、写作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、部署到因特网"><span class="toc-text">七、部署到因特网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、安装一些有用的插件"><span class="toc-text">八、安装一些有用的插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、创建一个可携带的生产环境"><span class="toc-text">九、创建一个可携带的生产环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、写在最后"><span class="toc-text">十、写在最后</span></a></li></ol>
+</div>
+			
+      		<p>今天打算把U盘里的博客生产环境做一份到我的笔记本电脑上，正好做的过程中可以从头再记录一遍这个博客的建设过程。<br><a id="more"></a></p>
+<h2 id="一、选择Hexo博客引擎"><a href="#一、选择Hexo博客引擎" class="headerlink" title="一、选择Hexo博客引擎"></a>一、选择Hexo博客引擎</h2><p>静态博客最近有多流行我就不用多说了吧，而静态博客里面最流行的引擎有两个：</p>
+<ul>
+<li>jekyll</li>
+<li>hexo</li>
+</ul>
+<p>我的选择是<font color="red">hexo</font>。原因如下：</p>
+<ol>
+<li>Hexo比jekyll生成简单，尤其是它的服务端命令，简单但是功能强大。可参照后文。</li>
+<li>Hexo和jekyll虽然都可以部署在github等第三方代码库上，但是Hexo只部署生成后的网页结果，而不是把全部的markdown文件、主题文件一并上传。这样比较保护作者的版权，否则别人直接一个Fork，你所有文章的原始文件就被拿到手了，主题文件也一并搞到手，分分种克隆一个相同的博客出来（连同你所有的文章），并换成他自己的名字。</li>
+<li>Hexo有大量好用的插件，参照后文</li>
+<li>Hexo可支持多个主题随心切换，只需要在配置文件里修改你要生效的主题名，就可以无缝换主题。jekyll的主题文件和其他文件混在一起，可能不是特别方便。</li>
+</ol>
+<h2 id="二、选择第三方代码托管库以及相应的page服务"><a href="#二、选择第三方代码托管库以及相应的page服务" class="headerlink" title="二、选择第三方代码托管库以及相应的page服务"></a>二、选择第三方代码托管库以及相应的page服务</h2><ul>
+<li>国外：github无疑</li>
+<li>国内：我本来选择的是gitcafe，无奈最近gitcafe与coding合并，于是变成了coding。</li>
+</ul>
+<h2 id="三、访问Hexo官网得到Hexo"><a href="#三、访问Hexo官网得到Hexo" class="headerlink" title="三、访问Hexo官网得到Hexo"></a>三、访问Hexo官网得到Hexo</h2><p>说实话百度Hexo可没那么容易找到官网，通常你都会找到一个四轴飞行器的官网。<br>这是官网地址：<a href="https://hexo.io/zh-cn/" target="_blank" rel="external">https://hexo.io/zh-cn/</a></p>
+<img src="/2016/04/23/buildBlog/1.png" alt="Hexo官网" title="Hexo官网">
+<p>通过官网我们可以发现这是一个Node.js项目，要想使用需要先装Node.js。<br>这是Node.js官网地址：<a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a><br>Node.js的windows版本是一个非常简单的安装包，安装之后你就拥有了Node.js，非常简单，零配置。<br>与此同时，还会为你安装Node.js的一个全局插件，即npm包管理器，可以从云端镜像服务器一键下载并安装Node.js的各种程序包。</p>
+<p><strong>现在你可以试试Hexo官网首页的命令了，win+R并输入cmd打开命令行窗口。然后试试。</strong></p>
+<blockquote>
+<p>npm install hexo-cli -g</p>
+</blockquote>
+<p>由于伟大的墙，npm直接使用的话，会非常非常的慢，推荐你先更改一下npm的镜像源地址（我更改的是淘宝的镜像源）：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm config <span class="keyword">set</span> registry <span class="comment">https:</span>//<span class="comment">registry.npm.taobao.org</span> </div><div class="line">npm <span class="comment">info underscore</span> （如果上面配置正确这个命令会有字符串<span class="comment">response</span>）</div></pre></td></tr></table></figure></p>
+<h2 id="四、使用Hexo搭建本地生产环境"><a href="#四、使用Hexo搭建本地生产环境" class="headerlink" title="四、使用Hexo搭建本地生产环境"></a>四、使用Hexo搭建本地生产环境</h2><p>在使用Hexo之前，你还需要安装以下git，也就是著名的代码管理工具，Hexo似乎在初始化的时候会使用git从它的代码库里克隆代码，因此没有git的话，后面使用Hexo会有少许问题。<br>git官网：<a href="https://git-scm.com/download/" target="_blank" rel="external">https://git-scm.com/download/</a></p>
+<p>安装好git，接下来就是Hexo大显身手的时刻了，你可以按照官网的步骤来做。也可以跟着我做：<br>首先进入你想要存放博客生产环境的本地文件夹（最好是空的），然后在地址栏输入cmd调出命令行窗口，这时命令行窗口的默认路径应该是你想要的那个文件夹的路径。<br>然后输入以下指令：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init</div><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure></p>
+<p>上面的命令成功后，你就可以在当前文件夹下看到Hexo为你生成的一系列文件和文件夹：</p>
+<img src="/2016/04/23/buildBlog/2.png" alt="生产环境" title="生产环境">
+<p>这些文件和文件夹各有妙用：</p>
+<ul>
+<li><strong>node_modules</strong>：这个里面放着Hexo为你从Npm镜像源服务器下载的各种Hexo的插件，既有Hexo本身，也有Hexo的生成器和渲染器插件，以后你还可以自己通过Npm安装更多的插件，它们都会被放在这里。</li>
+<li><strong>scaffolds</strong>：这里放着3个markdown文件，分别对应草稿，页面，文章三种类型的页面模板，之后你使用<code>Hexo new</code>命令来新建一个markdown资源文件时，就可以指定使用哪个作为新建文件的模板。比如<code>Hexo new post mynewpost</code>，就会在资源文件夹Post分文件夹新建一个名为mynewpost.md的markdown文件。打开这个文件，写你的文章，之后Hexo博客引擎就能根据这个来直接生成静态的html页面并自动Push到你设置的服务器（或page静态服务的代码库）里。</li>
+<li><strong>source</strong>：资源文件夹，存放所有的文章的原始markdown文件。markdown是程序员世界最流行的撰写文章的工具，它是一套语言规范，可以使你像码代码一些快速码出带格式的文章。</li>
+<li><strong>themes</strong>：看英文名就知道，这是存放主题的地方，默认会为你下载一套还算不错的主题：landscape</li>
+<li><strong>.gitignore</strong>：这是git所使用的文件，里面会定义上传到page静态服务的git代码库时，忽略哪些文件或者文件夹，比如上文提到的node modules就完全没有必要上传到你自己的代码库。</li>
+<li><strong>_config.yml</strong>：这是你博客的全局配置，博客名，博客要使用的主题等等，Hexo渲染你的博客时，会根据这里面的配置进行一些调整。你的代码库也配置在这里。</li>
+<li><strong>package.json</strong>：这是Node.js规范里指定的，一个Node.js的项目一定会有这样的配置文件来告诉Node.js这个项目叫什么，版本号是什么，有哪些依赖。</li>
+</ul>
+<p>做了这么多，博客在哪儿呢？<br>现在你就使用下面神奇的指令来生成你博客的html文件并启用一个Node.js的服务器来本地查看它了。<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span> 或者 hexo g 渲染文件</div><div class="line">hexo server 或者 hexo s 启动本地服务器，默认端口<span class="number">4000</span></div></pre></td></tr></table></figure></p>
+<p>启动完毕后，保持你的命令行窗口不要关闭，打开你的浏览器，输入localhost:4000，就能看到你的博客咯，如下图：<br><img src="/2016/04/23/buildBlog/3.png" alt="博客的样子" title="博客的样子"></p>
+<h2 id="五、配置博客"><a href="#五、配置博客" class="headerlink" title="五、配置博客"></a>五、配置博客</h2><p>看到了吧，哎？博客的名字怎么是Hexo,这怎么能行，肯定要起个自己喜欢的名字吧。<br>如何改呢？<br>打开上文提到的<strong>_config.yml</strong>文件，按照你的需求来更改里面的内容，更改好后，保存，刷新你的浏览器试试看。<br>如下是我的配置以及每项配置的解释：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 以下是一些博客基本信息的配置</span></div><div class="line"><span class="attr">title:</span> Dawn  <span class="comment">#博客名字</span></div><div class="line"><span class="attr">subtitle:</span> 这是码农welkin的技术博客  <span class="comment">#博客副标题</span></div><div class="line"><span class="attr">description:</span> 欢迎来玩    <span class="comment">#博客描述，会被搜索引擎收录</span></div><div class="line"><span class="attr">author:</span> Welkin Bai   <span class="comment">#博客作者</span></div><div class="line"><span class="attr">language:</span> zh-CN  <span class="comment">#博客语言</span></div><div class="line"><span class="attr">timezone:</span>   <span class="comment">#博客的时区</span></div><div class="line"></div><div class="line"><span class="comment"># URL配置</span></div><div class="line"><span class="comment">## 如果你的网站是放在一个分地址下的, url可以设置为'http://yoursite.com/child' 而root设置为'/child/'</span></div><div class="line"><span class="attr">url:</span> http://welkinbai.gitcafe.io</div><div class="line"><span class="attr">root:</span> /</div><div class="line"><span class="attr">permalink:</span> :year/:month/:day/:title/  <span class="comment">#这里设置的是生成文章地址的规则，相关变量可访问官网查看</span></div><div class="line"><span class="attr">permalink_defaults:</span>   <span class="comment">#这里可以设置地址规则中变量的默认值</span></div><div class="line"></div><div class="line"><span class="comment"># 以下是一些文件夹的配置，相信你肯定看得懂。需要一提的是i18n_dir是用来指定多语言的，</span></div><div class="line"><span class="comment">## 不做详述，你可以访问官网查看，skip_render则可以用表达式来匹配跳过指定文件的渲染</span></div><div class="line"><span class="attr">source_dir:</span> source</div><div class="line"><span class="attr">public_dir:</span> public</div><div class="line"><span class="attr">tag_dir:</span> tags</div><div class="line"><span class="attr">archive_dir:</span> archives</div><div class="line"><span class="attr">category_dir:</span> categories</div><div class="line"><span class="attr">code_dir:</span> downloads/code</div><div class="line"><span class="attr">i18n_dir:</span> :lang</div><div class="line"><span class="attr">skip_render:</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 以下是有关写作的配置</span></div><div class="line"><span class="attr">new_post_name:</span> :title.md <span class="comment"># 如果你使用New命令的时候没有指定新文章的名字，便会用默认值替代</span></div><div class="line"><span class="attr">default_layout:</span> post  <span class="comment">#默认的Markdown文件模板，就是scaffolds文件夹下的东西</span></div><div class="line"><span class="attr">titlecase:</span> <span class="literal">false</span> <span class="comment"># 就是标题首字母自动改为大写的意思，这个中文应该没用</span></div><div class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># 新标签中打开链接</span></div><div class="line"><span class="attr">filename_case:</span> <span class="number">0</span> <span class="comment"># 如果是1就转换文件名为小写，2为大写，0是关闭</span></div><div class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span> <span class="comment"># 渲染草稿</span></div><div class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span> <span class="comment"># 这里设置成true的话，每次生成文章都会在和文章相同的路径下建立同名文件夹，</span></div><div class="line"><span class="comment">##你将文章使用的相关资源（如图片）复制到这个文件夹，就可在文章中方便地调用</span></div><div class="line"><span class="attr">relative_link:</span> <span class="literal">false</span> <span class="comment"># 渲染的HTML中的链接改为相对链接</span></div><div class="line"><span class="attr">future:</span> <span class="literal">false</span> <span class="comment"># 允许文章的创建时间比当前时间还晚</span></div><div class="line"><span class="attr">highlight:</span>  <span class="comment"># 代码高亮的设置，第一个是开关，第二个是代码行数显示开关，</span></div><div class="line"><span class="comment">##第三个是自动探测语言类型开关，第四个不知道，欢迎知道的人留言补充^_^</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  line_number:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  auto_detect:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  tab_replace:</span></div><div class="line"></div><div class="line"><span class="comment"># 分类和标签配置</span></div><div class="line"><span class="attr">default_category:</span> uncategorized</div><div class="line"><span class="attr">category_map:</span> <span class="comment"># category别名</span></div><div class="line"><span class="attr">tag_map:</span> <span class="comment"># tag别名</span></div><div class="line"></div><div class="line"><span class="comment"># 时间格式配置，可参见如下地址</span></div><div class="line"><span class="comment">## http://momentjs.com/docs/#/displaying/format/</span></div><div class="line"><span class="attr">date_format:</span> LL</div><div class="line"><span class="attr">time_format:</span> HH:mm</div><div class="line"></div><div class="line"><span class="comment"># 分页配置，第一个配置每页几个文章，第二个配置分页文件夹</span></div><div class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></div><div class="line"><span class="attr">per_page:</span> <span class="number">10</span></div><div class="line"><span class="attr">pagination_dir:</span> page</div><div class="line"></div><div class="line"><span class="comment"># 这是sitemap插件的配置</span></div><div class="line"><span class="attr">sitemap:</span></div><div class="line"><span class="attr">    path:</span> sitemap.xml</div><div class="line"></div><div class="line"><span class="comment"># 这是主题配置</span></div><div class="line"><span class="attr">theme:</span> TKL-master <span class="comment">#设定使用哪个主题</span></div><div class="line"></div><div class="line"><span class="comment"># 部署代码库的配置，这里可以填写多个代码库，一键部署多个，比如我就部署了github和coding</span></div><div class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></div><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> </div><div class="line"><span class="attr">   github:</span> git@github.com:welkinbai/welkinbai.github.io.git</div><div class="line"><span class="attr">   gitcafe:</span> git@git.coding.net:welkinbai/welkinbai.git,coding-pages</div></pre></td></tr></table></figure></p>
+<h2 id="六、写作"><a href="#六、写作" class="headerlink" title="六、写作"></a>六、写作</h2><p>将博客配置好后，在命令行中使用如下代码新写一篇文章：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> <span class="type">post</span> 文章题目</div></pre></td></tr></table></figure></p>
+<p>Hexo会自动地在你的source_posts路径下新建Markdown文件，文件名为<em>文章题目.md</em>，然后你可以使用任何Markdown甚至记事本来写文章了。<br>打开这个文件，你可以看到以下格式：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="attr">title:</span> Hexo博客建设教程以及使用U盘漫游生产环境</div><div class="line"><span class="attr">updated:</span> &#123;&#123; date &#125;&#125;</div><div class="line"><span class="attr">comments:</span> <span class="literal">true</span></div><div class="line"><span class="attr">top_saying:</span></div><div class="line"><span class="attr">  - title:</span> &lt;strong&gt;Hexo&lt;/stong<span class="string">&gt;</span></div><div class="line"><span class="attr">    content:</span> 博客建设教程以及使用U盘漫游生产环境</div><div class="line"><span class="attr">date:</span> <span class="number">2016</span><span class="bullet">-04</span><span class="bullet">-23</span> <span class="number">12</span>:<span class="number">00</span>:<span class="number">54</span></div><div class="line"><span class="attr">tags:</span> 教程,Hexo</div><div class="line"><span class="attr">categories:</span> 教程</div><div class="line"><span class="attr">permalink:</span></div><div class="line"><span class="attr">ismyidea:</span> <span class="literal">true</span></div><div class="line"><span class="attr">top:</span></div><div class="line"><span class="attr">toc:</span> <span class="literal">true</span></div><div class="line"><span class="attr">cover:</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
+<ol>
+<li>三条横线符号的上端是一些专属于这篇文章的变量，它定义了这个文章的一些属性，Hexo生成Html文件的时候，会去拿这些变量，比如根据tags来为文章生成标签。<br>我自己更改了主题文件夹里面的ejs模板文件，因此我在文章的前面还自定义了许多的变量，比如要不要置顶，是不是原创，更新时间，是否打开评论功能、更改封面大图等。<br>这些都是根据你所使用的主题不同而不同的。但是像我这样自定义的变量如此之多是很罕见的哟。</li>
+<li>三条横线符号下面是你文章的主体内容，可以使用强大的Markdown语法来格式化你的文章，比如<strong>加粗</strong>、<em>斜体</em>等。当然了，Hexo默认的markdown解析器虽然比jekyll自带的强不少，但是我认为比起许多Markdown编辑器，还是弱的多。比如删除线语法，以及流程图语法，都不支持。</li>
+</ol>
+<p>写好文章后，保存，只要你本地的服务器开着，就会自动生成Html文件，刷新浏览器就可看到效果。如果服务器没开，那使用<code>hexo g</code>来生成文件，并使用<code>hexo s</code>来开启本地服务器。</p>
+<h2 id="七、部署到因特网"><a href="#七、部署到因特网" class="headerlink" title="七、部署到因特网"></a>七、部署到因特网</h2><p>现在博客只能在你自己本地看到，如何将它部署到网络上让所有人都看到呢？<br>一种方法是你购买服务器或者虚拟服务器，然后部署到上面。<br>然而大多数程序员都选择第二种方法：选择github等第三方代码库提供的免费的Page静态服务来部署博客。<br>只需要将相关html上传到代码库中，github就会为你自动部署，你甚至还可以弄个域名，替换掉默认的&lt;用户名&gt;.github.io。</p>
+<p><strong>拿Github举例。</strong><br>github官网：<a href="https://github.com" target="_blank" rel="external">https://github.com</a><br>注册自己的账号，然后创建一个代码仓库。<br>注意，按照github page服务的规则，如果你想要的是&lt;用户名&gt;.github.io这样的一级地址而非&lt;用户名&gt;.github.io/&lt;代码库名&gt;。那么你的代码库名必须和你的用户名一样。<br>然后将你的代码库的地址填入Hexo的配置文件，就如前文中描述的那样。<br>注意，我配置的是SSH的地址，如果你没有生成SSH密钥并配置进代码库的设置的话，是不能使用这种方式的。那你只能选择HTTPS的方式，输入HTTPS的地址。<br>在配置好以后，你可能还需要先安装Hexo的部署插件，默认是不安装的。安装插件的命令如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>安装好后，只需很简单的命令：<code>hexo deploy</code>或<code>hexo d</code>，便可自动将生成的Html推送到Github的代码库。<br>然后Github便会根据这些Html自动部署博客。<br>由于这个太简单了而且相关文章太多，我就不详述了。</p>
+<h2 id="八、安装一些有用的插件"><a href="#八、安装一些有用的插件" class="headerlink" title="八、安装一些有用的插件"></a>八、安装一些有用的插件</h2><p>在前文我有提到过Hexo有很多插件。具体插件列表可在如下地址找到：<a href="https://hexo.io/plugins/" target="_blank" rel="external">https://hexo.io/plugins/</a></p>
+<p>所有的插件都可以通过Npm命令来安装，就和部署插件的安装是一样的，类似下面这种形式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> &lt;插件名&gt; <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>其中save参数是告诉npm永久地为我安装此插件，这样即使命令行窗口关掉，也没关系。</p>
+<p>下面是我使用的一些插件：</p>
+<ul>
+<li>hexo-generator-feed 可生成atom.xml，有了这个文件，第三方的一些RSS阅读器就能订阅我的博客的文章。</li>
+<li>hexo-generator-seo-friendly-sitemap 可生成格式更加友好的网站地图文件，即sitemap.xml，主要是供搜索引擎使用，我的全站搜索插件也有用到</li>
+</ul>
+<p>除了Hexo原生插件以外，我还使用了<em>多说</em>这款专为博客等网站准备的评论插件。具体使用方法<em>多说</em>的官网已经说的很清楚了。</p>
+<p>如果你想拥有全站搜索功能呢？<br>我使用的是swiftype这个国外的插件。其实和多说一样，都是植入一段JS的代码来完成的。搜索结果虽然很不错，但是说实话，还是感觉拖慢了一些我博客的打开速度。</p>
+<h2 id="九、创建一个可携带的生产环境"><a href="#九、创建一个可携带的生产环境" class="headerlink" title="九、创建一个可携带的生产环境"></a>九、创建一个可携带的生产环境</h2><p>本文的重点来了，这是我自创的。<br>如果你细心的话就会发现，Hexo写博客每次都只能打开你本地的某个文件夹，然后Hexo new，然后写博客，然后hexo g，hexo d。</p>
+<p>问题来了，如果你的电脑不在身边呢？如果你临时想用另一台电脑写博客呢?<br>答案是把本地的这个文件夹装进U盘啊。这样不就可以走哪儿写哪儿了吗？</p>
+<p>没那么简单，有了这个想法，付出实践还是费了一番功夫的。</p>
+<ol>
+<li><p>首先需要解决的就是Hexo的依赖问题。Hexo依赖于Node.js和Git。但是不是每个电脑都装好了它们的。<br>因此，我需要想办法把它们变成便携版。<br>Git官网有便携版可以下载，下载下来后，直接就可以放在U盘里使用，非常贴心。<br>而Node.js，尽管没有便携版，但是我发现它是绿色的，整个拷贝C盘中Node.js的文件夹到U盘，便可作为便携版使用。</p>
+</li>
+<li><p>现在U盘环境搭好了，但是每次写文章输入一大堆命令真是不方便。别的不说，光指定环境变量就够麻烦的了，于是我又写了windows脚本。<br>自动化地为我执行这些命令。</p>
+</li>
+</ol>
+<p>脚本菜单如下：<br><img src="/2016/04/23/buildBlog/4.png" alt="脚本菜单" title="脚本菜单"></p>
+<p>你会发现在进入脚本的时候，首先让我输入bitbucket这个第三方代码库的密码。<br>那是因为我担心U盘丢失，这样博客文章的源文件就再也找不回来了。于是我注册了bitbucket的用户，它和github的不同在于可以拥有私有的仓库，任何人都无法看到和下载我博客的生产环境。因此我选择了它。<br>在每一次我退出脚本的时候，U盘里文件的任何改动都会被上传到bitbucket私有代码库。</p>
+<p>我已经给了你思路，如何实现最主要的是那些windows批处理脚本，太多了我就不一个个贴出来了，有空的话你可以自己研究。</p>
+<h2 id="十、写在最后"><a href="#十、写在最后" class="headerlink" title="十、写在最后"></a>十、写在最后</h2><p>写博客文章实在是太费时间了，所以我可能写的不是特别详细，如果你有什么问题，大可在评论里询问我。<br>静态博客虽然流行，但是还是要奉劝一句，比起博客园或者是简书之类的专业博客，这种静态博客还是需要大量的精力去研究去学习。<br>如果你不享受创造的过程，不做好随时崩溃的准备，还是老实使用成熟的博客吧。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2016-11-17T14:04:42.971Z" itemprop="datePublished">
+					2016年11月17日 22:04
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/08/15/mysql-intro/" style="float: left;">
+        ← 《高性能Mysql》读书笔记——第一章Mysql架构和历史
+    </a>
+    
+    
+    <a class="pull-right" href="/2016/04/06/spring-ioc/">
+        【学习回顾】Spring之IoC容器的使用(一) →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/04/23/buildBlog/" data-title="Hexo博客建设教程以及使用U盘漫游生产环境" data-url="/2016/04/23/buildBlog/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

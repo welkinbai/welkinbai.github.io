@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>有趣的反面模式 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>有趣的反面模式</h2>
+                                <p><strong>interesting anti-pattern</strong></p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-01-18T14:09:02.000Z" itemprop="datePublished">
+          2017年1月18日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/设计模式/'>设计模式</a>
+    
+    
+	
+        | 转载
+    
+</span>
+                <h1>有趣的反面模式</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、简介"><span class="toc-text">一、简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、举例"><span class="toc-text">二、举例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#社会和组织结构"><span class="toc-text">社会和组织结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#组织结构"><span class="toc-text">组织结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#项目管理"><span class="toc-text">项目管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析方式"><span class="toc-text">分析方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件工程"><span class="toc-text">软件工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#软件设计"><span class="toc-text">软件设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面向对象设计"><span class="toc-text">面向对象设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编程"><span class="toc-text">编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法论"><span class="toc-text">方法论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置管理"><span class="toc-text">配置管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、我自己的一些思考和补充"><span class="toc-text">三、我自己的一些思考和补充</span></a></li></ol>
+</div>
+			
+      		<p>按照学习计划，最近要开始研究设计模式和JAVA中好的编程习惯(effective java)。<br>但是我却无意中在研究Mockito的时候发现一种被称为反面模式的东西。非常有趣。<br>从维基百科上搬过来放着。毕竟不是人人都能看到墙外的花花世界的，：）<br><a id="more"></a></p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>在软件工程中，一个反面模式（anti-pattern或antipattern）指的是在实践中明显出现但又低效或是有待优化的设计模式，是用来解决问题的带有共同性的不良方法。它们已经经过研究并分类，以防止日后重蹈覆辙，并能在研发尚未投产的系统时辨认出来。<br>Andrew Koenig在1995年造了anti-pattern这个词，灵感来自于GoF的《设计模式》一书。而这本书则在软件领域引入了“设计模式”（design pattern）的概念。三年后antipattern因《AntiPatterns》这本书而获得普及，而它的使用也从软件设计领域扩展到了日常的社会互动中。按《AntiPatterns》作者的说法，可以用至少两个关键因素来把反面模式和不良习惯、错误的实践或糟糕的想法区分开来：<br>行动、过程和结构中的一些重复出现的乍一看是有益的，但最终得不偿失的模式<br>在实践中证明且可重复的清晰记录的重构方案<br>很多反面模式只相当于是错误、咆哮、不可解的问题、或是可能可以避免的糟糕的实践，它们的名字通常都是一些用反话构成的词语。有些时候陷阱（pitfalls）或黑色模式（dark patterns）这些不正式的说法会被用来指代各类反复出现的糟糕的解决方法。因此，一些有争议的候选的反面模式不会被正式承认。<br>这个概念很容易推广到工程学以及工程以外需要人们付出努力去争取的领域。尽管在工程学以外很少用到这个术语，但其概念是通用的。</p>
+<h2 id="二、举例"><a href="#二、举例" class="headerlink" title="二、举例"></a>二、举例</h2><h3 id="社会和组织结构"><a href="#社会和组织结构" class="headerlink" title="社会和组织结构"></a>社会和组织结构</h3><h4 id="组织结构"><a href="#组织结构" class="headerlink" title="组织结构"></a>组织结构</h4><p>从天而降的责任（Accidental Ownership）：雇员们接手了一个与当前系统完全无关的系统，在没有合适的训练、学习或关心下就得维护它<br>分析瘫痪（Analysis paralysis）：花费太多精力在项目的分析阶段<br>血刃（Bleeding edge，刀锋）：采用一些未经测试和/或尚不稳定的前沿技术来运营，从而导致成本超支、表现/性能不佳，和/或交付延期。<br>摇钱树（cash cow）：盈利的老产品通常会导致对新产品的自负<br>委员会设计（Design by committee）：很多人同时进行设计，却没有统一的看法<br>承诺升级（Escalation of commitment）：明知错了还不能收回之前的决定<br>独裁管理（Management by perkele）：用完全听不进异议的独裁作风进行管理<br>目标管理（Management by objectives）：通过数字管理，过于关注非本质而或不易取得的数字指标<br>道德风险（Moral hazard）：不让做决定的人知道他的决定会带来什么结果<br>蘑菇管理（Mushroom management）：不通知或是错误地通知雇员信息。雇员像蘑菇一样在黑暗中吸取养分，自生自灭<br>海鸥式管理（Seagull management）：只有当出现问题的时候管理人员才会跟雇员进行接触和互动的管理模式。典型的场景就是，海鸥式的管理人员“飞”过来，嘁嘁喳喳，是人都批评一通，尔后“飞”走了！<br>烟囱式管理（Stovepipe or Silos，竖井式/发射井式/谷仓式管理）：组织结构是由若干彼此孤立的团队组成，并且整个组织结构的范围内，上下沟通交流能够有效进行，而水平/横向的则不然。结构上支持数据主要在上下方面的流动，却禁止跨部门的通信。<br>厂商陷阱（Vendor lock-in，供应商套牢，供应商陷阱，厂商泥潭）：使一个系统过于依赖于外部所提供的组件/部件。</p>
+<h4 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h4><p>雪崩模型（Avalanche）：不合理地混搭或者说混合使用瀑布模型与敏捷开发方法。<br>死亡征途（Death march，死亡之旅）：除了CEO，每个人都知道这个项目会成为一场灾难，但是真相却被隐瞒下来，以免项目被立即取消。（尽管CEO通常知道并且仍然继续试图最大化利润。）然而，真相被隐藏起来，直到大限来临（”Big Bang”）。另一种定义：雇员由于不合理的deadline，被迫在深夜和周末加班。<br>团队思维（Groupthink）：在团队思维中，团队成员避免提出在一致观点之外的思维。<br>九九定律（Ninety-ninety rule）：当项目“几近完成”时，低估完成项目所需时间的倾向。<br>过度设计（Overengineering）：花费资源完成比实际需要的还要鲁棒和复杂的工程<br>障眼法（Smoke and mirrors）：展示还没实现的功能，就像它们已经实现了一样<br>软件膨胀（Software bloat）：允许系统的后续版本使用更多的资源</p>
+<h4 id="分析方式"><a href="#分析方式" class="headerlink" title="分析方式"></a>分析方式</h4><p>旁观冷漠（Bystander apathy）：一个需求或者设计是错的，注意到这一点的人却不指出，因为这影响的是其他人。</p>
+<h3 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h3><h4 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h4><p>抽象倒置（Abstraction inversion）：不把用户需要的功能直接提供出来，导致他们要用更上层的函数来重复实现<br>用意不明（Ambiguous viewpoint）：给出一个模型（通常是OOAD，面向对象分析与设计）却没有指出用意何在<br>大泥球（Big ball of mud）：没有清晰结构的系统<br>数据库式进程间通信（Database-as-IPC）：使用数据库进行进程间通信，而不使用更轻量级的合适的机制。或者说，对于常规的进程间通信，不是去采用轻量得多的合适机制，而是将数据库用作消息队列。<br>镀金（Gold plating）：在项目达到最高价值后还继续工作。<br>内部平台效应（Inner-platform effect）：系统可自定义的太多，以至于成为一个软件开发平台的蹩脚的复制品。<br>输入问题（Input kludge）：无法确定和实现对异常输入的处理<br>接口膨胀（Interface bloat）：把一个接口做得过于强大以至于极其难以实现<br>魔力按键（Magic pushbutton）：直接在接口的代码里编写实现，而不使用抽象<br>竞争风险（Race hazard）：输出结果受到事件执行顺序和时机的影响，在多线程环境和分布式系统中可能发生<br>烟囱系统（Stovepipe system）：过度聚集数据和功能，忽视了与其他系统和模块的共享</p>
+<h4 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h4><p>贫血的域模型（Anemic Domain Model）：仅因为每个对象都要有属性和方法，而在使用域模型的时候没有加入非OOP的业务逻辑<br>（BaseBean）：继承一个工具类的功能，而不是委托给它<br>调用父类（Call super）：需要子类调用父类被重定义的方法<br>圆还是椭圆问题（Circle-ellipse problem）：基于变量的子类化关系进行子类化<br>循环依赖（Circular dependency）：在对象或软件模块中，直接或间接引入循环依赖。<br>常量接口（Constant interface）：使用接口定义常量<br>上帝对象（God object）：在设计的单一部分（某个类）集中了过多的功能<br>对象粪池（Object cesspool）：复用那些不满足复用条件的对象。对象池是一种管理对象的方法，在重复使用对象前，需要针对对象进行初始化，以避免上次使用后的状态等数据影响下次的使用<br>不羁的对象（Object orgy）：没有成功封装对象，外部可以不受限制地访问它的内部<br>幽灵（Poltergeists）：指这样一些对象，它们唯一的作用就是把信息传给其它对象<br>顺序耦合（Sequential coupling）：指这样一些对象，它们的方法必须要按某种特定顺序调用<br>悠悠问题（Yo-yo problem）：一个结构（例如继承）因为过度碎片化而变得难于理解</p>
+<h4 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h4><p>偶然复杂度（Accidental complexity）：向一个方案中引入不必要的复杂度<br>远隔作用（Action at distance）：意料之外的在系统分离的部分之间交互<br>盲目信任（Blind faith）：缺乏对bugfix的校验或对子函数返回值的正确性检查<br>船锚（Boat anchor）：在系统中保留无用的部分<br>忙等待（Busy waiting）：在等待的时候不断占用CPU，通常是因为采用了重复检查而不是适当的消息机制<br>缓存失败（Caching failure）：错误被修正后忘记把错误标志复位<br>拜物编程（Cargo cult programming）：由于对模式的盲目崇拜，在不理解的情况下就使用模式和方法，企图得到好的结果<br>靠异常编程（Coding by exception）：当有特例被发现时才添加新代码去解决<br>隐藏错误（Error hiding）：在显示给用户之前捕捉到错误信息，要么什么都不显示，要么显示无意义的信息<br>硬编码（Hard code）：将对系统环境的假设写入实现中<br>熔岩流（Lava flow）：保留不想要的（冗余的或是低质量的）代码，仅因为除去这些代码的代价太高或是会带来不可预期的结果<br>循环-switch序列（Loop-switch sequence）在循环结构中使用switch语句来编写连续步骤<br>魔术数字（Magic numbers）：在算法里直接使用数字，而不解释含义<br>魔幻字符串（Magic strings）：直接在代码里使用常量字符串，例如用来比较，或是作为事件代码<br>自我复制（Repeating yourself）：通过不断复制已有代码的模式或代码段进行编码；而非采用once and only once（抽取原则）<br>软代码（Soft code）：在配置文件里保存业务逻辑而不是在代码中<br>面条代码（Spaghetti code）：指那些结构上完全不可理解的系统，尤其是因为误用代码结构<br>霰弹枪手术（Shotgun surgery）：开发人员一次性在一个多个实现的代码基中增加功能</p>
+<h4 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h4><p>拷贝粘贴编程（Copy and paste programming）：拷贝（然后修改）现有的代码而不是构造通用的解决方案<br>黄金大锤（Golden hammer）：认为自己最喜欢的解决方案是到处通用的（参见：银弹）<br>不可能因素（Improbability factor）：认为已知的错误不可能发生<br>非我所创（Not invented here）：拒绝使用组织外的主意或方案<br>这里发明的（invented here）：拒绝组织内部实现的创新或解决方案，通常因为对成员没有信心<br>不成熟的优化（Premature optimization）：在编码的早期追求代码的效率，牺牲了好的设计、可维护性、有时甚至是现实世界的效率<br>转换编程法或巧合编程（Programming by permutation or programming by accident）：试图通过连续修改代码再看是否工作的方式来解决问题<br>重新发明方的轮子（Reinventing the square wheel）：已经有一个很好的方案了，又再搞一个烂方案来替代它<br>银弹（Silver bullet）：认为自己最喜欢的技术方案能解决一个更大的问题<br>测试人员驱动开发（Tester driven development）：需求来自bug报告的软件工程</p>
+<h4 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h4><p>依赖地狱（Dependency hell）：所依赖产品的版本所导致的问题<br>DLL地狱（DLL hell）：不同版本DLL所带来的问题，包括DLL可见性和多版本问题，在微软的Windows上尤为突出<br>扩展冲突（Extension conflict）：苹果系统在Mac OS X版本之前的不同扩展的问题<br>JAR地狱（JAR hell）：JAR文件不同版本或路径带来的问题，通常是由于不懂类加载模型导致的</p>
+<h2 id="三、我自己的一些思考和补充"><a href="#三、我自己的一些思考和补充" class="headerlink" title="三、我自己的一些思考和补充"></a>三、我自己的一些思考和补充</h2><p>怎么样，看完上面这些词语和解释，是不是觉得很有趣？有些叫法让人忍俊不禁。<br>我是如何发现维基百科上这个反面模式的呢？<br>我首先发现的是一个叫做bad code smell（代码异味）的词语，我发现mockito的官方团队经常在他们的官方文档里使用这个词，我不理解到底什么意思，于是搜了维基百科。<br>然后就被打开了一道新世界的大门，讲真，在国外编程界，上面这些词语经常被人们使用到，如果你不会这些“行话”，我估计你根本无法听懂外国大神们互相之间的交流。</p>
+<p>和设计模式一样，人们在长期的编程活动中，除了总结出一些固定的，比较好的编程模式以外，人们还总结了一些固定的，一看就知道写的很烂的反模式。<br>代码异味就是一个典型的例子，非常形象生动，它讲述当我们看到一段代码时，它透着一股食物发馊的异味儿，此时就要警觉起来了，就要心想，我是不是应该重构这块代码？</p>
+<p><strong>下面是一些典型的代码异味</strong>：<br>代码重复: 相同或者相似的代码存在于一个以上的地方。<br>长方法: 一个非常长的方法、函数或者过程。<br>巨类: 一个非常庞大的类。<br>太多的参数: 函数或者过程的冗长的参数列表使得代码可读性和质量非常差。<br>特性依恋: 一个类过度的使用另一个类的方法。<br>亲密关系: 一个类依赖另一个类的实现细节。<br>拒绝继承: 子类以一种‘拒绝’的态度，覆盖基类中的方法，换句话说，子类不想继承父类中的方法，参考 Liskov substitution principle。<br>冗余类 / 寄生虫: 一个功能太少的类。<br>人为的复杂: 在简单设计已经满足需求的时候，强迫使用极度复杂的设计模式。<br>超长标识符: 尤其，在软件工程中，应该毫无保留的使用命名规则来消除歧义。<br>超短标识符: 除非很明显，一个变量名应该反映它的功用。<br>过度使用字面值: 为提高可读性和避免编码错误，应该使用命名常量。此外，字面值可以且应该在可能的情况下，独立存放于资源文件或者脚本中，在软件部署到不同区域时，可以很方便的本地化。</p>
+<p>好，本文就到这里，过一段时间我会写与反模式相反的，正模式，即设计模式。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+					  转载
+					  
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-12T02:55:23.690Z" itemprop="datePublished">
+					2017年3月12日 10:55
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/01/19/effective-java-1/" style="float: left;">
+        ← 《Effective Java》读书笔记——第一章 创建和销毁对象
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/01/15/mybatis-test/">
+        MyBatis的测试项目 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/01/18/anti-pattern/" data-title="有趣的反面模式" data-url="/2017/01/18/anti-pattern/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

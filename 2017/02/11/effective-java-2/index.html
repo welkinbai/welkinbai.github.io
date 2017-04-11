@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第二章 所有对象通用方法 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>Effective Java</h2>
+                                <p>读书笔记</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-02-11T08:01:47.000Z" itemprop="datePublished">
+          2017年2月11日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第二章 所有对象通用方法</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第八条-覆盖equals时需要遵守的约定"><span class="toc-text">第八条 覆盖equals时需要遵守的约定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么时候应该覆盖equals"><span class="toc-text">什么时候应该覆盖equals?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#覆盖equals必须遵守的约定"><span class="toc-text">覆盖equals必须遵守的约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#覆盖equals时建议的步骤"><span class="toc-text">覆盖equals时建议的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#额外的一些告诫"><span class="toc-text">额外的一些告诫</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第九条-覆盖equals时总要覆盖hashCode方法"><span class="toc-text">第九条 覆盖equals时总要覆盖hashCode方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么？"><span class="toc-text">为什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#覆盖hashCode应该遵守的约定"><span class="toc-text">覆盖hashCode应该遵守的约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么有这样的约定？"><span class="toc-text">为什么有这样的约定？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何产生满足条件的hashCode"><span class="toc-text">如何产生满足条件的hashCode?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些解释"><span class="toc-text">一些解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#额外的一些告诫-1"><span class="toc-text">额外的一些告诫</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十条-始终覆盖toString"><span class="toc-text">第十条 始终覆盖toString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十一条-谨慎地覆盖clone"><span class="toc-text">第十一条 谨慎地覆盖clone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十二条-考虑实现Comparable接口"><span class="toc-text">第十二条 考虑实现Comparable接口</span></a></li></ol>
+</div>
+			
+      		<p>本章主要讨论所有类的父类——Object类中的一些方法的使用，如何覆盖以及需要注意的问题<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="第八条-覆盖equals时需要遵守的约定"><a href="#第八条-覆盖equals时需要遵守的约定" class="headerlink" title="第八条 覆盖equals时需要遵守的约定"></a>第八条 覆盖equals时需要遵守的约定</h2><h3 id="什么时候应该覆盖equals"><a href="#什么时候应该覆盖equals" class="headerlink" title="什么时候应该覆盖equals?"></a>什么时候应该覆盖equals?</h3><p><code>equals</code>方法默认的逻辑是对比两个变量所指向的是否是同一个对象（实例）。<br>但是如果你想对比的是逻辑相等呢？比如两个对象都含有value这个域，你只是希望根据value这个域的情况来比较对象呢？<br>这种对象的类被称为”值类“，比如，代表日期的类Date。<br>需要注意，枚举类不需要覆盖equals方法，因为枚举类每个枚举值都被限定为全局唯一的实例，因此虽然equals比较的是对象是否相同，但是对象相同保证了其所代表的值一定相同。</p>
+<h3 id="覆盖equals必须遵守的约定"><a href="#覆盖equals必须遵守的约定" class="headerlink" title="覆盖equals必须遵守的约定"></a>覆盖equals必须遵守的约定</h3><p>首先，覆盖equals方法必须实现如下等价关系：</p>
+<ul>
+<li>自反性： 当x不等于null时，x.equals(x)必须等于true</li>
+<li>对称性： 当x、y不等于null时，x.equals(y)和y.equals(x)的结果必须相同</li>
+<li>传递性： 当x、y、z不等于null时，x.equals(y)和y.equals(z)都返回true，那么x.equals(z)也应该返回true</li>
+<li>一致性： 当x、y不等于null时，只要x,y中的相关信息没有被改变，那么无论调用多少次x.equals(y)都应该返回稳定一致的结果，如果是true就永远是true</li>
+<li>null处理：任何对象调用equals方法和null比较都应该返回false。即x.equals(null)永远为false</li>
+</ul>
+<p>如果你要覆盖equals方法，必须满足上述要求，不能偷懒，覆盖好后必须用单元测试测试上述等价关系。<br>书中列举除了违反上述等价关系会发生什么严重的后果，我就不一一说明了，总之就是一句话，如果不满足上述关系，你的程序可能不会像你想象的那样运行。</p>
+<h3 id="覆盖equals时建议的步骤"><a href="#覆盖equals时建议的步骤" class="headerlink" title="覆盖equals时建议的步骤"></a>覆盖equals时建议的步骤</h3><p>覆盖equals有一些有用的技巧，建议按照下述步骤进行：</p>
+<ol>
+<li>优先使用==操作符检查入参是否是方法调用者的一个引用，如果是立即返回true，这是一种快速返回策略，如果后续的逻辑非常复杂而且可能会耗费性能，那么这是有必要的</li>
+<li>使用<code>instanceof</code>操作符来对入参的类型做检查，如果不是方法调用者的类型或者不是类所实现的接口，那么立即返回false</li>
+<li>在上面第2步的基础上，就可以放心地将入参转换成正确的类型，不用担心抛出ClassCastException</li>
+<li>对于该类中的每个关键域，比较入参中的值和调用方法的对象中的值是否相等。<br>除了float和double的基本类型使用==来比较<br>对于float要使用Float.compare，double则使用Double.compare方法，这样特殊处理是因为有类似Float.NaN，-0.0f等特殊的常量。<br>对象则使用对象的equals方法来比较<br>如果是数组则数组中的元素要按照上述方法递归地处理<br>注意有些域为null是合法的，这个时候需要考虑null的情况下比较，使用三目运算符是常用的做法：<code>field==o.field || (field != null &amp;&amp; field.equals(o.field))</code><br>注意优先比较可能最可能不相等的域，以快速返回获得更好的性能<br>注意不用比较所有的域，如果有些域的值是完全由其他域得出的，那么它就是冗余的域，没必要比较这些域</li>
+<li>你编写完成了，那么你要检查一下，你写的是否满足上面提到的所有等价关系，最好写单元测试来验证它们</li>
+</ol>
+<h3 id="额外的一些告诫"><a href="#额外的一些告诫" class="headerlink" title="额外的一些告诫"></a>额外的一些告诫</h3><ol>
+<li>覆盖equals方法时必须同时覆盖hashCode方法，原因见第九条</li>
+<li>不要企图让equals方法过于智能，否则会很容易不满足等价关系或者隐藏深不见底的bug</li>
+<li>不要将覆盖方法的入参由Object改为其他类型，修改参数签名后你写的方法就不再是覆盖父类的方法而是重载方法，那没什么作用。</li>
+</ol>
+<h2 id="第九条-覆盖equals时总要覆盖hashCode方法"><a href="#第九条-覆盖equals时总要覆盖hashCode方法" class="headerlink" title="第九条 覆盖equals时总要覆盖hashCode方法"></a>第九条 覆盖equals时总要覆盖hashCode方法</h2><h3 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h3><p>上面提到过这个问题，你也许会问为什么？<br>最好的回答是如果你只覆盖equals方法而不覆盖hashCode方法，将导致你修改的类不能够在依赖hash散列的类中正常工作，比如HashMap、HashSet、HashTable、HashXXX等。<br>到时候你会发现对象总是在HashMap里面神秘失踪，或者神秘出现。</p>
+<h3 id="覆盖hashCode应该遵守的约定"><a href="#覆盖hashCode应该遵守的约定" class="headerlink" title="覆盖hashCode应该遵守的约定"></a>覆盖hashCode应该遵守的约定</h3><ol>
+<li>在应用程序执行期间，只要对象的equals方法依赖的相关信息没有改变，那么无论调用多少次，hashCode方法针对同一个对象应该始终返回同一个整数。当然应用程序的多次执行之间，可以返回不同的整数。</li>
+<li>如果两个对象由equals方法比较是相等的，那么由hashCode产生的整数就应该相等</li>
+<li>如果两个对象由equals方法比较是不相等的，那么由hashCode产生的整数可以相等也可以不相等，但是程序员应该尽量让其不相等以提升散列表的性能</li>
+</ol>
+<h3 id="为什么有这样的约定？"><a href="#为什么有这样的约定？" class="headerlink" title="为什么有这样的约定？"></a>为什么有这样的约定？</h3><p>hashCode返回的值主要是用在散列表中，而散列表的工作原理就是根据hashCode的返回结果将对象放在相应的位置，下次要从散列表中取出时，只要使用相同的hashCode整数值，就一定能取出相同的对象。<br>基于这样的工作原理，就必须要求hashCode应该满足对于同一个对象，始终返回同一个整数。<br>至于为什么和equals方法有关，那是因为有些散列表的实现仅仅凭借hashCode还不能确定对象的位置，仅仅凭借hashCode确定的位置里可能有多个对象，此时就需要使用equals方法来比较并得到最终的对象。HashMap的实现正是如此，先根据hashCode来得到key，value对在那个hash桶中，然后再遍历桶中的链表来获得key，value对的确切位置（使用equals方法）。</p>
+<h3 id="如何产生满足条件的hashCode"><a href="#如何产生满足条件的hashCode" class="headerlink" title="如何产生满足条件的hashCode?"></a>如何产生满足条件的hashCode?</h3><p>这是一个非常麻烦的技术活儿，就像书中所说，得到一个分布均匀的hash函数是非常困难的，恐怕要留给科学家们去完成，如果我们想要性能和结果非常优秀的hashCode方法，恐怕要借助于一些第三方的写好的工具库，JAVA的世界最令人赞叹的就是，当你需要什么，有人一定已经实现过了。<br>如果不想要这么麻烦，书中给出了一个简单的方法生成还算可以的hashCode：</p>
+<ol>
+<li>保存一个非零的常数值比如17到名为result的int变量中</li>
+<li>为对象中的每个关键域（就是除了冗余域的域，equals方法使用到的域）计算散列码c：<br>如果是boolean类型，则计算f?1:0<br>如果是byte、char、short、int类型，则计算(int)f<br>如果是long类型，则计算(int)(f^(f&gt;&gt;&gt;32))<br>如果是float类型，则计算Float.floatToIntBits(f)<br>如果是double类型，则计算Double.doubleToLongBits(f)得到long类型，然后在根据long类型得到结果<br>如果是对象，就看equals方法中比较这个对象时是否调用了这个对象的equals方法，如果调用了，那么这里也调用hashCode方法来得到结果，如果不是，则需要为这个域计算一个范式（我理解就是再为其实现一个类似hashCode的逻辑，将其标准化为一个数值，比如使用JSON，最终统一会得到一个string，当然JSON代价太高，只是举例），然后对范式得到的结果来调用hashCode。如果对象是null，则返回0<br>如果域是数组，那么数组中的每个元素都要递归地应用上面的规则，然后按照第3步的方法把结果组合起来。</li>
+<li>使用下面的公式将上面得到的结果都加进result里面：<br>result = 31 * result + c</li>
+<li>返回result</li>
+</ol>
+<p>好了，现在你要做的就是写单元测试，验证你的hashCode方法是不是满足上面的约定</p>
+<h3 id="一些解释"><a href="#一些解释" class="headerlink" title="一些解释"></a>一些解释</h3><p>1.为什么result要初始化为17或者其他常量？<br>答：因为假如没有这个设定，而我们的对象的很多域的初始化值都为0的话，会增加哈希冲突的可能性。如果有了一个常量，则对象得到的hashCode不会完全取决于其域值，有助于减少hashCode。<br>2.为什么要乘以31？<br>答：那是因为31是一个奇素数，偶数总会有一个约数为2，而2的乘法在计算机中等同于移位运算，这种移位运算可能导致高位溢出，丢失信息。奇素数降低这种可能性。<br>另外，31参与乘法运算时，在现代VM中可以被自动优化，即 <code>31*i == (i&lt;&lt;5)-i</code></p>
+<h3 id="额外的一些告诫-1"><a href="#额外的一些告诫-1" class="headerlink" title="额外的一些告诫"></a>额外的一些告诫</h3><ol>
+<li>绝对不要为了提高性能，只使用对象的一部分关键域来做hashCode，也许去掉一个域算出来的hashCode仍然是满足条件的，但是当有成千上万个对象产生的时候，这种细微的差别被无限放大，最终导致还是会有不同的对象得到同样的hashCode，而你使用单元测试的时候注意不到这些。</li>
+<li>绝对不要依赖hashCode返回的值来做额外的逻辑，因为一旦做了那相当于定死了hashCode方法的实现逻辑，以后如果想要使用更好的散列函数去替代实现，就会发现那些依赖返回值所做的特殊逻辑可能产生问题。</li>
+</ol>
+<h2 id="第十条-始终覆盖toString"><a href="#第十条-始终覆盖toString" class="headerlink" title="第十条 始终覆盖toString"></a>第十条 始终覆盖toString</h2><p>这一条没什么好说的，始终覆盖toString可以在日志输出的时候带来方便。何况，现代IDE已经可以自动地做这种事，只需要你轻轻一点，toString函数就自动生成好了，还有多种风格可选。</p>
+<h2 id="第十一条-谨慎地覆盖clone"><a href="#第十一条-谨慎地覆盖clone" class="headerlink" title="第十一条 谨慎地覆盖clone"></a>第十一条 谨慎地覆盖clone</h2><p>Object类中有个clone方法，注意，该方法的默认实现是一个<strong><em>浅拷贝</em></strong>。<br>我们还有一个接口叫Cloneable，这个接口什么方法都没有，是个标识接口，如果你要对某个类的对象调用clone方法，这个类必须实现cloneable接口。<br>如果覆盖clone方法，就要注意类的内部是否拥有可变的对象引用或者存储可变对象引用的数组或哈希表，如果有这些东西，那么你必须想办法递归地去将内部的引用对象也拷贝一份，否则你覆盖的实现也是一个浅拷贝。浅拷贝产生的对象在这种情况下会有各种诡异的行为，因为它内部的域指针和另一个对象内部的域指向同一个对象。<br>像书中说的，覆盖clone方法并实现Cloneable接口是如此地复杂并且容易出错，与之相比，提供一个静态工厂方法，来专门拷贝对象（深拷贝对象），来的更加高效和实际一些。毕竟如第一条所说，静态工厂方法非常灵活好用。<br>所以结论就是，设计良好的接口或者类，都绝不会去实现Cloneable接口，也不会轻易覆盖clone方法，有些专家级的程序员干脆从来不覆盖clone方法。</p>
+<h2 id="第十二条-考虑实现Comparable接口"><a href="#第十二条-考虑实现Comparable接口" class="headerlink" title="第十二条 考虑实现Comparable接口"></a>第十二条 考虑实现Comparable接口</h2><p>书中认为，所有的值类都应该实现Comparable接口，很遗憾很少有人这么做。<br>如果你实现Comparable接口，最好满足下面几条约定(假设返回值都是-1,0,1三个数中的一个)：</p>
+<ul>
+<li>x.compareTo(y)==-y.compareTo(x)</li>
+<li>x.compareTo(y)&gt;0且y.compareTo(z)&gt;0，则x.compareTo(z)&gt;0 即传递性</li>
+<li>x.compareTo(y)==0时，x.compareTo(z)==y.compareTo(z)<br>可选地，还需满足下面的约定：</li>
+<li>x.compareTo(y)==0 的结果和x.equals(y)的结果相同</li>
+</ul>
+<p>很少有人在实现的时候考虑上面全部的约定，这在绝大多数情况下都没有问题，但是一旦发生问题，我敢保证那将是一个令人头痛，浪费大量时间仍然毫无头绪的bug。<br>很多情况下，当程序员需要使用到和顺序有关的接口时，会手动地去实现一个匿名内部类Comparator，这也是可以的，但也许实现Comparable接口的方法更加通用一些，也减少了匿名内部类的写法。<br>注意无论哪种实现方法都要遵循上述约定，另外，比较值类的域时，比较顺序很重要，优先比较那些最可能不相同的关键域可以提高性能。<br>compareTo方法其实没有规定返回值一定是-1,0,1，只要符号对了就行，因此有时候你可以直接使用减法来简化代码（只是要注意两个数相减得到的值不能比INTEGER.MAX_VALUE大）。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-03-21T14:29:13.911Z" itemprop="datePublished">
+					2017年3月21日 22:29
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/02/19/effective-java-3/" style="float: left;">
+        ← 《Effective Java》读书笔记——第三章 类和接口
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/02/08/mysql-explain/">
+        《高性能Mysql》读书笔记——Explain命令详解 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/02/11/effective-java-2/" data-title="《Effective Java》读书笔记——第二章 所有对象通用方法" data-url="/2017/02/11/effective-java-2/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
