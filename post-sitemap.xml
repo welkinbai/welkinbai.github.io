@@ -8,7 +8,15 @@
 
     <url>
         <loc>/2017/04/16/effective-java-7/</loc>
-        <lastmod>2017-04-16T12:28:29.131Z</lastmod>
+        <lastmod>2017-04-16T14:46:51.319Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/21/effective-java-6/</loc>
+        <lastmod>2017-04-16T12:33:06.336Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -49,14 +57,6 @@
     <url>
         <loc>/2017/03/12/effective-java-5/</loc>
         <lastmod>2017-04-16T10:10:32.458Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/21/effective-java-6/</loc>
-        <lastmod>2017-04-16T09:35:33.615Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

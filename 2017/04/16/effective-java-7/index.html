@@ -279,7 +279,7 @@
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十五条-将局部变量的作用域最小化"><span class="toc-text">第四十五条 将局部变量的作用域最小化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十六条-for-each优于传统的for语句"><span class="toc-text">第四十六条 for-each优于传统的for语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十七条-了解和使用类库（不要重复发明轮子）"><span class="toc-text">第四十七条 了解和使用类库（不要重复发明轮子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十八条-需要精确答案的时候避免使用float和double"><span class="toc-text">第四十八条 需要精确答案的时候避免使用float和double</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十九条-基本类型优先于装箱基本类型"><span class="toc-text">第四十九条 基本类型优先于装箱基本类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十条-字符串不是万能的"><span class="toc-text">第五十条 字符串不是万能的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十一条-当心字符串连接的性能"><span class="toc-text">第五十一条 当心字符串连接的性能</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十五条-将局部变量的作用域最小化"><span class="toc-text">第四十五条 将局部变量的作用域最小化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十六条-for-each优于传统的for语句"><span class="toc-text">第四十六条 for-each优于传统的for语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十七条-了解和使用类库（不要重复发明轮子）"><span class="toc-text">第四十七条 了解和使用类库（不要重复发明轮子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十八条-需要精确答案的时候避免使用float和double"><span class="toc-text">第四十八条 需要精确答案的时候避免使用float和double</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十九条-基本类型优先于装箱基本类型"><span class="toc-text">第四十九条 基本类型优先于装箱基本类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十条-字符串不是万能的"><span class="toc-text">第五十条 字符串不是万能的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十一条-当心字符串连接的性能"><span class="toc-text">第五十一条 当心字符串连接的性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十二条-通过接口引用对象"><span class="toc-text">第五十二条 通过接口引用对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十三条-接口优先于反射机制"><span class="toc-text">第五十三条 接口优先于反射机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十四条-谨慎地使用本地方法"><span class="toc-text">第五十四条 谨慎地使用本地方法</span></a></li></ol>
 </div>
 			
       		<p>本章继续讨论一些编程过程中应该注意的问题和细节<br><a id="more"></a></p>
@@ -314,6 +314,26 @@
 </ul>
 <h2 id="第五十条-字符串不是万能的"><a href="#第五十条-字符串不是万能的" class="headerlink" title="第五十条 字符串不是万能的"></a>第五十条 字符串不是万能的</h2><p>很多程序员习惯什么东西都用字符串来代替，书中主张，如果一个东西本质上是什么，在程序中就应该是什么。<br>你不应该用”1“来代替数字1，也不应该用”true“来代替boolean值true，枚举类型也不可以用字符串代替，使用更加适当的数据类型，尽量避免字面量以及字符串的使用，这会使你的程序更加安全不易出错，有时候也会更快速。</p>
 <h2 id="第五十一条-当心字符串连接的性能"><a href="#第五十一条-当心字符串连接的性能" class="headerlink" title="第五十一条 当心字符串连接的性能"></a>第五十一条 当心字符串连接的性能</h2><p>字符串连接符<code>+</code>是非常方便的操作符，可以将多个东西连接到一起。<br>但是，字符串在JAVA环境中是不可变的，所有的字符串都放在一个字符串池中被全局共用，当你拼接字符串的时候，实际上是创建了一个新的字符串，复制两个旧的字符串的内容。<br>如果只有短短几个拼接，那么性能还是可以接受的。<br>但是如果放在循环体中，性能的损失是平方级增加的。<br>这个时候你应该用<code>StringBuilder</code>来完成字符串拼接，这个类速度在大量拼接场景快50倍以上。<br>另外，别忘了在使用连接符连接其他类型和字符串时，其他类型还有转化成字符串的开销。</p>
+<h2 id="第五十二条-通过接口引用对象"><a href="#第五十二条-通过接口引用对象" class="headerlink" title="第五十二条 通过接口引用对象"></a>第五十二条 通过接口引用对象</h2><p>这条在我看来就是多余的，通过接口引用对象而不是直接用类来引用对象有什么好处？<br>想想为什么会有接口这种东西就明白了。</p>
+<h2 id="第五十三条-接口优先于反射机制"><a href="#第五十三条-接口优先于反射机制" class="headerlink" title="第五十三条 接口优先于反射机制"></a>第五十三条 接口优先于反射机制</h2><p>这条说起来也很通俗：当你能直接使用接口或者类的时候，就不要使用反射机制去做事情。<br>反射机制是给框架的开发者用的，一般应用程序的开发者不应该用到反射机制。<br>反射机制有以下缺点：</p>
+<ul>
+<li>丧失了编译时的错误检查，取而代之的是一堆受检的运行时检查</li>
+<li>由于上面的原因和其他原因，使用反射的代码冗长而且容易出错</li>
+<li>反射性能会变差，2倍到50倍的性能下降，你不会想要的，只有万不得已的时候，才应该用反射</li>
+</ul>
+<h2 id="第五十四条-谨慎地使用本地方法"><a href="#第五十四条-谨慎地使用本地方法" class="headerlink" title="第五十四条 谨慎地使用本地方法"></a>第五十四条 谨慎地使用本地方法</h2><p>有一些方法标记着<code>native</code>关键字，它们是本地方法。这种方法是用其他语言编写的，通常是C或者C++，然后在JAVA中调用。<br>本地方法有以下用途：</p>
+<ul>
+<li>提供一些特定平台的能力，比如访问注册表</li>
+<li>提供访问遗留代码库的能力，遗留数据的能力</li>
+<li>提供更快的代码运行性能</li>
+</ul>
+<p>现在书中不推荐用户自己编写和使用本地方法。<br>因为随着JAVA的发展，JAVA的方法已经和本地方法一样快，有时甚至更快。而本地方法有以下缺点：</p>
+<ul>
+<li>不安全，可能有内存管理方面的问题</li>
+<li>造成无法移植，因为有可能与平台有相关性</li>
+<li>出入本地方法有一些固定开销，如果本地方法只做很少的事情，反而造成性能下降</li>
+<li>需要胶水代码的本地方法单调乏味，难以理解</li>
+</ul>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
@@ -359,8 +379,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-04-16T12:28:29.131Z" itemprop="datePublished">
-					2017年4月16日 20:28
+				<time datetime="2017-04-16T14:46:51.319Z" itemprop="datePublished">
+					2017年4月16日 22:46
 				</time>
 			</p>
             <p>
