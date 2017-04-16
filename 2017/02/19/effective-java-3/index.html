@@ -103,7 +103,7 @@
 				    
 				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(14)</small></a></li>
 				    
 				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
 				    
@@ -115,7 +115,7 @@
         		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(7)</small></a></li>
 				    
 				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
 				    
@@ -229,8 +229,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
-			 
+				<div class="container-fluid element-img" style="background: url(/img/bg_4.jpg) no-repeat center center fixed;background-size: cover">
+             
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -283,7 +283,7 @@
 </div>
 			
       		<p>本章主要讨论在设计类和接口的时候，要注意的事情以及一些设计原则。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第十三条-使类和成员的可访问性最小化"><a href="#第十三条-使类和成员的可访问性最小化" class="headerlink" title="第十三条 使类和成员的可访问性最小化"></a>第十三条 使类和成员的可访问性最小化</h2><p>这一条来源于面向对象设计的基本概念：封装。<br>这一概念认为，设计良好的模块应该隐藏所有的实现细节，只暴露其API给外部，内部的所有数据和实现都隐藏起来，模块间的互动由API完成。<br>这样做的好处是将模块之间的耦合度尽可能地降低了，在以后的开发中，设计者只需要在改动API的时候考虑到带给用户的影响以及兼容性，而其他隐藏部分的改动，只要不破坏API的约定，那么修改过程就是完全对用户透明的。<br>这么做不会带来性能上的优势，但是使得代码更加容易测试和维护，开发人员无需顾此失彼，只需要专注注意力在一处即可。<br>JAVA这门语言作为面向对象语言的标杆，自然提供了完善的机制来支持封装这一设计理念。<br>所有的顶层类和接口都有两个访问级别：</p>
 <ul>
 <li>包级私有：意味着只有同个包下的类能够访问</li>
@@ -383,8 +383,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-03-21T14:29:23.916Z" itemprop="datePublished">
-					2017年3月21日 22:29
+				<time datetime="2017-04-16T10:10:55.660Z" itemprop="datePublished">
+					2017年4月16日 18:10
 				</time>
 			</p>
             <p>

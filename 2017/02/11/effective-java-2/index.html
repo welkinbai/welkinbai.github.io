@@ -103,7 +103,7 @@
 				    
 				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(14)</small></a></li>
 				    
 				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
 				    
@@ -115,7 +115,7 @@
         		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(7)</small></a></li>
 				    
 				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
 				    
@@ -229,8 +229,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
-			 
+				<div class="container-fluid element-img" style="background: url(/img/bg_4.jpg) no-repeat center center fixed;background-size: cover">
+             
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -283,7 +283,7 @@
 </div>
 			
       		<p>本章主要讨论所有类的父类——Object类中的一些方法的使用，如何覆盖以及需要注意的问题<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第八条-覆盖equals时需要遵守的约定"><a href="#第八条-覆盖equals时需要遵守的约定" class="headerlink" title="第八条 覆盖equals时需要遵守的约定"></a>第八条 覆盖equals时需要遵守的约定</h2><h3 id="什么时候应该覆盖equals"><a href="#什么时候应该覆盖equals" class="headerlink" title="什么时候应该覆盖equals?"></a>什么时候应该覆盖equals?</h3><p><code>equals</code>方法默认的逻辑是对比两个变量所指向的是否是同一个对象（实例）。<br>但是如果你想对比的是逻辑相等呢？比如两个对象都含有value这个域，你只是希望根据value这个域的情况来比较对象呢？<br>这种对象的类被称为”值类“，比如，代表日期的类Date。<br>需要注意，枚举类不需要覆盖equals方法，因为枚举类每个枚举值都被限定为全局唯一的实例，因此虽然equals比较的是对象是否相同，但是对象相同保证了其所代表的值一定相同。</p>
 <h3 id="覆盖equals必须遵守的约定"><a href="#覆盖equals必须遵守的约定" class="headerlink" title="覆盖equals必须遵守的约定"></a>覆盖equals必须遵守的约定</h3><p>首先，覆盖equals方法必须实现如下等价关系：</p>
 <ul>
@@ -347,8 +347,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-03-21T14:29:13.911Z" itemprop="datePublished">
-					2017年3月21日 22:29
+				<time datetime="2017-04-16T10:11:10.473Z" itemprop="datePublished">
+					2017年4月16日 18:11
 				</time>
 			</p>
             <p>

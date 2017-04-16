@@ -7,8 +7,56 @@
     </url>
 
     <url>
+        <loc>/2017/04/16/effective-java-7/</loc>
+        <lastmod>2017-04-16T12:28:29.131Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/01/19/effective-java-1/</loc>
+        <lastmod>2017-04-16T10:51:48.618Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/02/11/effective-java-2/</loc>
+        <lastmod>2017-04-16T10:11:10.473Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/02/19/effective-java-3/</loc>
+        <lastmod>2017-04-16T10:10:55.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/02/effective-java-4/</loc>
+        <lastmod>2017-04-16T10:10:43.723Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/12/effective-java-5/</loc>
+        <lastmod>2017-04-16T10:10:32.458Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/03/21/effective-java-6/</loc>
-        <lastmod>2017-04-11T15:03:32.489Z</lastmod>
+        <lastmod>2017-04-16T09:35:33.615Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,46 +65,6 @@
     <url>
         <loc>/2016/08/29/mysql-basic/</loc>
         <lastmod>2017-04-10T14:15:58.555Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/12/effective-java-5/</loc>
-        <lastmod>2017-03-21T14:29:43.858Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/02/effective-java-4/</loc>
-        <lastmod>2017-03-21T14:29:33.640Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/02/19/effective-java-3/</loc>
-        <lastmod>2017-03-21T14:29:23.916Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/02/11/effective-java-2/</loc>
-        <lastmod>2017-03-21T14:29:13.911Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/01/19/effective-java-1/</loc>
-        <lastmod>2017-03-21T14:29:02.440Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -103,7 +103,7 @@
 				    
 				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(14)</small></a></li>
 				    
 				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
 				    
@@ -115,7 +115,7 @@
         		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(7)</small></a></li>
 				    
 				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
 				    
@@ -229,8 +229,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
-			 
+				<div class="container-fluid element-img" style="background: url(/img/bg_4.jpg) no-repeat center center fixed;background-size: cover">
+             
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -283,7 +283,7 @@
 </div>
 			
       		<p>本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。<br><a id="more"></a><br>本系列是著名JAVA必读书籍之一的《Effective JAVA》的读书笔记，注意，本书不适合没有JAVA基础或者编程经验的人阅读。属于高级教程。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第一条-用静态工厂方法代替构造器"><a href="#第一条-用静态工厂方法代替构造器" class="headerlink" title="第一条 用静态工厂方法代替构造器"></a>第一条 用静态工厂方法代替构造器</h2><h3 id="静态工厂方法大概长下面这样："><a href="#静态工厂方法大概长下面这样：" class="headerlink" title="静态工厂方法大概长下面这样："></a>静态工厂方法大概长下面这样：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> MyClass(arg1, arg2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>为什么要用上面的方法来获得对象的实例呢？用构造器不就好了吗？<br>理由有如下几点：</p>
 <ol>
@@ -371,8 +371,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-03-21T14:29:02.440Z" itemprop="datePublished">
-					2017年3月21日 22:29
+				<time datetime="2017-04-16T10:51:48.618Z" itemprop="datePublished">
+					2017年4月16日 18:51
 				</time>
 			</p>
             <p>

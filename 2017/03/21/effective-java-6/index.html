@@ -103,7 +103,7 @@
 				    
 				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(13)</small></a></li>
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(14)</small></a></li>
 				    
 				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
 				    
@@ -115,7 +115,7 @@
         		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(6)</small></a></li>
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(7)</small></a></li>
 				    
 				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
 				    
@@ -229,8 +229,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
-			 
+				<div class="container-fluid element-img" style="background: url(/img/bg_4.jpg) no-repeat center center fixed;background-size: cover">
+             
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -327,41 +327,6 @@
 </ul>
 <h2 id="第四十三条-返回零长度的集合而不是Null"><a href="#第四十三条-返回零长度的集合而不是Null" class="headerlink" title="第四十三条 返回零长度的集合而不是Null"></a>第四十三条 返回零长度的集合而不是Null</h2><p>当你的方法返回值是集合的时候，有一种情况你肯定需要面对：即返回结果为空的时候。<br>是返回Null还是返回空的集合？<br>书中推荐返回空的集合。因为返回Null会导致方法调用者忘记做非空判断，从而为隐藏很深的bug创造机会。<br>由于空的集合是一个不可变的集合，可以被共享，因此你可每次返回同一个空的集合。<br>JDK提供了<code>Collections.emptySet、emptyList、emptyMap</code>三个方法，每次返回同一个空的集合或Map，因此也不会产生每次返回都创建新的空数组这样的所谓性能问题。</p>
 <h2 id="第四十四条-为所有导出的API元素编写文档注释"><a href="#第四十四条-为所有导出的API元素编写文档注释" class="headerlink" title="第四十四条 为所有导出的API元素编写文档注释"></a>第四十四条 为所有导出的API元素编写文档注释</h2><p>这个就不详细讲了，总之就是应该编写JAVA Doc文档。<br>由于是使用注解的形式编写，而且现代IDE都自动帮你生成，所以没什么好讲的。<br>注解里面的文字支持Html标签。<br>注意{@code 代码片段}这样的格式可以放进代码片段而不用担心里面用到的Html符号会被识别，并且会以代码的字体渲染文本。<br>还有{@literal 普通文本}也是一样的，只不过是普通文本而非代码片段。</p>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -372,8 +337,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-04-11T15:03:32.489Z" itemprop="datePublished">
-					2017年4月11日 23:03
+				<time datetime="2017-04-16T09:35:33.615Z" itemprop="datePublished">
+					2017年4月16日 17:35
 				</time>
 			</p>
             <p>
@@ -383,6 +348,10 @@ content
             </p>		
         </div>		
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/04/16/effective-java-7/" style="float: left;">
+        ← 《Effective Java》读书笔记——第七章 通用程序设计
+    </a>
     
     
     <a class="pull-right" href="/2017/03/12/effective-java-5/">

@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>search | Dawn</title>
+  <title>《Effective Java》读书笔记——第七章 通用程序设计 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -237,8 +237,8 @@
                             <div>
 							
 								
-								<h2><span>Search result</span></h2>
-                                <p>搜索结果请滚动到下面观看</p>
+								<h2>第七章</h2>
+                                <p>通用程序设计</p>
 																
 							
                             </div>
@@ -255,15 +255,153 @@
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      <script src="/js/search.js"></script>
+      
 <section id="intro">
-    <div class="container">        
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-04-16T09:36:02.000Z" itemprop="datePublished">
+          2017年4月16日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第七章 通用程序设计</h1>				
+            </div>
+        </div>		
         <div class="col-md-8 col-md-offset-2">
-            <div class="st-search-container"></div>
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十五条-将局部变量的作用域最小化"><span class="toc-text">第四十五条 将局部变量的作用域最小化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十六条-for-each优于传统的for语句"><span class="toc-text">第四十六条 for-each优于传统的for语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十七条-了解和使用类库（不要重复发明轮子）"><span class="toc-text">第四十七条 了解和使用类库（不要重复发明轮子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十八条-需要精确答案的时候避免使用float和double"><span class="toc-text">第四十八条 需要精确答案的时候避免使用float和double</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四十九条-基本类型优先于装箱基本类型"><span class="toc-text">第四十九条 基本类型优先于装箱基本类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十条-字符串不是万能的"><span class="toc-text">第五十条 字符串不是万能的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十一条-当心字符串连接的性能"><span class="toc-text">第五十一条 当心字符串连接的性能</span></a></li></ol>
+</div>
+			
+      		<p>本章继续讨论一些编程过程中应该注意的问题和细节<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
+<h2 id="第四十五条-将局部变量的作用域最小化"><a href="#第四十五条-将局部变量的作用域最小化" class="headerlink" title="第四十五条 将局部变量的作用域最小化"></a>第四十五条 将局部变量的作用域最小化</h2><p>下面是本条的要点：</p>
+<ul>
+<li>局部变量应该在第一次使用的地方声明，有些人认为应该在代码块的开头处声明，这是C语言带过来的坏习惯，如果代码块很长，会造成阅读者糟糕的体验。</li>
+<li>局部变量声明应该尽量带着初始化表达式，除非你还不知道初始化值要赋什么值</li>
+<li>循环可以为我们带来作用域最小化的好处，因此，如果循环结束就不需要局部变量的内容，for循环优先于while循环使用</li>
+<li>for循环也会比while循环更简洁，bug可能性更低，它的局部变量作用域明显，不像while语句没有声明局部变量的地方</li>
+<li>使用传统的for循环时，在两个<code>；</code>符号中间的条件语句不能有计算过程，否则，每次循环都要执行这个过程，造成性能的巨大浪费，将上下限值计算好放在初始化语句中才是明智之举</li>
+</ul>
+<h2 id="第四十六条-for-each优于传统的for语句"><a href="#第四十六条-for-each优于传统的for语句" class="headerlink" title="第四十六条 for-each优于传统的for语句"></a>第四十六条 for-each优于传统的for语句</h2><p>下面是本条要点：</p>
+<ul>
+<li>还用说吗，for-each语句带来无与伦比的简洁性</li>
+<li>for-each语句没有性能上的损失，甚至某些时候能更快</li>
+<li>for-each语句可以遍历任何实现了<code>Iterable</code>接口的类，带来更多的便利性</li>
+</ul>
+<p>可惜，下面这些场景无法使用for-each语句：</p>
+<ul>
+<li>需要调用remove来安全的删除数组的某个元素，这个时候只能使用迭代器来实现</li>
+<li>需要动态地修改数组中的元素，需要获取index值的情况下</li>
+<li>一些需要多个数组并行地遍历时</li>
+</ul>
+<h2 id="第四十七条-了解和使用类库（不要重复发明轮子）"><a href="#第四十七条-了解和使用类库（不要重复发明轮子）" class="headerlink" title="第四十七条 了解和使用类库（不要重复发明轮子）"></a>第四十七条 了解和使用类库（不要重复发明轮子）</h2><p>这条没什么好说的，书中用Random类作为例子，告诉读者：<br><strong><em>不要遇到什么事情都想着自己去实现，自己搞一套，去熟悉最新的JAVA类库支持哪些功能，以及善加利用前人的经验凝结成的心血之作，也是优秀的程序员必须掌握的技巧。</em></strong></p>
+<h2 id="第四十八条-需要精确答案的时候避免使用float和double"><a href="#第四十八条-需要精确答案的时候避免使用float和double" class="headerlink" title="第四十八条 需要精确答案的时候避免使用float和double"></a>第四十八条 需要精确答案的时候避免使用float和double</h2><p>这一点很多人都知道，不必详细介绍。<br>总之这两种浮点数计算是计算机的通病，是涉及底层处理器架构方面的，只要计算机使用二进制，可能永远也无法摆脱这种缺陷，它们都是近似计算，而不是精确计算。<br>在进行科学计算和工程计算时，只要在容忍的精度范围内准确就够了。但是，涉及<code>金钱</code>方面的计算，货币计算，你绝对不能使用这两种类型！！<br>典型的替代方案是使用<code>int</code>、<code>long</code>、<code>BigDecimal</code>来解决问题。注意<code>BigDecimal</code>是有性能损失的，但是它有一些舍入模式很方便。</p>
+<h2 id="第四十九条-基本类型优先于装箱基本类型"><a href="#第四十九条-基本类型优先于装箱基本类型" class="headerlink" title="第四十九条 基本类型优先于装箱基本类型"></a>第四十九条 基本类型优先于装箱基本类型</h2><p>原因有以下几点：</p>
+<ul>
+<li>基本类型只有值，装箱基本类型虽然也有值，但是本质上是个对象，基本类型用<code>==</code>运算符不会出错，装箱基本类型用<code>==</code>运算符基本上都会出错，因为这会比较两者的引用而非值</li>
+<li>装箱基本类型有额外的值<code>NULL</code>，这和基本类型不一样，基本类型永远不会有NULL，因此有些时候你会遇到莫名其妙的NPE（NullPointerException）错误。当然了，对象的域建议使用装箱基本类型，这样可以避免初始化的时候自动为基本类型赋上毫无意义的初始值，而装箱基本类型用<code>NULL</code>作为初始值，更容易在早期暴露问题</li>
+<li>基本类型更快，更节省空间。如果有一个循环里面，你恰好使用到了装箱基本类型，有可能会导致频繁地自动拆装箱操作，严重降低性能。</li>
+</ul>
+<h2 id="第五十条-字符串不是万能的"><a href="#第五十条-字符串不是万能的" class="headerlink" title="第五十条 字符串不是万能的"></a>第五十条 字符串不是万能的</h2><p>很多程序员习惯什么东西都用字符串来代替，书中主张，如果一个东西本质上是什么，在程序中就应该是什么。<br>你不应该用”1“来代替数字1，也不应该用”true“来代替boolean值true，枚举类型也不可以用字符串代替，使用更加适当的数据类型，尽量避免字面量以及字符串的使用，这会使你的程序更加安全不易出错，有时候也会更快速。</p>
+<h2 id="第五十一条-当心字符串连接的性能"><a href="#第五十一条-当心字符串连接的性能" class="headerlink" title="第五十一条 当心字符串连接的性能"></a>第五十一条 当心字符串连接的性能</h2><p>字符串连接符<code>+</code>是非常方便的操作符，可以将多个东西连接到一起。<br>但是，字符串在JAVA环境中是不可变的，所有的字符串都放在一个字符串池中被全局共用，当你拼接字符串的时候，实际上是创建了一个新的字符串，复制两个旧的字符串的内容。<br>如果只有短短几个拼接，那么性能还是可以接受的。<br>但是如果放在循环体中，性能的损失是平方级增加的。<br>这个时候你应该用<code>StringBuilder</code>来完成字符串拼接，这个类速度在大量拼接场景快50倍以上。<br>另外，别忘了在使用连接符连接其他类型和字符串时，其他类型还有转化成字符串的开销。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
             <div class="clearfix"></div>
-        </div>        
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-04-16T12:28:29.131Z" itemprop="datePublished">
+					2017年4月16日 20:28
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/03/21/effective-java-6/">
+        《Effective Java》读书笔记——第六章 方法 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/04/16/effective-java-7/" data-title="《Effective Java》读书笔记——第七章 通用程序设计" data-url="/2017/04/16/effective-java-7/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
 
       
 <!-- ============================ Footer =========================== -->

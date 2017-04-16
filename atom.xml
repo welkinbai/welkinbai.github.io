@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-04-11T15:03:32.489Z</updated>
+  <updated>2017-04-16T12:28:29.131Z</updated>
   <id>/</id>
   
   <author>
@@ -16,11 +16,100 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>《Effective Java》读书笔记——第七章 通用程序设计</title>
+    <link href="/2017/04/16/effective-java-7/"/>
+    <id>/2017/04/16/effective-java-7/</id>
+    <published>2017-04-16T09:36:02.000Z</published>
+    <updated>2017-04-16T12:28:29.131Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章继续讨论一些编程过程中应该注意的问题和细节<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
+<h2 id="第四十五条-将局部变量的作用域最小化"><a href="#第四十五条-将局部变量的作用域最小化" class="headerlink" title="第四十五条 将局部变量的作用域最小化"></a>第四十五条 将局部变量的作用域最小化</h2><p>下面是本条的要点：</p>
+<ul>
+<li>局部变量应该在第一次使用的地方声明，有些人认为应该在代码块的开头处声明，这是C语言带过来的坏习惯，如果代码块很长，会造成阅读者糟糕的体验。</li>
+<li>局部变量声明应该尽量带着初始化表达式，除非你还不知道初始化值要赋什么值</li>
+<li>循环可以为我们带来作用域最小化的好处，因此，如果循环结束就不需要局部变量的内容，for循环优先于while循环使用</li>
+<li>for循环也会比while循环更简洁，bug可能性更低，它的局部变量作用域明显，不像while语句没有声明局部变量的地方</li>
+<li>使用传统的for循环时，在两个<code>；</code>符号中间的条件语句不能有计算过程，否则，每次循环都要执行这个过程，造成性能的巨大浪费，将上下限值计算好放在初始化语句中才是明智之举</li>
+</ul>
+<h2 id="第四十六条-for-each优于传统的for语句"><a href="#第四十六条-for-each优于传统的for语句" class="headerlink" title="第四十六条 for-each优于传统的for语句"></a>第四十六条 for-each优于传统的for语句</h2><p>下面是本条要点：</p>
+<ul>
+<li>还用说吗，for-each语句带来无与伦比的简洁性</li>
+<li>for-each语句没有性能上的损失，甚至某些时候能更快</li>
+<li>for-each语句可以遍历任何实现了<code>Iterable</code>接口的类，带来更多的便利性</li>
+</ul>
+<p>可惜，下面这些场景无法使用for-each语句：</p>
+<ul>
+<li>需要调用remove来安全的删除数组的某个元素，这个时候只能使用迭代器来实现</li>
+<li>需要动态地修改数组中的元素，需要获取index值的情况下</li>
+<li>一些需要多个数组并行地遍历时</li>
+</ul>
+<h2 id="第四十七条-了解和使用类库（不要重复发明轮子）"><a href="#第四十七条-了解和使用类库（不要重复发明轮子）" class="headerlink" title="第四十七条 了解和使用类库（不要重复发明轮子）"></a>第四十七条 了解和使用类库（不要重复发明轮子）</h2><p>这条没什么好说的，书中用Random类作为例子，告诉读者：<br><strong><em>不要遇到什么事情都想着自己去实现，自己搞一套，去熟悉最新的JAVA类库支持哪些功能，以及善加利用前人的经验凝结成的心血之作，也是优秀的程序员必须掌握的技巧。</em></strong></p>
+<h2 id="第四十八条-需要精确答案的时候避免使用float和double"><a href="#第四十八条-需要精确答案的时候避免使用float和double" class="headerlink" title="第四十八条 需要精确答案的时候避免使用float和double"></a>第四十八条 需要精确答案的时候避免使用float和double</h2><p>这一点很多人都知道，不必详细介绍。<br>总之这两种浮点数计算是计算机的通病，是涉及底层处理器架构方面的，只要计算机使用二进制，可能永远也无法摆脱这种缺陷，它们都是近似计算，而不是精确计算。<br>在进行科学计算和工程计算时，只要在容忍的精度范围内准确就够了。但是，涉及<code>金钱</code>方面的计算，货币计算，你绝对不能使用这两种类型！！<br>典型的替代方案是使用<code>int</code>、<code>long</code>、<code>BigDecimal</code>来解决问题。注意<code>BigDecimal</code>是有性能损失的，但是它有一些舍入模式很方便。</p>
+<h2 id="第四十九条-基本类型优先于装箱基本类型"><a href="#第四十九条-基本类型优先于装箱基本类型" class="headerlink" title="第四十九条 基本类型优先于装箱基本类型"></a>第四十九条 基本类型优先于装箱基本类型</h2><p>原因有以下几点：</p>
+<ul>
+<li>基本类型只有值，装箱基本类型虽然也有值，但是本质上是个对象，基本类型用<code>==</code>运算符不会出错，装箱基本类型用<code>==</code>运算符基本上都会出错，因为这会比较两者的引用而非值</li>
+<li>装箱基本类型有额外的值<code>NULL</code>，这和基本类型不一样，基本类型永远不会有NULL，因此有些时候你会遇到莫名其妙的NPE（NullPointerException）错误。当然了，对象的域建议使用装箱基本类型，这样可以避免初始化的时候自动为基本类型赋上毫无意义的初始值，而装箱基本类型用<code>NULL</code>作为初始值，更容易在早期暴露问题</li>
+<li>基本类型更快，更节省空间。如果有一个循环里面，你恰好使用到了装箱基本类型，有可能会导致频繁地自动拆装箱操作，严重降低性能。</li>
+</ul>
+<h2 id="第五十条-字符串不是万能的"><a href="#第五十条-字符串不是万能的" class="headerlink" title="第五十条 字符串不是万能的"></a>第五十条 字符串不是万能的</h2><p>很多程序员习惯什么东西都用字符串来代替，书中主张，如果一个东西本质上是什么，在程序中就应该是什么。<br>你不应该用”1“来代替数字1，也不应该用”true“来代替boolean值true，枚举类型也不可以用字符串代替，使用更加适当的数据类型，尽量避免字面量以及字符串的使用，这会使你的程序更加安全不易出错，有时候也会更快速。</p>
+<h2 id="第五十一条-当心字符串连接的性能"><a href="#第五十一条-当心字符串连接的性能" class="headerlink" title="第五十一条 当心字符串连接的性能"></a>第五十一条 当心字符串连接的性能</h2><p>字符串连接符<code>+</code>是非常方便的操作符，可以将多个东西连接到一起。<br>但是，字符串在JAVA环境中是不可变的，所有的字符串都放在一个字符串池中被全局共用，当你拼接字符串的时候，实际上是创建了一个新的字符串，复制两个旧的字符串的内容。<br>如果只有短短几个拼接，那么性能还是可以接受的。<br>但是如果放在循环体中，性能的损失是平方级增加的。<br>这个时候你应该用<code>StringBuilder</code>来完成字符串拼接，这个类速度在大量拼接场景快50倍以上。<br>另外，别忘了在使用连接符连接其他类型和字符串时，其他类型还有转化成字符串的开销。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章继续讨论一些编程过程中应该注意的问题和细节&lt;br&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Effective Java" scheme="/tags/Effective-Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>《Effective Java》读书笔记——第六章 方法</title>
     <link href="/2017/03/21/effective-java-6/"/>
     <id>/2017/03/21/effective-java-6/</id>
     <published>2017-03-21T14:25:55.000Z</published>
-    <updated>2017-04-11T15:03:32.489Z</updated>
+    <updated>2017-04-16T09:35:33.615Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍一些方法级别的技巧和需要注意的问题。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
@@ -67,41 +156,6 @@
 </ul>
 <h2 id="第四十三条-返回零长度的集合而不是Null"><a href="#第四十三条-返回零长度的集合而不是Null" class="headerlink" title="第四十三条 返回零长度的集合而不是Null"></a>第四十三条 返回零长度的集合而不是Null</h2><p>当你的方法返回值是集合的时候，有一种情况你肯定需要面对：即返回结果为空的时候。<br>是返回Null还是返回空的集合？<br>书中推荐返回空的集合。因为返回Null会导致方法调用者忘记做非空判断，从而为隐藏很深的bug创造机会。<br>由于空的集合是一个不可变的集合，可以被共享，因此你可每次返回同一个空的集合。<br>JDK提供了<code>Collections.emptySet、emptyList、emptyMap</code>三个方法，每次返回同一个空的集合或Map，因此也不会产生每次返回都创建新的空数组这样的所谓性能问题。</p>
 <h2 id="第四十四条-为所有导出的API元素编写文档注释"><a href="#第四十四条-为所有导出的API元素编写文档注释" class="headerlink" title="第四十四条 为所有导出的API元素编写文档注释"></a>第四十四条 为所有导出的API元素编写文档注释</h2><p>这个就不详细讲了，总之就是应该编写JAVA Doc文档。<br>由于是使用注解的形式编写，而且现代IDE都自动帮你生成，所以没什么好讲的。<br>注解里面的文字支持Html标签。<br>注意{@code 代码片段}这样的格式可以放进代码片段而不用担心里面用到的Html符号会被识别，并且会以代码的字体渲染文本。<br>还有{@literal 普通文本}也是一样的，只不过是普通文本而非代码片段。</p>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
 ]]></content>
     
     <summary type="html">
@@ -122,10 +176,10 @@ content
     <link href="/2017/03/12/effective-java-5/"/>
     <id>/2017/03/12/effective-java-5/</id>
     <published>2017-03-12T07:24:07.000Z</published>
-    <updated>2017-03-21T14:29:43.858Z</updated>
+    <updated>2017-04-16T10:10:32.458Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍在使用枚举和注解这两种类型时要注意的问题。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第三十条-用enum代替int常量"><a href="#第三十条-用enum代替int常量" class="headerlink" title="第三十条 用enum代替int常量"></a>第三十条 用enum代替int常量</h2><p>本条主要是讲枚举类型enum的优缺点。</p>
 <h3 id="int常量为什么不好？"><a href="#int常量为什么不好？" class="headerlink" title="int常量为什么不好？"></a>int常量为什么不好？</h3><p>枚举类型还不存在之前(JDK1.5才引入枚举类型)，大多数程序都使用下面的int常量形式代替枚举：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_FUJI = <span class="number">0</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_PIPPIN = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
 <p>它的缺点如下：</p>
@@ -190,11 +244,11 @@ content
     <link href="/2017/03/02/effective-java-4/"/>
     <id>/2017/03/02/effective-java-4/</id>
     <published>2017-03-02T12:49:04.000Z</published>
-    <updated>2017-03-21T14:29:33.640Z</updated>
+    <updated>2017-04-16T10:10:43.723Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讲JDK1.5加入的新特性——泛型。涉及泛型的使用，教你最大限度地使用泛型的优势而又不使事情复杂化。</p>
 <a id="more"></a>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第二十三条-请不要在新代码中使用原生态类型（请使用泛型）"><a href="#第二十三条-请不要在新代码中使用原生态类型（请使用泛型）" class="headerlink" title="第二十三条 请不要在新代码中使用原生态类型（请使用泛型）"></a>第二十三条 请不要在新代码中使用原生态类型（请使用泛型）</h2><p>如同我括号里写的那样，本条的主旨就一句话：请尽可能地使用泛型。<br>理由也很简单，在泛型面世之前，JAVA是一个类型不安全的语言。当然即使泛型面世之后，你使用了泛型，JAVA也只能达到勉强类型安全。<br>为什么我这么说？看如下代码：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">       List&lt;<span class="keyword">Object</span>&gt; a = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">Object</span>&gt;();</div><div class="line">       a.<span class="built_in">add</span>(<span class="string">"a"</span>);</div><div class="line">       a.<span class="built_in">add</span>(<span class="number">3</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString1 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">0</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString2 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>由于Object的存在，泛型的类型安全也没法百分之百保证，第6行抛出了<code>ClassCastException</code>，所以想要往列表里放东西，那就把泛型的参数类型写到具体的类而不是偷懒写Object，否则，列表里可能会不小心放进不同类型的东西，而编译器无法提前告诉你。<br>泛型的使用可以使运行时抛出的<code>ClassCastException</code>提前到编译期就告诉你哪儿不对。<br>而JAVA是典型的静态语言，编译器的编译期检查给予JAVA强大的稳定性，能把错误提前暴露在编译期，是JAVA这种语言的优势，不要浪费。<br>作者坦言，如果不是因为泛型推出的太迟，为了能向下兼容，JDK1.5的作者们会让代码只能使用泛型。</p>
 <h2 id="第二十四条-消除非受检警告"><a href="#第二十四条-消除非受检警告" class="headerlink" title="第二十四条 消除非受检警告"></a>第二十四条 消除非受检警告</h2><p>这条主要讲，好了，你终于用上泛型了，但是你是新手，还不会写，编译器就各种给你报警告。<br>怎么办呢？<br>作者建议你耐心下来，一个一个地消除警告，不要忽视它们或者放弃泛型。<br>但是有时候呢，会碰到确信没有类型安全问题的代码，编译器也会有非受检警告，比如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@SuppressWarnings(<span class="string">"unchecked"</span>)</div><div class="line">   <span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">       <span class="keyword">if</span> (a.length &lt; <span class="keyword">size</span>)</div><div class="line">           <span class="comment">// Make a new array of a's runtime type, but my contents:</span></div><div class="line">           <span class="keyword">return</span> (T[]) Arrays.copyOf(elementData, <span class="keyword">size</span>, a.getClass());</div><div class="line">       System.arraycopy(elementData, <span class="number">0</span>, a, <span class="number">0</span>, <span class="keyword">size</span>);</div><div class="line">       <span class="keyword">if</span> (a.length &gt; <span class="keyword">size</span>)</div><div class="line">           a[<span class="keyword">size</span>] = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">return</span> a;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
@@ -246,10 +300,10 @@ content
     <link href="/2017/02/19/effective-java-3/"/>
     <id>/2017/02/19/effective-java-3/</id>
     <published>2017-02-19T10:54:07.000Z</published>
-    <updated>2017-03-21T14:29:23.916Z</updated>
+    <updated>2017-04-16T10:10:55.660Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论在设计类和接口的时候，要注意的事情以及一些设计原则。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第十三条-使类和成员的可访问性最小化"><a href="#第十三条-使类和成员的可访问性最小化" class="headerlink" title="第十三条 使类和成员的可访问性最小化"></a>第十三条 使类和成员的可访问性最小化</h2><p>这一条来源于面向对象设计的基本概念：封装。<br>这一概念认为，设计良好的模块应该隐藏所有的实现细节，只暴露其API给外部，内部的所有数据和实现都隐藏起来，模块间的互动由API完成。<br>这样做的好处是将模块之间的耦合度尽可能地降低了，在以后的开发中，设计者只需要在改动API的时候考虑到带给用户的影响以及兼容性，而其他隐藏部分的改动，只要不破坏API的约定，那么修改过程就是完全对用户透明的。<br>这么做不会带来性能上的优势，但是使得代码更加容易测试和维护，开发人员无需顾此失彼，只需要专注注意力在一处即可。<br>JAVA这门语言作为面向对象语言的标杆，自然提供了完善的机制来支持封装这一设计理念。<br>所有的顶层类和接口都有两个访问级别：</p>
 <ul>
 <li>包级私有：意味着只有同个包下的类能够访问</li>
@@ -359,10 +413,10 @@ content
     <link href="/2017/02/11/effective-java-2/"/>
     <id>/2017/02/11/effective-java-2/</id>
     <published>2017-02-11T08:01:47.000Z</published>
-    <updated>2017-03-21T14:29:13.911Z</updated>
+    <updated>2017-04-16T10:11:10.473Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论所有类的父类——Object类中的一些方法的使用，如何覆盖以及需要注意的问题<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第八条-覆盖equals时需要遵守的约定"><a href="#第八条-覆盖equals时需要遵守的约定" class="headerlink" title="第八条 覆盖equals时需要遵守的约定"></a>第八条 覆盖equals时需要遵守的约定</h2><h3 id="什么时候应该覆盖equals"><a href="#什么时候应该覆盖equals" class="headerlink" title="什么时候应该覆盖equals?"></a>什么时候应该覆盖equals?</h3><p><code>equals</code>方法默认的逻辑是对比两个变量所指向的是否是同一个对象（实例）。<br>但是如果你想对比的是逻辑相等呢？比如两个对象都含有value这个域，你只是希望根据value这个域的情况来比较对象呢？<br>这种对象的类被称为”值类“，比如，代表日期的类Date。<br>需要注意，枚举类不需要覆盖equals方法，因为枚举类每个枚举值都被限定为全局唯一的实例，因此虽然equals比较的是对象是否相同，但是对象相同保证了其所代表的值一定相同。</p>
 <h3 id="覆盖equals必须遵守的约定"><a href="#覆盖equals必须遵守的约定" class="headerlink" title="覆盖equals必须遵守的约定"></a>覆盖equals必须遵守的约定</h3><p>首先，覆盖equals方法必须实现如下等价关系：</p>
 <ul>
@@ -515,10 +569,10 @@ content
     <link href="/2017/01/19/effective-java-1/"/>
     <id>/2017/01/19/effective-java-1/</id>
     <published>2017-01-19T14:40:59.000Z</published>
-    <updated>2017-03-21T14:29:02.440Z</updated>
+    <updated>2017-04-16T10:51:48.618Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。<br><a id="more"></a><br>本系列是著名JAVA必读书籍之一的《Effective JAVA》的读书笔记，注意，本书不适合没有JAVA基础或者编程经验的人阅读。属于高级教程。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
 <h2 id="第一条-用静态工厂方法代替构造器"><a href="#第一条-用静态工厂方法代替构造器" class="headerlink" title="第一条 用静态工厂方法代替构造器"></a>第一条 用静态工厂方法代替构造器</h2><h3 id="静态工厂方法大概长下面这样："><a href="#静态工厂方法大概长下面这样：" class="headerlink" title="静态工厂方法大概长下面这样："></a>静态工厂方法大概长下面这样：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> MyClass(arg1, arg2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>为什么要用上面的方法来获得对象的实例呢？用构造器不就好了吗？<br>理由有如下几点：</p>
 <ol>
@@ -2327,452 +2381,6 @@ content
     
     
       <category term="redis" scheme="/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql基础知识汇总</title>
-    <link href="/2016/08/29/mysql-basic/"/>
-    <id>/2016/08/29/mysql-basic/</id>
-    <published>2016-08-29T12:58:35.000Z</published>
-    <updated>2017-04-10T14:15:58.555Z</updated>
-    
-    <content type="html"><![CDATA[<p>本篇主要汇总Mysql的一些基础知识。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
-<h2 id="一、Mysql支持的数据类型"><a href="#一、Mysql支持的数据类型" class="headerlink" title="一、Mysql支持的数据类型"></a>一、Mysql支持的数据类型</h2><p>Mysql支持的类型大概可分为<strong>数字</strong>、<strong>日期</strong>、<strong>字符串</strong><br>下面分别介绍：</p>
-<h3 id="1-数字"><a href="#1-数字" class="headerlink" title="1.数字"></a>1.数字</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>大小</th>
-<th>范围</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TINYINT</td>
-<td>1字节</td>
-<td>(-128，127)</td>
-<td>特小整数</td>
-</tr>
-<tr>
-<td>SMAILINT</td>
-<td>2字节</td>
-<td>(-2^15,2^15-1)</td>
-<td>小整数</td>
-</tr>
-<tr>
-<td>MEDIUMINT</td>
-<td>3字节</td>
-<td>(-2^23,2^23-1)</td>
-<td>中等整数</td>
-</tr>
-<tr>
-<td>INT</td>
-<td>4字节</td>
-<td>(-2^31,2^31-1)</td>
-<td>整数</td>
-</tr>
-<tr>
-<td>BIGINT</td>
-<td>8字节</td>
-<td>(-2^63,2^63-1)</td>
-<td>大整数</td>
-</tr>
-<tr>
-<td>FLOAT</td>
-<td>4字节</td>
-<td>(-2^128,2^128)</td>
-<td>单精度浮点</td>
-</tr>
-<tr>
-<td>DOUBLE</td>
-<td>8字节</td>
-<td>(-2^1024,2^1024)</td>
-<td>双精度浮点</td>
-</tr>
-<tr>
-<td>DECIMAL</td>
-<td>不确定</td>
-<td>不确定</td>
-<td>精确计算</td>
-</tr>
-</tbody>
-</table>
-<p>REAL是DOUBLE的同义词，NUMERIC是DECIMAL的同义词。<br>FLOAT和DOUBLE的范围我写的不是特别精确，因为这实际上依赖于Mysql运行的平台是如何实现的。不过它们都拥有一个靠近自然数0的最小值，不能平滑地过渡到无穷小<br>另外，这里列出的都是有符号类型的范围。无符号类型的话，就是在前面加上UNSIGNED关键字，范围都会变成正数。<br>如何记忆范围里的数字呢？其实不用死记硬背，只需要记得前面占用几个字节即可，1个字节等于8bit，因此就是2的8次方。有符号数的范围由于一个bit用来记录正负，因此只能取到负的2的7次方到2的7次方-1。</p>
-<h3 id="2-字符串"><a href="#2-字符串" class="headerlink" title="2.字符串"></a>2.字符串</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>大小</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CHAR</td>
-<td>0-255字节</td>
-<td>定长字符串</td>
-</tr>
-<tr>
-<td>VARCHAR</td>
-<td>0-65535字节</td>
-<td>变长字符串</td>
-</tr>
-<tr>
-<td>TINYBLOB</td>
-<td>0-255字节</td>
-<td>小二进制字符串</td>
-</tr>
-<tr>
-<td>TINYTEXT</td>
-<td>0-255字节</td>
-<td>小文本字符串</td>
-</tr>
-<tr>
-<td>BLOB</td>
-<td>0-65535字节</td>
-<td>二进制字符串</td>
-</tr>
-<tr>
-<td>TEXT</td>
-<td>0-65535字节</td>
-<td>文本字符串</td>
-</tr>
-<tr>
-<td>MEDIUMBLOB</td>
-<td>0-(2^24-1)字节</td>
-<td>中等二进制字符串</td>
-</tr>
-<tr>
-<td>MEDIUMTEXT</td>
-<td>0-(2^24-1)字节</td>
-<td>中等文本字符串</td>
-</tr>
-<tr>
-<td>LONGBLOB</td>
-<td>0-(2^32-1)字节</td>
-<td>大二进制字符串</td>
-</tr>
-<tr>
-<td>LONGTEXT</td>
-<td>0-(2^32-1)字节</td>
-<td>大文本字符串</td>
-</tr>
-</tbody>
-</table>
-<p>除此之外，还有BINARY、VARBINARY、ENUM、SET四种类型<br><strong>CHAR和VARCHAR:</strong></p>
-<ul>
-<li>VARCHAR是变长的，即数据多长，就占用多长的存储空间，比较省空间</li>
-<li>VARCHAR需要额外的1个字节来存储字符串长度，如果字符串长度大于255，则需要2个额外的字节</li>
-<li>VARCHAR不太适合更新频繁的场景，因为当长度改变后，行的长度就改变了，存储引擎需要做额外的工作，影响性能，产生碎片。</li>
-<li>Mysql5.0或更高版本，会在存储和检索时保留VARCHAR的空格，CHAR末尾的空格会被自动去除</li>
-<li>CHAR适合频繁更新，字符串长度不怎么变的场景，比如存放MD5</li>
-<li>InnoDB这个存储引擎会把过长的VARCHAR转成TEXT</li>
-<li>虽然VARCHAR是变长的，但是建表的时候，还是要分配真实需要的空间，不要取得过大，因为这会导致Mysql在使用内存临时表排序或者操作时消耗更多的内存</li>
-</ul>
-<p><strong>BINARY和VARBINARY:</strong></p>
-<ul>
-<li>和CHAR、VARCHAR是类似的，不同的是，存储的是二进制字符串，这样存储的是字节码而不是字符，就与字符集无关了</li>
-<li>由于存储的是字节码，因此比较起来比字符简单，故查询的性能应该好一些</li>
-<li>填充采用的是\0而不是空格(由于我看的书是中文翻译，所以这里我没看懂什么意思……哎，还是原生好啊)</li>
-</ul>
-<p><strong>BLOB和TEXT:</strong></p>
-<ul>
-<li>它们都是为了存储很大的数据设计的字符串数据类型(这里我就要吐槽一下既然如此为什么还有TINYBLOB这种东西……)</li>
-<li>SMALLBLOB=BLOB,SMALLTEXT=TEXT，即它们是同义词</li>
-<li>这两种类型当值太大时，Mysql会在行内存储它们的指针，实际内容放在外部单独的区域存储。</li>
-<li>BLOB和TEXT的区别就是BLOB存储的是二进制的数据，没有字符集也没有排序规则而TEXT有。</li>
-<li>BLOB和TEXT列进行排序和其他的不同，只会对最前面max_sort_length个字节做排序，用户可以手动设置这个值也可以使用<br><code>ORDER BY SUSTRING(column,length)</code><br>来指定取前多少个字符排序。</li>
-<li>Mysql没法对BLOB、TEXT列全部长度的字符串进行索引</li>
-</ul>
-<p><strong>ENUM:</strong></p>
-<ul>
-<li>枚举类型是特殊的字符串类型，定义枚举列后，真正存在表中的是整数，表的.frm文件则保存整数和枚举字符串的映射关系</li>
-<li>如：<code>CREATE TABLE enum_test(e ENUM(&#39;fish&#39;,&#39;apple&#39;,&#39;dog&#39;) NOT NULL);</code>在表中，真正存储的是，1、2、3这样的数字</li>
-<li>不要使用数字作为枚举字符串常量，如ENUM(‘1’,’2’,’3’)。这样会导致混乱</li>
-<li>枚举的顺序是按照背地里的数字来排序的，因此，你的Order by语句可能得不到按字符串排序的结果。解决方案就是声明的时候就把字符串排好序，枚举常量对应的数字是和声明时的顺序有关的。还有一种方案是使用如下FIELD语句：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> e <span class="keyword">FROM</span> enum_test <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(e,<span class="string">'apple'</span>,<span class="string">'dog'</span>,<span class="string">'fish'</span>);</div></pre></td></tr></table></figure>
-<ul>
-<li>ENUM和CHAR(VARCHAR)类型关联查询，会慢一些，因此，假如预先知道某列需要与CHAR类型关联，那么就不应该将该列设置为ENUM类型</li>
-<li>ENUM类型的列可有效缩小表所占的空间，书中写可缩小1/3</li>
-</ul>
-<p><strong>SET:</strong></p>
-<ul>
-<li>和ENUM最大的不同就是它的值可以是多个字符串常量的集合，比如设定了字符串常量有：’a’,’b’,’c’。它的某个值可以是’a’,’b’或者’a’,’c’。而ENUM的值只能是它们的其中一个</li>
-<li>还有就是SET存储值的方式是使用位，比如abc三个值，可能分别用3个位来存储，如果a和c对应的位为1则说明存储了’a’,’c’</li>
-</ul>
-<h3 id="3-日期和时间"><a href="#3-日期和时间" class="headerlink" title="3.日期和时间"></a>3.日期和时间</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>大小</th>
-<th>范围</th>
-<th>格式</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DATE</td>
-<td>3字节</td>
-<td>1000-01-01/9999-12-31</td>
-<td>YYYY-MM-DD</td>
-<td>日期值</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>3字节</td>
-<td>‘-838:59:59’/‘838:59:59’</td>
-<td>HH:MM:SS</td>
-<td>时间值或持续时间</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>1字节</td>
-<td>1970/2069(2字符长度格式)或1901/2155(4字符长度格式)</td>
-<td>YY或YYYY</td>
-<td>年份值</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>8字节</td>
-<td>1000-01-01 00:00:00/9999-12-31 23:59:59</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>混合日期和时间值</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>4字节</td>
-<td>1970-01-01 00:00:00/2037</td>
-<td>YYYYMMDDHHMMSS</td>
-<td>存放时间戳</td>
-</tr>
-</tbody>
-</table>
-<p>注意：MYSQL 5.5以及以下版本不支持毫秒精度！存储DATETIM和TIMESTAMP时会自动对毫秒进行四舍五入！5.6版本支持，但是要配置打开，并在相应字段声明时，声明精度。如：TIMESTAMP(3)，最高精度可到6。</p>
-<p><strong><em>注：Mysql的行具有大小限制，一行最大长度为65,535 bytes。因此，假定所有的列都是CHAR(255),字符编码UTF-8，那么表格最大的列数就是65535/(255*3)=85详情请看官网文档：</em></strong><br><a href="https://dev.mysql.com/doc/refman/5.7/en/column-count-limit.html" target="_blank" rel="external"><font color="blue">Mysql-Limits on Table Column Count and Row Size</font></a></p>
-<h2 id="二、Mysql在linux环境下的安装"><a href="#二、Mysql在linux环境下的安装" class="headerlink" title="二、Mysql在linux环境下的安装"></a>二、Mysql在linux环境下的安装</h2><p>windows环境就不说了，有傻瓜包。<br>首先所有的Linux平台都可以用npm包来安装。官方有下载(现在被甲骨文毒瘤收购开始收费了，只能下社区版)。<br>下载好后，使用以下命令安装：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[root@host]</span># <span class="selector-tag">rpm</span> <span class="selector-tag">-i</span> <span class="selector-tag">MySQL-5</span><span class="selector-class">.0</span><span class="selector-class">.9-0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div><div class="line"><span class="selector-attr">[root@host]</span># <span class="selector-tag">rpm</span> <span class="selector-tag">-i</span> <span class="selector-tag">MySQL-client-5</span><span class="selector-class">.0</span><span class="selector-class">.9-0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div><div class="line"><span class="selector-attr">[root@host]</span># <span class="selector-tag">rpm</span> <span class="selector-tag">-i</span> <span class="selector-tag">MySQL-devel-5</span><span class="selector-class">.0</span><span class="selector-class">.9-0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div><div class="line"><span class="selector-attr">[root@host]</span># <span class="selector-tag">rpm</span> <span class="selector-tag">-i</span> <span class="selector-tag">MySQL-shared-5</span><span class="selector-class">.0</span><span class="selector-class">.9-0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div><div class="line"><span class="selector-attr">[root@host]</span># <span class="selector-tag">rpm</span> <span class="selector-tag">-i</span> <span class="selector-tag">MySQL-bench-5</span><span class="selector-class">.0</span><span class="selector-class">.9-0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure></p>
-<p>其中，后四项是可选的，但是强烈建议都装，尤其第二个是客户端</p>
-<p>然后CentOs等系统可以使用yum来安装，更加方便，过程如下：</p>
-<ol>
-<li><p>先利用wget获得rpm格式的repo源</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">wget</span> http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div><div class="line"><span class="comment">#如果提示wget命令不存在，就先用yum安装wget</span></div><div class="line">yum install wget</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装下载好的rpm包</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql-community-release-el7-<span class="number">5</span><span class="selector-class">.noarch</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>现在你就可以使用yum命令来安装mysql了</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> mysql-<span class="keyword">server</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>安装好后，默认是没有密码的，你可以登录来设置密码：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql -uroot</div><div class="line">mysql&gt;use mysql;</div><div class="line">mysql&gt;update user set password=PASSWORD(<span class="string">'你的密码'</span>)where user=<span class="string">'root'</span>;</div><div class="line">mysql&gt;flush privileges;</div><div class="line">mysql&gt;<span class="keyword">exit</span>;</div></pre></td></tr></table></figure></p>
-<p>其中，flush语句是令mysql不重启的情况下读取配置表，使你的修改实时生效。你也可以重启Mysql来让配置生效。<br>有时候会遇到如下提示：<br>ERROR 2002 (HY000): Can‘t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock‘ (2)<br>原因是访问权限问题，使用如下语句将/var/lib/mysql的拥有者该为当前用户：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R 用户名 /var/<span class="class"><span class="keyword">lib</span>/<span class="title">mysql</span></span></div></pre></td></tr></table></figure></p>
-<p>然后重启服务：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">service mysqld restart</span></div></pre></td></tr></table></figure></p>
-<h2 id="三、配置Mysql可以远程连接"><a href="#三、配置Mysql可以远程连接" class="headerlink" title="三、配置Mysql可以远程连接"></a>三、配置Mysql可以远程连接</h2><p>此时你的mysql虽然装好了，但是你只能通过Linux系统本地的客户端登录使用，不能通过另一台电脑连接，如果你的应用服务器是部署在其他机器上的，也别想连接。<br>Mysql默认是关闭远程连接的。<br>通过以下步骤开启：</p>
-<ol>
-<li>修改/etc/my.cnf文件，<br>如果文件中有bing-address=127.0.0.1这句话，用#注释掉它</li>
-<li><p>为用户赋予远程登录权限<br>使用<code>mysql -uroot -p你的密码</code>来登录Mysql，然后执行如下命令：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> root@<span class="string">"%"</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">"你的密码"</span>;</div><div class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</div></pre></td></tr></table></figure>
-<p> 其中，<code>*.*</code>代表了所有schema下面所有的表，你也可以指定某个schema下面的某个表。<br> <code>root@&quot;%&quot;</code>代表了以root用户任意Ip地址登录。假如你只想让192.168.1.1这个Ip地址的机器使用root用户登录，你可以改成：root@”192.168.1.1”<br> 当然，你也可以直接use mysql然后修改mysql.user这个表里的内容，效果是一样的。GRANT命令还可以用来创建用户。 </p>
-</li>
-<li><p>开放端口号<br>做完上述步骤你可能还是不能远程登录，因为Linux系统有可能内置了防火墙会默认禁掉mysql的默认端口3306<br>修改防火墙配置文件：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/etc/</span>sysconfig<span class="regexp">/iptables</span></div></pre></td></tr></table></figure>
-<p> 添加以下内容：<br> -A INPUT -p tcp -m state –state NEW -m tcp –dport 3306 -j ACCEPT<br> 然后重启防火墙：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">service iptables restart</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>现在你可以用其他机器的客户端连接试试了。</p>
-<h2 id="四、一些常用管理命令"><a href="#四、一些常用管理命令" class="headerlink" title="四、一些常用管理命令"></a>四、一些常用管理命令</h2><p>注意：必须以分号结尾</p>
-<ol>
-<li><p>USE schema名字<br>schema在Mysql中等同于数据库的概念(下文全部称数据库)。使用该命令以后，你接下来所有的命令都默认是对该数据库操作的。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; <span class="keyword">use</span> <span class="title">RUNOOB</span>;</div><div class="line">Database changed</div></pre></td></tr></table></figure>
-</li>
-<li><p>SHOW DATABASES<br>可以列出所有数据库</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SHOW DATABASES;</span></div><div class="line">+--------------------+</div><div class="line"><span class="section">| Database           |</span></div><div class="line">+--------------------+</div><div class="line">| information<span class="emphasis">_schema |</span></div><div class="line">| RUNOOB             |</div><div class="line">| cdcol              |</div><div class="line">| mysql              |</div><div class="line">| onethink           |</div><div class="line">| performance_schema |</div><div class="line">| phpmyadmin         |</div><div class="line">| test               |</div><div class="line">| wecenter           |</div><div class="line"><span class="section">| wordpress          |</span></div><div class="line">+--------------------+</div><div class="line">10 rows in set (0.02 sec)</div></pre></td></tr></table></figure>
-</li>
-<li><p>SHOW TABLES<br>在你使用use语句后，列出你指定的数据库的所有表</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use RUNOOB;</div><div class="line">Database changed</div><div class="line"><span class="section">mysql&gt; SHOW TABLES;</span></div><div class="line">+------------------+</div><div class="line"><span class="section">| Tables_in_runoob |</span></div><div class="line">+------------------+</div><div class="line">| employee<span class="emphasis">_tbl     |</span></div><div class="line">| runoob_tbl       |</div><div class="line"><span class="section">| tcount_tbl       |</span></div><div class="line">+------------------+</div><div class="line">3 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-</li>
-<li><p>SHOW COLUMNS FROM 数据表<br>显示某个表所有的列信息</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SHOW COLUMNS FROM runoob_tbl;</div><div class="line">+-----------------+--------------+------+-----+---------+-------+</div><div class="line">|<span class="string"> Field           </span>|<span class="string"> Type         </span>|<span class="string"> Null </span>|<span class="string"> Key </span>|<span class="string"> Default </span>|<span class="string"> Extra </span>|</div><div class="line">+-----------------+--------------+------+-----+---------+-------+</div><div class="line">|<span class="string"> runoob_id       </span>|<span class="string"> int(11)      </span>|<span class="string"> NO   </span>|<span class="string"> PRI </span>|<span class="string"> NULL    </span>|<span class="string">       </span>|</div><div class="line">|<span class="string"> runoob_title    </span>|<span class="string"> varchar(255) </span>|<span class="string"> YES  </span>|<span class="string">     </span>|<span class="string"> NULL    </span>|<span class="string">       </span>|</div><div class="line">|<span class="string"> runoob_author   </span>|<span class="string"> varchar(255) </span>|<span class="string"> YES  </span>|<span class="string">     </span>|<span class="string"> NULL    </span>|<span class="string">       </span>|</div><div class="line">|<span class="string"> submission_date </span>|<span class="string"> date         </span>|<span class="string"> YES  </span>|<span class="string">     </span>|<span class="string"> NULL    </span>|<span class="string">       </span>|</div><div class="line">+-----------------+--------------+------+-----+---------+-------+</div><div class="line">4 rows in set (0.01 sec)</div></pre></td></tr></table></figure>
-</li>
-<li><p>SHOW INDEX FROM 数据表<br>显示某个表所有的索引</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SHOW INDEX FROM runoob_tbl;</span></div><div class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</div><div class="line"><span class="section">| Table      | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |</span></div><div class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</div><div class="line"><span class="section">| runoob_tbl |          0 | PRIMARY  |            1 | runoob_id   | A         |           2 |     NULL | NULL   |      | BTREE      |         |               |</span></div><div class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
-</li>
-<li><p>SHOW TABLE STATUS LIKE [FROM db_name] [LIKE ‘pattern’] \G<br>显示某数据库下所有表或名字满足pattern的表的各类信息</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SHOW <span class="keyword">TABLE</span> STATUS  <span class="comment">FROM RUNOOB</span>;<span class="comment">   #</span> 显示数据库<span class="comment"> RUNOOB</span> 中所有表的信息</div><div class="line">mysql&gt; SHOW <span class="keyword">TABLE</span> STATUS <span class="comment">from RUNOOB LIKE</span> <span class="comment">'runoob%'</span>;<span class="comment">     #</span> 表名以<span class="comment">runoob</span>开头的表的信息</div><div class="line">mysql&gt; SHOW <span class="keyword">TABLE</span> STATUS <span class="comment">from RUNOOB LIKE</span> <span class="comment">'runoob%'</span><span class="comment">\G</span>;<span class="comment">   #</span> 加上<span class="comment"> \G</span>，查询结果按列打印<span class="comment">(</span>许多命令都可以这么干<span class="comment">)</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [create_specification]<br>创建一个数据库。<code>[]</code>括起来的是可选值<br>IF NOT EXISTS 可在数据库已经存在的时候忽略执行这句话从而避免报错<br>create_specification:<br> [DEFAULT] CHARACTER SET [=] charset_name<br>| [DEFAULT] COLLATE [=] collation_name<br>CHARACTER SET指定数据库的默认字符集，<br>COLLATE指定数据库对应字符集的字符校对规则(影响排序和字符比较)</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE DATABASE <span class="keyword">IF</span> <span class="keyword">NOT</span> EXISTS test_db CHARACTER <span class="keyword">SET</span>=utf8 <span class="comment">COLLATE=utf8_unicode_ci</span>;</div><div class="line">Query OK, <span class="number">1</span> row affected (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-</li>
-<li><p>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name<br>删除数据库。注意：删除数据库操作会导致数据永久删除。另外，如果user表中定义了某用户对你删除的表的种种权限，这些记录不会跟着删除。</p>
-</li>
-</ol>
-<h2 id="五、一些高级命令-比较复杂的"><a href="#五、一些高级命令-比较复杂的" class="headerlink" title="五、一些高级命令(比较复杂的)"></a>五、一些高级命令(比较复杂的)</h2><h4 id="1-创建表"><a href="#1-创建表" class="headerlink" title="1)创建表"></a>1)创建表</h4><p>CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name<br>    (create_definition,…)<br>    [table_options]<br>    [partition_options]</p>
-<p><code>[]</code>括起来的是可选值。</p>
-<ul>
-<li>TEMPORARY：这个字段允许你创建一个临时表，当会话(session)结束时，这个临时表自动销毁。临时表赋予你不同会话创建同名表的能力，甚至是和已有的非临时表同名。<br>注意：临时表的创建不会自动commit事务，临时表和数据库关系是很松的，删除数据库不会删除其中的临时表，同样地，你还可以定义临时表在压根不存在的数据库里，不过之后的每次调用你都要用数据库名.临时表名的方式访问</li>
-<li><p>create_definition:<br>这部分内容主要有以下结构组成：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">  col_name column_definition</div><div class="line">| [<span class="symbol">CONSTRAINT</span> [symbol]] <span class="symbol">PRIMARY</span> <span class="symbol">KEY</span> [index_type] (index_col_name,...)</div><div class="line">    [index_option] ...</div><div class="line">| &#123;<span class="symbol">INDEX</span>|<span class="symbol">KEY</span>&#125; [index_name] [index_type] (index_col_name,...)</div><div class="line">    [index_option] ...</div><div class="line">| [<span class="symbol">CONSTRAINT</span> [symbol]] <span class="symbol">UNIQUE</span> [<span class="symbol">INDEX</span>|<span class="symbol">KEY</span>]</div><div class="line">    [index_name] [index_type] (index_col_name,...)</div><div class="line">    [index_option] ...</div><div class="line">| &#123;<span class="symbol">FULLTEXT</span>|<span class="symbol">SPATIAL</span>&#125; [<span class="symbol">INDEX</span>|<span class="symbol">KEY</span>] [index_name] (index_col_name,...)</div><div class="line">    [index_option] ...</div><div class="line">| [<span class="symbol">CONSTRAINT</span> [symbol]] <span class="symbol">FOREIGN</span> <span class="symbol">KEY</span></div><div class="line">    [index_name] (index_col_name,...) reference_definition</div><div class="line">| <span class="symbol">CHECK</span> (expr)</div></pre></td></tr></table></figure>
-<ul>
-<li>col_name:就是列名</li>
-<li>column_definition:<br>又由以下结构构成：<br>data_type [NOT NULL | NULL] [DEFAULT default_value]<br>[AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY]<br>[COMMENT ‘string’]<br>[COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}]<br>[STORAGE {DISK|MEMORY|DEFAULT}]<br>[reference_definition]<ul>
-<li>data_type：就是column的类型</li>
-<li>NOT NULL或NULL：指定列是否可以为空</li>
-<li>DEFAULT:指定默认的值，必须为常数，不能是函数，不能为BLOB和TEXT类型设置默认值，自增的列也不行</li>
-<li>AUTO_INCREMENT:设置列为自增列，只能设置整数(integer)和单精度浮点(floating-point)类型为自增，超过最大值时，自增列又会从1开始。自增数字都是正的，不能是负的</li>
-<li>UNIQUE：唯一性索引，设置列里的值全部是唯一的，不允许插入已经有的值。另外，NULL是可以插入多个的</li>
-<li>PRIMARY：主键，不用说了，必须非空，一种唯一性索引，因此你不能再创建一个索引名字叫PRIMARY。在InnoDB表中要尽可能地使主键更短，来优化secondary index(辅助索引)占用的空间。最好先声明PRIMARY列再次是UNIQUE列，最后是其他列，这样可以提高索引使用效率</li>
-<li>COMMENT：列的注释，1024个字符长度限制</li>
-<li>COLUMN_FORMAT：针对NDB引擎的字段，指定列是动态的还是固定的空间存储还是根据类型自动选择。其他引擎声明了也没用。</li>
-<li>STORAGE：针对NDB引擎的，指定列是存放内存里还是硬盘上。其他引擎没用。必须与表空间声明字段TABLESPACE配合使用。</li>
-<li>reference_definition:<br>  主要是声明外键约束用的，InnoDB和NDB引擎支持。由以下结构组成：<br>  REFERENCES tbl_name (index_col_name,…)<br>  [MATCH FULL | MATCH PARTIAL | MATCH SIMPLE]<br>  [ON DELETE reference_option]<br>  [ON UPDATE reference_option]<ul>
-<li>tbl_name就是其他表的表名</li>
-<li>index_col_name就是其他表已经建立过索引的列的列名。就是说其他表的列最好是非空并唯一的。</li>
-<li>MATCH语句应该避免使用，尤其是InnoDB引擎，默认就是MATCH SIMPLE。如果显示声明了，可能导致其连同后面的语句一起被忽略。这个语句主要是指定外键是否允许或部分允许空值NULL的</li>
-<li>ON DELETE：删除时候的行为，有四种选项：RESTRICT(有外键不给删) | CASCADE(递归删) | SET NULL(置为空) | NO ACTION(不做事情)。</li>
-<li>ON UPDATE：更新时候的行为，有四种选项：RESTRICT(有外键不给更新) | CASCADE(递归更新) | SET NULL(置为空) | NO ACTION(不做事情)。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>CONSTRAINT就是约束的意思，所以接下来可选的句子都是设置表的约束条件的。大部分都很容易看懂字面意思，就不详细说了。</li>
-<li>index_option：<br>索引的配置项，其中PARSER是为全文索引用的，全文索引需要特殊的解析插件的话可以定义。<br>index_type有BTREE和HASH两种。不解释了。<br>KEY_BLOCK_SIZE有点儿歧义，官网文档针对不同的引擎有不同的解释，针对MyISAM引擎，可以用来指定索引块的大小。针对InnoDB引擎，可以用来指定压缩过的表的分页大小(不能超过innodb_page_size)。无论哪种引擎，这个值都只是一个参考值，真正运行中引擎会根据情况调整。<br>index_option:<br>KEY_BLOCK_SIZE [=] value<br>| index_type<br>| WITH PARSER parser_name<br>| COMMENT ‘string’</li>
-</ul>
-</li>
-<li><p>table_options：<br>指定的是表级别的设置，有如下选项：<br>table_option:<br>  ENGINE [=] engine_name<br>| AUTO_INCREMENT [=] value<br>| AVG_ROW_LENGTH [=] value<br>| [DEFAULT] CHARACTER SET [=] charset_name<br>| CHECKSUM [=] {0 | 1}<br>| [DEFAULT] COLLATE [=] collation_name<br>| COMMENT [=] ‘string’<br>| CONNECTION [=] ‘connect_string’<br>| DATA DIRECTORY [=] ‘absolute path to directory’<br>| DELAY_KEY_WRITE [=] {0 | 1}<br>| INDEX DIRECTORY [=] ‘absolute path to directory’<br>| INSERT_METHOD [=] { NO | FIRST | LAST }<br>| KEY_BLOCK_SIZE [=] value<br>| MAX_ROWS [=] value<br>| MIN_ROWS [=] value<br>| PACK_KEYS [=] {0 | 1 | DEFAULT}<br>| PASSWORD [=] ‘string’<br>| ROW_FORMAT [=] {DEFAULT|DYNAMIC|FIXED|COMPRESSED|REDUNDANT|COMPACT}<br>| STATS_AUTO_RECALC [=] {DEFAULT|0|1}<br>| STATS_PERSISTENT [=] {DEFAULT|0|1}<br>| STATS_SAMPLE_PAGES [=] value<br>| TABLESPACE tablespace_name [STORAGE {DISK|MEMORY|DEFAULT}]<br>| UNION [=] (tbl_name[,tbl_name]…)</p>
-<ul>
-<li>ENGINE：引擎，不用说了，一般都是InnoDB，还有略旧一点儿引擎MyISAM。引擎介绍可以看我这篇文章： <a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a></li>
-<li>AUTO_INCREMENT: 指定自增列从什么数字开始自增</li>
-<li>AVG_ROW_LENGTH：这个官网写的啥啊，反正就是MyISAM引擎用的，用来指定行的平均长度，用来被计算表的数据和索引至多占用多少空间。默认是占256TB，好像如果设置到7，你就可以搞成65,536TB。文末有官网文档地址，谁英语好帮我看看啥意思……</li>
-<li>CHARACTER SET:字符集设置</li>
-<li>COLLATE：字符集校对设置</li>
-<li>CHECKSUM：校验和。仅用于MyISAM。设置成1使得表格维护一个校验和，每次更新校验和也会更新。会拖慢速度，但是更容易通过CHECKSUM TABLE语句找到坏数据的表。</li>
-<li>COMMENT：表格的注释，没啥好说的，最大2048个字符</li>
-<li>CONNECTION：FEDERATED引擎，一种可以将表定义放在本地，数据放在远程的表格。其中，远程服务器的连接信息放在这个字段里。</li>
-<li>DATA DIRECTORY：指定一个特殊的路径来放表的文件。</li>
-<li>INDEX DIRECTORY：指定一个特殊的路径来放索引的文件。</li>
-<li>DELAY_KEY_WRITE：设置为1的话，直到表格关闭才会更新key值。仅MyISAM引擎。</li>
-<li>INSERT_METHOD：为MERGE引擎设计的，这个引擎可以支持将MyISAM引擎的同结构表合并成一个表，便于查询。但是插入的时候就麻烦，不知道要插入到哪个表里去。这个字段定义了插入到哪儿。是合并的第一张表，还是最后一张，还是不让插入。</li>
-<li>MAX_ROWS：一个参考值，告诉引擎至少要支持到存这么多行。</li>
-<li>MIN_ROWS：一个参考值，只有MEMORY引擎用，告诉引擎最少打算存多少行。</li>
-<li>PACK_KEYS：仅MyISAM，压缩索引的。若为1，则压缩所有的。会导致更新更慢，读取更快。0则不压缩，DEFAULT就是仅压缩CHAR,VARCHAR,BINARY,VARBINARY这些类型的列。默认不写的话，只压缩字符串，不压缩数字类型</li>
-<li><del>PASSWORD</del>：官方文档说没用了，看来Mysql也会因为历史原因生产死亡的代码……</li>
-<li>ROW_FORMAT：定义行存储的物理格式。不同引擎不一样，主要就是定义是紧凑还是过去的宽松存储格式，还有压缩神马的，有兴趣的可以看文末官网文档。</li>
-<li>STATS_AUTO_RECALC：是否自动重新计算表的持久化统计数据。</li>
-<li>STATS_PERSISTENT：是否开启持久化表的统计数据功能</li>
-<li>STATS_SAMPLE_PAGES：用于估计索引列的统计数据的基数的时候，设定取样的索引页数目，详情见官网文档</li>
-<li>TABLESPACE：仅用于NDB引擎。分配表空间的。</li>
-<li>UNION：就是MERGE引擎用的，来把两个MyISAM同结构表合并</li>
-</ul>
-</li>
-<li>partition_options：<br>用来控制表的分割方式的，很少用到，还是不讲了，见官网。</li>
-</ul>
-<p>说了这么多，其实真正用起来的时候，建表语句并没有这么长。下面是一些常用的例子：<br>注意，如果你在linux mysql客户端里面输入这些命令的话，输错了可以使用<code>\c</code>来取消当前命令重新输入。<br>最好使用远程的，windows系统下的图形界面客户端来输入，不然很蛋疼。输错一个全部重来。</p>
-<p>没有索引的：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE TABLE IF NOT EXISTS welkin_test2</div><div class="line">    -<span class="ruby">&gt; (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,</span></div><div class="line">    -<span class="ruby">&gt; name VARCHAR(<span class="number">45</span>) COMMENT <span class="string">'this is users name'</span>,</span></div><div class="line">    -<span class="ruby">&gt; create_date DATE NOT NULL)</span></div><div class="line">    -<span class="ruby">&gt;  ENGINE=innodb CHARACTER SET=UTF8 COMMENT = <span class="string">'just test'</span></span></div><div class="line">    -<span class="ruby">&gt; AUTO_INCREMENT=<span class="number">1</span>;</span></div></pre></td></tr></table></figure></p>
-<p>有外键约束索引的：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE TABLE welkin_test_index</div><div class="line">    -<span class="ruby">&gt; (id int NOT NULL AUTO_INCREMENT PRIMARY KEY,</span></div><div class="line">    -<span class="ruby">&gt; test2_id int NOT NULL,</span></div><div class="line">    -<span class="ruby">&gt; CONSTRAINT FOREIGN KEY</span></div><div class="line">    -<span class="ruby">&gt; (test2_id) REFERENCES welkin_test2 (id)</span></div><div class="line">    -<span class="ruby">&gt; ON DELETE CASCADE</span></div><div class="line">    -<span class="ruby">&gt; ON UPDATE CASCADE</span></div><div class="line">    -<span class="ruby">&gt; )</span></div><div class="line">    -<span class="ruby">&gt; ENGINE=innodb</span></div><div class="line">    -<span class="ruby">&gt; AUTO_INCREMENT=<span class="number">1</span></span></div><div class="line">    -<span class="ruby">&gt; CHARACTER SET=UTF8;</span></div></pre></td></tr></table></figure></p>
-<p>创建表还有两种模式，一种是根据搜索的结果创建表，另一种是根据已经有的表创建表。如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> [<span class="keyword">TEMPORARY</span>] <span class="keyword">TABLE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] tbl_name</div><div class="line">    [(create_definition,...)]</div><div class="line">    [table_options]</div><div class="line">    [partition_options]</div><div class="line">    [<span class="keyword">IGNORE</span> | <span class="keyword">REPLACE</span>]</div><div class="line">    [<span class="keyword">AS</span>] query_expression</div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> [<span class="keyword">TEMPORARY</span>] <span class="keyword">TABLE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] tbl_name</div><div class="line">    &#123; <span class="keyword">LIKE</span> old_tbl_name | (<span class="keyword">LIKE</span> old_tbl_name) &#125;</div></pre></td></tr></table></figure></p>
-<h4 id="2-更新语句"><a href="#2-更新语句" class="headerlink" title="2)更新语句"></a>2)更新语句</h4><p>如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> [<span class="keyword">LOW_PRIORITY</span>] [<span class="keyword">IGNORE</span>] table_reference</div><div class="line">    <span class="keyword">SET</span> col_name1=&#123;expr1|<span class="keyword">DEFAULT</span>&#125; [, col_name2=&#123;expr2|<span class="keyword">DEFAULT</span>&#125;] ...</div><div class="line">    [<span class="keyword">WHERE</span> where_condition]</div><div class="line">    [<span class="keyword">ORDER</span> <span class="keyword">BY</span> ...]</div><div class="line">    [<span class="keyword">LIMIT</span> <span class="keyword">row_count</span>]</div></pre></td></tr></table></figure></p>
-<ul>
-<li>LIMIT：限制更新条数，如果where语句查出的多于这个数目，语句就不执行</li>
-</ul>
-<h4 id="3-查询语句"><a href="#3-查询语句" class="headerlink" title="3)查询语句"></a>3)查询语句</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line">    [ALL | <span class="keyword">DISTINCT</span> | <span class="keyword">DISTINCTROW</span> ]</div><div class="line">      [<span class="keyword">HIGH_PRIORITY</span>]</div><div class="line">      [<span class="keyword">STRAIGHT_JOIN</span>]</div><div class="line">      [<span class="keyword">SQL_SMALL_RESULT</span>] [<span class="keyword">SQL_BIG_RESULT</span>] [<span class="keyword">SQL_BUFFER_RESULT</span>]</div><div class="line">      [<span class="keyword">SQL_CACHE</span> | SQL_NO_CACHE] [<span class="keyword">SQL_CALC_FOUND_ROWS</span>]</div><div class="line">    select_expr [, select_expr ...]</div><div class="line">    [<span class="keyword">FROM</span> table_references</div><div class="line">      [<span class="keyword">PARTITION</span> partition_list]</div><div class="line">    [<span class="keyword">WHERE</span> where_condition]</div><div class="line">    [<span class="keyword">GROUP</span> <span class="keyword">BY</span> &#123;col_name | expr | <span class="keyword">position</span>&#125;</div><div class="line">      [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>], ... [<span class="keyword">WITH</span> <span class="keyword">ROLLUP</span>]]</div><div class="line">    [<span class="keyword">HAVING</span> where_condition]</div><div class="line">    [<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;col_name | expr | <span class="keyword">position</span>&#125;</div><div class="line">      [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>], ...]</div><div class="line">    [<span class="keyword">LIMIT</span> &#123;[<span class="keyword">offset</span>,] <span class="keyword">row_count</span> | <span class="keyword">row_count</span> <span class="keyword">OFFSET</span> <span class="keyword">offset</span>&#125;]</div><div class="line">    [<span class="keyword">PROCEDURE</span> procedure_name(argument_list)]</div><div class="line">    [<span class="keyword">INTO</span> <span class="keyword">OUTFILE</span> <span class="string">'file_name'</span></div><div class="line">        [<span class="built_in">CHARACTER</span> <span class="keyword">SET</span> charset_name]</div><div class="line">        export_options</div><div class="line">      | <span class="keyword">INTO</span> <span class="keyword">DUMPFILE</span> <span class="string">'file_name'</span></div><div class="line">      | <span class="keyword">INTO</span> var_name [, var_name]]</div><div class="line">    [<span class="keyword">FOR</span> <span class="keyword">UPDATE</span> | <span class="keyword">LOCK</span> <span class="keyword">IN</span> <span class="keyword">SHARE</span> <span class="keyword">MODE</span>]]</div></pre></td></tr></table></figure>
-<ul>
-<li>ALL/DISTINCT/DISTINCTROW：ALL其实可以忽略不写，默认就是ALL，DISTINCT和DISTINCTROW是同义词，代表输出结果去重</li>
-<li>HIGH_PRIORITY：用在MyISAM, MEMORY, and MERGE这类表锁引擎上，代表高优先级，先于更新的语句执行，并锁住表</li>
-<li>STRAIGHT_JOIN：优化表关联查询的，如果优化器没有以最优的方式关联表，你可以使用这个字段。(强迫优化器按照你声明的顺序关联查询)</li>
-<li>SQL_BIG_RESULT/SQL_SMALL_RESULT：告诉优化器查询结果是非常大还是很小，以利于优化器优化GROUP BY或DISTINCT的性能。</li>
-<li>SQL_BUFFER_RESULT：强制性将查询结果放入临时表。帮助MYSQL提前释放表锁，否则还要等到将结果发给客户端后才能释放。只能用在顶级查询，子查询和联合查询(UNION)不行</li>
-<li>SQL_CACHE/SQL_NO_CACHE：告诉MYSQL要不要缓存查询结果，缓存的话下一次直接从缓存里取结果</li>
-<li>SQL_CALC_FOUND_ROWS：使用了这个参数的haunted，可以在之后使用SELECT FOUND_ROWS()语句得到结果集有多少行，忽视LIMIT限制。</li>
-<li>LIMIT：就是制定返回的数据集，offset代表偏移量，比如5的话，就是从第6条数据返回，row_count就是返回的行数。也可以使用LIMIT row_count OFFSET offest这种格式来声明</li>
-<li>INTO OUTFILE：是用来将结果输出到某个文件或者某个变量里的。</li>
-<li>FOR UPDATE：会在相应的行上上写锁(InnoDB这种支持的引擎才行)，直到事务结束</li>
-<li>LOCK IN SHARE MODE：在相应行上加共享锁。详情见另一篇文章：<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a></li>
-<li>PROCEDURE：存储过程，一段可以处理查询结果的程序</li>
-<li>PARTITION：和分页有关，5.6.2版本后可以支持分页，将数据自动地按照某些条件分成几页，查询的时候使用这个条件来查询相应页的数据</li>
-</ul>
-<p>有关查询语句的参数就介绍这些。具体的查询操作见下章内容。</p>
-<h4 id="4-插入语句"><a href="#4-插入语句" class="headerlink" title="4)插入语句"></a>4)插入语句</h4><p>插入语句有三种写法：<br>第一种：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">DELAYED</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</div><div class="line">    [<span class="keyword">INTO</span>] tbl_name</div><div class="line">    [<span class="keyword">PARTITION</span> (partition_name,...)]</div><div class="line">    [(col_name,...)]</div><div class="line">    &#123;<span class="keyword">VALUES</span> | <span class="keyword">VALUE</span>&#125; (&#123;expr | <span class="keyword">DEFAULT</span>&#125;,...),(...),...</div><div class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span></div><div class="line">      col_name=expr</div><div class="line">        [, col_name=expr] ... ]</div></pre></td></tr></table></figure></p>
-<p>第二种：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">DELAYED</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</div><div class="line">    [<span class="keyword">INTO</span>] tbl_name</div><div class="line">    [<span class="keyword">PARTITION</span> (partition_name,...)]</div><div class="line">    <span class="keyword">SET</span> col_name=&#123;expr | <span class="keyword">DEFAULT</span>&#125;, ...</div><div class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span></div><div class="line">      col_name=expr</div><div class="line">        [, col_name=expr] ... ]</div></pre></td></tr></table></figure></p>
-<p>第三种：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</div><div class="line">    [<span class="keyword">INTO</span>] tbl_name</div><div class="line">    [<span class="keyword">PARTITION</span> (partition_name,...)]</div><div class="line">    [(col_name,...)]</div><div class="line">    <span class="keyword">SELECT</span> ...</div><div class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span></div><div class="line">      col_name=expr</div><div class="line">        [, col_name=expr] ... ]</div></pre></td></tr></table></figure></p>
-<p>前两种都是插入新的数据，最后一种是根据其他表的查询结果来插入数据。</p>
-<ul>
-<li>VALUE和VALUES是同义词</li>
-<li>LOW_PRIORITY/DELAYED/HIGH_PRIORITY：用在MyISAM等表锁引擎里，指执行的优先级，低优先级将等待没有其他客户端在读的时候才执行(频繁读的表会导致较大延迟)。这个字段轻易不要用，有并发问题。</li>
-<li>IGNORE：忽略错误，如果有错误(比如违反唯一性约束)不会抛错，而是抛警告。语句不执行。</li>
-<li>ON DUPLICATE KEY UPDATE：可以在违反唯一性约束的时候，更新旧的行，而不是新插入一行。</li>
-</ul>
-<p>例子：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into welkin<span class="emphasis">_test2(id,name,create_</span>date)</div><div class="line"><span class="code">    -&gt; values(1,'test',now());</span></div><div class="line">Query OK, 1 row affected, 1 warning (0.00 sec)</div><div class="line"></div><div class="line"><span class="section">mysql&gt; select * from welkin_test2;</span></div><div class="line">+----+------+-------------+</div><div class="line"><span class="section">| id | name | create_date |</span></div><div class="line">+----+------+-------------+</div><div class="line"><span class="section">|  1 | test | 2016-10-13  |</span></div><div class="line">+----+------+-------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into welkin<span class="emphasis">_test2</span></div><div class="line">    -&gt; value(2,'test2',now()),(3,'test3',now());</div><div class="line">Query OK, 2 rows affected, 2 warnings (0.00 sec)</div><div class="line">Records: 2  Duplicates: 0  Warnings: 2</div><div class="line"></div><div class="line"><span class="section">mysql&gt; select * from welkin_test2;</span></div><div class="line">+----+-------+-------------+</div><div class="line"><span class="section">| id | name  | create_date |</span></div><div class="line">+----+-------+-------------+</div><div class="line">|  1 | test  | 2016-10-13  |</div><div class="line">|  2 | test2 | 2016-10-13  |</div><div class="line"><span class="section">|  3 | test3 | 2016-10-13  |</span></div><div class="line">+----+-------+-------------+</div></pre></td></tr></table></figure>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into welkin<span class="emphasis">_test2</span></div><div class="line">    -&gt; set id=4,name='test4',create_date=now();</div><div class="line">Query OK, 1 row affected, 1 warning (0.00 sec)</div><div class="line"></div><div class="line"><span class="section">mysql&gt; select * from welkin_test2;</span></div><div class="line">+----+-------+-------------+</div><div class="line"><span class="section">| id | name  | create_date |</span></div><div class="line">+----+-------+-------------+</div><div class="line">|  1 | test  | 2016-10-13  |</div><div class="line">|  2 | test2 | 2016-10-13  |</div><div class="line">|  3 | test3 | 2016-10-13  |</div><div class="line"><span class="section">|  4 | test4 | 2016-10-13  |</span></div><div class="line">+----+-------+-------------+</div><div class="line">4 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p>注意：如果table名字后面不跟列名，默认就要提供所有的列值。跟了就可以选择性地提供，顺序也可以乱。否则就要按照表声明时的顺序。<br>没声明的列值，都会用相应类型的默认值去填充，自增的列会自增，无需提供列值，当然你也可以提供。</p>
-<h4 id="5-删除语句"><a href="#5-删除语句" class="headerlink" title="5)删除语句"></a>5)删除语句</h4><p>DROP语句可以删除很多东西，数据库，表，用户等。<br>但是删除数据，需要用delete语句。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> [<span class="keyword">LOW_PRIORITY</span>] [<span class="keyword">QUICK</span>] [<span class="keyword">IGNORE</span>] <span class="keyword">FROM</span> tbl_name</div><div class="line">    [<span class="keyword">PARTITION</span> (partition_name,...)]</div><div class="line">    [<span class="keyword">WHERE</span> where_condition]</div><div class="line">    [<span class="keyword">ORDER</span> <span class="keyword">BY</span> ...]</div><div class="line">    [<span class="keyword">LIMIT</span> <span class="keyword">row_count</span>]</div></pre></td></tr></table></figure>
-<p>ORDER BY：按照排序的顺序结果来删，配合LIMIT用<br>LIMIT：限制删除多少行，超过部分忽略不删。</p>
-<p>还有多表联合删除，这个就不写了，看官网。</p>
-<h2 id="六、高级命令第二部分"><a href="#六、高级命令第二部分" class="headerlink" title="六、高级命令第二部分"></a>六、高级命令第二部分</h2><h4 id="1-排序"><a href="#1-排序" class="headerlink" title="1)排序"></a>1)排序</h4><p>SELECT语句中有ORDER BY子句，用来指定根据哪些列来排序。默认的ASC参数代表升序，DESC参数代表降序。<br>注意：根据设置的字符集和字符校对规则不同，排序结果可能不同。</p>
-<h4 id="2-分组"><a href="#2-分组" class="headerlink" title="2)分组"></a>2)分组</h4><p>SELECT语句有GROUP BY子句，用来对结果集进行分组。<br>基本语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, <span class="keyword">function</span>(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</div></pre></td></tr></table></figure></p>
-<p>注意，必须在select_expr部分使用类似sum()这样的聚合函数，否则输出的结果没有意义，虽然的确按照指定的列分组了，但是其他的列的值是随机的。<br>例子：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SELECT * FROM employee_tbl;</span></div><div class="line">+----+--------+---------------------+--------+</div><div class="line"><span class="section">| id | name   | date                | singin |</span></div><div class="line">+----+--------+---------------------+--------+</div><div class="line">|  1 | 小明 | 2016-04-22 15:25:33 |      1 |</div><div class="line">|  2 | 小王 | 2016-04-20 15:25:47 |      3 |</div><div class="line">|  3 | 小丽 | 2016-04-19 15:26:02 |      2 |</div><div class="line">|  4 | 小王 | 2016-04-07 15:26:14 |      4 |</div><div class="line">|  5 | 小明 | 2016-04-11 15:26:40 |      4 |</div><div class="line"><span class="section">|  6 | 小明 | 2016-04-04 15:26:54 |      2 |</span></div><div class="line">+----+--------+---------------------+--------+</div><div class="line"><span class="section">mysql&gt; SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;</span></div><div class="line">+--------+----------+</div><div class="line"><span class="section">| name   | COUNT(*) |</span></div><div class="line">+--------+----------+</div><div class="line">| 小丽 |        1 |</div><div class="line">| 小明 |        3 |</div><div class="line"><span class="section">| 小王 |        2 |</span></div><div class="line">+--------+----------+</div><div class="line">3 rows in set (0.01 sec)</div></pre></td></tr></table></figure></p>
-<p>GROUP BY 命令末尾有一个有趣的参数：WITH ROLLUP<br>这个参数具有多重功能。</p>
-<ol>
-<li><p>如果你仔细观察上门的例子，你会发现，聚合函数只能统计那些分组的字段的情况，加入我们要统计不同的人singin的次数呢？<br>WITH ROLLUP参数允许你执行下面的结果：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span></div><div class="line">+--------+--------------+</div><div class="line"><span class="section">| name   | singin_count |</span></div><div class="line">+--------+--------------+</div><div class="line">| 小丽 |            2 |</div><div class="line">| 小明 |            7 |</div><div class="line">| 小王 |            7 |</div><div class="line"><span class="section">| NULL   |           16 |</span></div><div class="line">+--------+--------------+</div><div class="line">4 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p> 可以看到，最后一行还统计了三个人总共的签到次数。</p>
-</li>
-<li><p>这个参数第二个功能就是当你有多个分组时，它会统计多个分组的全集的情况。<br>让我们把时间那一列运用起来：<br>现在我们的表格是这样的：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SELECT <span class="symbol">*</span> FROM employee_tbl;</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  7 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  8 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  9 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string"> 10 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> 11 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> 12 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">12 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p> 然后我们不用WITH ROLLUP试试：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SELECT name, date, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name,date;</span></div><div class="line">+--------+---------------------+--------------+</div><div class="line"><span class="section">| name   | date                | singin_count |</span></div><div class="line">+--------+---------------------+--------------+</div><div class="line">| 小丽   | 2016-04-19 15:26:02 |            4 |</div><div class="line">| 小明   | 2016-04-04 15:26:54 |            4 |</div><div class="line">| 小明   | 2016-04-11 15:26:40 |            8 |</div><div class="line">| 小明   | 2016-04-22 15:25:33 |            2 |</div><div class="line">| 小王   | 2016-04-07 15:26:14 |            8 |</div><div class="line"><span class="section">| 小王   | 2016-04-20 15:25:47 |            6 |</span></div><div class="line">+--------+---------------------+--------------+</div><div class="line">6 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p> 可以看到先按照名字分组，然后又按照时间分组了，最后统计了同一名字同一时间的签到情况。<br> 使用了WITH ROLLUP会怎样呢？</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SELECT name, date, SUM(singin) as singin_count FROM employee_tbl GROUP BY name,date WITH ROLLUP;</div><div class="line">+--------+---------------------+--------------+</div><div class="line">|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin_count </span>|</div><div class="line">+--------+---------------------+--------------+</div><div class="line">|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">            4 </span>|</div><div class="line">|<span class="string"> 小丽   </span>|<span class="string"> NULL                </span>|<span class="string">            4 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">            4 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">            8 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">            2 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> NULL                </span>|<span class="string">           14 </span>|</div><div class="line">|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">            8 </span>|</div><div class="line">|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">            6 </span>|</div><div class="line">|<span class="string"> 小王   </span>|<span class="string"> NULL                </span>|<span class="string">           14 </span>|</div><div class="line">|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">           32 </span>|</div><div class="line">+--------+---------------------+--------------+</div><div class="line">10 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-<p> 可以看到，多了一些行，这些行统计了同一个名字无论什么时间的签到情况，还有所有人所有时间的签到情况。</p>
-</li>
-</ol>
-<p>我们还有HAVING语句。<br>用来对分组后的数据进行二次过滤，比如我们想得到上面那个表签到大于10的情况：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; SELECT name, date, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name,date WITH ROLLUP HAVING sum(singin)&gt;10;</span></div><div class="line">+--------+------+--------------+</div><div class="line"><span class="section">| name   | date | singin_count |</span></div><div class="line">+--------+------+--------------+</div><div class="line">| 小明   | NULL |           14 |</div><div class="line">| 小王   | NULL |           14 |</div><div class="line"><span class="section">| NULL   | NULL |           32 |</span></div><div class="line">+--------+------+--------------+</div><div class="line">3 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<h4 id="3-内外连接查询"><a href="#3-内外连接查询" class="headerlink" title="3)内外连接查询"></a>3)内外连接查询</h4><p>使用JOIN语法来联合多表查询。</p>
-<h5 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h5><p>首先是内连接，或者叫等值连接。<br>语法如下：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_tbl a INNER JOIN employee_copy_tbl b ON(a.id=b.id AND a.name=b.name AND a.date=b.date AND a.singin=b.singin);</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">6 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>还有一种等价的表示方法：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_tbl a, employee_copy_tbl b where a.id=b.id AND a.name=b.name AND a.date=b.date AND a.singin=b.singin;</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">6 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>这种等价的方法叫做逗号连接，使用比较多。但是貌似新的SQL标准推荐使用显式地连接而不要使用这种隐式连接。</p>
-<p>如果还有更多的表，第一种方法可以在INNER JOIN之后使用括号(a,b,c……)来连接多个表，也可以使用(a CROSS JOIN b CROSS JOIN c……)的形式，这两者是等价的，而且只有Mysql是等价的。其他数据库不等价。<br>第二种方法就很简单了，继续使用逗号来列出要连接的多个表就行了。</p>
-<p>注：表名的后面空格跟表名的别名，这样你的SQL语句可以简洁一些。</p>
-<p>第一种方法还可以在ON的子句之后跟where语句，对两个表连接之后的数据做进一步过滤，比如：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_tbl a INNER JOIN employee_copy_tbl b ON(a.id=b.id AND a.name=b.name AND a.date=b.date AND a.singin=b.singin) where a.name='小明';</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+----+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">3 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>还可以使用USING语句替代ON语句，比如例子中两个表都有id,name,date,singin这些字段，用USING(id,name,date,singin)来代替ON语句后面括号里跟的一长串等号表达式：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_tbl a INNER JOIN employee_copy_tbl b USING(id,name,date,singin);</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+----+--------+---------------------+--------+</div><div class="line">6 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>细心地你肯定发现USING使用起来还是和ON有区别的。如果使用USING，并且select后面跟了*，那么USING不像ON那样将两个表的列都显示出来，而是把他们合并起来了，因为这种情况下，两个列的值肯定是相同的。</p>
-<h5 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h5><p>外连接语法和内连接几乎一样，除了关键字不一样，左外连接是LEFT OUTER JOIN或者(LEFT JOIN)，右外连接是RIGHT OUTER JOIN<br>例子：<br>左连接<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_tbl a LEFT OUTER JOIN employee_copy_tbl b ON(a.id=b.id AND a.name=b.name AND a.date=b.date AND a.singin=b.singin);</div><div class="line">+----+--------+---------------------+--------+------+--------+---------------------+--------+</div><div class="line">|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|<span class="string"> id   </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+----+--------+---------------------+--------+------+--------+---------------------+--------+</div><div class="line">|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string">    1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|<span class="string">    2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|<span class="string">    3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|<span class="string">    4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string">    5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string">    6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">  7 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">|<span class="string">  8 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">|<span class="string">  9 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">|<span class="string"> 10 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">|<span class="string"> 11 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">|<span class="string"> 12 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|</div><div class="line">+----+--------+---------------------+--------+------+--------+---------------------+--------+</div><div class="line">12 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>右连接<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select <span class="symbol">*</span> from employee_copy_tbl a RIGHT OUTER JOIN employee_tbl b ON(a.id=b.id AND a.name=b.name AND a.date=b.date AND a.singin=b.singin);</div><div class="line">+------+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string"> id   </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|<span class="string"> id </span>|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+------+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">|<span class="string">    1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|<span class="string">  1 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string">    2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|<span class="string">  2 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string">    3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|<span class="string">  3 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string">    4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|<span class="string">  4 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">    5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|<span class="string">  5 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string">    6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|<span class="string">  6 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string">  7 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string">  8 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string">  9 </span>|<span class="string"> 小丽   </span>|<span class="string"> 2016-04-19 15:26:02 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string"> 10 </span>|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string"> 11 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> NULL </span>|<span class="string"> NULL   </span>|<span class="string"> NULL                </span>|<span class="string">   NULL </span>|<span class="string"> 12 </span>|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">+------+--------+---------------------+--------+----+--------+---------------------+--------+</div><div class="line">12 rows in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>从上面的表里可以看出，左连接保留了所有左表的数据，用右表来匹配左表，匹配不到的右表用NULL来填充。<br>右连接则用左表匹配右表的全部数据，匹配不到的用NULL来填充。(例子中我为了结果更直观，右连接互换了左右表，请注意)<br>官方文档说，尽量地使用左连接，因为它效率更高。</p>
-<p>同样地，你也可以在连接后使用where语句过滤结果。<br>也可以使用USING来代替ON语句。注意，USING在select *的情况下会合并两个表，并在合并的时候，忽略NULL，使用存在的数据。</p>
-<p>至于全连接，很遗憾mysql没有这种类型。</p>
-<h4 id="4-多语句联合查询-UNION"><a href="#4-多语句联合查询-UNION" class="headerlink" title="4)多语句联合查询(UNION)"></a>4)多语句联合查询(UNION)</h4><p>可以将多个select语句的结果合并在一起，同时返回，语法如下：<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ...</div><div class="line"><span class="keyword">UNION</span> [ALL | <span class="keyword">DISTINCT</span>] <span class="keyword">SELECT</span> ...</div><div class="line">[<span class="keyword">UNION</span> [ALL | <span class="keyword">DISTINCT</span>] <span class="keyword">SELECT</span> ...]</div></pre></td></tr></table></figure></p>
-<ul>
-<li>多个语句搜到的结果，它们应该拥有相同的结构，如相同的列，列的类型也相同</li>
-<li>最终结果集的列名会以第一个select语句的列名为准</li>
-<li>只有最后一个select语句允许使用INTO OUTFILE语法来将结果输出到文件。结果输出的是所有语句合并的最终结果。</li>
-<li>HIGH_PRIORITY关键字不能用在UNION中，如果你声明在第一个select语句中，会被忽略，声明在后面的语句中，会报错。</li>
-<li>UNION默认的行为是最终结果会进行去重，你也可以使用ALL关键字来不去重。</li>
-<li>你可以在UNION语句中即使用ALL又使用DISTINCT，但是DISTINCT语句会将左边所有的ALL语句覆盖掉，这样的话，得到的就是去重的了。</li>
-<li>你可以在每个select语句中使用ORDER BY语句，但是必须搭配LIMIT语句，否则没有任何效果，最终结果仍然是没排序的。如果想要最终结果排序，那么就把select语句用括号括起来，在整个语句的最后用ORDER BY来排序。如果有字段起了别名，那ORDER BY 必须用别名来指定列。<br>例子：<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SELECT name,date,singin FROM employee_tbl WHERE name = '小明'</div><div class="line">    -&gt; UNION</div><div class="line">    -&gt; (SELECT name,date,singin FROM employee_tbl WHERE name = '小王') ORDER BY singin DESC;</div><div class="line"></div><div class="line">+--------+---------------------+--------+</div><div class="line">|<span class="string"> name   </span>|<span class="string"> date                </span>|<span class="string"> singin </span>|</div><div class="line">+--------+---------------------+--------+</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-11 15:26:40 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> 小王   </span>|<span class="string"> 2016-04-07 15:26:14 </span>|<span class="string">      4 </span>|</div><div class="line">|<span class="string"> 小王   </span>|<span class="string"> 2016-04-20 15:25:47 </span>|<span class="string">      3 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-04 15:26:54 </span>|<span class="string">      2 </span>|</div><div class="line">|<span class="string"> 小明   </span>|<span class="string"> 2016-04-22 15:25:33 </span>|<span class="string">      1 </span>|</div><div class="line">+--------+---------------------+--------+</div><div class="line">5 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="5-虚拟表"><a href="#5-虚拟表" class="headerlink" title="5)虚拟表"></a>5)虚拟表</h4><p>MySQL支持像Oracel数据库那样的虚拟表，你可以使用虚拟表来显示SQL语句计算得到的结果：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="number">1</span>+<span class="number">1</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
-<hr>
-<p>tips:当你在linux里面使用Mysql的客户端时，你可以使用help+语句来查找每个语句的帮助。<br>而且，你可以在帮助的最下方找到详细解释这个语句的官网文档地址，非常方便。<br><a href="http://dev.mysql.com/doc/refman/5.6/en/create-table.html" target="_blank" rel="external">Mysql官网文档5.6版本——Create语句</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本篇主要汇总Mysql的一些基础知识。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Mysql" scheme="/tags/Mysql/"/>
     
   </entry>
   
