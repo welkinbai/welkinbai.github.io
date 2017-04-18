@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-04-16T14:46:51.319Z</updated>
+  <updated>2017-04-18T13:50:56.554Z</updated>
   <id>/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="/2017/04/16/effective-java-7/"/>
     <id>/2017/04/16/effective-java-7/</id>
     <published>2017-04-16T09:36:02.000Z</published>
-    <updated>2017-04-16T14:46:51.319Z</updated>
+    <updated>2017-04-18T13:50:56.554Z</updated>
     
     <content type="html"><![CDATA[<p>本章继续讨论一些编程过程中应该注意的问题和细节<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
@@ -74,41 +74,15 @@
 <li>出入本地方法有一些固定开销，如果本地方法只做很少的事情，反而造成性能下降</li>
 <li>需要胶水代码的本地方法单调乏味，难以理解</li>
 </ul>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
+<h2 id="第五十五条-谨慎地进行优化"><a href="#第五十五条-谨慎地进行优化" class="headerlink" title="第五十五条 谨慎地进行优化"></a>第五十五条 谨慎地进行优化</h2><p>本条的大意有一下几点：</p>
+<ul>
+<li>要优先编写好的程序而不是快的程序，不要为了性能去做额外的多余的事情，尤其不能为了性能去牺牲好的设计和代码结构</li>
+<li>要在设计的初期就采取好的设计决策，留心那些暴露给其他模块用来交互的接口、数据对象等后期难以改变的东西，优秀的设计能够使后期灵活地调整代码，比如使用性能更好的实现来替代原有实现。</li>
+<li>好的设计通常都可以带来好的性能，不需要刻意去优化性能，除非真的有严重的性能问题</li>
+<li>尝试优化性能最不容易的地方在于找到究竟是哪些代码在拖慢速度，往往实际与脑中的想象大相径庭，需要一些JAVA的性能剖析器的帮助</li>
+<li>记得在优化前后测量性能，运气不好的时候，可能你还需要在不同的JVM实现和不同的硬件平台上去测量性能</li>
+</ul>
+<h2 id="第五十六条-遵守普遍接受的命名惯例"><a href="#第五十六条-遵守普遍接受的命名惯例" class="headerlink" title="第五十六条 遵守普遍接受的命名惯例"></a>第五十六条 遵守普遍接受的命名惯例</h2><p>这一条就不多说了，类似驼峰命名法这样的惯例，还有常量应该使用全大写下划线分隔的形式，书中列举了很多，但是都很基础，不再赘述。</p>
 ]]></content>
     
     <summary type="html">
