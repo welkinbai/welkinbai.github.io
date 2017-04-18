@@ -103,7 +103,7 @@
 				    
 				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(14)</small></a></li>
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(15)</small></a></li>
 				    
 				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
 				    
@@ -115,7 +115,7 @@
         		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(7)</small></a></li>
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(8)</small></a></li>
 				    
 				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
 				    
@@ -229,8 +229,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_4.jpg) no-repeat center center fixed;background-size: cover">
-             
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -284,7 +284,7 @@
 			
       		<p>本章主要讲JDK1.5加入的新特性——泛型。涉及泛型的使用，教你最大限度地使用泛型的优势而又不使事情复杂化。</p>
 <a id="more"></a>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
 <h2 id="第二十三条-请不要在新代码中使用原生态类型（请使用泛型）"><a href="#第二十三条-请不要在新代码中使用原生态类型（请使用泛型）" class="headerlink" title="第二十三条 请不要在新代码中使用原生态类型（请使用泛型）"></a>第二十三条 请不要在新代码中使用原生态类型（请使用泛型）</h2><p>如同我括号里写的那样，本条的主旨就一句话：请尽可能地使用泛型。<br>理由也很简单，在泛型面世之前，JAVA是一个类型不安全的语言。当然即使泛型面世之后，你使用了泛型，JAVA也只能达到勉强类型安全。<br>为什么我这么说？看如下代码：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">       List&lt;<span class="keyword">Object</span>&gt; a = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">Object</span>&gt;();</div><div class="line">       a.<span class="built_in">add</span>(<span class="string">"a"</span>);</div><div class="line">       a.<span class="built_in">add</span>(<span class="number">3</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString1 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">0</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString2 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>由于Object的存在，泛型的类型安全也没法百分之百保证，第6行抛出了<code>ClassCastException</code>，所以想要往列表里放东西，那就把泛型的参数类型写到具体的类而不是偷懒写Object，否则，列表里可能会不小心放进不同类型的东西，而编译器无法提前告诉你。<br>泛型的使用可以使运行时抛出的<code>ClassCastException</code>提前到编译期就告诉你哪儿不对。<br>而JAVA是典型的静态语言，编译器的编译期检查给予JAVA强大的稳定性，能把错误提前暴露在编译期，是JAVA这种语言的优势，不要浪费。<br>作者坦言，如果不是因为泛型推出的太迟，为了能向下兼容，JDK1.5的作者们会让代码只能使用泛型。</p>
 <h2 id="第二十四条-消除非受检警告"><a href="#第二十四条-消除非受检警告" class="headerlink" title="第二十四条 消除非受检警告"></a>第二十四条 消除非受检警告</h2><p>这条主要讲，好了，你终于用上泛型了，但是你是新手，还不会写，编译器就各种给你报警告。<br>怎么办呢？<br>作者建议你耐心下来，一个一个地消除警告，不要忽视它们或者放弃泛型。<br>但是有时候呢，会碰到确信没有类型安全问题的代码，编译器也会有非受检警告，比如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@SuppressWarnings(<span class="string">"unchecked"</span>)</div><div class="line">   <span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">       <span class="keyword">if</span> (a.length &lt; <span class="keyword">size</span>)</div><div class="line">           <span class="comment">// Make a new array of a's runtime type, but my contents:</span></div><div class="line">           <span class="keyword">return</span> (T[]) Arrays.copyOf(elementData, <span class="keyword">size</span>, a.getClass());</div><div class="line">       System.arraycopy(elementData, <span class="number">0</span>, a, <span class="number">0</span>, <span class="keyword">size</span>);</div><div class="line">       <span class="keyword">if</span> (a.length &gt; <span class="keyword">size</span>)</div><div class="line">           a[<span class="keyword">size</span>] = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">return</span> a;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
@@ -326,8 +326,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-04-16T10:10:43.723Z" itemprop="datePublished">
-					2017年4月16日 18:10
+				<time datetime="2017-04-18T14:09:46.759Z" itemprop="datePublished">
+					2017年4月18日 22:09
 				</time>
 			</p>
             <p>

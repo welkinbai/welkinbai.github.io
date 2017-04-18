@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 设计模式 | Dawn</title>
+  <title>《Effective Java》读书笔记——第八章 异常 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -75,7 +75,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -236,14 +236,10 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-							
-							    
-                            
-							
-								<h2><strong>BE <span>BRAVE</span>, FOR YOU.</strong></h2>
-                                <p>努力吧，即使手中没有刀剑，终有通关人生这场游戏的那一天</p>				    			
-							    
-                            
+								
+								<h2>第八章</h2>
+                                <p>异常</p>
+																
 							
                             </div>
                         </div>
@@ -260,60 +256,130 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-<section id="services">
+<section id="intro">
     <div class="container">
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2017/01/18/anti-pattern/">有趣的反面模式</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-01-18T14:09:02.000Z" itemprop="datePublished">
-          2017年1月18日
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-04-18T14:06:57.000Z" itemprop="datePublished">
+          2017年4月18日
       </time>	  
     
     
     | 
-    <a href='/tags/设计模式/'>设计模式</a>
+    <a href='/tags/Effective-Java/'>Effective Java</a>
     
     
 	
-        | 转载
-    
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>按照学习计划，最近要开始研究设计模式和JAVA中好的编程习惯(effective java)。<br>但是我却无意中在研究Mockito的时候发现一种被称为反面模式的东西。非常有趣。<br>从维基百科上搬过来放着。毕竟不是人人都能看到墙外的花花世界的，：）<br>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/01/18/anti-pattern/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>《Effective Java》读书笔记——第八章 异常</h1>				
             </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五十七条-只针对异常的情况使用异常"><span class="toc-text">第五十七条 只针对异常的情况使用异常</span></a></li></ol>
+</div>
+			
+      		<p>本章讨论一些有关异常的使用。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="第五十七条-只针对异常的情况使用异常"><a href="#第五十七条-只针对异常的情况使用异常" class="headerlink" title="第五十七条 只针对异常的情况使用异常"></a>第五十七条 只针对异常的情况使用异常</h2><p>书中指出，很多人企图使用异常来控制程序流转。<br>异常<strong>不应该</strong>被用来控制程序流，比如在死循环中循环一个数组，然后捕获数组越界异常来终止循环。<br>原因如下：</p>
+<ul>
+<li>使用异常比正常的控制流代码慢的多</li>
+<li>使用异常的代码丑陋无比，掩盖意图，容易造成误解</li>
+<li>使用异常的代码块由于会捕获异常，可能会意外地将真正的异常捕获掉并当成控制流的逻辑去处理，造成十分麻烦的bug</li>
+<li>try-catch块可能会阻止一些现代JVM本来要进行的优化</li>
+</ul>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-      <nav class="pagination" role="pagination">
-          
-          
-        </nav>    
-    </div>
-</section> 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
-        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-04-18T14:22:51.521Z" itemprop="datePublished">
+					2017年4月18日 22:22
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/04/16/effective-java-7/">
+        《Effective Java》读书笔记——第七章 通用程序设计 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/04/18/effective-java-8/" data-title="《Effective Java》读书笔记——第八章 异常" data-url="/2017/04/18/effective-java-8/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
