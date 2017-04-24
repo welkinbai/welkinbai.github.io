@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-04-18T14:22:51.521Z</updated>
+  <updated>2017-04-24T15:17:56.283Z</updated>
   <id>/</id>
   
   <author>
@@ -16,22 +16,20 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>《Effective Java》读书笔记——第八章 异常</title>
-    <link href="/2017/04/18/effective-java-8/"/>
-    <id>/2017/04/18/effective-java-8/</id>
-    <published>2017-04-18T14:06:57.000Z</published>
-    <updated>2017-04-18T14:22:51.521Z</updated>
+    <title>《Effective Java》读书笔记——第九章 并发</title>
+    <link href="/2017/04/24/effective-java-9/"/>
+    <id>/2017/04/24/effective-java-9/</id>
+    <published>2017-04-24T13:58:32.000Z</published>
+    <updated>2017-04-24T15:17:56.283Z</updated>
     
-    <content type="html"><![CDATA[<p>本章讨论一些有关异常的使用。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
-<h2 id="第五十七条-只针对异常的情况使用异常"><a href="#第五十七条-只针对异常的情况使用异常" class="headerlink" title="第五十七条 只针对异常的情况使用异常"></a>第五十七条 只针对异常的情况使用异常</h2><p>书中指出，很多人企图使用异常来控制程序流转。<br>异常<strong>不应该</strong>被用来控制程序流，比如在死循环中循环一个数组，然后捕获数组越界异常来终止循环。<br>原因如下：</p>
-<ul>
-<li>使用异常比正常的控制流代码慢的多</li>
-<li>使用异常的代码丑陋无比，掩盖意图，容易造成误解</li>
-<li>使用异常的代码块由于会捕获异常，可能会意外地将真正的异常捕获掉并当成控制流的逻辑去处理，造成十分麻烦的bug</li>
-<li>try-catch块可能会阻止一些现代JVM本来要进行的优化</li>
-</ul>
-<p>【未完待续】</p>
+    <content type="html"><![CDATA[<p>本章主要讨论多线程程序设计时的一些问题，并发问题通常要复杂的多，容易出错，即使是高级工程师也经常会无意间犯错，然而，随着多核处理器的问世，并发几乎是程序员绕不开的一道坎。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
+<h2 id="第六十六条-同步访问共享的可变数据"><a href="#第六十六条-同步访问共享的可变数据" class="headerlink" title="第六十六条 同步访问共享的可变数据"></a>第六十六条 同步访问共享的可变数据</h2><p>本条又要回到大段的代码示例中。<br>首先，书中讲述一个观点，就是我们认为只有在写操作的时候才需要关心同步问题，实际上并非如此，读操作同样需要关心同步问题，变量的值发生改变时，其对其他线程的可见性是无法保证的。比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested)</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个例子我们开启了一个线程，并轮询一个boolean变量来决定是否要结束线程。<br>读者可能会以为主线程设置boolean变量为true时，子线程就会结束。实际上，子线程永远不会结束，因为boolean变量的变更子线程没有感知到。这其中涉及到了很多JVM重排序的知识，可惜书中只是一笔带过，只是交代while语句可能会变成这样：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(!stopRequested)</span></div><div class="line">	<span class="keyword">while</span><span class="comment">(true)</span></div><div class="line">		i++;</div></pre></td></tr></table></figure></p>
+<p>如果将变量的读取做成同步的，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">requestStop</span><span class="params">()</span> </span>&#123;</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">stopRequested</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> stopRequested;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested())</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		requestStop();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序便能如期望的那样工作，注意，写方法和读方法都要加同步，否则，就会不起作用。<br>书中还给出了更推荐的版本：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested)</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用<code>volatile</code>关键字，变量值的变更会立即被所有线程看到，至于内部实现机理，很遗憾，本书还是没讲。<br>书中提到在使用<code>volatile</code>的过程中，要务必小心<code>++</code>操作符是非原子的，实际上，我认为在所有并发情况下都应该要小心这个操作符是分两步执行的，即先读后写。<br>在这种情况下，应该使用<code>java.util.concurrent.atomic</code>中的类<code>AtomicLong</code>，来执行线程安全的加一操作。<br>书中提到，避免多线程同步问题的最佳办法是<code>不要共享变量，或者共享不可变数据</code>。</p>
+<h2 id="第六十七条-避免过度同步"><a href="#第六十七条-避免过度同步" class="headerlink" title="第六十七条 避免过度同步"></a>第六十七条 避免过度同步</h2><p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -70,6 +68,72 @@ content
     
     <summary type="html">
     
+      &lt;p&gt;本章主要讨论多线程程序设计时的一些问题，并发问题通常要复杂的多，容易出错，即使是高级工程师也经常会无意间犯错，然而，随着多核处理器的问世，并发几乎是程序员绕不开的一道坎。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Effective Java" scheme="/tags/Effective-Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《Effective Java》读书笔记——第八章 异常</title>
+    <link href="/2017/04/18/effective-java-8/"/>
+    <id>/2017/04/18/effective-java-8/</id>
+    <published>2017-04-18T14:06:57.000Z</published>
+    <updated>2017-04-24T14:09:26.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章讨论一些有关异常的使用。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
+<h2 id="第五十七条-只针对异常的情况使用异常"><a href="#第五十七条-只针对异常的情况使用异常" class="headerlink" title="第五十七条 只针对异常的情况使用异常"></a>第五十七条 只针对异常的情况使用异常</h2><p>书中指出，很多人企图使用异常来控制程序流转。<br>异常<strong>不应该</strong>被用来控制程序流，比如在死循环中循环一个数组，然后捕获数组越界异常来终止循环。<br>原因如下：</p>
+<ul>
+<li>使用异常比正常的控制流代码慢的多</li>
+<li>使用异常的代码丑陋无比，掩盖意图，容易造成误解</li>
+<li>使用异常的代码块由于会捕获异常，可能会意外地将真正的异常捕获掉并当成控制流的逻辑去处理，造成十分麻烦的bug</li>
+<li>try-catch块可能会阻止一些现代JVM本来要进行的优化</li>
+</ul>
+<h2 id="第五十八条-对可恢复的情况使用受检异常，对编程错误使用运行时异常"><a href="#第五十八条-对可恢复的情况使用受检异常，对编程错误使用运行时异常" class="headerlink" title="第五十八条 对可恢复的情况使用受检异常，对编程错误使用运行时异常"></a>第五十八条 对可恢复的情况使用受检异常，对编程错误使用运行时异常</h2><p>本条内容标题已经说得很清楚了。<br>还有就是，异常也是一个对象，可以为它增加一些方法，尤其是受检异常，增加一些方法可以帮助用户在捕获异常之后，获得一些有助于恢复程序的信息。</p>
+<h2 id="第五十九条-避免不必要地使用受检异常"><a href="#第五十九条-避免不必要地使用受检异常" class="headerlink" title="第五十九条 避免不必要地使用受检异常"></a>第五十九条 避免不必要地使用受检异常</h2><p>受检异常只有以下两种情况满足的时候才使用：</p>
+<ol>
+<li>正确地使用API，没有编程错误，仍然无法阻止这个异常的发生</li>
+<li>异常发生后，使用API的程序员可以采取一些有用的动作，而不是仅仅能做的只是消极忽略，或者干脆什么也不干</li>
+</ol>
+<p>当编写异常的时候，问自己，调用自己方法的程序员将有可能如何处理这个异常，这样可以通过简单的方式测验是否应该使用受检异常。<br>受检异常强迫程序员处理，因此会造成使用者的负担。（而且说实话，try-catch块的代码挺丑的，很臃肿，还拥有自己的局部作用域，导致局部变量的使用变得很难受）</p>
+<p>作者建议有些情况可以将方法拆成两个方法，其中一个方法返回boolean值来替代抛出受检异常。<br>当然，这种做法并不是万能的，尤其是多线程并发访问时，以及返回boolean值的方法额外的做了很多事影响性能的时候。</p>
+<h2 id="第六十条-优先使用标准的异常"><a href="#第六十条-优先使用标准的异常" class="headerlink" title="第六十条 优先使用标准的异常"></a>第六十条 优先使用标准的异常</h2><p>优先使用已经存在的标准异常有以下一些好处：</p>
+<ul>
+<li>易于学习和使用，因为绝大多数程序员都已经熟悉那些标准的异常，他们使用起来没有额外学习成本</li>
+<li>可读性增加，异常类越少越能减小装载类的开销</li>
+</ul>
+<p>下面是书中列出的一些常用的标准异常：</p>
+<ul>
+<li>IllegalArgumentException：参数不正确（非Null参数）</li>
+<li>IllegalStateException：对于方法调用而言，对象状态不合适（比如还没初始化好）</li>
+<li>NullPointerException：禁止参数值为Null的情况下传入了Null</li>
+<li>IndexOutOfBoundsException：下标参数值越界（不一定是数组的）</li>
+<li>ConcurrentModificationException：禁止并发修改的情况下检测到并发修改</li>
+<li>UnsupportOperationException：对象不支持用户请求的方法</li>
+</ul>
+<h2 id="第六十一条-抛出与抽象相对应的异常（异常转译和异常链）"><a href="#第六十一条-抛出与抽象相对应的异常（异常转译和异常链）" class="headerlink" title="第六十一条 抛出与抽象相对应的异常（异常转译和异常链）"></a>第六十一条 抛出与抽象相对应的异常（异常转译和异常链）</h2><p>有一些底层方法抛出的异常传到高层以后，就变得与所执行的任务联系不是很紧密，这种情形会让API用户感到困惑。<br>通常的做法是使用异常转译，即将底层异常捕获，转而抛出高层抽象对应的异常。（Spring在封装JDBC的时候，就大量使用到了异常转译，将JDBC难以理解的异常转化为更加清晰的异常）<br>异常链则是指在使用异常转译的时候，将底层异常传给高层异常的构造函数，从而形成异常链条，使得高层异常在处理的时候，可以通过<code>Throwable.getCause()</code>方法来获取底层异常，这样在某些场景下，便于调试问题。</p>
+<h2 id="第六十二条-每个方法抛出的异常都要有文档"><a href="#第六十二条-每个方法抛出的异常都要有文档" class="headerlink" title="第六十二条 每个方法抛出的异常都要有文档"></a>第六十二条 每个方法抛出的异常都要有文档</h2><p>Effective Java的很多条目非常的细，比如本条，题目就是内容，内容告诉我们，每个方法抛出的异常都要有文档。实际上这样的内容不足以分出一节，不过书中还是分出了。<br>注意，非受检的异常，不要用throws关键字标识在方法声明中，这样会令方法的调用者困惑，受检异常才需要检查，非受检异常就是非受检异常，不可混用。<br>在文档中除了受检异常，非受检异常也应该标出，标出这些异常发生的场景可以帮助调用者了解方法正确执行的<code>前提条件</code>是什么。</p>
+<h2 id="第六十三条-在细节消息中包含能捕获失败的消息"><a href="#第六十三条-在细节消息中包含能捕获失败的消息" class="headerlink" title="第六十三条 在细节消息中包含能捕获失败的消息"></a>第六十三条 在细节消息中包含能捕获失败的消息</h2><p>本节标题翻译的不好，可以理解为，在异常的message中，尽可能地包含异常发生时，造成异常的实时数据。<br>比如数组越界的异常，应该要将异常发生时候数组的上界，下界，越界下标值这些有用的数据都记录在异常的Message内。<br>通常异常的构造器都有一个类型为string的message入参，但是作者推荐更进一步，将这个异常需要的数据直接传入构造器，由构造器内部来拼接message，这样将拼接message的代码落在一处，更便于程序员抛出异常。</p>
+<h2 id="第六十四条-努力使失败保持原子性"><a href="#第六十四条-努力使失败保持原子性" class="headerlink" title="第六十四条 努力使失败保持原子性"></a>第六十四条 努力使失败保持原子性</h2><p>书中建议，即使发生了异常，也应该努力使对象保持在方法调用前的某种可用的良好状态。这样程序还能继续进行，程序的状态也容易恢复。相反地，如果异常发生后，对象的状态变得不可捉摸，或者处于中间状态，程序就会变得难以恢复，有可能还会造成更多异常发生。<br>实现异常发生时的原子性有以下几个建议：</p>
+<ul>
+<li>不可变对象天生拥有原子性，因为一旦创建就不可改变，不会处于一个不一致的状态中</li>
+<li>可变对象要想拥有原子性，最好再状态改变前就尽可能地检查参数，将异常抛出在状态改变之前</li>
+<li>调整计算过程的顺序，是任何可能失败的计算部分在对象状态改变前发生</li>
+<li>编写一段恢复代码，由它拦截操作过程中的失败，恢复对象之前的状态，这经常用在永久性的数据结构（比如数据库等）上</li>
+<li>将操作执行在对象的拷贝上，直到操作成功后，再使用对象拷贝来替代原对象</li>
+</ul>
+<p>有时候未必能做到失败原子性，比如并发修改对象，这个异常抛出时，无法保证对象恢复到原先的状态。这种情况也是没办法的事。</p>
+<h2 id="第六十五条-不要忽略异常"><a href="#第六十五条-不要忽略异常" class="headerlink" title="第六十五条 不要忽略异常"></a>第六十五条 不要忽略异常</h2><p>不要用try-catch块把异常抓取后什么也不做，这是典型的反模式！<br>如果非要忽略，至少注释一下为什么忽略，而且即使忽略了，也要用日志框架把异常记录下来。<br>忽略异常等于忽略火警警报，早晚会出事。</p>
+]]></content>
+    
+    <summary type="html">
+    
       &lt;p&gt;本章讨论一些有关异常的使用。&lt;br&gt;
     
     </summary>
@@ -86,10 +150,10 @@ content
     <link href="/2017/04/16/effective-java-7/"/>
     <id>/2017/04/16/effective-java-7/</id>
     <published>2017-04-16T09:36:02.000Z</published>
-    <updated>2017-04-18T14:08:28.184Z</updated>
+    <updated>2017-04-24T14:09:15.024Z</updated>
     
     <content type="html"><![CDATA[<p>本章继续讨论一些编程过程中应该注意的问题和细节<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第四十五条-将局部变量的作用域最小化"><a href="#第四十五条-将局部变量的作用域最小化" class="headerlink" title="第四十五条 将局部变量的作用域最小化"></a>第四十五条 将局部变量的作用域最小化</h2><p>下面是本条的要点：</p>
 <ul>
 <li>局部变量应该在第一次使用的地方声明，有些人认为应该在代码块的开头处声明，这是C语言带过来的坏习惯，如果代码块很长，会造成阅读者糟糕的体验。</li>
@@ -169,10 +233,10 @@ content
     <link href="/2017/03/21/effective-java-6/"/>
     <id>/2017/03/21/effective-java-6/</id>
     <published>2017-03-21T14:25:55.000Z</published>
-    <updated>2017-04-18T14:09:32.336Z</updated>
+    <updated>2017-04-24T14:08:59.896Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍一些方法级别的技巧和需要注意的问题。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第三十八条-检查参数的有效性"><a href="#第三十八条-检查参数的有效性" class="headerlink" title="第三十八条 检查参数的有效性"></a>第三十八条 检查参数的有效性</h2><p>关于方法体的第一个原则就是：<strong>应该在错误发生之后尽快检测出错误</strong><br>如果不是这样，那么当错误发生时，很难追踪错误的根源。<br>本条建议就是遵循这个原则，在你的方法体开头立刻检查入参的有效性，抛出含义明确的异常，并且在Java doc文档中指出入参的限制条件以及异常抛出的原因。<br>如果没有这么做，那么你的方法有可能会失败，更糟糕的是，你的方法不会失败，会返回错误的值，错误的值在另一个地方造成失败。</p>
 <h3 id="私有方法的处理"><a href="#私有方法的处理" class="headerlink" title="私有方法的处理"></a>私有方法的处理</h3><p>私有方法并未导出给其他人使用，作为方法的创建者和使用者，你自己能保证入参的正确性，作者的建议是使用断言，即assert关键字。<br>原因是：assert关键字只有在启动时传给解释器-ea这个参数才会生效，这样你自己测试的时候开启断言，用户使用的时候关闭断言，保证了最小的性能开销。<br>事实上，现在看到的更多的做法是，压根不检查入参，只要你保证为调用这个私有方法的方法编写了单元测试，并验证了私有方法不会在所有情况下传入非法入参，不检查入参也是可以接受的。<br>你甚至可以为私有的方法编写单元测试，当然，这需要额外的单元测试框架的支持。<br>另外，在一些检查开销很贵或者不切实际的时候，也可以不必检查入参。有时候，像<code>Collections.sort()</code>这样的方法就隐式地为我们检查了入参，因此，也不必再额外地重复检查。</p>
 <h2 id="第三十九条-必要时进行保护性拷贝"><a href="#第三十九条-必要时进行保护性拷贝" class="headerlink" title="第三十九条 必要时进行保护性拷贝"></a>第三十九条 必要时进行保护性拷贝</h2><p>联想第十五条，可能会比较容易理解本条。<br>本条主要讲的是一个提高代码安全性的技巧，即保护性拷贝。<br>看下面的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> start</div><div class="line">	 *            the beginning of the period</div><div class="line">	 * <span class="doctag">@param</span> end</div><div class="line">	 *            the end of the period; must not precede start</div><div class="line">	 * <span class="doctag">@throws</span> IllegalArgumentException</div><div class="line">	 *             if start is after end</div><div class="line">	 * <span class="doctag">@throws</span> NullPointerException</div><div class="line">	 *             if start or end is null</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start, Date end)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (start.compareTo(end) &gt; <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + end);</div><div class="line">		<span class="keyword">this</span>.start = start;</div><div class="line">		<span class="keyword">this</span>.end = end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Repaired constructor - makes defensive copies of parameters - Page 185</span></div><div class="line">	<span class="comment">// Stops first attack</span></div><div class="line">	<span class="comment">// public Period(Date start, Date end) &#123;</span></div><div class="line">	<span class="comment">// this.start = new Date(start.getTime());</span></div><div class="line">	<span class="comment">// this.end = new Date(end.getTime());</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// if (this.start.compareTo(this.end) &gt; 0)</span></div><div class="line">	<span class="comment">// throw new IllegalArgumentException(start +" after "+ end);</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> start;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Repaired accessors - make defensive copies of internal fields - Page 186</span></div><div class="line">	<span class="comment">// Stops second attack</span></div><div class="line">	<span class="comment">// public Date start() &#123;</span></div><div class="line">	<span class="comment">// return new Date(start.getTime());</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// public Date end() &#123;</span></div><div class="line">	<span class="comment">// return new Date(end.getTime());</span></div><div class="line">	<span class="comment">// &#125;</span></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> start + <span class="string">" - "</span> + end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Remainder omitted</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -236,10 +300,10 @@ content
     <link href="/2017/03/12/effective-java-5/"/>
     <id>/2017/03/12/effective-java-5/</id>
     <published>2017-03-12T07:24:07.000Z</published>
-    <updated>2017-04-18T14:09:39.511Z</updated>
+    <updated>2017-04-24T14:08:49.582Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍在使用枚举和注解这两种类型时要注意的问题。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第三十条-用enum代替int常量"><a href="#第三十条-用enum代替int常量" class="headerlink" title="第三十条 用enum代替int常量"></a>第三十条 用enum代替int常量</h2><p>本条主要是讲枚举类型enum的优缺点。</p>
 <h3 id="int常量为什么不好？"><a href="#int常量为什么不好？" class="headerlink" title="int常量为什么不好？"></a>int常量为什么不好？</h3><p>枚举类型还不存在之前(JDK1.5才引入枚举类型)，大多数程序都使用下面的int常量形式代替枚举：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_FUJI = <span class="number">0</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> APPLE_PIPPIN = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
 <p>它的缺点如下：</p>
@@ -304,11 +368,11 @@ content
     <link href="/2017/03/02/effective-java-4/"/>
     <id>/2017/03/02/effective-java-4/</id>
     <published>2017-03-02T12:49:04.000Z</published>
-    <updated>2017-04-18T14:09:46.759Z</updated>
+    <updated>2017-04-24T14:07:21.838Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讲JDK1.5加入的新特性——泛型。涉及泛型的使用，教你最大限度地使用泛型的优势而又不使事情复杂化。</p>
 <a id="more"></a>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第二十三条-请不要在新代码中使用原生态类型（请使用泛型）"><a href="#第二十三条-请不要在新代码中使用原生态类型（请使用泛型）" class="headerlink" title="第二十三条 请不要在新代码中使用原生态类型（请使用泛型）"></a>第二十三条 请不要在新代码中使用原生态类型（请使用泛型）</h2><p>如同我括号里写的那样，本条的主旨就一句话：请尽可能地使用泛型。<br>理由也很简单，在泛型面世之前，JAVA是一个类型不安全的语言。当然即使泛型面世之后，你使用了泛型，JAVA也只能达到勉强类型安全。<br>为什么我这么说？看如下代码：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">       List&lt;<span class="keyword">Object</span>&gt; a = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">Object</span>&gt;();</div><div class="line">       a.<span class="built_in">add</span>(<span class="string">"a"</span>);</div><div class="line">       a.<span class="built_in">add</span>(<span class="number">3</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString1 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">0</span>);</div><div class="line">       <span class="keyword">String</span> shouldBeString2 = (<span class="keyword">String</span>) a.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>由于Object的存在，泛型的类型安全也没法百分之百保证，第6行抛出了<code>ClassCastException</code>，所以想要往列表里放东西，那就把泛型的参数类型写到具体的类而不是偷懒写Object，否则，列表里可能会不小心放进不同类型的东西，而编译器无法提前告诉你。<br>泛型的使用可以使运行时抛出的<code>ClassCastException</code>提前到编译期就告诉你哪儿不对。<br>而JAVA是典型的静态语言，编译器的编译期检查给予JAVA强大的稳定性，能把错误提前暴露在编译期，是JAVA这种语言的优势，不要浪费。<br>作者坦言，如果不是因为泛型推出的太迟，为了能向下兼容，JDK1.5的作者们会让代码只能使用泛型。</p>
 <h2 id="第二十四条-消除非受检警告"><a href="#第二十四条-消除非受检警告" class="headerlink" title="第二十四条 消除非受检警告"></a>第二十四条 消除非受检警告</h2><p>这条主要讲，好了，你终于用上泛型了，但是你是新手，还不会写，编译器就各种给你报警告。<br>怎么办呢？<br>作者建议你耐心下来，一个一个地消除警告，不要忽视它们或者放弃泛型。<br>但是有时候呢，会碰到确信没有类型安全问题的代码，编译器也会有非受检警告，比如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@SuppressWarnings(<span class="string">"unchecked"</span>)</div><div class="line">   <span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</div><div class="line">       <span class="keyword">if</span> (a.length &lt; <span class="keyword">size</span>)</div><div class="line">           <span class="comment">// Make a new array of a's runtime type, but my contents:</span></div><div class="line">           <span class="keyword">return</span> (T[]) Arrays.copyOf(elementData, <span class="keyword">size</span>, a.getClass());</div><div class="line">       System.arraycopy(elementData, <span class="number">0</span>, a, <span class="number">0</span>, <span class="keyword">size</span>);</div><div class="line">       <span class="keyword">if</span> (a.length &gt; <span class="keyword">size</span>)</div><div class="line">           a[<span class="keyword">size</span>] = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">return</span> a;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
@@ -360,10 +424,10 @@ content
     <link href="/2017/02/19/effective-java-3/"/>
     <id>/2017/02/19/effective-java-3/</id>
     <published>2017-02-19T10:54:07.000Z</published>
-    <updated>2017-04-18T14:09:53.418Z</updated>
+    <updated>2017-04-24T14:07:11.533Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论在设计类和接口的时候，要注意的事情以及一些设计原则。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第十三条-使类和成员的可访问性最小化"><a href="#第十三条-使类和成员的可访问性最小化" class="headerlink" title="第十三条 使类和成员的可访问性最小化"></a>第十三条 使类和成员的可访问性最小化</h2><p>这一条来源于面向对象设计的基本概念：封装。<br>这一概念认为，设计良好的模块应该隐藏所有的实现细节，只暴露其API给外部，内部的所有数据和实现都隐藏起来，模块间的互动由API完成。<br>这样做的好处是将模块之间的耦合度尽可能地降低了，在以后的开发中，设计者只需要在改动API的时候考虑到带给用户的影响以及兼容性，而其他隐藏部分的改动，只要不破坏API的约定，那么修改过程就是完全对用户透明的。<br>这么做不会带来性能上的优势，但是使得代码更加容易测试和维护，开发人员无需顾此失彼，只需要专注注意力在一处即可。<br>JAVA这门语言作为面向对象语言的标杆，自然提供了完善的机制来支持封装这一设计理念。<br>所有的顶层类和接口都有两个访问级别：</p>
 <ul>
 <li>包级私有：意味着只有同个包下的类能够访问</li>
@@ -473,10 +537,10 @@ content
     <link href="/2017/02/11/effective-java-2/"/>
     <id>/2017/02/11/effective-java-2/</id>
     <published>2017-02-11T08:01:47.000Z</published>
-    <updated>2017-04-18T14:10:01.160Z</updated>
+    <updated>2017-04-24T14:06:57.798Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论所有类的父类——Object类中的一些方法的使用，如何覆盖以及需要注意的问题<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第八条-覆盖equals时需要遵守的约定"><a href="#第八条-覆盖equals时需要遵守的约定" class="headerlink" title="第八条 覆盖equals时需要遵守的约定"></a>第八条 覆盖equals时需要遵守的约定</h2><h3 id="什么时候应该覆盖equals"><a href="#什么时候应该覆盖equals" class="headerlink" title="什么时候应该覆盖equals?"></a>什么时候应该覆盖equals?</h3><p><code>equals</code>方法默认的逻辑是对比两个变量所指向的是否是同一个对象（实例）。<br>但是如果你想对比的是逻辑相等呢？比如两个对象都含有value这个域，你只是希望根据value这个域的情况来比较对象呢？<br>这种对象的类被称为”值类“，比如，代表日期的类Date。<br>需要注意，枚举类不需要覆盖equals方法，因为枚举类每个枚举值都被限定为全局唯一的实例，因此虽然equals比较的是对象是否相同，但是对象相同保证了其所代表的值一定相同。</p>
 <h3 id="覆盖equals必须遵守的约定"><a href="#覆盖equals必须遵守的约定" class="headerlink" title="覆盖equals必须遵守的约定"></a>覆盖equals必须遵守的约定</h3><p>首先，覆盖equals方法必须实现如下等价关系：</p>
 <ul>
@@ -629,10 +693,10 @@ content
     <link href="/2017/01/19/effective-java-1/"/>
     <id>/2017/01/19/effective-java-1/</id>
     <published>2017-01-19T14:40:59.000Z</published>
-    <updated>2017-04-18T14:10:10.593Z</updated>
+    <updated>2017-04-24T14:06:49.207Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。<br><a id="more"></a><br>本系列是著名JAVA必读书籍之一的《Effective JAVA》的读书笔记，注意，本书不适合没有JAVA基础或者编程经验的人阅读。属于高级教程。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
 <h2 id="第一条-用静态工厂方法代替构造器"><a href="#第一条-用静态工厂方法代替构造器" class="headerlink" title="第一条 用静态工厂方法代替构造器"></a>第一条 用静态工厂方法代替构造器</h2><h3 id="静态工厂方法大概长下面这样："><a href="#静态工厂方法大概长下面这样：" class="headerlink" title="静态工厂方法大概长下面这样："></a>静态工厂方法大概长下面这样：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> MyClass(arg1, arg2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>为什么要用上面的方法来获得对象的实例呢？用构造器不就好了吗？<br>理由有如下几点：</p>
 <ol>
@@ -2229,137 +2293,6 @@ content
     <summary type="html">
     
       &lt;p&gt;本章主要是介绍索引的基础知识以及创建和维护索引的过程中需要注意的性能优化问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Mysql" scheme="/tags/Mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《高性能Mysql》读书笔记——第四章schema与数据类型优化</title>
-    <link href="/2016/10/14/mysql-datatype/"/>
-    <id>/2016/10/14/mysql-datatype/</id>
-    <published>2016-10-14T08:01:50.000Z</published>
-    <updated>2016-12-24T13:29:35.503Z</updated>
-    
-    <content type="html"><![CDATA[<p>本章主要是在讲一些建表时候应该注意的性能优化问题，各种数据类型的选择等。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
-<h2 id="一、选择数据类型"><a href="#一、选择数据类型" class="headerlink" title="一、选择数据类型"></a>一、选择数据类型</h2><h3 id="零散的注意事项："><a href="#零散的注意事项：" class="headerlink" title="零散的注意事项："></a>零散的注意事项：</h3><ul>
-<li>更小的更好：尽量使用可以正确存储数据的最小数据类型但是要确保没有低估需要存储的值的范围，因为在未来修改数据类型是痛苦的工作。</li>
-<li>简单就好：尽量使用简单的数据类型，比如整型优于字符类型，字符类型有字符集和校对规则，因此更加复杂。使用内建日期类型而不是字符串保存日期和时间，用整型存储Ip地址而不是字符串。</li>
-<li>尽量避免NULL：让一个列为可以NULL的会导致耗费很多的存储空间，尤其是那些预计会建立索引的列，可NULL的列会导致索引的统计和值比较更加复杂。</li>
-</ul>
-<h3 id="整型类型"><a href="#整型类型" class="headerlink" title="整型类型"></a>整型类型</h3><p>基本介绍可见这篇文章：<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a></p>
-<ul>
-<li>整数计算一般使用BIGINT，即使在32位环境也是这样</li>
-<li>INT(11)可以指定命令行客户端显示字符的个数，但是对于真正存储值和计算是没有意义的，不会真的限制字符长度</li>
-</ul>
-<h3 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h3><ul>
-<li>FLOAT\DOUBLE类型支持单精度浮点运算和双精度浮点运算，这种计算是近似的，不精确的，这是现行计算机架构的通病，是由底层决定的，不是Mysql自己导致的。</li>
-<li>DECIMAL类型支持精确的计算，存储精确的小数。但是这是有代价的，这种类型的运算比浮点运算慢。 占用空间更多。</li>
-<li>书中推荐使用BIGINT来存储精确数字，比如要精确到0.0001，那么每次存储数字的时候只要乘以一万就可以了。取出数字后再除以一万。这样可以避免浮点运算的精度问题，又不用付出DECIMAL高昂的代价。</li>
-</ul>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><h4 id="VARCHAR"><a href="#VARCHAR" class="headerlink" title="VARCHAR:"></a>VARCHAR:</h4><p>下面这些情况推荐使用VARCHAR</p>
-<ul>
-<li>列的最大长度比平均长度大的多</li>
-<li>需要UTF-8这种变长的字符编码</li>
-<li>列很少更新</li>
-<li>需要保留末尾的空格的列</li>
-</ul>
-<h4 id="CHAR"><a href="#CHAR" class="headerlink" title="CHAR:"></a>CHAR:</h4><p>下面这些情况推荐使用CHAR</p>
-<ul>
-<li>定长的列</li>
-<li>经常更新的列</li>
-<li>非常短的列，比如在单字节字符集的情况下存储Y和N，CHAR只需要一个字节，VARCHAR需要两个。</li>
-</ul>
-<h4 id="BINARY-VARBINARY"><a href="#BINARY-VARBINARY" class="headerlink" title="BINARY/VARBINARY:"></a>BINARY/VARBINARY:</h4><p>下面这些情况推荐使用BINARY/VARBINARY</p>
-<ul>
-<li>需要存储二进制数据并且希望比较时直接比较字节而不是字符</li>
-<li>想要大小写敏感地比较数值(所有的utf8的校对规则都是不支持大小写敏感的，因此你用了utf8的CHAR/VARCHAR是大小写不敏感的)</li>
-</ul>
-<p>VARCHAR既然是变长的，那么VARCHAR(5)和VARCHAR(200)不是一样吗？<br>答案是不一样，虽然他们存储某个字符串时，占用的空间是一样的，但是Mysql在使用内存临时表进行排序或者操作时，以及磁盘临时表来排序时，分配的空间却是与此有关的。<br>因此结论是尽可能地分配真实的字符长度。</p>
-<h4 id="BLOB-TEXT"><a href="#BLOB-TEXT" class="headerlink" title="BLOB/TEXT:"></a>BLOB/TEXT:</h4><p>要存储很大的数据时使用这两种类型，其中，BLOB存储二进制数据，因此可以存储图片甚至是word文档都没问题。<br>TEXT类型就只能存储字符串了，而且有字符集和校对规则。</p>
-<h4 id="ENUM"><a href="#ENUM" class="headerlink" title="ENUM:"></a>ENUM:</h4><p>下面这些情况推荐使用ENUM:</p>
-<ul>
-<li>在表定义之后，ENUM集合不会有变动或者只在末尾增加新的枚举类型，否则只能使用ALTER TABLE来修改字符串集合，这样比较慢，还有其他问题。</li>
-<li>确定这个枚举列不需要和其他CHAR/VARCHAR关联查询，如果有这样的就不推荐，没有就可以用</li>
-</ul>
-<h3 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h3><h4 id="DATETIME"><a href="#DATETIME" class="headerlink" title="DATETIME:"></a>DATETIME:</h4><p>下面这些情况推荐使用DATETIME:</p>
-<ul>
-<li>需要存储1970年以前的时间，或者2037年以后的时间</li>
-<li>需要存储不会根据时区变化的时间</li>
-</ul>
-<h4 id="TIMESTAMP"><a href="#TIMESTAMP" class="headerlink" title="TIMESTAMP:"></a>TIMESTAMP:</h4><p>下面这些情况推荐使用TIMESTAMP:</p>
-<ul>
-<li>默认情况</li>
-<li>不会在意不同时区显示不同时间的情况</li>
-</ul>
-<h4 id="记录毫秒级时间的办法"><a href="#记录毫秒级时间的办法" class="headerlink" title="记录毫秒级时间的办法"></a>记录毫秒级时间的办法</h4><p>Mysql没有日期类型能记录微秒级时间。<br>书中提供了两种方法：</p>
-<ol>
-<li>使用BIGINT存储微秒级的时间戳</li>
-<li>使用DOUBLE存储秒之后的小数部分</li>
-</ol>
-<h3 id="位类型"><a href="#位类型" class="headerlink" title="位类型"></a>位类型</h3><h4 id="BIT："><a href="#BIT：" class="headerlink" title="BIT："></a>BIT：</h4><ul>
-<li>这个类型行为怪异，还是不用的好…………</li>
-</ul>
-<h4 id="SET："><a href="#SET：" class="headerlink" title="SET："></a>SET：</h4><ul>
-<li>适用于不经常改变SET列集合的情况</li>
-</ul>
-<h2 id="二、选择标识符的类型"><a href="#二、选择标识符的类型" class="headerlink" title="二、选择标识符的类型"></a>二、选择标识符的类型</h2><p>有些列是作为标识的，比如性别，比如某个表的id等等，这些列经常被用来寻找其他的列，或者作为外键使用。<br>下面是选择标识列类型的注意事项:</p>
-<ul>
-<li>确保某一种标识一旦选定了类型，就在所有关联的表中使用同一类型，包括UNSIGNED这样的属性。</li>
-<li>在满足值的要求，并充分考虑到未来扩展性的情况下，应使用尽可能小的数据类型，比如存储美国各州的名字(另一张表)的id列，不需要INT，TINYINT就够了。</li>
-<li>整数&gt;ENUM/SET&gt;字符串 整数的性能和扩展性最好，字符串最糟糕，占用很多空间，性能也差的多</li>
-<li>对于MD5(),SHA1(),UUID()这种产生随机字符串的函数要特别注意，这些函数生成的值会导致插入和查询变得很慢</li>
-<li>存储UUID值，要去掉’-‘号，或者用UNHEX()函数转换UUID为16字节的数字，存储在BINATY(16)中。检索时再通过HEX()格式化成十六进制形式。</li>
-</ul>
-<p>tips:书中写，要当心自动生成的schema，包括ORM框架生成的，这些生成的schema没有按照最优的设计来存储数据。</p>
-<h2 id="三、特殊类型的数据"><a href="#三、特殊类型的数据" class="headerlink" title="三、特殊类型的数据"></a>三、特殊类型的数据</h2><h3 id="IP地址的存储"><a href="#IP地址的存储" class="headerlink" title="IP地址的存储"></a>IP地址的存储</h3><p>人们经常用VARCHAR(15)来存储IP地址，更好的实践是用无符号整数来存储，比如UNSIGNED INT来存储。<br>但是IP地址的小数点怎么办呢？<br>Mysql提供了函数来处理这种格式，INET_ATON()可以将IP地址变成无符号整数，INET_NTOA()则可以反过来把无符号整数搞成IP地址。</p>
-<h2 id="四、一些应该避免的情况"><a href="#四、一些应该避免的情况" class="headerlink" title="四、一些应该避免的情况"></a>四、一些应该避免的情况</h2><p>以下设计应该尽量避免：</p>
-<ul>
-<li>太多的列。因为Mysql会在工作时，从存储引擎层和服务器层之间通过行缓冲格式拷贝数据，然后将缓冲内容在服务器端解码成各个列，因此，行太多的话，这一操作的开支非常高。事实上，之前我写的文章里描述过，Mysql根据各个列数据类型的不同，是可以算出一个最大列数的，实际情况支持的列数只会比理论值更少。</li>
-<li>太多关联。书中推荐，追求查询速度和并发性，单个查询最好是12个表以内关联。尤其注意不要使用“实体-属性-值”这种三列设计模式，这种模式会导致很多自关联，甚至有可能超过每次查询61个表这个限制。</li>
-<li>避免过度使用枚举。</li>
-<li>避免在应该使用ENUM的情况下使用SET，比如存储是Y还是N的列。如果不会同时出现YN，就不需要SET类型</li>
-<li>不要太多的NULL，但是也不要不用NULL去用-1这种奇怪的值，如果某些场景非用不可，NULL比起神奇常数是更好的选择。</li>
-</ul>
-<h2 id="五、范式和反范式"><a href="#五、范式和反范式" class="headerlink" title="五、范式和反范式"></a>五、范式和反范式</h2><p>范式是数据库都有的概念，又称规范化。<br>主要是在设计数据库字段时遵循的规范，可以有效地避免一些表的设计问题。<br>范式主要分为，第一范式、第二范式、第三范式、BC范式(又叫第三范式补充范式)、第四范式等。<br>本文主要介绍前三个范式和补充范式。</p>
-<h3 id="1-第一范式"><a href="#1-第一范式" class="headerlink" title="1.第一范式"></a>1.第一范式</h3><p>表中的每个列都是不可再分的列，就满足第一范式。<br>比如联系人表里有电话字段，电话有可能是座机电话，也有可能是移动电话，那么就不符合第一范式的要求，应当将字段分开，变成两个字段，座机电话和移动电话。</p>
-<h3 id="2-第二范式"><a href="#2-第二范式" class="headerlink" title="2.第二范式"></a>2.第二范式</h3><p>表首先要满足第一范式，然后表的每个非主属性完全函数依赖于码，则满足第二范式。<br>解释一下专用术语：</p>
-<ul>
-<li>非主属性，即不在表的主键中的字段，比如订单表的主键是订单id和产品id两者合起来称为一个主键，那么除了订单id和产品id的其他字段就是非主属性。相应地，订单id和产品id就是主属性。</li>
-<li>完全函数依赖，首先解释函数依赖，函数依赖其实就是数学上函数F(x)这样一种关系，给一个x的值，必然得到一个y值。给一个码值，必然得到一个非主属性的值。至于完全函数依赖，那是因为码有可能是由多个属性组成，如果码中的部分属性和该非主属性满足函数依赖关系，就只能叫部分依赖。<br>说通俗点好了，选定了表中组成主键的所有列的值，那么这些列的值组成的集合所对应的非主键列，它们的值都是唯一的。</li>
-<li>码，其实就是通常意义上的主键。(实际上还是有点儿不同的，主码才相当于主键，码相当于键，就是只要它的值能唯一标识一行数据，都可以称为码或者键。在Mysql当中，建立唯一索引的列应该可以称为键)</li>
-</ul>
-<p>第二范式经常使用，当然，前提是你的表的主键由多个列组成，单主键的情况下，只要所有的非主属性函数依赖这个主键就行了。<br>举个例子，订单表里有订单id和商品id两个共同形成主键，如果表中还有字段是商品的单价，那商品的单价只由商品id来决定，不由订单id来决定，显然就是不满足第二范式的。<br>解决方法就是把这些只依赖商品id的字段比如商品单价，拆分出去，拆到一个只有商品id作为主键的表里去。</p>
-<h3 id="3-第三范式"><a href="#3-第三范式" class="headerlink" title="3.第三范式"></a>3.第三范式</h3><p>这个范式比较复杂，大致意思就是说，在满足第二范式的基础上，如果表中不存在非主属性部分依赖或者传递依赖于码，那表满足第三范式。</p>
-<ul>
-<li>部分依赖，上面第二范式已经提到过了，就是码的部分属性能唯一地决定某个属性值，那它就是部分依赖。</li>
-<li>传递依赖，就是A依赖于B，B又依赖于C这种。在这里就是非主属性A依赖于某个属性或属性组B，然后B又依赖于码C，那么这就是传递依赖。</li>
-</ul>
-<p>举例子，学生表里有学生id，学生姓名，系id，系名，系地址。<br>这例子中，学生id是主键，也就是码，学生姓名依赖于学生id，没问题。系id依赖于学生id也没问题。系名呢？系地址呢？事实上，系名和系地址都依赖于系id，然后通过系id依赖于学生id，才传递依赖于学生id。所以系名和系地址是多余的，应该被拆出到新表中。<br>很多人搞混第三范式和第二范式，其实很容易分清。<br>第三范式关注传递依赖，即使一张表不满足第三范式，它所有的依赖，最终还是会依赖到主键上。如果你发现你的表的字段存在传递依赖，但是却只是主键之外的字段相互依赖着玩儿，根本没有主键什么事儿，那这个表肯定是不满足第二范式而不是第三范式。<br>记住，主键可不一定是某个列，主键可以是多个列的集合，这种情况下，虽然你的字段有依赖到组成主键的某些列，但是只要不是组成主键的全部列，那它就不是主键，就不是依赖主键，就不会满足第二范式。<br>主键如果被定义为A和B和C，那么就ABC三者都在一起才能叫主键，少一个都只能叫属性组，和主键没关系。</p>
-<h3 id="4-补充范式"><a href="#4-补充范式" class="headerlink" title="4.补充范式"></a>4.补充范式</h3><p>这个范式是补充第三范式的，又叫BC范式(因Boyce和Codd共同提出而得名)。<br>在第三范式的基础上，它要求任何一个属性对不包含它的码都是完全函数依赖。大概意思就是管你这个列是不是组成主键的列，都必须由主键以及其他键唯一的确定。<br>另外，还要求任何属性不能依赖非码，就是除了主键和其他的键以外，其他的任何列以及它们的组合都不能唯一地去确定另外的一些列。依赖关系不能存在于键之外。<br>补充范式的限制已经强到了令人发指的地步，在日常使用中，很少有全部遵守补充范式的数据库设计出现。<br>然而这还不算最强的，还有第四范式和第五范式。但是它们很少会被人们用到，就不介绍了。</p>
-<h3 id="范式的优点"><a href="#范式的优点" class="headerlink" title="范式的优点"></a>范式的优点</h3><p>范式有优点，所以才会被人们使用，显而易见的优点是最大限度地防止数据库表的冗余设计以节约数据库表的存储空间，防止冗余设计还可以消除某些更新、插入、删除操作带来的麻烦。如数据不一致问题，关联新数据插入问题，关联数据删除问题。</p>
-<h3 id="范式的缺点"><a href="#范式的缺点" class="headerlink" title="范式的缺点"></a>范式的缺点</h3><p>范式的缺点就是将原本放在同一张表的字段分拆成了多张表，导致查询效率降低，需要连接多张表查询才能得到结果。而且，原本可以放在同一张表建立索引的字段也有可能因此享受不到索引的好处。</p>
-<h3 id="反范式"><a href="#反范式" class="headerlink" title="反范式"></a>反范式</h3><p>反范式就是不按照范式的规定来设计表。这样可以避免连接太多表查询。<br>在实际使用中，很少有完全的反范式设计也很少有完全的范式设计。<br>范式和反范式总是共同使用，以此来灵活地解决实际问题。尤其是在一些表上冗余一些字段是很常见的做法，尽管有可能带来数据不一致问题，但是如果能够妥善解决，也是可以接受的。</p>
-<h2 id="六、缓存表、汇总表、物化视图、计数器表"><a href="#六、缓存表、汇总表、物化视图、计数器表" class="headerlink" title="六、缓存表、汇总表、物化视图、计数器表"></a>六、缓存表、汇总表、物化视图、计数器表</h2><p>写的太简单，都略过，之后的章节应该还会详细解释</p>
-<h2 id="七、ALTER-TABLE操作优化"><a href="#七、ALTER-TABLE操作优化" class="headerlink" title="七、ALTER TABLE操作优化"></a>七、ALTER TABLE操作优化</h2><ul>
-<li>ALTER TABLE操作真的非常费时</li>
-<li>费时的原因是常常需要新建表，并将原表数据插入新表，再删除原表，整个过程都是阻塞式的，服务会在这期间不可用</li>
-<li>解决方案有两种：一种是在一台不提供服务的机器上进行ALTER TABLE操作，然后热切换过去;另一种是影子拷贝，建立一张与原表一模一样的影子表，然后影子表的名字改成原表的名字，原表的名字改成其他的，由于改名字的操作时非阻塞的，而且非常快，因此是有效的。</li>
-<li>有时候只是改变某个列的配置，比如默认值等等，可以使用ALTER TABLE XXX.XXX ALTER COLUMN XXXX;使用ALTER COLUMN不要使用MODIFY COLUMN，这样修改操作是非阻塞的。</li>
-<li>骇客做法，书中介绍了一种慎用的方法，就是直接修改存储表结构的.frm文件。创建一个与原表一样的新表，然后修改新表的结构，然后锁住原表，交换两个表的.frm文件，然后解锁原表，删除新表，这样原表的结构就被更改了。</li>
-<li>骇客操作仅限于给列增加AUTO_INCREMENT属性以及增加、移除、或更改ENUM\SET常量。其他情况下，表的数据必须重新构建，光修改表的结构文件是不够的。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本章主要是在讲一些建表时候应该注意的性能优化问题，各种数据类型的选择等。&lt;br&gt;
     
     </summary>
     

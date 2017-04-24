@@ -7,56 +7,16 @@
     </url>
 
     <url>
+        <loc>/2017/04/24/effective-java-9/</loc>
+        <lastmod>2017-04-24T15:17:56.283Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/04/18/effective-java-8/</loc>
-        <lastmod>2017-04-18T14:22:51.521Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/01/19/effective-java-1/</loc>
-        <lastmod>2017-04-18T14:10:10.593Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/02/11/effective-java-2/</loc>
-        <lastmod>2017-04-18T14:10:01.160Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/02/19/effective-java-3/</loc>
-        <lastmod>2017-04-18T14:09:53.418Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/02/effective-java-4/</loc>
-        <lastmod>2017-04-18T14:09:46.759Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/12/effective-java-5/</loc>
-        <lastmod>2017-04-18T14:09:39.511Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/03/21/effective-java-6/</loc>
-        <lastmod>2017-04-18T14:09:32.336Z</lastmod>
+        <lastmod>2017-04-24T14:09:26.904Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -64,7 +24,55 @@
 
     <url>
         <loc>/2017/04/16/effective-java-7/</loc>
-        <lastmod>2017-04-18T14:08:28.184Z</lastmod>
+        <lastmod>2017-04-24T14:09:15.024Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/21/effective-java-6/</loc>
+        <lastmod>2017-04-24T14:08:59.896Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/12/effective-java-5/</loc>
+        <lastmod>2017-04-24T14:08:49.582Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/03/02/effective-java-4/</loc>
+        <lastmod>2017-04-24T14:07:21.838Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/02/19/effective-java-3/</loc>
+        <lastmod>2017-04-24T14:07:11.533Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/02/11/effective-java-2/</loc>
+        <lastmod>2017-04-24T14:06:57.798Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/01/19/effective-java-1/</loc>
+        <lastmod>2017-04-24T14:06:49.207Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -103,7 +111,7 @@
     </url>
 
     <url>
-        <loc>/2016/04/06/spring-ioc/</loc>
+        <loc>/2016/01/23/rollout-version-1/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -111,7 +119,7 @@
     </url>
 
     <url>
-        <loc>/2016/01/23/rollout-version-1/</loc>
+        <loc>/2016/04/06/spring-ioc/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

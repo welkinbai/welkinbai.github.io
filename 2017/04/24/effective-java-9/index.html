@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>博客1.0版本正式上线 | Dawn</title>
+  <title>《Effective Java》读书笔记——第九章 并发 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -237,8 +237,8 @@
                             <div>
 							
 								
-								<h2>BLOG 1.0 VERSION <SPAN>ROLLOUT</SPAN></h2>
-                                <p>博客1.0版本正式上线</p>
+								<h2>第九章</h2>
+                                <p>并发</p>
 																
 							
                             </div>
@@ -261,46 +261,70 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2016-01-23T13:13:14.000Z" itemprop="datePublished">
-          2016年1月23日
+      <time datetime="2017-04-24T13:58:32.000Z" itemprop="datePublished">
+          2017年4月24日
       </time>	  
     
     
     | 
-    <a href='/tags/置顶/'>置顶</a>,
-    
-    <a href='/tags/上线/'>上线</a>
+    <a href='/tags/Effective-Java/'>Effective Java</a>
     
     
 	
 </span>
-                <h1>博客1.0版本正式上线</h1>				
+                <h1>《Effective Java》读书笔记——第九章 并发</h1>				
             </div>
         </div>		
         <div class="col-md-8 col-md-offset-2">
 			
-      		<h3 id="终于！博客1-0版本上线啦！！"><a href="#终于！博客1-0版本上线啦！！" class="headerlink" title="终于！博客1.0版本上线啦！！"></a>终于！博客1.0版本上线啦！！</h3><h4 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h4><a id="more"></a>
-<ol>
-<li>文艺范儿主题，响应式布局</li>
-<li>自定义页首大图，自定义大图上的文字，默认页首大图和文字随文章总数的奇偶数有两种变化</li>
-<li>每篇文章可单独设定页首大图和大图上的文字</li>
-<li>Markdown语法（暂时不支持流程图，待定事项等高级功能）</li>
-<li>代码高亮</li>
-<li>自动生成文章目录</li>
-<li>多说评论</li>
-<li>全文搜索</li>
-<li>设置置顶文章</li>
-<li>设置显示是否为原创还是转载</li>
-<li>漫游式生产环境，只要带着U盘，任何一台电脑上都可以发表博客</li>
-<li>利用gitcafe page/github page部署网站，不掏一分钱(一键双部署，国内用户用gitcafe，国外用户可以用github)</li>
-<li>自定义404页面</li>
-</ol>
-<h4 id="暂时不能用的页面："><a href="#暂时不能用的页面：" class="headerlink" title="暂时不能用的页面："></a>暂时不能用的页面：</h4><ol>
-<li>归档、标签、分类实际上是一个页面，所以功能上比较单一，2.0版本会改进</li>
-<li>关于也就是自我介绍还没有弄</li>
-<li>云链接这个自创的友情链接页面我也还没弄，可能会放在下个版本</li>
-</ol>
-<h5 id="欢迎为作者寻找bug和提出宝贵意见！"><a href="#欢迎为作者寻找bug和提出宝贵意见！" class="headerlink" title="欢迎为作者寻找bug和提出宝贵意见！"></a>欢迎为作者寻找bug和提出宝贵意见！</h5>
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六十六条-同步访问共享的可变数据"><span class="toc-text">第六十六条 同步访问共享的可变数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六十七条-避免过度同步"><span class="toc-text">第六十七条 避免过度同步</span></a></li></ol>
+</div>
+			
+      		<p>本章主要讨论多线程程序设计时的一些问题，并发问题通常要复杂的多，容易出错，即使是高级工程师也经常会无意间犯错，然而，随着多核处理器的问世，并发几乎是程序员绕不开的一道坎。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a></p>
+<h2 id="第六十六条-同步访问共享的可变数据"><a href="#第六十六条-同步访问共享的可变数据" class="headerlink" title="第六十六条 同步访问共享的可变数据"></a>第六十六条 同步访问共享的可变数据</h2><p>本条又要回到大段的代码示例中。<br>首先，书中讲述一个观点，就是我们认为只有在写操作的时候才需要关心同步问题，实际上并非如此，读操作同样需要关心同步问题，变量的值发生改变时，其对其他线程的可见性是无法保证的。比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested)</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个例子我们开启了一个线程，并轮询一个boolean变量来决定是否要结束线程。<br>读者可能会以为主线程设置boolean变量为true时，子线程就会结束。实际上，子线程永远不会结束，因为boolean变量的变更子线程没有感知到。这其中涉及到了很多JVM重排序的知识，可惜书中只是一笔带过，只是交代while语句可能会变成这样：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(!stopRequested)</span></div><div class="line">	<span class="keyword">while</span><span class="comment">(true)</span></div><div class="line">		i++;</div></pre></td></tr></table></figure></p>
+<p>如果将变量的读取做成同步的，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">requestStop</span><span class="params">()</span> </span>&#123;</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">stopRequested</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> stopRequested;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested())</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		requestStop();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序便能如期望的那样工作，注意，写方法和读方法都要加同步，否则，就会不起作用。<br>书中还给出了更推荐的版本：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopThread</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stopRequested;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">		Thread backgroundThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span> (!stopRequested)</div><div class="line">					i++;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		backgroundThread.start();</div><div class="line">	</div><div class="line">		TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">		stopRequested = <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用<code>volatile</code>关键字，变量值的变更会立即被所有线程看到，至于内部实现机理，很遗憾，本书还是没讲。<br>书中提到在使用<code>volatile</code>的过程中，要务必小心<code>++</code>操作符是非原子的，实际上，我认为在所有并发情况下都应该要小心这个操作符是分两步执行的，即先读后写。<br>在这种情况下，应该使用<code>java.util.concurrent.atomic</code>中的类<code>AtomicLong</code>，来执行线程安全的加一操作。<br>书中提到，避免多线程同步问题的最佳办法是<code>不要共享变量，或者共享不可变数据</code>。</p>
+<h2 id="第六十七条-避免过度同步"><a href="#第六十七条-避免过度同步" class="headerlink" title="第六十七条 避免过度同步"></a>第六十七条 避免过度同步</h2><p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
@@ -310,8 +334,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-02-19T07:56:04.234Z" itemprop="datePublished">
-					2017年2月19日 15:56
+				<time datetime="2017-04-24T15:17:56.283Z" itemprop="datePublished">
+					2017年4月24日 23:17
 				</time>
 			</p>
             <p>
@@ -322,13 +346,9 @@
         </div>		
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2016/03/01/myplan/" style="float: left;">
-        ← 新的人生大计
-    </a>
     
-    
-    <a class="pull-right" href="/2015/12/20/my-new-post/">
-        博客更新日志 →
+    <a class="pull-right" href="/2017/04/18/effective-java-8/">
+        《Effective Java》读书笔记——第八章 异常 →
     </a>
     
 </nav>
@@ -336,7 +356,7 @@
         
 		<div class="duoshuo">
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2016/01/23/rollout-version-1/" data-title="博客1.0版本正式上线" data-url="/2016/01/23/rollout-version-1/"></div>
+	<div class="ds-thread" data-thread-key="2017/04/24/effective-java-9/" data-title="《Effective Java》读书笔记——第九章 并发" data-url="/2017/04/24/effective-java-9/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
