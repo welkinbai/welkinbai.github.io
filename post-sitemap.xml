@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>/2015/12/20/my-new-post/</loc>
+        <lastmod>2017-04-30T15:03:19.544Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/04/30/effective-java-10/</loc>
         <lastmod>2017-04-30T09:21:32.552Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -119,7 +127,7 @@
     </url>
 
     <url>
-        <loc>/2016/04/06/spring-ioc/</loc>
+        <loc>/2016/01/23/rollout-version-1/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -127,7 +135,7 @@
     </url>
 
     <url>
-        <loc>/2016/01/23/rollout-version-1/</loc>
+        <loc>/2016/04/06/spring-ioc/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -145,14 +153,6 @@
     <url>
         <loc>/2016/12/28/mybatis-spring/</loc>
         <lastmod>2017-02-19T07:56:04.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2015/12/20/my-new-post/</loc>
-        <lastmod>2017-02-19T07:56:04.230Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -30,15 +30,15 @@
     </url>
 
     <url>
-        <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
-        <lastmod>2017-02-19T07:56:04.230Z</lastmod>
+        <loc>/tags/MyBatis/</loc>
+        <lastmod>2017-02-19T07:56:04.231Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>/tags/MyBatis/</loc>
-        <lastmod>2017-02-19T07:56:04.231Z</lastmod>
+        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
+        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -58,22 +58,8 @@
     </url>
 
     <url>
-        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
-        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
         <lastmod>2017-03-12T02:55:23.690Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
-        <lastmod>2017-03-12T03:11:16.227Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -95,6 +81,20 @@
     <url>
         <loc>/tags/Effective-Java/</loc>
         <lastmod>2017-04-30T09:21:32.552Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
+        <lastmod>2017-04-30T15:03:19.544Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
+        <lastmod>2017-04-30T15:03:19.544Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
