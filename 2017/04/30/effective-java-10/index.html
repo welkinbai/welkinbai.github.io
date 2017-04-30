@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>《Effective Java》读书笔记——第十章 序列化 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(8)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(17)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(10)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_3.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第十章</h2>
+                                <p>序列化</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-04-30T04:09:20.000Z" itemprop="datePublished">
+          2017年4月30日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Effective-Java/'>Effective Java</a>
+    
+    
+	
+</span>
+                <h1>《Effective Java》读书笔记——第十章 序列化</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七十四条-谨慎地实现Serializable接口"><span class="toc-text">第七十四条 谨慎地实现Serializable接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七十五条-考虑使用自定义的序列化形式"><span class="toc-text">第七十五条 考虑使用自定义的序列化形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七十六条-保护性地编写readObject方法"><span class="toc-text">第七十六条 保护性地编写readObject方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七十七条-对于实例控制（单例模式），枚举优先于readResolve"><span class="toc-text">第七十七条 对于实例控制（单例模式），枚举优先于readResolve</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七十八条-考虑使用序列化代理"><span class="toc-text">第七十八条 考虑使用序列化代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本书总结"><span class="toc-text">本书总结</span></a></li></ol>
+</div>
+			
+      		<p>本章主要讲序列化API相关的问题和技巧。序列化API主要是用来将对象编码成字节流，传送字节流到某个地方，然后从字节流中重新构建对象。本章是最后一章，文末会跟一个全书的总结。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a><br>10.<a href="/2017/04/30/effective-java-10/" title="《Effective Java》读书笔记——第十章 序列化">《Effective Java》读书笔记——第十章 序列化</a></p>
+<h2 id="第七十四条-谨慎地实现Serializable接口"><a href="#第七十四条-谨慎地实现Serializable接口" class="headerlink" title="第七十四条 谨慎地实现Serializable接口"></a>第七十四条 谨慎地实现Serializable接口</h2><p>只在非常必要的时候实现Serializable接口，因为一旦实现它，就会有一些限制和安全隐患。<br>如下：</p>
+<ul>
+<li>一旦实现Serializable接口，就大大降低了改变类实现的灵活性。如果接受默认的序列化形式，类的私有域和私有方法也会成为导出API的一部分。如果忘记显式地声明序列版本号UID私有静态字段，改变内部表示法就变的更加困难（因为自动生成的UID受到类的内部表示法的影响，比如类名等）。</li>
+<li>增加了出现bug和安全漏洞的可能性，因为反序列化实际上就像一个隐藏构造器，它独立于现有构造器之外，却可以创建对象，因此在初始化对象的时候所要建立起来的约束条件都不能同样地建立在反序列化过程中。此外，攻击者可以利用反序列化过程来非法访问正在构造过程中的对象。</li>
+<li>随着类发行新的版本，测试的负担增加了，每增加一个版本，测试就要保证任何新版本序列化老版本反序列化，老版本序列化新版本反序列化的过程是可用的，每个版本都成倍地增加测试的工作量，除了检查是否可用以外（即二进制兼容性），还要检查用起来是否如预期那样产生原始对象的复制品（语义兼容性）。</li>
+</ul>
+<p>综上所述，除非你在使用的时候，所要融入的框架需求你的对象必须实现Serializable接口，或者你有其他序列化对象的需求，否则尽量避免实现该接口。<br>为继承设计的类，应该尽可能少地实现该接口，用户的接口也应该尽可能少地继承该接口。<br>内部类也不应该实现该接口，但是静态成员类是可以的。</p>
+<h2 id="第七十五条-考虑使用自定义的序列化形式"><a href="#第七十五条-考虑使用自定义的序列化形式" class="headerlink" title="第七十五条 考虑使用自定义的序列化形式"></a>第七十五条 考虑使用自定义的序列化形式</h2><p>上条我们讲述了序列化接口的诸多问题，实际上，序列化接口的诸多问题主要是由默认的序列化形式导致的，如果考虑使用自定义的序列化形式，某些情况能够得到改善。<br>如果一个对象的物理表示法等同于它的逻辑内容，则适用于默认的序列化形式。比如：一个表示名字的对象有lastName，firstName，middleName三个实例域，它的物理表示法精确地表示了它的逻辑内容，可以不用自己自定义序列化形式。<br>但是，下面这个例子就不行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringList</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">transient</span> Entry head = <span class="keyword">null</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// No longer Serializable!</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> </span>&#123;</div><div class="line">		String data;</div><div class="line">		Entry next;</div><div class="line">		Entry previous;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Appends the specified string to the list</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">		<span class="comment">// Implementation omitted</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * Serialize this &#123;<span class="doctag">@code</span> StringList&#125; instance.</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@serialData</span> The size of the list (the number of strings it contains) is</div><div class="line">	 *             emitted (&#123;<span class="doctag">@code</span> int&#125;), followed by all of its elements (each</div><div class="line">	 *             a &#123;<span class="doctag">@code</span> String&#125;), in the proper sequence.</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(ObjectOutputStream s)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		s.defaultWriteObject();</div><div class="line">		s.writeInt(size);</div><div class="line"></div><div class="line">		<span class="comment">// Write out all elements in the proper order.</span></div><div class="line">		<span class="keyword">for</span> (Entry e = head; e != <span class="keyword">null</span>; e = e.next)</div><div class="line">			s.writeObject(e.data);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(ObjectInputStream s)</span> <span class="keyword">throws</span> IOException,</span></div><div class="line">			ClassNotFoundException &#123;</div><div class="line">		s.defaultReadObject();</div><div class="line">		<span class="keyword">int</span> numElements = s.readInt();</div><div class="line"></div><div class="line">		<span class="comment">// Read in all elements and insert them in list</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numElements; i++)</div><div class="line">			add((String) s.readObject());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">93248094385L</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个例子是一个自己实现的存放string的数组链表，如果使用默认的序列化形式，有以下几个缺点：</p>
+<ul>
+<li>它使类的导出API永远束缚在内部表示法之上，比如上面这个例子，其内部私有的静态成员类Entry也成为了导出API的一部分，在未来想要改变内部表示法的结构，比如不要Entry了，也不想使用链表来实现了，抱歉，那是不可以的。</li>
+<li>它会消耗过多的空间，由于默认的序列化形式是将对象所有的内容忠实地遍历并写入字节流中，因此包括Entry在内，所有的内部实现细节都一并写入字节流里了，实际上不需要这么做，这会导致字节流膨胀，浪费空间。</li>
+<li>它会消耗过多的时间，理由同上，它会经历一次昂贵的图遍历来将内部所有的细节写入字节流。</li>
+<li>会引起内存不足溢出，理由同上。</li>
+</ul>
+<p>这些缺点迫使我们必须自己实现序列化过程，上面的例子已经给出了，主要是去实现writeObject和readObject方法，由于JDK早期的糟糕设计，它们没有被包含在接口定义中，所以注意不要打错名字。<br>可以看到自定义的序列化形式并没有将所有的实现细节都写入字节流中，只是将数组的大小以及数组中的string的值写入到字节流中，这大大减少了空间占用，节省序列化和反序列化时间。<br>注意，如果你不想要某个域参与到默认的序列化过程中，就可以使用<code>transient</code>修饰符来声明，这样域就是瞬时的，不会参与默认序列化过程。然后你在自定义的序列化过程中按需来使用这些域即可。<br>另外，要注意，即使你所有的域都是<code>transient</code>的，你也必须在自定义的序列化方法中优先调用<code>s.defaultReadObject()</code>方法和<code>s.defaultWriteObject</code>方法，这两个方法会先进行默认的序列化过程，原因是以后升级版本，你很难保证新增的域依然是瞬时的。调用它们可以增强灵活性和扩展性。<br>还有就是所有的私有域，一旦序列化了，就有可能成为公有API的一部分，那么你就应该为它们编写Javadoc文档，用<code>@serial</code>和<code>@serialData</code>两个标签提示Javadoc生成工具将注释内容放到有关序列化形式的文档页上。<br>如果类用来被多个线程共享，那么你就要注意了，自定义的序列化方法也要考虑同步问题。<br>不要忘记显示地声明序列化版本号UID，现在IDE都可以一键生成，有了这样一个值，序列化的类升级版本后才能安全地废除老的版本，而且扩展性也能得到保证。</p>
+<h2 id="第七十六条-保护性地编写readObject方法"><a href="#第七十六条-保护性地编写readObject方法" class="headerlink" title="第七十六条 保护性地编写readObject方法"></a>第七十六条 保护性地编写readObject方法</h2><p>实现序列化接口会极大地降低类的安全性，尤其是会令一个不可变的类成为一个可变的类，会破坏一个类的约束条件。<br>为了弥补安全性，必须保护性地编写readObject方法，即使你接受默认的序列化形式，也要这么干。<br>下面是书中的一个例子：<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> final <span class="keyword">class</span> Period implements Serializable &#123;</div><div class="line">	<span class="keyword">private</span> <span class="built_in">Date</span> start;</div><div class="line">	<span class="keyword">private</span> <span class="built_in">Date</span> <span class="keyword">end</span>;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * @param start</div><div class="line">	 *            the beginning of the period</div><div class="line">	 * @param <span class="keyword">end</span></div><div class="line">	 *            the <span class="keyword">end</span> of the period; must <span class="keyword">not</span> precede start</div><div class="line">	 * @throws IllegalArgumentException</div><div class="line">	 *             <span class="keyword">if</span> start <span class="keyword">is</span> after <span class="keyword">end</span></div><div class="line">	 * @throws NullPointerException</div><div class="line">	 *             <span class="keyword">if</span> start <span class="keyword">or</span> <span class="keyword">end</span> <span class="keyword">is</span> <span class="literal">null</span></div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> Period(<span class="built_in">Date</span> start, <span class="built_in">Date</span> <span class="keyword">end</span>) &#123;</div><div class="line">		this.start = <span class="keyword">new</span> <span class="built_in">Date</span>(start.getTime());</div><div class="line">		this.<span class="keyword">end</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="keyword">end</span>.getTime());</div><div class="line">		<span class="keyword">if</span> (this.start.compareTo(this.<span class="keyword">end</span>) &gt; <span class="number">0</span>)</div><div class="line">			throw <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + <span class="keyword">end</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="built_in">Date</span> start() &#123;</div><div class="line">		return <span class="keyword">new</span> <span class="built_in">Date</span>(start.getTime());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="built_in">Date</span> <span class="keyword">end</span>() &#123;</div><div class="line">		return <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="keyword">end</span>.getTime());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="built_in">String</span> toString() &#123;</div><div class="line">		return start + <span class="string">" - "</span> + <span class="keyword">end</span>;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>考虑上面这个类，原本构造器中的约束条件想要保证开始时间总是在结束时间之前，然而，当你实现了序列化接口，一切都是泡影，攻击者可以很轻松地使用反序列化方法给你创造出一个结束时间在开始时间之前的对象出来。一旦约束条件不再有效，这样的对象有可能造成整个系统的奔溃，更严重的情况，将导致黑客彻底控制系统。<br>因此，为了防止这种情况出现，你必须显式地实现<code>readObject</code>方法，如下：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// readObject method with validity checking - Page 304</span></div><div class="line"><span class="comment">// This will defend against BogusPeriod attack but not MutablePeriod.</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">void</span> readObject(ObjectInputStream s)</div><div class="line">throws IOException, ClassNotFoundException &#123;</div><div class="line">	s.defaultReadObject();</div><div class="line"></div><div class="line">	<span class="comment">// Check that our invariants are satisfied</span></div><div class="line">	<span class="built_in">if</span> (start.compareTo(<span class="built_in">end</span>) &gt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> InvalidObjectException(start +<span class="string">" after "</span>+ <span class="built_in">end</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你以为这样就完事大吉了？问题是，本来例子中的类是个不可变的类，它使用了保护性拷贝确保其内部域不被人修改，现在呢？现在攻击者可以很容易地获取到内部域的引用，进而在反序列化结束之后，修改内部域，破坏约束条件，如下：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MutablePeriod</span> &#123;</div><div class="line">	<span class="comment">// A period instance</span></div><div class="line">	<span class="keyword">public</span> final Period period;</div><div class="line">	</div><div class="line">	<span class="comment">// period's start field, to which we shouldn't have access</span></div><div class="line">	<span class="keyword">public</span> final Date start;</div><div class="line">	</div><div class="line">	<span class="comment">// period's end field, to which we shouldn't have access</span></div><div class="line">	<span class="keyword">public</span> final Date end;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MutablePeriod</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ByteArrayOutputStream bos = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">			ObjectOutputStream <span class="keyword">out</span> = <span class="keyword">new</span> ObjectOutputStream(bos);</div><div class="line"></div><div class="line">			<span class="comment">// Serialize a valid Period instance</span></div><div class="line">			<span class="keyword">out</span>.writeObject(<span class="keyword">new</span> Period(<span class="keyword">new</span> Date(), <span class="keyword">new</span> Date()));</div><div class="line"></div><div class="line">			<span class="comment">/*</span></div><div class="line">			 * Append rogue "previous object refs" for internal Date fields in</div><div class="line">			 * Period. For details, see "Java Object Serialization</div><div class="line">			 * Specification," Section 6.4.</div><div class="line">			 */</div><div class="line">			<span class="keyword">byte</span>[] <span class="keyword">ref</span> = &#123; <span class="number">0x71</span>, <span class="number">0</span>, <span class="number">0x7e</span>, <span class="number">0</span>, <span class="number">5</span> &#125;; <span class="comment">// Ref #5</span></div><div class="line">			bos.write(<span class="keyword">ref</span>); <span class="comment">// The start field</span></div><div class="line">			<span class="keyword">ref</span>[<span class="number">4</span>] = <span class="number">4</span>; <span class="comment">// Ref # 4</span></div><div class="line">			bos.write(<span class="keyword">ref</span>); <span class="comment">// The end field</span></div><div class="line"></div><div class="line">			<span class="comment">// Deserialize Period and "stolen" Date references</span></div><div class="line">			ObjectInputStream <span class="keyword">in</span> = <span class="keyword">new</span> ObjectInputStream(</div><div class="line">					<span class="keyword">new</span> ByteArrayInputStream(bos.toByteArray()));</div><div class="line">			period = (Period) <span class="keyword">in</span>.readObject();</div><div class="line">			start = (Date) <span class="keyword">in</span>.readObject();</div><div class="line">			end = (Date) <span class="keyword">in</span>.readObject();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">		MutablePeriod mp = <span class="keyword">new</span> MutablePeriod();</div><div class="line">		Period p = mp.period;</div><div class="line">		Date pEnd = mp.end;</div><div class="line"></div><div class="line">		<span class="comment">// Let's turn back the clock</span></div><div class="line">		pEnd.setYear(<span class="number">78</span>);</div><div class="line">		System.<span class="keyword">out</span>.println(p);</div><div class="line"></div><div class="line">		<span class="comment">// Bring back the 60s!</span></div><div class="line">		pEnd.setYear(<span class="number">69</span>);</div><div class="line">		System.<span class="keyword">out</span>.println(p);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，攻击者轻而易举地使用额外的两个字段将要攻击的域的引用保存下来，并随后改变了它们的值，不可变的类变成了可以改变的类。<br>防止这种情况发生只能使用下面的方法：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// readObject method with defensive copying and validity checking - Page 306</span></div><div class="line"><span class="comment">// This will defend against BogusPeriod and MutablePeriod attacks.</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">void</span> readObject(ObjectInputStream s)</div><div class="line">throws IOException, ClassNotFoundException &#123;</div><div class="line">	s.defaultReadObject();</div><div class="line"></div><div class="line">	<span class="comment">// Defensively copy our mutable components</span></div><div class="line">	start = <span class="keyword">new</span> Date(start.getTime());</div><div class="line">	<span class="built_in">end</span> = <span class="keyword">new</span> Date(<span class="built_in">end</span>.getTime());</div><div class="line"></div><div class="line">	<span class="comment">// Check that our invariants are satisfied</span></div><div class="line">	<span class="built_in">if</span> (start.compareTo(<span class="built_in">end</span>) &gt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> InvalidObjectException(start +<span class="string">" after "</span>+ <span class="built_in">end</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即针对每个内部域，使用保护性拷贝。注意一定要在有效性验证之前做这个事情。否则有效性验证可能失效。另外由于保护性拷贝的缘故，无法使实例域声明为final的，这也是无奈之举，后面要介绍的序列化代理类可以解决这个问题。<br>另外要注意的是，不要使用<code>ObjectOutputStream</code>中的<code>writeUnshared</code>和<code>readUnshared</code>方法，书中说这两个方法并不安全，有漏洞，只要进行一些复杂的攻击，就可以搞定它们。<br>不要在readObject方法中直接或者间接调用任何可被覆盖的方法，那也是不安全的。</p>
+<h2 id="第七十七条-对于实例控制（单例模式），枚举优先于readResolve"><a href="#第七十七条-对于实例控制（单例模式），枚举优先于readResolve" class="headerlink" title="第七十七条 对于实例控制（单例模式），枚举优先于readResolve"></a>第七十七条 对于实例控制（单例模式），枚举优先于readResolve</h2><p>实现单例模式最好的方法是使用枚举，前面已经介绍过了，但是枚举有个缺陷就是编译期你就要知道单例究竟是什么，有时候单例要到运行期才能被创建，这时候枚举就无可奈何，那么有必要针对传统的单例模式进行了解。<br>传统的单例模式前面也有讲到过，大概长这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Elvis</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Elvis INSTANCE = <span class="keyword">new</span> Elvis();</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Elvis</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> String[] favoriteSongs = &#123; <span class="string">"Hound Dog"</span>, <span class="string">"Heartbreak Hotel"</span> &#125;;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printFavorites</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(Arrays.toString(favoriteSongs));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException </span>&#123;</div><div class="line">		<span class="keyword">return</span> INSTANCE;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后你看到了，这个单例我们要实现序列化接口，那么就会存在一些糟糕的问题，糟糕的安全性问题。<br>首先由于反序列化过程完全无视构造器，即使构造器私有化，它也能创建一个完全不同的对象，因此，必须使用<code>readResolve</code>方法来解决这个问题，该方法会在readObject方法之后调用，如果该方法返回了一个对象，那么就立即丢弃反序列化过程创建的对象，进而使用该方法返回的对象替代。<br>如上面例子中展示的，readResolve方法返回了单例的唯一实例，反序列化过程创造的对象被立即丢弃了，这样就保证了单例不被破坏，全局仍然只有一个实例。<br>遗憾的是，攻击者可以在readResolve方法调用之前，先将反序列化产生的对象保存起来，这样便还是能够产生两个实例。<br>攻击例子如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElvisStealer</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> Elvis impersonator;</div><div class="line">	<span class="keyword">private</span> Elvis payload;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// Save a reference to the "unresolved" Elvis instance</span></div><div class="line">		impersonator = payload;</div><div class="line">	</div><div class="line">		<span class="comment">// Return an object of correct type for favorites field</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String[] &#123; <span class="string">"A Fool Such as I"</span> &#125;;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个攻击能成立的前提条件是：单例类中有一个对象引用类型的实例域，而且该域没有被声明为transient的。<br>这样攻击者就会精心准备一段字节流，使用自己写的攻击类来替换单例类中的对象引用类型的实例域。<br>下面的例子展示了攻击效果：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">public class ElvisImpersonator &#123;</div><div class="line">	<span class="comment">// Byte stream could not have come from real Elvis instance!</span></div><div class="line">	private static final byte[] serializedForm = new byte[] &#123; (byte) <span class="number">0xac</span>,</div><div class="line">			(byte) <span class="number">0xed</span>, <span class="number">0x00</span>, <span class="number">0x05</span>, <span class="number">0x73</span>, <span class="number">0x72</span>, <span class="number">0x00</span>, <span class="number">0x05</span>, <span class="number">0x45</span>, <span class="number">0x6c</span>, <span class="number">0x76</span>,</div><div class="line">			<span class="number">0x69</span>, <span class="number">0x73</span>, (byte) <span class="number">0x84</span>, (byte) <span class="number">0xe6</span>, (byte) <span class="number">0x93</span>, <span class="number">0x33</span>,</div><div class="line">			(byte) <span class="number">0xc3</span>, (byte) <span class="number">0xf4</span>, (byte) <span class="number">0x8b</span>, <span class="number">0x32</span>, <span class="number">0x02</span>, <span class="number">0x00</span>, <span class="number">0x01</span>,</div><div class="line">			<span class="number">0x4c</span>, <span class="number">0x00</span>, <span class="number">0x0d</span>, <span class="number">0x66</span>, <span class="number">0x61</span>, <span class="number">0x76</span>, <span class="number">0x6f</span>, <span class="number">0x72</span>, <span class="number">0x69</span>, <span class="number">0x74</span>, <span class="number">0x65</span>,</div><div class="line">			<span class="number">0x53</span>, <span class="number">0x6f</span>, <span class="number">0x6e</span>, <span class="number">0x67</span>, <span class="number">0x73</span>, <span class="number">0x74</span>, <span class="number">0x00</span>, <span class="number">0x12</span>, <span class="number">0x4c</span>, <span class="number">0x6a</span>, <span class="number">0x61</span>,</div><div class="line">			<span class="number">0x76</span>, <span class="number">0x61</span>, <span class="number">0x2f</span>, <span class="number">0x6c</span>, <span class="number">0x61</span>, <span class="number">0x6e</span>, <span class="number">0x67</span>, <span class="number">0x2f</span>, <span class="number">0x4f</span>, <span class="number">0x62</span>, <span class="number">0x6a</span>,</div><div class="line">			<span class="number">0x65</span>, <span class="number">0x63</span>, <span class="number">0x74</span>, <span class="number">0x3b</span>, <span class="number">0x78</span>, <span class="number">0x70</span>, <span class="number">0x73</span>, <span class="number">0x72</span>, <span class="number">0x00</span>, <span class="number">0x0c</span>, <span class="number">0x45</span>,</div><div class="line">			<span class="number">0x6c</span>, <span class="number">0x76</span>, <span class="number">0x69</span>, <span class="number">0x73</span>, <span class="number">0x53</span>, <span class="number">0x74</span>, <span class="number">0x65</span>, <span class="number">0x61</span>, <span class="number">0x6c</span>, <span class="number">0x65</span>, <span class="number">0x72</span>,</div><div class="line">			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x02</span>, <span class="number">0x00</span>, <span class="number">0x01</span>,</div><div class="line">			<span class="number">0x4c</span>, <span class="number">0x00</span>, <span class="number">0x07</span>, <span class="number">0x70</span>, <span class="number">0x61</span>, <span class="number">0x79</span>, <span class="number">0x6c</span>, <span class="number">0x6f</span>, <span class="number">0x61</span>, <span class="number">0x64</span>, <span class="number">0x74</span>,</div><div class="line">			<span class="number">0x00</span>, <span class="number">0x07</span>, <span class="number">0x4c</span>, <span class="number">0x45</span>, <span class="number">0x6c</span>, <span class="number">0x76</span>, <span class="number">0x69</span>, <span class="number">0x73</span>, <span class="number">0x3b</span>, <span class="number">0x78</span>, <span class="number">0x70</span>,</div><div class="line">			<span class="number">0x71</span>, <span class="number">0x00</span>, <span class="number">0x7e</span>, <span class="number">0x00</span>, <span class="number">0x02</span> &#125;;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		<span class="comment">// Initializes ElvisStealer.impersonator and returns</span></div><div class="line">		<span class="comment">// the real Elvis (which is Elvis.INSTANCE)</span></div><div class="line">		Elvis elvis = (Elvis) deserialize(serializedForm);</div><div class="line">		Elvis impersonator = ElvisStealer.impersonator;</div><div class="line">	</div><div class="line">		elvis.printFavorites();</div><div class="line">		impersonator.printFavorites();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Returns the object with the specified serialized form</span></div><div class="line">	private static Object deserialize(byte[] sf) &#123;</div><div class="line">		try &#123;</div><div class="line">			InputStream is = new ByteArrayInputStream(sf);</div><div class="line">			ObjectInputStream ois = new ObjectInputStream(is);</div><div class="line">			return ois.readObject();</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			throw new IllegalArgumentException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一个精心准备的字节流写入进来，其中，该字节流的favoriteSongs字段实际上是攻击者编写的攻击类，因此，在反序列化的时候，也会反序列化攻击类，而且攻击类的readResolve方法被优先调用，于是，攻击类内部将反序列化的单例类实例保存在静态域中，并在readResolve方法中返回了新的修改过的favoriteSongs实例，这样，反序列化机制完全没有觉察到自己在实例化单例的时候，字节流里有一个攻击类，它会抛弃攻击类实例的引用，使用攻击类返回的favoriteSongs来为单例的实例域设值。至此，单例被成功反序列化了，如果你仔细检查，会发现的确是你想要的那个单例。但是，在<code>ElvisStealer.impersonator</code>中，存有另一份实例，系统中出现了两份实例！<br>解决这个问题的办法很简单，就是消灭这种攻击方法的前提条件：单例中任何对象引用类型的实例域，都要声明为瞬时的（transient），这样攻击者就没有办法在反序列化过程中伪装自己的攻击类了。</p>
+<h2 id="第七十八条-考虑使用序列化代理"><a href="#第七十八条-考虑使用序列化代理" class="headerlink" title="第七十八条 考虑使用序列化代理"></a>第七十八条 考虑使用序列化代理</h2><p>有一种方法叫做序列化代理，可以很大程度上解决之前提到过的很多序列化的安全问题。<br>它的例子如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> start</div><div class="line">	 *            the beginning of the period</div><div class="line">	 * <span class="doctag">@param</span> end</div><div class="line">	 *            the end of the period; must not precede start</div><div class="line">	 * <span class="doctag">@throws</span> IllegalArgumentException</div><div class="line">	 *             if start is after end</div><div class="line">	 * <span class="doctag">@throws</span> NullPointerException</div><div class="line">	 *             if start or end is null</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start, Date end)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.start = <span class="keyword">new</span> Date(start.getTime());</div><div class="line">		<span class="keyword">this</span>.end = <span class="keyword">new</span> Date(end.getTime());</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.start.compareTo(<span class="keyword">this</span>.end) &gt; <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + end);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Date(start.getTime());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Date(end.getTime());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> start + <span class="string">" - "</span> + end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// writeReplace method for the serialization proxy pattern - page 312</span></div><div class="line">	<span class="function"><span class="keyword">private</span> Object <span class="title">writeReplace</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> SerializationProxy(<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// readObject method for the serialization proxy pattern - Page 313</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(ObjectInputStream stream)</span></span></div><div class="line">			<span class="keyword">throws</span> InvalidObjectException &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> InvalidObjectException(<span class="string">"Proxy required"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">// Serialization proxy for Period class - page 312</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializationProxy</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line">	</div><div class="line">		SerializationProxy(Period p) &#123;</div><div class="line">			<span class="keyword">this</span>.start = p.start;</div><div class="line">			<span class="keyword">this</span>.end = p.end;</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">234098243823485285L</span>; </div><div class="line">	</div><div class="line">		<span class="comment">// readResolve method for Period.SerializationProxy - Page 313</span></div><div class="line">		<span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Period(start, end); <span class="comment">// Uses public constructor</span></div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>序列化代理类是一个内部的静态类。它和外围类都实现序列化接口，并且它拥有外围类的所有域。<br>当外围类反序列化时，由于它实现了<code>writeReplace()</code>方法，序列化时本来要序列化外围类就变成了序列化代理类，然后它还实现了<code>readObject</code>方法，阻止任何攻击者直接反序列化外围类。<br>现在反序列化的目标被转为了内部的序列化代理类，当反序列化内部的代理类时，由于内部的代理类又实现了<code>readResolve</code>方法，所以，反序列化过程又返回了外围类的实例，而且是通过真实存在的构造器来创建实例的，这样的话就能确保约束条件得到检查。</p>
+<p>通过上面的过程，你可以得到序列化代理的好处有：</p>
+<ul>
+<li>使用真实的构造器来创建实例，使得约束条件得到满足</li>
+<li>无需保护性拷贝因为攻击者无从下手</li>
+<li>外围类的实例域可以做成final的，这样确保外围类永远是不可变的，若在反序列化的地方使用保护性拷贝，就无法这么做。</li>
+<li>序列化代理还允许反序列化的时候，创建的对象是与序列化的时候不同的类，EnumSet就使用这种序列化代理来在不同的情况生成不同的EnumSet子类。</li>
+</ul>
+<p>序列化代理也有自己的缺点，比如：</p>
+<ul>
+<li>性能会有所降低</li>
+<li>有些情况不能使用，比如不能与可被客户端扩展的类兼容，不能与对象图中包含循环的某些类兼容。</li>
+</ul>
+<h2 id="本书总结"><a href="#本书总结" class="headerlink" title="本书总结"></a>本书总结</h2><p>经过漫长的阅读，终于结束了被称为JAVA圣经之一的书，在阅读的过程中的确有很多收获。<br>本书的确是一本非常值得每个JAVA工程师阅读的书籍，作者丰富的经验和详实的例子也非常令人佩服。<br>不过，个人认为，有些小节切分的太细太啰嗦，有些部分又描述的太过笼统和简略，采取这种一条一条的写法可能会给读者带来一种阅读起来轻松的错觉，但是却牺牲了很好地组织文章结构的机会，只能说毁誉各半吧。<br>至于中文译文的评价，个人认为算是中规中矩，但是在有些地方有点儿过于直译，如果译者能够有更多自己的思考，针对晦涩难懂的一些东西不是直白翻译而是有目的性地转译的话，可能会更出彩吧。<br>随着JDK1.8的问世，可能本书讨论的有些内容有点儿陈旧了，期待能有新版的问世。<br>最后，完结撒花~</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-04-30T09:21:32.552Z" itemprop="datePublished">
+					2017年4月30日 17:21
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/04/24/effective-java-9/">
+        《Effective Java》读书笔记——第九章 并发 →
+    </a>
+    
+</nav>
+
+        
+		<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2017/04/30/effective-java-10/" data-title="《Effective Java》读书笔记——第十章 序列化" data-url="/2017/04/30/effective-java-10/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"welkinbaicafe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

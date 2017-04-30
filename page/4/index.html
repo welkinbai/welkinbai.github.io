@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>fiddler抓包https教程 | Dawn</title>
+  <title>Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -75,7 +75,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -236,10 +236,14 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-								
-								<h2>fiddler抓包https</h2>
-                                <p>炒鸡简单</p>
-																
+							
+							    
+                            
+							
+								<h2><strong>BE <span>BRAVE</span>, FOR YOU.</strong></h2>
+                                <p>努力吧，即使手中没有刀剑，终有通关人生这场游戏的那一天</p>				    			
+							    
+                            
 							
                             </div>
                         </div>
@@ -255,95 +259,90 @@
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      
+      <!-- ============================ Content =========================== -->
+
 <section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2016-12-08T09:17:57.000Z" itemprop="datePublished">
-          2016年12月8日
-      </time>	  
-    
-    
-    | 
-    <a href='/tags/fiddler/'>fiddler</a>
-    
-    
-	
-</span>
-                <h1>fiddler抓包https教程</h1>				
-            </div>
-        </div>		
-        <div class="col-md-8 col-md-offset-2">
-			
-			<div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、打开Fiddler4"><span class="toc-text">一、打开Fiddler4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、手机端的配置"><span class="toc-text">二、手机端的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、安装证书抓取https请求"><span class="toc-text">三、安装证书抓取https请求</span></a></li></ol>
-</div>
-			
-      		<p>本教程教大家如何使用fiddler来抓包http和https请求<br><a id="more"></a></p>
-<h4 id="一、打开Fiddler4"><a href="#一、打开Fiddler4" class="headerlink" title="一、打开Fiddler4"></a>一、打开Fiddler4</h4><p>选择Tools-&gt;Telerik Fiddler Options<br>点选HTTPS选项卡做如下配置：<br><img src="/2016/12/08/fiddler-https/1.png" alt="1.png" title=""><br>点选Connections选项卡做如下配置：<br><img src="/2016/12/08/fiddler-https/2.png" alt="2.png" title=""><br>点击OK。</p>
-<h4 id="二、手机端的配置"><a href="#二、手机端的配置" class="headerlink" title="二、手机端的配置"></a>二、手机端的配置</h4><p>打开自己手机，连接QingQing_Dev的wifi。<br>连接后进入该wifi的详情，为该wifi配置http代理：<br><img src="/2016/12/08/fiddler-https/3.png" alt="3.png" title=""><br>此时如果配置成功，应该已经可以抓取到http请求。</p>
-<h4 id="三、安装证书抓取https请求"><a href="#三、安装证书抓取https请求" class="headerlink" title="三、安装证书抓取https请求"></a>三、安装证书抓取https请求</h4><p>想要抓取https请求，在前面配置的基础上，使用手机浏览器访问http代理中配置的地址和端口<br>比如上图中是192.168.1.104:8888<br>你应该能看到如下网页：<br><img src="/2016/12/08/fiddler-https/4.png" alt="4.png" title=""><br>点击网页中的下载链接，下载Fiddler提供的根证书，并安装。<br>Iphone用户应该在下载后立刻能够看到如下安装界面：<br><img src="/2016/12/08/fiddler-https/5.png" alt="5.png" title=""><br>选择安装，安装后就能成功地抓取https请求了。<br>如果想要抓取电脑端的https请求，只需在fiddler中导出根证书到桌面：<br><img src="/2016/12/08/fiddler-https/6.png" alt="6.png" title=""><br>然后双击安装即可。</p>
-<p>注意：fiddler的根证书在不用的时候记得删掉，否则你的电脑和手机有被入侵的风险</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-		<div class="col-md-8 col-md-offset-2">
-      		<p>作者：
-                        Welkin Bai
-                      
-			</p>
-			<p>最后修改：
-				<time datetime="2016-12-08T13:03:16.456Z" itemprop="datePublished">
-					2016年12月8日 21:03
-				</time>
-			</p>
-            <p>
-                <span id="busuanzi_container_page_pv" style='display:none'>
-                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
-                </span>
-            </p>		
-        </div>		
-        <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/2016/12/21/mybatis-dynamic/" style="float: left;">
-        ← MyBatis 动态SQL
-    </a>
-    
-    
-    <a class="pull-right" href="/2016/12/08/mybatis-mapper/">
-        MyBatis Mapper映射文件中的SQL配置 →
-    </a>
-    
-</nav>
-
+    <div class="container">    
+                
         
-		<div class="duoshuo">
-<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2016/12/08/fiddler-https/" data-title="fiddler抓包https教程" data-url="/2016/12/08/fiddler-https/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"welkinbaicafe"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
-</div>
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+                
+        
+        		
+		        
 		
-        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+        
+        <nav class="pagination" role="pagination">
+          <a class="pull-left" href="/page/3/">← 上一页</a>
+          
+        </nav>
     </div>
 </section>
-
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
+        </div>
+    </div>
+</section>
+<!-- ============================ END Content =========================== -->
 
       
 <!-- ============================ Footer =========================== -->
