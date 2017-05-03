@@ -65,13 +65,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E8%AE%A1%E5%88%92/</loc>
-        <lastmod>2017-03-12T03:11:16.227Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/Mysql/</loc>
         <lastmod>2017-04-10T14:15:58.555Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -94,7 +87,14 @@
 
     <url>
         <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
-        <lastmod>2017-05-01T12:25:13.870Z</lastmod>
+        <lastmod>2017-05-03T13:27:44.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E8%AE%A1%E5%88%92/</loc>
+        <lastmod>2017-05-03T13:27:44.027Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

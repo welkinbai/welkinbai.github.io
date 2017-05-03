@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>/2016/03/01/myplan/</loc>
+        <lastmod>2017-05-03T13:27:44.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2015/12/20/my-new-post/</loc>
         <lastmod>2017-05-01T12:25:13.870Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -97,14 +105,6 @@
     <url>
         <loc>/2016/08/29/mysql-basic/</loc>
         <lastmod>2017-04-10T14:15:58.555Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2016/03/01/myplan/</loc>
-        <lastmod>2017-03-12T03:11:16.227Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
