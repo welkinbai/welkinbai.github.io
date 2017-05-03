@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: IOC容器 | Dawn</title>
+  <title>Guava框架官方文档学习——第一章 基础工具包 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -75,7 +75,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -238,14 +238,10 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-							
-							
-								<h2><strong>NO <span>PAIN</span>,NO <span>GAIN</span>.</strong></h2>
-                                <p>成功是成功者的里程碑，失败是失败者的墓志铭</p>				    			
-							    
-                            
-							    
-                            
+								
+								<h2>第一章</h2>
+                                <p>基础工具包</p>
+																
 							
                             </div>
                         </div>
@@ -262,60 +258,156 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-<section id="services">
+<section id="intro">
     <div class="container">
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2016/04/06/spring-ioc/">【学习回顾】Spring之IoC容器的使用(一)</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-06T11:49:47.000Z" itemprop="datePublished">
-          2016年4月6日
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-05-03T14:03:29.000Z" itemprop="datePublished">
+          2017年5月3日
       </time>	  
     
     
     | 
-    <a href='/tags/Spring/'>Spring</a>,
-    
-    <a href='/tags/IOC容器/'>IOC容器</a>
+    <a href='/tags/Guava/'>Guava</a>
     
     
 	
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>本来写的是Spring深层实现的解析，想来想去还是由浅入深比较好。<br>那先来写写怎么使用Spring的容器吧。<br>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/04/06/spring-ioc/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>Guava框架官方文档学习——第一章 基础工具包</h1>				
             </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-使用和避免Null"><span class="toc-text">第一节 使用和避免Null</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Null糟糕的地方"><span class="toc-text">Null糟糕的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null也有一些优点"><span class="toc-text">Null也有一些优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#谷歌的建议"><span class="toc-text">谷歌的建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊例子的建议"><span class="toc-text">特殊例子的建议</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>Guava是谷歌出品的一款JAVA工具框架，提供了很多丰富的工具类来弥补JAVA这门语言的不足之处。可以说将Guava就像是JAVA武侠世界的一本绝世秘籍，学会了它程序员可以轻松应对很多场景，用最少的代码实现业务逻辑。<br><a id="more"></a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a>
+<p><br></p>
+<h2 id="第一节-使用和避免Null"><a href="#第一节-使用和避免Null" class="headerlink" title="第一节 使用和避免Null"></a>第一节 使用和避免Null</h2><blockquote>
+<p>“I call it my billion-dollar mistake.” - Sir C. A. R. Hoare, on his invention of the null reference</p>
+</blockquote>
+<p>上面是Null引用发明者亲口说的话，大意为：Null是我犯下的一个数百万美元的错误<br>可见连创始人本人都觉的Null是一个糟糕的发明。<br>那么Null到底糟糕在哪儿呢？</p>
+<h3 id="Null糟糕的地方"><a href="#Null糟糕的地方" class="headerlink" title="Null糟糕的地方"></a>Null糟糕的地方</h3><p>如下：</p>
+<ul>
+<li>Null值的含义不明，比如<code>Map.get(key)</code>返回的Null值，即可以代表在Map中什么也没找到，也可以代表找到的value是Null。在很多程序中，Null可以代表失败，可以代表成功，可以代表任何事。</li>
+<li>Null值总是伴随着著名的<code>NullPointerException</code>，这个异常之所以著名的原因是因为通常它发生的时候，程序员很难定位错误的根源，只能靠瞎蒙</li>
+</ul>
+<h3 id="Null也有一些优点"><a href="#Null也有一些优点" class="headerlink" title="Null也有一些优点"></a>Null也有一些优点</h3><p>当Null能被正确使用时，Null是很cheap的（应该就是几乎没有性能和空间开销）。<br>而且Null在数组对象中是不可避免的（这个我不认同原文观点，可以使用一个专用的引用来专门代表数组中空的元素，而不是通用的Null）</p>
+<h3 id="谷歌的建议"><a href="#谷歌的建议" class="headerlink" title="谷歌的建议"></a>谷歌的建议</h3><p>谷歌的建议是尽可能地在Null值出现的地方快速失败而不是忍气吞声把Null值接受下来。<br>我也认为这是个好建议，就地失败可以更容易查出根源问题，比Null值被好几个类传来传去以后才失败要好。</p>
+<h3 id="特殊例子的建议"><a href="#特殊例子的建议" class="headerlink" title="特殊例子的建议"></a>特殊例子的建议</h3><p>谷歌还提出了以下建议：</p>
+<ul>
+<li>如果你打算使用Null放在一个Set里或者作为Map的key，请不要这么做。</li>
+<li>如果你打算把Null值作为Map的Value放进去，请考虑分离开来，将Null键值对和非空的键值对分开放，或者维持一个非空键值对（或着空的）key的Set。因为很容易搞混到底是Map里面没有这个value，还是value就是Null。</li>
+<li>如果你打算把Null放进List中，如果List不是很大，考虑使用<code>Map&lt;Integer,E&gt;</code>来代替List使用，这样更加高效，也许也更加符合你的应用的需求。</li>
+<li>为枚举类型增加一种额外的枚举常量来代表Null值出现的情况，比如<code>java.math.RoundingMode</code>就用<code>UNNECESSARY</code>来代表不需要舍入，并在舍入的时候抛出异常。</li>
+<li>如果你真的要使用Null，请使用<code>Collections.unmodifiableList(Lists.newArrayList())</code>来代替<code>ImmutableList</code>，因为后者对Null不友好</li>
+</ul>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-      <nav class="pagination" role="pagination">
-          
-          
-        </nav>    
-    </div>
-</section> 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
-        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-05-03T14:54:28.557Z" itemprop="datePublished">
+					2017年5月3日 22:54
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/04/30/effective-java-10/">
+        《Effective Java》读书笔记——第十章 序列化 →
+    </a>
+    
+</nav>
+
+        
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/05/03/guava-1/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1493820209; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://dawn-2.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+s.setAttribute('async', 'async');
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan">
+<!-- UY BEGIN -->
+<div id="youyan_intro" class="col-md-10"><p>由于多说倒闭，故迁移至disqus（需翻墙）和友言。请优先使用disqus（这句话上面的评论框），没有梯子的童鞋（看不见上面评论框的）使用友言</p></div>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132402"></script>
+<!-- UY END -->
+</div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
