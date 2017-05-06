@@ -281,7 +281,7 @@
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-使用和避免Null"><span class="toc-text">第一节 使用和避免Null</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Null糟糕的地方"><span class="toc-text">Null糟糕的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null也有一些优点"><span class="toc-text">Null也有一些优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#谷歌的建议"><span class="toc-text">谷歌的建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊例子的建议"><span class="toc-text">特殊例子的建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#谷歌用来替代Null值的兵器——Optional"><span class="toc-text">谷歌用来替代Null值的兵器——Optional</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional提供的方法"><span class="toc-text">Optional提供的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional的优点"><span class="toc-text">Optional的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他一些便利的方法"><span class="toc-text">其他一些便利的方法</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-使用和避免Null"><span class="toc-text">第一节 使用和避免Null</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Null糟糕的地方"><span class="toc-text">Null糟糕的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null也有一些优点"><span class="toc-text">Null也有一些优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#谷歌的建议"><span class="toc-text">谷歌的建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊例子的建议"><span class="toc-text">特殊例子的建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#谷歌用来替代Null值的兵器——Optional"><span class="toc-text">谷歌用来替代Null值的兵器——Optional</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional提供的方法"><span class="toc-text">Optional提供的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional的优点"><span class="toc-text">Optional的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他一些便利的方法"><span class="toc-text">其他一些便利的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二节-前置条件检查-Preconditions"><span class="toc-text">第二节 前置条件检查(Preconditions)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Preconditions提供的方法"><span class="toc-text">Preconditions提供的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些需要注意的问题"><span class="toc-text">一些需要注意的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三节-链式调用风格比较器"><span class="toc-text">第三节 链式调用风格比较器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何得到Ordering对象"><span class="toc-text">如何得到Ordering对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有用的链式调用方法"><span class="toc-text">一些有用的链式调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链式调用的收尾方法，一些有用的快捷方法"><span class="toc-text">链式调用的收尾方法，一些有用的快捷方法</span></a></li></ol></li></ol>
 </div>
 			
       		<p>Guava是谷歌出品的一款JAVA工具框架，提供了很多丰富的工具类来弥补JAVA这门语言的不足之处。可以说将Guava就像是JAVA武侠世界的一本绝世秘籍，学会了它程序员可以轻松应对很多场景，用最少的代码实现业务逻辑。<br><a id="more"></a></p>
@@ -372,7 +372,183 @@
 <li><code>Strings.nullToEmpty(String)</code>这个方法返回入参本身，如果入参是个Null，那就返回空字符串。</li>
 <li><code>Strings.isNullOrEmpty(String)</code>这个方法在入参为Null或者空字符串时返回true。</li>
 </ul>
-<p>其中，后面三种方法谷歌说主要是为了那些糟糕的API库设计的，有些API库认为空字符串和Null是一个东西，谷歌认为这是不好的，应该把他们的含义分隔开来。<br>本小节涉及到的javadoc地址<br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Optional.html" title="[external]" target="_blank" rel="external">Optional</a><br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/MoreObjects.html" title="[external]" target="_blank" rel="external">MoreObjects</a><br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Strings.html" title="[external]" target="_blank" rel="external">Strings</a><br>【未完待续】</p>
+<p>其中，后面三种方法谷歌说主要是为了那些糟糕的API库设计的，有些API库认为空字符串和Null是一个东西，谷歌认为这是不好的，应该把他们的含义分隔开来。<br>本小节涉及到的javadoc地址<br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Optional.html" title="[external]" target="_blank" rel="external">Optional</a><br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/MoreObjects.html" title="[external]" target="_blank" rel="external">MoreObjects</a><br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Strings.html" title="[external]" target="_blank" rel="external">Strings</a></p>
+<h2 id="第二节-前置条件检查-Preconditions"><a href="#第二节-前置条件检查-Preconditions" class="headerlink" title="第二节 前置条件检查(Preconditions)"></a>第二节 前置条件检查(Preconditions)</h2><p>谷歌提供了一个有用的工具类来进行前置条件检查，比如检查方法的入参是否合法，检查对象不为空，检查对象的状态是否可用等。<br>一个例子大概是下面这样的：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Preconditions.checkNotNull(yourObject)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>每个方法都提供了三个版本：</p>
+<ul>
+<li>像上面例子那样的最简版本，如果前置条件不满足就直截了当地抛出相应的Exception</li>
+<li>带一个额外的Object参数的版本，前置条件不满足的时候，抛出Exception的同时，使用object.toString()将额外的参数放入错误message中。</li>
+<li>带一个额外的String参数，并且支持跟数个不同类型的参数来format进String参数，比如下面这样的：<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">checkArgument(<span class="name">i</span> &gt;= <span class="number">0</span>, <span class="string">"Argument was %s but expected nonnegative"</span>, i)<span class="comment">;</span></div><div class="line">checkArgument(<span class="name">i</span> &lt; j, <span class="string">"Expected i &lt; j, but %s &gt; %s"</span>, i, j)<span class="comment">;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意String里面只支持<code>%s</code>占位符</p>
+<h3 id="Preconditions提供的方法"><a href="#Preconditions提供的方法" class="headerlink" title="Preconditions提供的方法"></a>Preconditions提供的方法</h3><p>提供的方法如下：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>不满足条件时抛出的异常</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>checkArgument(boolean)</td>
+<td>检查入参是否为True，用来检查一个方法的入参是否符合要求</td>
+<td>IllegalArgumentException</td>
+</tr>
+<tr>
+<td>checkNotNull(T)</td>
+<td>检查入参是否为Null，为Null抛出异常，不为空则返回入参</td>
+<td>NullPointerException</td>
+</tr>
+<tr>
+<td>checkElementIndex(int index, int size)</td>
+<td>检查index是否为某个数组中合法的index，从0到size(size除外)都是合法的，否则抛出异常</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndex(int index, int size)</td>
+<td>检查index是否为某个数组中合法的index，从0到size(包括size)都是合法的，否则抛出异常</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+<tr>
+<td>checkPositionIndexes(int start,int end,int size)</td>
+<td>检查<code>[start,end)</code>是否是某个数组的一个合法的范围</td>
+<td>IndexOutOfBoundsException</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一些需要注意的问题"><a href="#一些需要注意的问题" class="headerlink" title="一些需要注意的问题"></a>一些需要注意的问题</h3><ul>
+<li>带String参数的自动format过程发生在真的要抛出异常的时候，所以不用担心有性能问题</li>
+<li>使用的时候，最好使用静态引用，static import来将该类的调用缩短，缩短后的代码非常简洁，而且由于个别方法直接返回入参，因此可以在一行中嵌套使用</li>
+<li>虽然支持在一行中嵌套使用，但是谷歌提倡我们为每个Preconditions检查语句另起一行，这样在debug的时候更加容易和直观，而且如果要传入String参数，放在一行里不太方便。</li>
+</ul>
+<p>本小节涉及到的javadoc地址：<br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Preconditions.html" title="[external]" target="_blank" rel="external">Preconditions</a></p>
+<h2 id="第三节-链式调用风格比较器"><a href="#第三节-链式调用风格比较器" class="headerlink" title="第三节 链式调用风格比较器"></a>第三节 链式调用风格比较器</h2><p>主要是介绍谷歌提供的Ordering这个工具类。它封装了Comparator，将一些静态方法如（Collections.max)封装到内部的实例方法中，并提供链式调用风格来形成复杂的比较器。</p>
+<h3 id="如何得到Ordering对象"><a href="#如何得到Ordering对象" class="headerlink" title="如何得到Ordering对象"></a>如何得到Ordering对象</h3><p>最简单的方式是和Comparator一样，直接New一个出来：<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Ordering&lt;<span class="built_in">String</span>&gt; byLengthOrdering = <span class="keyword">new</span> Ordering&lt;<span class="built_in">String</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">int</span> compare(<span class="built_in">String</span> <span class="built_in">left</span>, <span class="built_in">String</span> <span class="built_in">right</span>) &#123;</div><div class="line">    return Ints.compare(<span class="built_in">left</span>.length(), <span class="built_in">right</span>.length());</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>由于它实现了Comparator接口，所以可以直接传到<code>Collections.sort</code>方法中使用。</p>
+<p>还有其他方式，使用下面这几个静态方法得到一些预置的比较器：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>natural()</td>
+<td>得到一个自然排序器，对数字和日期都是由小到大排序</td>
+</tr>
+<tr>
+<td>allEqual()</td>
+<td>得到一个认为所有元素都相等的比较器，即压根不比较结果，不会对元素顺序发生影响(Null值的顺序除外)</td>
+</tr>
+<tr>
+<td>arbitrary()</td>
+<td>得到一个对象身份比较器，该比较器不比较对象的大小，而是比较它们的系统默认的hashCode（不管你有没有覆盖HashCode方法），a==b发生时，元素的顺序是不确定的，但是在JVM整个生命周期中不再改变（因为它们的hashCode值不会发生变化）</td>
+</tr>
+<tr>
+<td>compound(Iterable)</td>
+<td>通过一个可迭代的入参得到一个比较器，可迭代入参里存放着数个比较器，这样当第一个比较器比较结果相等时，就用第二个，以此类推</td>
+</tr>
+<tr>
+<td>explicit(T t1,T… tn)或者explicit(List)</td>
+<td>得到一个部分比较器，该比较器的比较结果和入参的顺序一致，注意，比较的时候传入的比较对象必须都包含在入参里，否则抛出异常</td>
+</tr>
+<tr>
+<td>from(comparator)</td>
+<td>从一个现成的comparator得到一个Ordering</td>
+</tr>
+<tr>
+<td>usingToString()</td>
+<td>得到一个字符串比较器，该比较器先针对每个对象应用toString方法，然后根据得到的字符串来比较对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一些有用的链式调用方法"><a href="#一些有用的链式调用方法" class="headerlink" title="一些有用的链式调用方法"></a>一些有用的链式调用方法</h3><p>上面介绍的这些预置的比较器以及我们自己创建的比较器都有一系列额外的方法，来方便地进行链式调用。<br>需要注意的是，链式调用的时候，要从右往左理解代码，就好像代码是从右往左执行的(compound方法除外)。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reverse()</td>
+<td>反转比较结果</td>
+</tr>
+<tr>
+<td>nullsFirst()</td>
+<td>先把Null值都放在数组最前面，剩下的部分再应用相应规则比较，调用该方法后，我们的比较器就支持含有Null值的数组排序，否则抛出异常</td>
+</tr>
+<tr>
+<td>nullsLast()</td>
+<td>和上面相反，先把Null值都放在最后面，然后剩余的部分再应用规则比较，同上，该方法使得Ordering比较器容忍Null值在数组中</td>
+</tr>
+<tr>
+<td>lexicographical()</td>
+<td>该方法一旦调用，比较器的任务就是比较数组了，针对这种情况，先比较数组中的第一个值，在第一个值相同的时候比较第二个值，较短的数组排在前面</td>
+</tr>
+<tr>
+<td>compound(Comparator)</td>
+<td>这个方法和上面介绍的静态方法功能一致，就是和另一个比较器组合在一起，当上一个比较器比较结果为相等时，应用下一个比较器比较结果，注意该链式调用是唯一一个需要从左往右看的，为了避免搞混，最好在代码链的末尾调用，不要在中间调用</td>
+</tr>
+<tr>
+<td>onResultOf(Function)</td>
+<td>该方法需要一个入参Function，关于Function的介绍要查看后文了，此处只能说它负责对入参执行一个函数，而本方法使比较器先针对每个比较对象执行该函数，然后根据函数结果来比较大小</td>
+</tr>
+</tbody>
+</table>
+<p>针对<code>onResultof</code>这个方法比较特殊，有下面的例子供参考：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="meta">@Nullable</span> <span class="built_in">String</span> sortedBy;</div><div class="line">  <span class="built_in">int</span> notSortedBy;</div><div class="line">&#125;</div><div class="line">	</div><div class="line">Ordering&lt;Foo&gt; ordering = Ordering.natural().nullsFirst().onResultOf(<span class="keyword">new</span> <span class="built_in">Function</span>&lt;Foo, <span class="built_in">String</span>&gt;() &#123;</div><div class="line">  public <span class="built_in">String</span> apply(Foo foo) &#123;</div><div class="line">    <span class="keyword">return</span> foo.sortedBy;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>可以看出我们本来传入的是一个对象，但是我们并没有根据整个对象来比较，而是根据对象的域sortedBy来比较的。</p>
+<h3 id="链式调用的收尾方法，一些有用的快捷方法"><a href="#链式调用的收尾方法，一些有用的快捷方法" class="headerlink" title="链式调用的收尾方法，一些有用的快捷方法"></a>链式调用的收尾方法，一些有用的快捷方法</h3><p>并不是所有方法都是一个链式调用，很多方法将终结链式调用，这些方法往往会产生最终结果：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List greatestOf(Iterable，int k)</td>
+<td>返回第一个入参中前k个最大的(排序后靠近末尾)元素</td>
+</tr>
+<tr>
+<td>List leastOf(Iterable，int k)</td>
+<td>返回第一个入参中前k个最小的(排序后靠近前面)元素</td>
+</tr>
+<tr>
+<td>boolean isOrdered(Iterable)</td>
+<td>返回入参是否已经是按照当前比较器排好序的了，容忍有相等的元素出现的情况</td>
+</tr>
+<tr>
+<td>boolean isStrictlyOrdered(Iterable)</td>
+<td>返回入参是否已经是按照当前比较器排好序的了，而且是严格排序，不允许出现相等元素</td>
+</tr>
+<tr>
+<td>E Max(Iterable)或者E Max(E a,E b)</td>
+<td>入参为元素时，可以有无限多个，为可迭代的对象时，该对象不能为空。返回按照比较器得到的结果中最大的(最靠近末尾)的一个元素</td>
+</tr>
+<tr>
+<td>E min(Iterable)或者E Min(E a,E b)</td>
+<td>同上，只不过返回的是最小的(最靠近前面)的一个元素</td>
+</tr>
+<tr>
+<td>List sortedCopy(Iterable)</td>
+<td>返回一个按照比较器排好序的入参的可变副本，而入参的顺序还是原来的顺序不改变。这个方法只有想要不改变入参的时候才调用，它要快于手工地复制一份然后在sort，但是慢于下面这个方法</td>
+</tr>
+<tr>
+<td>ImmutableList immutableSortedCopy(Iterable)</td>
+<td>同上，唯一的不同是得到的是一个不可变的数组副本，速度快于上面的方法，如果你之后不会再修改结果只是读取的话，推荐用这个方法</td>
+</tr>
+</tbody>
+</table>
+<p>本小节涉及到的javadoc地址：<br><a href="http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/collect/Ordering.html" title="[external]" target="_blank" rel="external">Ordering</a></p>
+<p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -417,8 +593,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-05-04T15:25:23.524Z" itemprop="datePublished">
-					2017年5月4日 23:25
+				<time datetime="2017-05-06T08:19:12.132Z" itemprop="datePublished">
+					2017年5月6日 16:19
 				</time>
 			</p>
             <p>
