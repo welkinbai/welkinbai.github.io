@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-05-06T13:06:20.128Z</updated>
+  <updated>2017-05-07T11:44:33.556Z</updated>
   <id>/</id>
   
   <author>
@@ -16,15 +16,165 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Guava框架官方文档学习——第二章 集合</title>
+    <link href="/2017/05/07/guava-2/"/>
+    <id>/2017/05/07/guava-2/</id>
+    <published>2017-05-07T10:18:50.000Z</published>
+    <updated>2017-05-07T11:44:33.556Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章主要介绍Guava框架给我们带来的有关集合的系列工具类和新的集合类型。<br><a id="more"></a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a></p>
+<h2 id="第一节-不可变的集合们"><a href="#第一节-不可变的集合们" class="headerlink" title="第一节 不可变的集合们"></a>第一节 不可变的集合们</h2><p>关于不可变的概念和好处，请看这篇文章：<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>Guava为我们提供了一系列的不可变集合类，每个都有方便地方法来获得实例。下面先罗列出它们：</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>JDK or Guava?</th>
+<th>Immutable Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collection</td>
+<td>JDK</td>
+<td>ImmutableCollection</td>
+</tr>
+<tr>
+<td>List</td>
+<td>JDK</td>
+<td>ImmutableList</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>JDK</td>
+<td>ImmutableSet</td>
+</tr>
+<tr>
+<td>SortedSet/NavigableSet</td>
+<td>JDK</td>
+<td>ImmutableSortedSet</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>JDK</td>
+<td>ImmutableMap</td>
+</tr>
+<tr>
+<td>SortedMap</td>
+<td>JDK</td>
+<td>ImmutableSortedMap</td>
+</tr>
+<tr>
+<td>Multiset</td>
+<td>Guava</td>
+<td>ImmutableMultiset</td>
+</tr>
+<tr>
+<td>SortedMultiset</td>
+<td>Guava</td>
+<td>ImmutableSortedMultiset</td>
+</tr>
+<tr>
+<td>Multimap</td>
+<td>Guava</td>
+<td>ImmutableMultimap</td>
+</tr>
+<tr>
+<td>ListMultimap</td>
+<td>Guava</td>
+<td>ImmutableListMultimap</td>
+</tr>
+<tr>
+<td>SetMultimap</td>
+<td>Guava</td>
+<td>ImmutableSetMultimap</td>
+</tr>
+<tr>
+<td>BiMap</td>
+<td>Guava</td>
+<td>ImmutableBiMap</td>
+</tr>
+<tr>
+<td>ClassToInstanceMap</td>
+<td>Guava</td>
+<td>ImmutableClassToInstanceMap</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Guava</td>
+<td>ImmutableTable</td>
+</tr>
+</tbody>
+</table>
+<p>其中，后面的一些集合是Guava新增加的，在后面的小节会有介绍。<br>可以看到，每个集合类都有其对应的不可变版本。</p>
+<h3 id="创建不可变集合的方法"><a href="#创建不可变集合的方法" class="headerlink" title="创建不可变集合的方法"></a>创建不可变集合的方法</h3><p>如果构造上面罗列的不可变集合呢，有三种方法：</p>
+<ul>
+<li>使用<code>copyOf</code>静态方法，可以直接从一个现有的集合中构造出不可变的集合，例如：<code>ImmutableSet.copyOf(set)</code></li>
+<li>使用<code>of</code>静态方法，可以直接传入集合元素来构造不可变的集合，例如：<code>ImmutableSet.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code></li>
+<li>使用Builder构造器，例如：<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ImmutableSet&lt;Color&gt; GOOGLE_COLORS =</div><div class="line">       ImmutableSet.&lt;Color&gt;builder()</div><div class="line">           .addAll(WEBSAFE_COLORS)</div><div class="line">           .<span class="built_in">add</span>(<span class="keyword">new</span> Color(<span class="number">0</span>, <span class="number">191</span>, <span class="number">255</span>))</div><div class="line">           .build();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="聪明的copyOf方法"><a href="#聪明的copyOf方法" class="headerlink" title="聪明的copyOf方法"></a>聪明的copyOf方法</h3><p>在上面提到的方法中，copyOf方法非常聪明，它会在允许的情况下，尽可能地不复制数据到产生的不可变集合中，这样可以在某些场景下提高性能。<br>比如：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ImmutableSet&lt;<span class="built_in">String</span>&gt; foobar = ImmutableSet.of(<span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="string">"baz"</span>);</div><div class="line">thingamajig(foobar);</div><div class="line">	</div><div class="line"><span class="literal">void</span> thingamajig(Collection&lt;<span class="built_in">String</span>&gt; collection) &#123;</div><div class="line">   ImmutableList&lt;<span class="built_in">String</span>&gt; defensiveCopy = ImmutableList.copyOf(collection);</div><div class="line">   <span class="params">...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这个例子里，copyOf会调用<code>foobar.asList()</code>方法，产生一个原始集合的视图，而不是拷贝数据，访问视图实际上是在访问原始集合，但是由于视图是不可变的，所以不会有修改数据的麻烦。<br>另外，每个不可变集合都有一个<code>asList()</code>方法来产生一个不可变的List视图，使用这种方法，能够提高程序的性能，略去拷贝的过程，而在调用contains这种方法时，会调用原始集合的对应方法，如果原始集合是个Set，那么这种查询是常数级时间。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章主要介绍Guava框架给我们带来的有关集合的系列工具类和新的集合类型。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Guava" scheme="/tags/Guava/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Guava框架官方文档学习——第一章 基础工具包</title>
     <link href="/2017/05/03/guava-1/"/>
     <id>/2017/05/03/guava-1/</id>
     <published>2017-05-03T14:03:29.000Z</published>
-    <updated>2017-05-06T13:06:20.128Z</updated>
+    <updated>2017-05-07T10:27:10.277Z</updated>
     
     <content type="html"><![CDATA[<p>Guava是谷歌出品的一款JAVA工具框架，提供了很多丰富的工具类来弥补JAVA这门语言的不足之处。可以说将Guava就像是JAVA武侠世界的一本绝世秘籍，学会了它程序员可以轻松应对很多场景，用最少的代码实现业务逻辑。<br><a id="more"></a></p>
-<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a>
-<p><br></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a></p>
 <h2 id="第一节-使用和避免Null"><a href="#第一节-使用和避免Null" class="headerlink" title="第一节 使用和避免Null"></a>第一节 使用和避免Null</h2><blockquote>
 <p>“I call it my billion-dollar mistake.” - Sir C. A. R. Hoare, on his invention of the null reference</p>
 </blockquote>
@@ -2291,141 +2441,6 @@ content
     
     
       <category term="MyBatis" scheme="/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《高性能Mysql》读书笔记——第七章Mysql高级特性</title>
-    <link href="/2016/11/15/mysql-advance/"/>
-    <id>/2016/11/15/mysql-advance/</id>
-    <published>2016-11-15T08:45:05.000Z</published>
-    <updated>2017-02-19T07:56:04.232Z</updated>
-    
-    <content type="html"><![CDATA[<p>本章主要介绍一些Mysql的高级特性，比如分区表，视图，触发器等<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a></p>
-<h2 id="一、分区表"><a href="#一、分区表" class="headerlink" title="一、分区表"></a>一、分区表</h2><h3 id="1-简单介绍"><a href="#1-简单介绍" class="headerlink" title="1.简单介绍"></a>1.简单介绍</h3><p>分区表对于用户来说就是一个表，但是底层实际上是物理隔离的多个子表。<br>分区的实现对于存储引擎来说是封装好的黑盒子，对于应用来说是透明的，反正就是说，分区表其实是在Mysql服务器层实现的，和引擎应该是无关的。<br>从底层的文件系统可知，分区表都是用#分割命名的表文件<br>Mysql中的分区表，每个子表有自己的索引，没有整个父表的索引。<br>分区表有什么用呢？<br>使用场景如下：</p>
-<ul>
-<li>表非常大，几GB以及以上级别，或者表的最后部分是热点数据，其他部分都是历史数据，很少查询，也很少改写。这样我们使用分区表时可以只查询某个子表的数据</li>
-<li>分区表的数据易于维护，可以整个删除某个分区的数据，还可以针对某个独立分区进行一些优化、检查、修复操作</li>
-<li>分区表的数据可以分布在不同的物理设备上</li>
-<li>可以利用分区表避免某些特殊的瓶颈，例如InnoDB的单个索引的互斥访问、ext3文件系统的inode锁竞争等(书里写的这都是啥，求科普……)</li>
-<li>可以备份和恢复某个独立的分区</li>
-</ul>
-<p>创建分区表的语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> sales(</div><div class="line">	order_date DATETIME <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	<span class="comment">-- Other columns omitted</span></div><div class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(<span class="keyword">YEAR</span>(order_date))(</div><div class="line">	<span class="keyword">PARTITION</span> p_2010 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2010</span>),</div><div class="line">	<span class="keyword">PARTITION</span> p_2011 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2011</span>),</div><div class="line">	<span class="keyword">PARTITION</span> p_2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">2012</span>),</div><div class="line">	<span class="keyword">PARTITION</span> p_catchall <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> MAXVALUE</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>如果想要详细地了解分区表的创建还有修改语法，还是去官网查看CREATE TABLE,ALTER TABLE语句的文档比较好，在<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a>文章里有给出文档链接。</p>
-<p>分区表有一些限制：</p>
-<ul>
-<li>一个表最多只能有1024个分区</li>
-<li>分区表无法使用外键约束</li>
-<li>分区必须使用相同的存储引擎</li>
-<li>还有一些其他的，书中介绍的不太清楚，比如提及分区字段中有主键或者唯一索引列的时候，所有的主键列和唯一索引列都必须包含进来(我实在没懂要包含进哪里来，译者的语文水平真是捉急)</li>
-</ul>
-<h3 id="2-分区表原理"><a href="#2-分区表原理" class="headerlink" title="2.分区表原理"></a>2.分区表原理</h3><p>以下是RUID操作的分区表底层逻辑：<br><code>SELECT</code>：查询一个分区表时，会先打开并锁住所有的分区子表，优化器判断是否可以过滤部分分区，然后再调用存储引擎来访问各个分区的数据<br><code>INSERT</code>：写入一条记录时，同样地，先打开并锁住所有的分区子表，确定哪个分区接收这条记录，然后写入对应子表<br><code>DELETE</code>：一样的，打开并锁住所有分区表，然后确定数据对应分区，然后在相应子表上删数据<br><code>UPDATE</code>：一样，先打开并锁住所有分区表，然后找到要改的数据，修改，然后判断改后的数据应该放在哪个分区，就写入哪个分区子表，删除之前分区子表中的那条数据<br>这本书啰嗦了半天，其实上述操作时类似的，而且更扯的是，书后立马说道，并不是所有情况都锁整个分区表，InnoDB就不锁，只锁行，和普通的表类似。(没区别为什么还要这么啰嗦？有细微区别却又不提……难道我在亚马逊上买到了盗版……)</p>
-<h3 id="3-使用分区表需要注意的一些问题"><a href="#3-使用分区表需要注意的一些问题" class="headerlink" title="3.使用分区表需要注意的一些问题"></a>3.使用分区表需要注意的一些问题</h3><ul>
-<li>注意NULL值可能会让分区表的过滤很鸡肋，所有的NULL值或者非法值会被放到第一个分区里，那就悲剧了，尤其是上面例子中那种YEAR()函数等，一旦接收非法值就返回NULL的函数，会导致查询时总是会查第一个分区，因为这个函数会返回NULL值。书中给出的解决办法是创建一个无用的第一分区，比如一个值都没有的，LESS THAN (0)这种，我给出的建议是最好不要用这种函数去分区，最新版本的MYSQL分区的方法多了去，甚至不要用可NULL字段去分区。</li>
-<li>查询的时候最好使用where条件尽可能地过滤分区，让被搜索到的分区尽可能地少，尤其关联查询的时候，想想吧，第一个表的每条命中数据在第二个表匹配的时候，都要把第二个表的分区全部搜一遍，这是不可接受的。</li>
-</ul>
-<h2 id="二、视图"><a href="#二、视图" class="headerlink" title="二、视图"></a>二、视图</h2><h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h3><p>视图就是一个虚拟的表，其数据实际上是来源于真实的表。<br>因此，对视图的删改查实际上是对形成视图的真实的表的删改查。</p>
-<h3 id="2-创建视图语句"><a href="#2-创建视图语句" class="headerlink" title="2.创建视图语句"></a>2.创建视图语句</h3><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt;<span class="keyword">CREATE</span> VIEW oceania <span class="keyword">AS</span> </div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> country <span class="keyword">WHERE</span> continent = <span class="string">'Oceania'</span></div><div class="line"><span class="keyword">WITH</span> CHECK OPTION;</div></pre></td></tr></table></figure>
-<p>其中，<code>WITH CHECK OPTION</code>语句是限制使用视图更新时，更新的东西必须是视图条件内的行。比如要去更新一个continent != ‘Oceania’的数据是不行的，只能更新等于Oceania的数据</p>
-<h3 id="3-视图的实现机制"><a href="#3-视图的实现机制" class="headerlink" title="3.视图的实现机制"></a>3.视图的实现机制</h3><p>视图有两种实现机制：</p>
-<ul>
-<li>临时表算法：将对视图的查询更改为对临时表的查询，临时表的内容是视图中的内容</li>
-<li>合并算法：将对视图的查询和视图定义的查询合并为一个查询，然后直接返回查询结果。</li>
-</ul>
-<p>临时表算法浪费空间，性能较差，所以大多数时候推荐使用合并算法。<br>在视图中包含GROUP BY、DISTINCT、聚合函数、UNION、子查询等原表记录不能与视图记录一一对应的场景，Mysql都会使用临时表算法。</p>
-<h3 id="4-视图的限制"><a href="#4-视图的限制" class="headerlink" title="4.视图的限制"></a>4.视图的限制</h3><ul>
-<li>不能对视图创建触发器</li>
-<li>使用临时表算法实现的视图，无法被更新</li>
-<li>无法使用SHOW CREATE VIEW来查看视图定义语句（估计5.5之后的版本已经修好了这个bug吧，不是很确定）</li>
-</ul>
-<h3 id="5-视图使用小技巧"><a href="#5-视图使用小技巧" class="headerlink" title="5.视图使用小技巧"></a>5.视图使用小技巧</h3><p>比如，利用视图可以进行基于列的权限控制：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> public.employeeinfo <span class="keyword">AS</span></div><div class="line">	<span class="keyword">SELECT</span> firstname, lastname</div><div class="line">	<span class="keyword">FROM</span> private.employeeinfo;</div><div class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> public.* <span class="keyword">TO</span> public_user;</div></pre></td></tr></table></figure></p>
-<p>这样的话，我们的public_user可以对employeeinfo的firstname,lastname两个列有查询权限，却无法查询其他列。弥补了GRANT语句不能针对某些列设置权限的缺陷<br>还有一个小技巧是：<br>在一次会话中创建视图，然后利用视图来替代子查询完成查询。然后会话退出前删掉视图。<br>当然，使用这个技巧的时候要保证视图替代子查询有助于性能提高。</p>
-<h2 id="三、外键约束"><a href="#三、外键约束" class="headerlink" title="三、外键约束"></a>三、外键约束</h2><p>根据书中所说，外键约束虽然InnoDB引擎支持，但是强烈不建议使用外键。<br>外键的增加会影响插入和更新语句的性能，还会导致锁争用和锁等待增加。<br>如果只是想要利用外键来保证数据一致性，不妨使用触发器或者在应用端保证。<br>笔者补充一点，外键的维护也是非常繁琐和容易遗漏的，因此尽量不要使用外键。</p>
-<h2 id="四、内部存储代码"><a href="#四、内部存储代码" class="headerlink" title="四、内部存储代码"></a>四、内部存储代码</h2><p>就是指存储过程、触发器、事件这些在Mysql内部编写的代码，可供外部或者满足一定条件时调用。<br>笔者本人是非常不赞同严重依赖这些存储在数据库内部的代码的，因为数据库服务器的能力有限，使用的编程语言也相对简陋，无法替代应用端的各种服务器语言的作用。<br>如果一个项目严重依赖存储过程的代码，去“面向数据库编程”，造成数据库太重，时间长了就会产生团队新人来了以后，打开数据库看到成千上万行丑陋不堪不可测试的存储过程代码而不知所措，甚至由于其晦涩难懂导致项目后期无人敢碰无人敢改的尴尬境地。<br>但是并不意味着就要使用者完全不用，一些反复执行的，可抽象的简单过程还是可以用存储过程的，只要保持其逻辑简单，短小就行。<br>综合来说，将代码逻辑放入数据库有以下好处：</p>
-<ul>
-<li>在服务器内部运行，离数据最近，节省带宽，改善延迟</li>
-<li>代码重用，可统一业务规则，保证行为一致</li>
-<li>服务器端可以缓存存储过程的执行计划，这样对于反复执行的过程，会降低服务器消耗</li>
-</ul>
-<p>有好处就会有坏处，除了上面写道的坏处外，还有如下坏处：</p>
-<ul>
-<li>没有好的开发和调试工具</li>
-<li>代码执行效率比应用程序的代码差一些，能使用的函数有限，很难实现复杂的逻辑</li>
-<li>存储过程有安全隐患，尤其注意不应该将加密过程放在存储过程里，否则数据库一旦攻破，加密数据和加密方法将同时被黑客得到</li>
-<li>给数据库服务器带来额外压力，而数据库服务器一般扩展性比应用服务器差，不可能在需要的时候立马加一台数据库服务器来化解压力</li>
-<li>数据库服务器可没有什么垃圾回收机制，资源消耗都要编程者自己小心注意</li>
-</ul>
-<h3 id="1-存储过程"><a href="#1-存储过程" class="headerlink" title="1.存储过程"></a>1.存储过程</h3><p>尽管非常不推荐存储过程，但是这里还是打算详细地介绍一下它，毕竟某些公司面试还是会非常烦人地问到，而你需要告诉面试官你是知道这玩意儿的，只是不屑于用而已（当我没说……）。</p>
-<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>可以使用如下语句来声明变量：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--用户变量，仅在当前用户使用的客户端生效</span></div><div class="line"><span class="keyword">set</span> @变量名=<span class="string">'test'</span>;</div><div class="line"><span class="comment">--全局变量，而且是Mysql的系统变量，修改会影响Mysql的行为，一致存在于数据库服务器中，服务器启动时被初始化，一旦更改，所有会话可见</span></div><div class="line"><span class="keyword">set</span> <span class="keyword">GLOBAL</span> 变量名=<span class="string">'test'</span>;</div><div class="line"><span class="keyword">set</span> @@global.变量名=<span class="string">'test'</span>;</div><div class="line"><span class="comment">--会话变量，也是Mysql的系统变量，会话创建时从全局变量拷贝一份</span></div><div class="line"><span class="keyword">set</span> SESSON 变量名=<span class="string">'test'</span>;</div><div class="line"><span class="keyword">set</span> @@session.变量名=<span class="string">'test'</span>;</div><div class="line"><span class="comment">--以上语句是可以用在存储过程之外的。</span></div><div class="line"><span class="comment">--下面是局部变量，仅用在begin到end语句块之间</span></div><div class="line"><span class="keyword">declare</span> 变量名 变量类型 <span class="keyword">default</span> 默认值;</div></pre></td></tr></table></figure></p>
-<h4 id="存储过程的声明语句"><a href="#存储过程的声明语句" class="headerlink" title="存储过程的声明语句"></a>存储过程的声明语句</h4><p>存储过程声明语句如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span></div><div class="line">    [DEFINER = &#123; <span class="keyword">user</span> | <span class="keyword">CURRENT_USER</span> &#125;]</div><div class="line">    <span class="keyword">PROCEDURE</span> sp_name ([proc_parameter[,...]])</div><div class="line">    [characteristic ...] routine_body</div><div class="line">proc_parameter:</div><div class="line">    [ <span class="keyword">IN</span> | <span class="keyword">OUT</span> | INOUT ] param_name <span class="keyword">type</span></div><div class="line"><span class="keyword">type</span>:</div><div class="line">    <span class="keyword">Any</span> valid MySQL <span class="keyword">data</span> <span class="keyword">type</span></div><div class="line">characteristic:</div><div class="line">    <span class="keyword">COMMENT</span> <span class="string">'string'</span></div><div class="line">  | <span class="keyword">LANGUAGE</span> <span class="keyword">SQL</span></div><div class="line">  | [<span class="keyword">NOT</span>] <span class="keyword">DETERMINISTIC</span></div><div class="line">  | &#123; CONTAINS <span class="keyword">SQL</span> | <span class="keyword">NO</span> <span class="keyword">SQL</span> | <span class="keyword">READS</span> <span class="keyword">SQL</span> <span class="keyword">DATA</span> | MODIFIES <span class="keyword">SQL</span> <span class="keyword">DATA</span> &#125;</div><div class="line">  | <span class="keyword">SQL</span> <span class="keyword">SECURITY</span> &#123; DEFINER | INVOKER &#125;</div></pre></td></tr></table></figure></p>
-<p>其中DEFINER语法定义存储过程可执行的用户，并且此用户必须拥有相应数据库的执行权限<br>sp_name是存储过程的名字<br>proc_parameter有三种，IN、OUT、INOUT。IN是调用者传入的参数，但是传入后该参数的改变调用者无法“看到”。INOUT也是调用者传入的参数并且可以指定初始化值，但是该参数的改变调用者是可以“看到”的。OUT是一个初始化值为NULL的参数，不管你调用的时候给它设置什么值都没用，你只能传一个变量来得到最终输出的参数。<br>characteristic就不详细介绍了，是一些可选参数，具体可见<a href="http://dev.mysql.com/doc/refman/5.6/en/create-procedure.html" target="_blank" rel="external">官方文档</a><br>routine_body就是合法的存储过程语句体。</p>
-<h4 id="存储过程常用语句示例"><a href="#存储过程常用语句示例" class="headerlink" title="存储过程常用语句示例"></a>存储过程常用语句示例</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//IF ELSE语句，注意等号,then以及end if这三处，和大多数语言都不一样</span></div><div class="line"><span class="keyword">CREATE</span> DEFINER = `root`@`localhost` <span class="function"><span class="keyword">PROCEDURE</span> `<span class="title">prc_test1</span>`<span class="params">(<span class="keyword">in</span> parameter int)</span></span></div><div class="line"><span class="title">BEGIN</span></div><div class="line">     <span class="title">declare</span> <span class="title">var</span> <span class="title">int</span>;  </div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span>=<span class="number">1</span>;  </div><div class="line">     <span class="keyword">if</span> <span class="keyword">var</span>=<span class="number">0</span> <span class="keyword">then</span> </div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">11</span>;  </div><div class="line">     elseif <span class="keyword">var</span>=<span class="number">1</span> <span class="keyword">then</span></div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">22</span>;  </div><div class="line">     <span class="keyword">else</span> </div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">33</span>; </div><div class="line">     <span class="keyword">end</span> <span class="keyword">if</span>;</div><div class="line">     <span class="keyword">select</span> parameter;</div><div class="line"><span class="keyword">END</span></div><div class="line"><span class="comment">//CASE语句</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">     declare <span class="keyword">var</span> int;  </div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span> = parameter; </div><div class="line">     <span class="keyword">case</span> <span class="keyword">var</span></div><div class="line">     when <span class="number">1</span> <span class="keyword">then</span>  </div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">11</span>;  </div><div class="line">     when <span class="number">2</span> <span class="keyword">then</span></div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">22</span>;  </div><div class="line">     <span class="keyword">else</span> </div><div class="line">     <span class="keyword">set</span> parameter=<span class="number">33</span>; </div><div class="line">     <span class="keyword">end</span> <span class="keyword">case</span>;</div><div class="line">     <span class="keyword">select</span> parameter;</div><div class="line"><span class="keyword">END</span></div><div class="line"><span class="comment">//while循环语句，注意不要遗漏do这个关键字</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">     declare <span class="keyword">var</span> int;  </div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span> = parameter; </div><div class="line">     <span class="keyword">while</span> <span class="keyword">var</span>&gt;<span class="number">0</span> <span class="keyword">do</span></div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span> = <span class="keyword">var</span> - <span class="number">1</span>; </div><div class="line">     <span class="keyword">set</span> parameter = parameter -<span class="number">2</span>; </div><div class="line">     <span class="keyword">end</span> <span class="keyword">WHILE</span>;</div><div class="line">     <span class="keyword">select</span> parameter;</div><div class="line"><span class="keyword">END</span></div><div class="line"><span class="comment">//repeat语句，相当于JAVA的do while语句</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">     declare <span class="keyword">var</span> int;  </div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span> = parameter; </div><div class="line">     <span class="keyword">REPEAT</span></div><div class="line">     <span class="keyword">set</span> <span class="keyword">var</span> = <span class="keyword">var</span> - <span class="number">1</span>; </div><div class="line">     <span class="keyword">set</span> parameter = parameter -<span class="number">2</span>; </div><div class="line">     <span class="keyword">UNTIL</span> <span class="keyword">var</span>&lt;<span class="number">0</span></div><div class="line">     <span class="keyword">end</span> <span class="keyword">REPEAT</span>;</div><div class="line">     <span class="keyword">select</span> parameter;</div><div class="line"><span class="keyword">END</span></div><div class="line"><span class="comment">//游标语句，游标是类似指针的东西，可以为开发人员提供逐行读取数据的便利，它是只读的，单向的</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">	DECLARE film_id INT;</div><div class="line">	DECLARE f CURSOR <span class="keyword">FOR</span> <span class="keyword">SELECT</span> film_id <span class="keyword">FROM</span> sakila.film;</div><div class="line">	OPEN f;--打开游标的瞬间，游标的查询语句就会执行，并将结果放在一张临时表里</div><div class="line">	FETCH f <span class="keyword">INTO</span> film_id;--只抓取了一行数据，然后就关了，但是事实上，仍然读取了<span class="number">1000</span>次，还做了<span class="number">1000</span>次写入，因为数据要写入临时表</div><div class="line">	CLOSE f;</div><div class="line"><span class="keyword">END</span></div></pre></td></tr></table></figure>
-<p>游标的例子是一个不好的例子，如果只读取一条数据，定义游标的查询语句应该用LIMIT来限定查询结果。</p>
-<h3 id="2-触发器"><a href="#2-触发器" class="headerlink" title="2.触发器"></a>2.触发器</h3><p>触发器就是在增删改的时候，可以自动地执行一段逻辑代码。<br>还可以指定是增删改之前触发还是之后。<br>触发器不像存储过程，没有返回值。<br>触发器有一些限制：</p>
-<ul>
-<li>针对每个表的某个事件，只能有一个触发器</li>
-<li>基于行的触发，如果变更数据集很大，那效率很差</li>
-<li>触发器失败，激活触发器的语句也会失败，这会导致排查问题困难，不知道是原语句的问题还是触发器的问题</li>
-<li>MyISAM引擎执行触发器是非事务的，InnoDB是事务的</li>
-</ul>
-<p>触发器通过如下语句创建：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span></div><div class="line">    [DEFINER = &#123; <span class="keyword">user</span> | <span class="keyword">CURRENT_USER</span> &#125;]</div><div class="line">    <span class="keyword">TRIGGER</span> trigger_name</div><div class="line">    trigger_time trigger_event</div><div class="line">    <span class="keyword">ON</span> tbl_name <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></div><div class="line">    trigger_body</div><div class="line">trigger_time: &#123; <span class="keyword">BEFORE</span> | <span class="keyword">AFTER</span> &#125;</div><div class="line">trigger_event: &#123; <span class="keyword">INSERT</span> | <span class="keyword">UPDATE</span> | <span class="keyword">DELETE</span> &#125;</div></pre></td></tr></table></figure></p>
-<p>其中，trigger_body和存储过程一样，用BEGIN……END语句块来定义，当然一句话的话就不需要了，多行语句才需要。</p>
-<h3 id="3-事件"><a href="#3-事件" class="headerlink" title="3.事件"></a>3.事件</h3><p>类似定时任务，不详细介绍了，请看<a href="http://dev.mysql.com/doc/refman/5.6/en/create-event.html" target="_blank" rel="external">官方文档</a></p>
-<h2 id="五、绑定变量——不讲了"><a href="#五、绑定变量——不讲了" class="headerlink" title="五、绑定变量——不讲了"></a>五、绑定变量——不讲了</h2><p>忽略，ORM框架已经很成熟了，没必要使用服务端的绑定变量，或者使用服务端的绑定变量这种事已经被框架封装好了。</p>
-<h2 id="六、字符集和校对"><a href="#六、字符集和校对" class="headerlink" title="六、字符集和校对"></a>六、字符集和校对</h2><p>主要问题在于，Mysql有一堆和字符集有关的设置，然而，用户常常搞不清楚到底哪个设置生效…………</p>
-<p>Mysql的字符集设置是逐层嵌套的，整个服务器有字符集的设置，表有字符集的设置，表中的某列也有字符集的设置。这些设置都是从下而上逐层覆盖的，先看列的设置，列没设置就算表的设置，表也没设置那就认整个服务器的设置。<br>下面是一些常用设置的介绍：</p>
-<ul>
-<li>character_set_client：服务器端收到客户端的字符时，总是假设客户端的字符是这个设置配置的字符集</li>
-<li>character_set_connection：一旦收到了客户端的字符，服务器端会先将字符转换成这个设置所配置的字符集，即会从character_set_client的字符集转换为character_set_connection的字符集</li>
-<li>character_set_result：服务器端返回数据时，总是将数据的字符由character_set_connection的字符集转换为character_set_result的字符集</li>
-<li>character_set_server：整个服务器字符集的默认设置</li>
-<li>character_set_database：默认数据库的字符集的设置，当没有使用<code>use database</code>命令来指定要使用的数据库时，这个值和character_set_server是一样的。如果你切换了正在使用的数据库，这个值会跟着改变</li>
-<li>character_set_filesystem：指定当使用<code>LOAD DATA INFILE</code>和<code>SELECT...INTO OUTFILE</code>语法的时候，文件的文件名使用的字符集。</li>
-<li>character_set_system：服务器存储标识符的时候使用的字符集，总是utf-8，应当是不可动态修改的吧</li>
-<li>character_sets_dir：指定字符集设置存放的路径，也是不可动态修改的值</li>
-</ul>
-<p>关于字符集的选择，中文推荐使用utf-8。更详细的探讨以后再写。</p>
-<h2 id="七、全文索引，略过"><a href="#七、全文索引，略过" class="headerlink" title="七、全文索引，略过"></a>七、全文索引，略过</h2><p>本书所基于的Mysql5.5版本仍然只有MyISAM引擎支持全文索引，实际上全文索引现在有很多替代方案，比如ES搜索引擎（全称elasticsearch），可以非常方便地为数据创建全文索引。</p>
-<h2 id="八、分布式事务"><a href="#八、分布式事务" class="headerlink" title="八、分布式事务"></a>八、分布式事务</h2><p>最近正好公司同事分享了分布式事务的一些内容，现在简要介绍。<br>首先需要注意的是，分布式事务并不是解决问题的最佳方案，要求不严格的应用完全可以不使用分布式事务而使用其他成本较低的替代方案。分布式事务实现复杂，性能开销不小，不一定是非常好的技术选择。</p>
-<h3 id="1-什么是分布式事务"><a href="#1-什么是分布式事务" class="headerlink" title="1.什么是分布式事务"></a>1.什么是分布式事务</h3><p>我理解就是当一个应用拥有多个数据源时，多个数据源之间相互无法感知，分布式事务保证在这种情况下，一个使用了多个数据源的事务能够不失去事务的ACID特性。（关于事务的基本概念请看这篇文章：<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a>）<br>注意，这里数据源不止指数据库，也还包含了消息队列等各种各样的数据来源。<br>普通的非分布式事务只能告诉各个数据源各自提交事务，如果有一个数据源提交事务失败了，其他的数据源并不会感知到这个失败，也不会随之回滚，因此整个事务的特性便被破坏。</p>
-<h3 id="2-XA协议"><a href="#2-XA协议" class="headerlink" title="2.XA协议"></a>2.XA协议</h3><p>实现分布式的事务，最重要的是XA协议，该协议结构图如下：<br><img src="/2016/11/15/mysql-advance/xa.gif" alt="[xa协议结构图]" title="[xa协议结构图]"></p>
-<p>从图中可以看到，我们需要一个叫做事务管理器（Transaction Monitor/manager）的协调者来协调各个资源的资源管理器（Resource Manager），而各个资源管理器又各自和真正的数据源（数据库或者消息队列）交互。<br>事务管理器与资源管理器之间正是通过XA协议来通信交互，XA协议实现有几种不同的算法，最常见的是两段式提交和三段式提交法。</p>
-<p>两段式提交是说：</p>
-<ul>
-<li>第一阶段：协调者（即事务管理器）确保所有的参与者（即资源管理器们）都完成了准备工作，可以提交事务而不是回滚。如果有参与者遇到了问题需要回滚，就会告诉协调者</li>
-<li>第二阶段：协调者收到所有参与者准备完成的通知，便通知所有参与者提交事务，如果收到了某个参与者需要回滚，协调者便会通知所有的参与者回滚。</li>
-</ul>
-<p>还有一种比较有名的算法：Paxos<br>这种算法由于采用了无协调者的模式，即每个节点都是一样的，都可以承担多个不同的角色，因此，不像两阶段提交那样，即使协调者挂掉了，立马就会有节点补上，不会影响信息的流通和一致性。<br>这里就不详细介绍这种算法了，可以到知乎上看看大家是怎么回答的<a href="https://www.zhihu.com/question/19787937" target="_blank" rel="external">如何浅显易懂地解说 Paxos 的算法？——知乎</a><br>这种算法也有缺陷，有可能会产生活锁，多个提交者提交议案，但是没有任何人的议案能够胜出，造成议案提交的第一阶段不停地重复执行。</p>
-<h3 id="3-Mysql的内部XA事务"><a href="#3-Mysql的内部XA事务" class="headerlink" title="3.Mysql的内部XA事务"></a>3.Mysql的内部XA事务</h3><p>Mysql服务器内部有多个存储引擎，而且这些存储引擎都只和上层服务器层交互，因此不可避免地要考虑XA事务问题。<br>即使事务中只使用到了一个存储引擎，但是打开了二进制事务日志，那么还是需要XA事务的支持。因为二进制事务日志也可以算作是一种数据源。<br>注：相信已经更新到5.7版本的Mysql已经对此问题有了解决方案，否则无论如何都要XA事务的话，对性能的影响实在太大。</p>
-<h3 id="4-Mysql外部的XA事务"><a href="#4-Mysql外部的XA事务" class="headerlink" title="4.Mysql外部的XA事务"></a>4.Mysql外部的XA事务</h3><p>5.5版本的Mysql对于XA协议支持的还不是特别完整。<br>书中也不建议使用外部的XA事务，对性能影响太大，尤其受到网络因素的影响。</p>
-<h2 id="九、查询缓存"><a href="#九、查询缓存" class="headerlink" title="九、查询缓存"></a>九、查询缓存</h2><p>之前的文章已经对此有过介绍，Mysql在服务器的入口处有个命中查询缓存的过程，一旦命中，立刻返回之前缓存的查询结果，而无需执行解析、优化、查询这些阶段。<br>有趣的是，书中不推荐使用查询缓存，建议把Mysql的查询缓存关掉，或者设置一个较小的缓存空间，比如几十兆。理由后面说。</p>
-<h3 id="1-缓存命中的注意事项"><a href="#1-缓存命中的注意事项" class="headerlink" title="1.缓存命中的注意事项"></a>1.缓存命中的注意事项</h3><p>Mysql是如何判断缓存命中的？有如下要点：</p>
-<ul>
-<li>Mysql是通过哈希查找来判断缓存命中的，将查询语句，查询涉及的数据库、客户端协议版本等影响返回结果的信息变成哈希值和返回结果存储在一张引用表里。这意味着，查询语句中的任何字符的改变，甚至多一个空格，注释，都有可能影响命中。</li>
-<li>当查询语句中有不确定的数据时，查询结果根本不会缓存，比如now()这样的函数，由于查询结果不会缓存，那么缓存也就不会命中了。另外，查询中包含自定义函数、存储函数、用户变量、临时表、系统表等等都不会被缓存。</li>
-</ul>
-<h3 id="2-查询缓存可能会带来的消极因素"><a href="#2-查询缓存可能会带来的消极因素" class="headerlink" title="2.查询缓存可能会带来的消极因素"></a>2.查询缓存可能会带来的消极因素</h3><ul>
-<li>打开查询缓存意味着所有的查询语句涉及读操作的，都要先检查是否命中缓存</li>
-<li>所有读操作结束返回结果的时候，如果结果可以被缓存，需要将结果存入缓存</li>
-<li>写操作结束时，需要将查询缓存中因为写操作而失效的缓存都消除</li>
-<li>如果在一个事务中修改了某个表，由于要保证事务的隔离性，会限制这个表对应的查询缓存，在这个事务结束之前，任何外部事务包括这个事务，都无法使用跟这个表有关的缓存，也无法对涉及这个表的查询进行缓存。因此，长时间运行的事务会降低缓存命中率。</li>
-<li>缓存在失效的时候，消除失效缓存的操作由一个全局锁保护，导致所有检查缓存命中和检查缓存失效的查询都要等待，这个时候系统可能会僵死一会儿。这就是为什么书中不推荐使用查询缓存或者推荐设置很小的缓存空间的原因。</li>
-</ul>
-<h3 id="3-查询缓存相关设置"><a href="#3-查询缓存相关设置" class="headerlink" title="3.查询缓存相关设置"></a>3.查询缓存相关设置</h3><p>query_cache_type：查询缓存的开关，有ON、OFF、DEMAND三个可选值，其中DEMAND的意思是，只有用户在查询语句中用SQL_CACHE指明才使用查询缓存。<br>query_cache_size：缓存使用的总空间，必须是1024的整数倍，单位为字节。<br>query_cache_min_res_unit：查询缓存分配内存时的最小单位<br>query_cache_limit：能够缓存的最大结果。如果查询结果大于这个值，不会缓存。如果预先知道会有这种情况，最好查询语句里直接指定SQL_NO_CACHE。</p>
-<p>关于服务器的一些设置下一章有详细介绍。<br>实际上，Mysql的大多数设置代表什么意思都可以在官方文档中找到，虽然万恶的Oracle公司收购了Mysql，但是带来的一个好处是，该公司有能力也有人力为我们提供非常详细的官方文档。<br><a href="http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html" target="_blank" rel="external">Mysql查询缓存设置的官方文档</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本章主要介绍一些Mysql的高级特性，比如分区表，视图，触发器等&lt;br&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Mysql" scheme="/tags/Mysql/"/>
     
   </entry>
   

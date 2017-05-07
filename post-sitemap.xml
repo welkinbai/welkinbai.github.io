@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>/2015/12/20/my-new-post/</loc>
-        <lastmod>2017-05-06T13:11:11.891Z</lastmod>
+        <loc>/2017/05/07/guava-2/</loc>
+        <lastmod>2017-05-07T11:44:33.556Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>/2017/05/03/guava-1/</loc>
-        <lastmod>2017-05-06T13:06:20.128Z</lastmod>
+        <lastmod>2017-05-07T10:27:10.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2015/12/20/my-new-post/</loc>
+        <lastmod>2017-05-06T13:11:11.891Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -135,7 +143,7 @@
     </url>
 
     <url>
-        <loc>/2016/01/23/rollout-version-1/</loc>
+        <loc>/2016/04/06/spring-ioc/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +151,7 @@
     </url>
 
     <url>
-        <loc>/2016/04/06/spring-ioc/</loc>
+        <loc>/2016/01/23/rollout-version-1/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

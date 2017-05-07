@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: Spring | Dawn</title>
+  <title>Guava框架官方文档学习——第二章 集合 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -75,7 +75,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -238,14 +238,10 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-							
-							    
-                            
-							
-								<h2><strong>HAVE <span>DREAM</span> ON THE WAY.</strong></h2>
-                                <p>但行好事，莫问前程</p>				    			
-							    
-                            
+								
+								<h2>第二章</h2>
+                                <p>集合</p>
+																
 							
                             </div>
                         </div>
@@ -262,60 +258,222 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-<section id="services">
+<section id="intro">
     <div class="container">
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2016/04/06/spring-ioc/">【学习回顾】Spring之IoC容器的使用(一)</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-06T11:49:47.000Z" itemprop="datePublished">
-          2016年4月6日
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-05-07T10:18:50.000Z" itemprop="datePublished">
+          2017年5月7日
       </time>	  
     
     
     | 
-    <a href='/tags/Spring/'>Spring</a>,
-    
-    <a href='/tags/IOC容器/'>IOC容器</a>
+    <a href='/tags/Guava/'>Guava</a>
     
     
 	
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>本来写的是Spring深层实现的解析，想来想去还是由浅入深比较好。<br>那先来写写怎么使用Spring的容器吧。<br>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/04/06/spring-ioc/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>Guava框架官方文档学习——第二章 集合</h1>				
             </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一节-不可变的集合们"><span class="toc-text">第一节 不可变的集合们</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建不可变集合的方法"><span class="toc-text">创建不可变集合的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#聪明的copyOf方法"><span class="toc-text">聪明的copyOf方法</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要介绍Guava框架给我们带来的有关集合的系列工具类和新的集合类型。<br><a id="more"></a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a></p>
+<h2 id="第一节-不可变的集合们"><a href="#第一节-不可变的集合们" class="headerlink" title="第一节 不可变的集合们"></a>第一节 不可变的集合们</h2><p>关于不可变的概念和好处，请看这篇文章：<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>Guava为我们提供了一系列的不可变集合类，每个都有方便地方法来获得实例。下面先罗列出它们：</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>JDK or Guava?</th>
+<th>Immutable Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collection</td>
+<td>JDK</td>
+<td>ImmutableCollection</td>
+</tr>
+<tr>
+<td>List</td>
+<td>JDK</td>
+<td>ImmutableList</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>JDK</td>
+<td>ImmutableSet</td>
+</tr>
+<tr>
+<td>SortedSet/NavigableSet</td>
+<td>JDK</td>
+<td>ImmutableSortedSet</td>
+</tr>
+<tr>
+<td>Map</td>
+<td>JDK</td>
+<td>ImmutableMap</td>
+</tr>
+<tr>
+<td>SortedMap</td>
+<td>JDK</td>
+<td>ImmutableSortedMap</td>
+</tr>
+<tr>
+<td>Multiset</td>
+<td>Guava</td>
+<td>ImmutableMultiset</td>
+</tr>
+<tr>
+<td>SortedMultiset</td>
+<td>Guava</td>
+<td>ImmutableSortedMultiset</td>
+</tr>
+<tr>
+<td>Multimap</td>
+<td>Guava</td>
+<td>ImmutableMultimap</td>
+</tr>
+<tr>
+<td>ListMultimap</td>
+<td>Guava</td>
+<td>ImmutableListMultimap</td>
+</tr>
+<tr>
+<td>SetMultimap</td>
+<td>Guava</td>
+<td>ImmutableSetMultimap</td>
+</tr>
+<tr>
+<td>BiMap</td>
+<td>Guava</td>
+<td>ImmutableBiMap</td>
+</tr>
+<tr>
+<td>ClassToInstanceMap</td>
+<td>Guava</td>
+<td>ImmutableClassToInstanceMap</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Guava</td>
+<td>ImmutableTable</td>
+</tr>
+</tbody>
+</table>
+<p>其中，后面的一些集合是Guava新增加的，在后面的小节会有介绍。<br>可以看到，每个集合类都有其对应的不可变版本。</p>
+<h3 id="创建不可变集合的方法"><a href="#创建不可变集合的方法" class="headerlink" title="创建不可变集合的方法"></a>创建不可变集合的方法</h3><p>如果构造上面罗列的不可变集合呢，有三种方法：</p>
+<ul>
+<li>使用<code>copyOf</code>静态方法，可以直接从一个现有的集合中构造出不可变的集合，例如：<code>ImmutableSet.copyOf(set)</code></li>
+<li>使用<code>of</code>静态方法，可以直接传入集合元素来构造不可变的集合，例如：<code>ImmutableSet.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code></li>
+<li>使用Builder构造器，例如：<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ImmutableSet&lt;Color&gt; GOOGLE_COLORS =</div><div class="line">       ImmutableSet.&lt;Color&gt;builder()</div><div class="line">           .addAll(WEBSAFE_COLORS)</div><div class="line">           .<span class="built_in">add</span>(<span class="keyword">new</span> Color(<span class="number">0</span>, <span class="number">191</span>, <span class="number">255</span>))</div><div class="line">           .build();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="聪明的copyOf方法"><a href="#聪明的copyOf方法" class="headerlink" title="聪明的copyOf方法"></a>聪明的copyOf方法</h3><p>在上面提到的方法中，copyOf方法非常聪明，它会在允许的情况下，尽可能地不复制数据到产生的不可变集合中，这样可以在某些场景下提高性能。<br>比如：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ImmutableSet&lt;<span class="built_in">String</span>&gt; foobar = ImmutableSet.of(<span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="string">"baz"</span>);</div><div class="line">thingamajig(foobar);</div><div class="line">	</div><div class="line"><span class="literal">void</span> thingamajig(Collection&lt;<span class="built_in">String</span>&gt; collection) &#123;</div><div class="line">   ImmutableList&lt;<span class="built_in">String</span>&gt; defensiveCopy = ImmutableList.copyOf(collection);</div><div class="line">   <span class="params">...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这个例子里，copyOf会调用<code>foobar.asList()</code>方法，产生一个原始集合的视图，而不是拷贝数据，访问视图实际上是在访问原始集合，但是由于视图是不可变的，所以不会有修改数据的麻烦。<br>另外，每个不可变集合都有一个<code>asList()</code>方法来产生一个不可变的List视图，使用这种方法，能够提高程序的性能，略去拷贝的过程，而在调用contains这种方法时，会调用原始集合的对应方法，如果原始集合是个Set，那么这种查询是常数级时间。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-      <nav class="pagination" role="pagination">
-          
-          
-        </nav>    
-    </div>
-</section> 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
-        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-05-07T11:44:33.556Z" itemprop="datePublished">
+					2017年5月7日 19:44
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/05/03/guava-1/">
+        Guava框架官方文档学习——第一章 基础工具包 →
+    </a>
+    
+</nav>
+
+        
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/05/07/guava-2/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1494152330; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://dawn-2.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+s.setAttribute('async', 'async');
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

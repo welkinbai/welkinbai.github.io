@@ -37,13 +37,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
-        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/Spring/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -52,6 +45,13 @@
 
     <url>
         <loc>/tags/IOC%E5%AE%B9%E5%99%A8/</loc>
+        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -86,13 +86,6 @@
     </url>
 
     <url>
-        <loc>/tags/Guava/</loc>
-        <lastmod>2017-05-06T13:06:20.128Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
         <lastmod>2017-05-06T13:11:11.891Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -102,6 +95,13 @@
     <url>
         <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
         <lastmod>2017-05-06T13:11:11.891Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/Guava/</loc>
+        <lastmod>2017-05-07T11:44:33.556Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
