@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Guava框架官方文档学习——第三章 缓存 | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(11)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(17)</small></a></li>
+				    
+				    <li><a href="/categories/转载分享/" class="animsition-link">转载分享<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(10)</small></a></li>
+				    
+				    <li><a href="/tags/Guava/" class="animsition-link">Guava<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/技术周报/" class="animsition-link">技术周报<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(4)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_5.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第三章</h2>
+                                <p>缓存</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-05-25T14:09:27.000Z" itemprop="datePublished">
+          2017年5月25日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/Guava/'>Guava</a>
+    
+    
+	
+</span>
+                <h1>Guava框架官方文档学习——第三章 缓存</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适用范围"><span class="toc-text">适用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Population"><span class="toc-text">Population</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CacheLoader"><span class="toc-text">CacheLoader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Callable"><span class="toc-text">Callable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inserted-Directly（直接插入）"><span class="toc-text">Inserted Directly（直接插入）</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要介绍Guava提供的有关缓存方面的工具。本来第三章应该对应官方文档的话，是介绍Guava实现的一整套有向图无向图的工具类，但是考虑到图模型在我们日常开发中较少用到(web开发中)，所以暂缓到后面有时间再补充。<br><a id="more"></a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>Guava的官方文档一上来就怼给你一个例子，我也学学：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LoadingCache&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt; graphs = CacheBuilder.newBuilder()</div><div class="line">       .maximumSize(<span class="number">1000</span>)</div><div class="line">       .expireAfterWrite(<span class="number">10</span>, TimeUnit.MINUTES)</div><div class="line">       .removalListener(MY_LISTENER)</div><div class="line">       .build(</div><div class="line">           <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">             public <span class="keyword">Graph</span> <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) throws AnyException &#123;</div><div class="line">               <span class="keyword">return</span> createExpensiveGraph(<span class="built_in">key</span>);</div><div class="line">             &#125;</div><div class="line">           &#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h2><p>缓存这个不用说了，很多情况下我们的确需要缓存。<br>Guava文档说了，它提供的缓存比较像<code>ConcurrentMap</code>，但是也是有区别的，我们从上面的例子就能看出来区别，Guava提供的可以设定缓存的过期时间，时间一到entry就被自动移除了，还允许你注册监听器Listener，移除的时候告诉你一声，做点儿额外的逻辑。<br>总之，总的来说，下面这些情况同时满足时，Guava提供的缓存比较适合你：</p>
+<ul>
+<li>你想要花一些内存来提高程序的速度</li>
+<li>你预期你的key值会不止一次地被查询</li>
+<li>你想要缓存的东西不会撑爆虚拟机的最大内存</li>
+<li>Guava的缓存是单机缓存，如果你有多台机器干同样的事儿，那么你可能用不上这个缓存，还是考虑<code>Memcached</code>或者<code>redis</code>吧</li>
+</ul>
+<p>如果上面的这些都满足了，那么恭喜你，可以使用Guava的缓存了。</p>
+<h2 id="Population"><a href="#Population" class="headerlink" title="Population"></a>Population</h2><p>这特么怎么翻译，常用方法？懵逼中……<br>Guava的缓存实现比较有意思，我们看上面的例子可以注意到最终build时传入了一个<code>CacheLoader</code>，这就是Guava强烈推荐的第一种缓存。</p>
+<h3 id="CacheLoader"><a href="#CacheLoader" class="headerlink" title="CacheLoader"></a>CacheLoader</h3><p>CacheLoader主要是用在那种可以根据key直接计算得到Value的情况，就是Key和Value之间有个函数关系，这样的话，你就可以使用这个CacheLoader来得到缓存：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">LoadingCache&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt; graphs = CacheBuilder.newBuilder()</div><div class="line">       .maximumSize(<span class="number">1000</span>)</div><div class="line">       .build(</div><div class="line">           <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">             public <span class="keyword">Graph</span> <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) throws AnyException &#123;</div><div class="line">               <span class="keyword">return</span> createExpensiveGraph(<span class="built_in">key</span>);</div><div class="line">             &#125;</div><div class="line">           &#125;);</div><div class="line"></div><div class="line">...</div><div class="line">try &#123;</div><div class="line">  <span class="keyword">return</span> graphs.get(<span class="built_in">key</span>);</div><div class="line">&#125; catch (ExecutionException e) &#123;</div><div class="line">  throw <span class="keyword">new</span> OtherException(e.getCause());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面的get方法会得到value，如果此时缓存内部还没有的话，就调用你传入的load方法计算得到，同时缓存起来。<br>注意到get方法被try-catch块包起来了，这是因为你传入的Load方法有抛出受检异常。<br>如果没有抛出受检异常，就不用这么麻烦，直接使用<code>getUnchecked(K)</code>方法，就不需要try-catch块包起来了。注意，抛出受检异常的情况，你绝对不能使用<code>getUnchecked(K)</code>方法。<br>当然，还可以使用<code>getAll(Iterable&lt;? extends K&gt;)</code>方法来直接获得多个Value，不过这意味着每个Key都有可能要经过Load方法计算得到value，所以为了性能考虑，你也可以实现<code>CacheLoader.loadAll</code>方法，来覆盖默认的行为。</p>
+<h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><p>先看例子：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Cache&lt;Key, Value&gt; cache = CacheBuilder.<span class="keyword">new</span><span class="type">Builder</span>()</div><div class="line">    .maximumSize(<span class="number">1000</span>)</div><div class="line">    .build(); <span class="comment">// look Ma, no CacheLoader</span></div><div class="line">...</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  <span class="comment">// If the key wasn't in the "easy to compute" group, we need to</span></div><div class="line">  <span class="comment">// do things the hard way.</span></div><div class="line">  cache.<span class="keyword">get</span>(key, <span class="keyword">new</span> <span class="type">Callable</span>&lt;Value&gt;() &#123;</div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> Value call() throws AnyException &#123;</div><div class="line">      <span class="keyword">return</span> doThingsTheHardWay(key);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">OtherException</span>(e.getCause());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，在build的时候并没有传入一个Loader进去，而是在get的地方传入了一个<code>Callbale&lt;Value&gt;</code>进去，很显然，这种情况适合在创建缓存的时候，Key和Value的关系还不能确定的情况下。</p>
+<h3 id="Inserted-Directly（直接插入）"><a href="#Inserted-Directly（直接插入）" class="headerlink" title="Inserted Directly（直接插入）"></a>Inserted Directly（直接插入）</h3><p>我们经常讨论的缓存都是这种思路，上面两种思路我只能说谷歌的人果然脑洞惊奇。<br>使用<code>put(key,value)</code>来直接将缓存的东西放进去，如果已经有了，就覆盖。<br>还可以通过<code>Cache.asMap()</code>得到一个<code>ConcurrentMap</code>的View，但是Guava好像不推荐使用<code>Cache.asMap().putIfAbsent</code>，虽然这样也能改变缓存，但是似乎有些问题，可惜原文解释的太烂，我没有看懂，贴出原文如下：</p>
+<blockquote>
+<p>Changes can also be made to a cache using any of the ConcurrentMap methods exposed by the Cache.asMap() view. Note that no method on the asMap view will ever cause entries to be automatically loaded into the cache. Further, the atomic operations on that view operate outside the scope of automatic cache loading, so Cache.get(K, Callable<v>) should always be preferred over Cache.asMap().putIfAbsent in caches which load values using either CacheLoader or Callable.</v></p>
+</blockquote>
+<p>但愿看懂的好心人能在下面留言告诉我怎么回事。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-05-25T15:18:14.362Z" itemprop="datePublished">
+					2017年5月25日 23:18
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/05/19/technology-report/">
+        后端技术周报 →
+    </a>
+    
+</nav>
+
+        
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/05/25/guava-3/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1495721367; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://dawn-2.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+s.setAttribute('async', 'async');
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
