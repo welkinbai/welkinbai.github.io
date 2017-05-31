@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-05-25T15:18:14.362Z</updated>
+  <updated>2017-05-31T14:05:46.927Z</updated>
   <id>/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="/2017/05/25/guava-3/"/>
     <id>/2017/05/25/guava-3/</id>
     <published>2017-05-25T14:09:27.000Z</published>
-    <updated>2017-05-25T15:18:14.362Z</updated>
+    <updated>2017-05-31T14:05:46.927Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍Guava提供的有关缓存方面的工具。本来第三章应该对应官方文档的话，是介绍Guava实现的一整套有向图无向图的工具类，但是考虑到图模型在我们日常开发中较少用到(web开发中)，所以暂缓到后面有时间再补充。<br><a id="more"></a></p>
 <h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a></p>
@@ -43,6 +43,43 @@
 <p>Changes can also be made to a cache using any of the ConcurrentMap methods exposed by the Cache.asMap() view. Note that no method on the asMap view will ever cause entries to be automatically loaded into the cache. Further, the atomic operations on that view operate outside the scope of automatic cache loading, so Cache.get(K, Callable<v>) should always be preferred over Cache.asMap().putIfAbsent in caches which load values using either CacheLoader or Callable.</v></p>
 </blockquote>
 <p>但愿看懂的好心人能在下面留言告诉我怎么回事。</p>
+<h2 id="缓存释放"><a href="#缓存释放" class="headerlink" title="缓存释放"></a>缓存释放</h2><p>Guava提供了三种缓存自动释放的方法：基于大小、基于时间、基于引用<br>下面逐个介绍</p>
+<h3 id="基于大小的缓存释放"><a href="#基于大小的缓存释放" class="headerlink" title="基于大小的缓存释放"></a>基于大小的缓存释放</h3><p>上面的例子中实际上演示了这种方法，只要在创建的时候，通过<code>CacheBuilder.maximumSize(long)</code>指定大小的最大值即可。<br>注意：</p>
+<ul>
+<li>Guava不会在到了最大大小的时候才开始释放缓存，而是在缓存已用大小逼近最大大小的时候就开始释放了</li>
+<li>释放缓存的时候把谁从缓存里删掉呢？原文说，会删最近不常使用的，或者最常使用的。原文：<code>The cache will try to evict entries that haven&#39;t been used recently or very often.</code></li>
+</ul>
+<p>还有另外一种方式：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingCache&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt; graphs = CacheBuilder.newBuilder()</div><div class="line">       .maximumWeight(<span class="number">100000</span>)</div><div class="line">       .weigher(<span class="keyword">new</span> Weigher&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">          public int weigh(<span class="built_in">Key</span> k, <span class="keyword">Graph</span> g) &#123;</div><div class="line">            <span class="keyword">return</span> g.vertices().size();</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">       .build(</div><div class="line">           <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">             public <span class="keyword">Graph</span> <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) &#123; <span class="comment">// no checked exception</span></div><div class="line">               <span class="keyword">return</span> createExpensiveGraph(<span class="built_in">key</span>);</div><div class="line">             &#125;</div><div class="line">           &#125;);</div></pre></td></tr></table></figure></p>
+<p>这主要是因为，放在缓存中的对象可能大小差别很大，如果每个都当做1来看待，可能会对什么时候释放缓存评估失误。<br>这个时候需要开发者使用weigher来为每个对象计算一个大小，并指定最大值。<br>注意：</p>
+<ul>
+<li>这种方法也是一样，在缓存使用量逼近你设置的max值时，缓存释放的工作就已经开始了，不会等到缓存用完才开始</li>
+<li>weigher是在缓存创建的时候就计算好的，不会再改变，是静态的</li>
+</ul>
+<h3 id="基于时间的缓存释放"><a href="#基于时间的缓存释放" class="headerlink" title="基于时间的缓存释放"></a>基于时间的缓存释放</h3><p>Guava提供了两个方法：</p>
+<ul>
+<li><code>expireAfterAccess(long, TimeUnit)</code>：在上一次读过或者写过，反正就是访问过后，再过一定的时间就释放</li>
+<li><code>expireAfterWrite(long, TimeUnit)</code>：在创建好之后，或者上一次值更换之后，再过一定的时间就释放</li>
+</ul>
+<p>还可以用<code>CacheBuilder.ticker(Ticker)</code>来指定外部的时钟源</p>
+<h3 id="基于引用的缓存释放"><a href="#基于引用的缓存释放" class="headerlink" title="基于引用的缓存释放"></a>基于引用的缓存释放</h3><p>有三个方法：</p>
+<ul>
+<li><code>CacheBuilder.weakKeys()</code>：key值使用弱引用来保存，即当key值不再有强引用和软引用时，垃圾回收器将回收缓存</li>
+<li><code>CacheBuilder.weakValues()</code>：value值使用弱引用来保存，当value值不再有强引用和软引用时，垃圾回收期将回收缓存</li>
+<li><code>CacheBuilder.softValues()</code>：value值使用软引用来保存，软引用只有在内存不够用的时候，垃圾回收器才会去回收。并遵循最近最频繁使用的方式（最近最频繁使用的留下？原文没说）。</li>
+</ul>
+<p>注意，上面提到的三种方法都会令相应的字段在比较的时候，使用<code>==</code>操作符而不是<code>equals()</code>方法，这是因为垃圾回收器在乎的是引用值，所以比较自然而然也要换成引用值来比较。</p>
+<h2 id="明确移除"><a href="#明确移除" class="headerlink" title="明确移除"></a>明确移除</h2><p>任何时候，你都可以使用明确的方法来移除缓存而不是消极地等待缓存自己释放：</p>
+<ul>
+<li><code>Cache.invalidate(key)</code>：移除某一个缓存</li>
+<li><code>Cache.invalidateAll(keys)</code>：移除一批</li>
+<li><code>Cache.invalidateAll()</code>：移除全部</li>
+</ul>
+<h2 id="移除时的监听器"><a href="#移除时的监听器" class="headerlink" title="移除时的监听器"></a>移除时的监听器</h2><p>上面提到过，我们可以注册一个监听器，当有元素被从缓存中移除时，会调用监听器来进行一些处理，比如下面这个例子在移除的时候关闭连接：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">CacheLoader&lt;<span class="built_in">Key</span>, DatabaseConnection&gt; loader = <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, DatabaseConnection&gt; () &#123;</div><div class="line">  public DatabaseConnection <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) throws Exception &#123;</div><div class="line">    <span class="keyword">return</span> openConnection(<span class="built_in">key</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">RemovalListener&lt;<span class="built_in">Key</span>, DatabaseConnection&gt; removalListener = <span class="keyword">new</span> RemovalListener&lt;<span class="built_in">Key</span>, DatabaseConnection&gt;() &#123;</div><div class="line">  public void onRemoval(RemovalNotification&lt;<span class="built_in">Key</span>, DatabaseConnection&gt; removal) &#123;</div><div class="line">    DatabaseConnection conn = removal.getValue();</div><div class="line">    conn.<span class="built_in">close</span>(); <span class="comment">// tear down properly</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">	</div><div class="line"><span class="keyword">return</span> CacheBuilder.newBuilder()</div><div class="line">  .expireAfterWrite(<span class="number">2</span>, TimeUnit.MINUTES)</div><div class="line">  .removalListener(removalListener)</div><div class="line">  .build(loader);</div></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ul>
+<li>监听器抛出的错误都会被日志系统记录然后忽略，不会继续抛出</li>
+<li>默认情况下，监听器是同步的，如果监听器里面的操作特别昂贵，会降低缓存的性能。可以声明监听器为异步的，使用<code>RemovalListeners.asynchronous(RemovalListener, Executor)</code></li>
+</ul>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
