@@ -285,7 +285,7 @@
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适用范围"><span class="toc-text">适用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Population"><span class="toc-text">Population</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CacheLoader"><span class="toc-text">CacheLoader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Callable"><span class="toc-text">Callable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inserted-Directly（直接插入）"><span class="toc-text">Inserted Directly（直接插入）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存释放"><span class="toc-text">缓存释放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于大小的缓存释放"><span class="toc-text">基于大小的缓存释放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于时间的缓存释放"><span class="toc-text">基于时间的缓存释放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于引用的缓存释放"><span class="toc-text">基于引用的缓存释放</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#明确移除"><span class="toc-text">明确移除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移除时的监听器"><span class="toc-text">移除时的监听器</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适用范围"><span class="toc-text">适用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Population"><span class="toc-text">Population</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CacheLoader"><span class="toc-text">CacheLoader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Callable"><span class="toc-text">Callable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inserted-Directly（直接插入）"><span class="toc-text">Inserted Directly（直接插入）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存释放"><span class="toc-text">缓存释放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于大小的缓存释放"><span class="toc-text">基于大小的缓存释放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于时间的缓存释放"><span class="toc-text">基于时间的缓存释放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于引用的缓存释放"><span class="toc-text">基于引用的缓存释放</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#明确移除"><span class="toc-text">明确移除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移除时的监听器"><span class="toc-text">移除时的监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移除什么时候会发生？"><span class="toc-text">移除什么时候会发生？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷新"><span class="toc-text">刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-text">特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#统计数据"><span class="toc-text">统计数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#asMap"><span class="toc-text">asMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断和Bug"><span class="toc-text">中断和Bug</span></a></li></ol>
 </div>
 			
       		<p>本章主要介绍Guava提供的有关缓存方面的工具。本来第三章应该对应官方文档的话，是介绍Guava实现的一整套有向图无向图的工具类，但是考虑到图模型在我们日常开发中较少用到(web开发中)，所以暂缓到后面有时间再补充。<br><a id="more"></a></p>
@@ -346,41 +346,21 @@
 <li>监听器抛出的错误都会被日志系统记录然后忽略，不会继续抛出</li>
 <li>默认情况下，监听器是同步的，如果监听器里面的操作特别昂贵，会降低缓存的性能。可以声明监听器为异步的，使用<code>RemovalListeners.asynchronous(RemovalListener, Executor)</code></li>
 </ul>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
+<h2 id="移除什么时候会发生？"><a href="#移除什么时候会发生？" class="headerlink" title="移除什么时候会发生？"></a>移除什么时候会发生？</h2><p>尽管上面介绍了一堆可以自动释放缓存的方法，实际上，Guava并没有按你想象的那样去维护这个东西。比如基于时间的缓存释放，过期了以后，我们放在缓存里面的东西会立马被移除吗？<br>答案是，不会。<br>维护缓存的操作见缝插针地被安排在写操作中，针对写操作比较少的情况，则被安排在读操作中。<br>也就是说，过期的entry会在下一次写操作或者读操作的时候，被Guava给移除掉。<br>之所以采取这种做法，显然是实现上面的考虑，如果Guava被设计成在缓存过期的时候立即处理，那么必然要开启一个线程来时刻维护缓存，类似守护进程那个样子。Guava是不希望这么做的，因为这样一方面涉及多线程，会不可避免地与用户的操作产生互斥和锁竞争，增加复杂度，另一方面，有些环境严格控制程序能够创建的线程数，可能导致缓存的守护线程创建失败。<br>如果你非常在乎缓存的读取性能，怕Guava在读取操作上干别的事儿影响读取速度，你可以自己实现一个守护线程，并调用<code>Cache.cleanUp()</code>方法来通知缓存打扫掉过期的数据。</p>
+<h2 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h2><p>刷新指的是更新缓存里的值，在更新操作结束前，旧的值依然可以被获取到。这和移除再添加完全不同。<br>这一过程完全可以是异步的，因此对性能的影响非常小。<br>下面看一个例子：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Some keys don't need refreshing, and we want refreshes to be done asynchronously.</span></div><div class="line">LoadingCache&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt; graphs = CacheBuilder.newBuilder()</div><div class="line">       .maximumSize(<span class="number">1000</span>)</div><div class="line">       .refreshAfterWrite(<span class="number">1</span>, TimeUnit.MINUTES)</div><div class="line">       .build(</div><div class="line">           <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">             public <span class="keyword">Graph</span> <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) &#123; <span class="comment">// no checked exception</span></div><div class="line">               <span class="keyword">return</span> getGraphFromDatabase(<span class="built_in">key</span>);</div><div class="line">             &#125;</div><div class="line"></div><div class="line">             public ListenableFuture&lt;<span class="keyword">Graph</span>&gt; reload(final <span class="built_in">Key</span> <span class="built_in">key</span>, <span class="keyword">Graph</span> prevGraph) &#123;</div><div class="line">               <span class="keyword">if</span> (neverNeedsRefresh(<span class="built_in">key</span>)) &#123;</div><div class="line">                 <span class="keyword">return</span> Futures.immediateFuture(prevGraph);</div><div class="line">               &#125; <span class="keyword">else</span> &#123;</div><div class="line">                 <span class="comment">// asynchronous!</span></div><div class="line">                 ListenableFutureTask&lt;<span class="keyword">Graph</span>&gt; task = ListenableFutureTask.<span class="keyword">create</span>(<span class="keyword">new</span> Callable&lt;<span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">                   public <span class="keyword">Graph</span> <span class="keyword">call</span>() &#123;</div><div class="line">                     <span class="keyword">return</span> getGraphFromDatabase(<span class="built_in">key</span>);</div><div class="line">                   &#125;</div><div class="line">                 &#125;);</div><div class="line">                 executor.execute(task);</div><div class="line">                 <span class="keyword">return</span> task;</div><div class="line">               &#125;</div><div class="line">             &#125;</div><div class="line">           &#125;);</div></pre></td></tr></table></figure></p>
+<p>可以看到：</p>
+<ul>
+<li>可以使用<code>refreshAfterWrite</code>方法来指定多长时间后自动刷新，并且，你还可以和<code>expireAfterWrite</code>这个方法一起使用。注意，刷新操作也是在读取操作的时候触发的，满足时间条件并读取的同时会触发刷新操作，那么如果满足时间条件没有被读取，却满足的过期条件，那么entry就会被过期。（这段是看文档理解的，并没有具体实验，后续将实验验证）</li>
+<li>可以实现CacheLoader的<code>reload</code>方法，来指定刷新的具体实现逻辑，在这个方法里可以得到之前的值，还可以轻松地指定刷新操作异步执行。</li>
+</ul>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="统计数据"><a href="#统计数据" class="headerlink" title="统计数据"></a>统计数据</h3><p>使用<code>CacheBuilder.recordStats()</code>可以打开统计功能，然后使用<code>Cache.stats()</code>就可以得到一个包含统计数据的对象。比如命中率啊、平均读取时间啊、缓存释放次数啊等等和性能有关的值。</p>
+<h3 id="asMap"><a href="#asMap" class="headerlink" title="asMap"></a>asMap</h3><p>使用asMap可以得到一个视图。有以下要点需要注意：</p>
+<ul>
+<li><code>cache.asMap()</code>包含所有此刻在缓存中的entry。</li>
+<li><code>asMap().get(key)</code>相当于<code>cache.getIfPresent(key)</code>，但是不会触发缓存写入。</li>
+<li>访问时间会被任何写操作和读操作重置，包括<code>cache.asMap().get(Object)</code>和<code>cache.asMap().put(K,V)</code>。但是其他方法，比如遍历啊，是否包含啊之类的方法不会重置访问时间(access time，猜测用在上面的基于时间的缓存释放功能里)。</li>
+</ul>
+<h2 id="中断和Bug"><a href="#中断和Bug" class="headerlink" title="中断和Bug"></a>中断和Bug</h2><p>似乎Guava的程序员没能很好地处理<code>InterruptedException</code>，给出的理由是大多数缓存都是单线程的，即使多线程中断的场景也很少见，所以让所有人都去在乎<code>InterruptedException</code>不太好。<br>但是没能很好地处理<code>InterruptedException</code>有可能导致线程的永久阻塞，代码修改是没戏了，因为改起来太难了，于是谷歌的程序员们又新给了一个缓存的实现，<code>AsyncLoadingCache</code>，这个可以很好地处理中断。<br>这大段的英文翻译起来真心心塞啊，总之就是在多线程环境下有一些bug。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -391,8 +371,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-05-31T14:05:46.927Z" itemprop="datePublished">
-					2017年5月31日 22:05
+				<time datetime="2017-06-01T15:53:56.385Z" itemprop="datePublished">
+					2017年6月1日 23:53
 				</time>
 			</p>
             <p>
