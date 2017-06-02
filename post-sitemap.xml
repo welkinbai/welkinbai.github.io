@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>/2017/05/19/technology-report/</loc>
+        <lastmod>2017-06-02T12:54:07.093Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/05/25/guava-3/</loc>
         <lastmod>2017-06-01T15:53:56.385Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,14 +33,6 @@
     <url>
         <loc>/2017/05/07/guava-2/</loc>
         <lastmod>2017-05-25T14:14:30.863Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/05/19/technology-report/</loc>
-        <lastmod>2017-05-19T13:28:31.250Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -159,7 +159,7 @@
     </url>
 
     <url>
-        <loc>/2016/01/23/rollout-version-1/</loc>
+        <loc>/2016/04/06/spring-ioc/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -167,7 +167,7 @@
     </url>
 
     <url>
-        <loc>/2016/04/06/spring-ioc/</loc>
+        <loc>/2016/01/23/rollout-version-1/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
