@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Guava框架官方文档学习——第四章 函数式编程 | Dawn</title>
+  <title>Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等） | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -243,8 +243,8 @@
                             <div>
 							
 								
-								<h2>第四章</h2>
-                                <p>函数式编程</p>
+								<h2>终章</h2>
+                                <p>剩余的部分</p>
 																
 							
                             </div>
@@ -267,7 +267,7 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2017-06-03T03:45:29.000Z" itemprop="datePublished">
+      <time datetime="2017-06-03T08:16:34.000Z" itemprop="datePublished">
           2017年6月3日
       </time>	  
     
@@ -278,33 +278,61 @@
     
 	
 </span>
-                <h1>Guava框架官方文档学习——第四章 函数式编程</h1>				
+                <h1>Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）</h1>				
             </div>
         </div>		
         <div class="col-md-8 col-md-offset-2">
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#警告！！"><span class="toc-text">警告！！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Functions和predicates"><span class="toc-text">Functions和predicates</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Function"><span class="toc-text">Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Predicate"><span class="toc-text">Predicate</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章目录"><span class="toc-text">系列文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发"><span class="toc-text">并发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型工具包"><span class="toc-text">基本类型工具包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开闭区间"><span class="toc-text">开闭区间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO工具类"><span class="toc-text">IO工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hash函数"><span class="toc-text">Hash函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他一些功能"><span class="toc-text">其他一些功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
 </div>
 			
-      		<p>本章主要介绍Guava提供的函数式编程工具类。<br><a id="more"></a></p>
+      		<p>本章把剩下的部分一笔带过，主要集中讲Guava还提供哪些功能，有个大概认知，具体使用，看文末附上的官方javadoc文档。<br><a id="more"></a></p>
 <h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a><br>5.<a href="/2017/06/03/guava-5/" title="Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）">Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）</a></p>
-<h2 id="警告！！"><a href="#警告！！" class="headerlink" title="警告！！"></a>警告！！</h2><p>在jdk8以前，函数式编程都只能通过丑陋冗长尴尬的匿名内部类来实现。<br>所以你们懂得，即使是Guava提供的函数式工具类，滥用的后果就是，丑陋、不可读、冗长。<br>比如下面这个：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt; lengthFunction = <span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">Predicate&lt;<span class="built_in">String</span>&gt; allCaps = <span class="literal">new</span> Predicate&lt;<span class="built_in">String</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">boolean</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="built_in">string</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">Multiset&lt;<span class="built_in">Integer</span>&gt; lengths = HashMultiset.create(</div><div class="line">  Iterables.transform(Iterables.filter(strings, allCaps), lengthFunction));</div></pre></td></tr></table></figure></p>
-<p>还有下面这个：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Multiset&lt;<span class="built_in">Integer</span>&gt; lengths = HashMultiset.create(</div><div class="line">  FluentIterable.from(strings)</div><div class="line">    .filter(<span class="literal">new</span> Predicate&lt;<span class="built_in">String</span>&gt;() &#123;</div><div class="line">       <span class="keyword">public</span> <span class="built_in">boolean</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">         <span class="keyword">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="built_in">string</span>);</div><div class="line">       &#125;</div><div class="line">     &#125;)</div><div class="line">    .transform(<span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">       <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">         <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">       &#125;</div><div class="line">     &#125;));</div></pre></td></tr></table></figure></p>
-<p>然而不用Guava的函数式编程工具，你只需要：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Multiset&lt;Integer&gt; </span>lengths = HashMultiset.create()<span class="comment">;</span></div><div class="line"><span class="symbol">for</span> (<span class="keyword">String </span><span class="keyword">string </span>: <span class="keyword">strings) </span>&#123;</div><div class="line">  <span class="meta">if</span> (CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="keyword">string)) </span>&#123;</div><div class="line">    lengths.<span class="keyword">add(string.length());</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>哎哟，居然比用函数式还简短，而且很好懂。这也是为什么Guava呼吁大家不要用它的函数式编程工具类了。除非以下几种情况：</p>
+<p>本来优先学习Guava的目的是工作中实在是太多地方需要工具类的帮助，所以希望能先了解Guava都支持哪些功能，避免重复造轮子。<br>但是现在发现，除了集合工具类以外，Guava提供的其他工具类用到不多，有些还有点鸡肋，因此，为避免浪费宝贵的业余时间，开始加快速度，集中阐述Guava工具包里都有哪些功能，不再赘述细节。</p>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>JDK从5开始提供的并发包其实已经很强大了。尤其是<code>executor</code>系列。<br>Guava做了一些补充，尤其是在异步化方面。<br>下面是一些Guava给到的额外的补充：</p>
 <ul>
-<li>使用函数式编程以后，真的能缩短代码行数，那些用静态import以及另开一个类用常量保存functions的方法，并不能缩短代码行数，那些移到别的地方去的代码，也要算上行数才行。</li>
-<li>为了效率，比如有些方法会返回给你一个视图，为了使用这些返回视图的高效方法，你可以使用函数式编程。但是，正如《Effective Java》这本书说的，任何优化不要想当然，等你用完你认为会快的方法后，最好做个测试，用数字来证明你是对的。</li>
+<li>ListenableFuture：针对原始的<code>executor</code>可能返回的<code>Future</code>，Guava提供的新类型。原来的Future可以获取异步任务返回的结果，但是如果异步任务还没算出结果，那么线程就要等待，等异步任务算出结果再得到结果。而Guava这个就灵活了，你还可以给它注册个监听器，如果结果算好了，自动回调你注册的方法来处理结果。</li>
+<li>FutureCallback：这个也很棒，除了注册监听器以外，你还可以注册这个回调，这个回调接口有两个方法，<code>onSuccess(V)</code>和<code>onFailure(Throwable)</code>，把成功失败分开来处理，更加好用。</li>
+<li>ListeningExecutorService：问题来了，普通的Future可是JDK默认的Executor返回的，怎么得到Guava的新类型呢？用<code>MoreExecutors.listeningDecorator(ExecutorService)</code>方法包装一下默认的，这样得到的就是<code>ListenableFuture</code>啦</li>
+<li>CheckedFuture<v, x="" extends="" exception="">：这个是ListenableFuture的一个子接口，有时候我们的异步操作会抛出受检异常，那么我们就需要返回这个Future，可以使用<code>Futures.makeChecked(ListenableFuture&lt;V&gt;, Function&lt;Exception, X&gt;)</code>来吧普通的ListenableFuture变成CheckedFure</v,></li>
+<li>Service：Guava提供了一个高层接口，这个接口代表某一项业务，它有自己的状态，<code>NEW-&gt;STARTING-&gt;RUNNING-&gt;STOPPING-&gt;TERMINATED</code>以及<code>FAILED</code>等，用诸如<code>startAsync()</code>或者<code>stopAsync()</code>这样的方法就能启动或者停止service，当然不同的实现还有其他几种状态的流转方法。另外，你还可以注册监听器，当状态改变的事件发生时，告知监听器，执行相应的逻辑。你还可以让service同步地执行，调用<code>awaitRunning()</code>即可。Service的接口实现众多，下面列举如下：<ul>
+<li>AbstractIdleService：这个service在执行的时候不做逻辑，只有启动和停止的时候做逻辑。</li>
+<li>AbstractExecutionThreadService：这个service会开启一个单线程来做逻辑，有startup、run、triggerShutdown三处地方可以做逻辑。</li>
+<li>AbstractScheduledService：看名字就知道了，这是周期性的service，可以周期性的运行。</li>
+<li>AbstractService：这是纯粹的抽象类，用来给你自己实现属于自己的service的</li>
 </ul>
-<h2 id="Functions和predicates"><a href="#Functions和predicates" class="headerlink" title="Functions和predicates"></a>Functions和predicates</h2><p>讲真我一开始接触到Guava的函数式时，直观的感觉就是这玩意儿好晦涩，什么玩意儿，为什么要从右往左读等等。<br>说实话在JDK7以及以下的版本上，很难见到更便利更新颖的写法，因此Guava的函数式实现只能勉强接受了。<br>主要是两个接口，分别简单介绍一下。</p>
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><p>第一个接口名字很好懂，就叫函数。<br>函数式编程其实就是将我们在编程的过程中，遇到的<code>y=f(x)</code>这样的逻辑关系编写成一个一个的函数，并且可以作为参数、变量来使用。<br>一个函数最主要的就是由三部分组成：入参x，函数逻辑，结果y<br>所以Guava的函数接口总结下来就是这样：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt; lengthFunction = <span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>在这里，我们的入参就是一个<code>String</code>，而结果就是一个<code>Integer</code>，函数的逻辑就是匿名内部类apply方法实现的<code>string.length()</code>。<br>可以看到，由于实现一个函数，我们至少要写5行代码，而实际上，真正使用的时候，少不了函数相互之间的连接、嵌套等，这导致使用函数式编程的时候，会有大量此类定义一个函数的模板代码产生。<br>当我们使用的时候，可以把这个函数传给<code>Iterables.transform()</code>这样的方法，然后Guava就会针对一个可迭代对象的每个元素使用函数，得到结果，最终生成一个经过该函数转换的可迭代对象。<br>比如：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; strings = Lists.newArrayList(<span class="string">"acb"</span>,<span class="string">"aaad"</span>);</div><div class="line"><span class="built_in">Iterable</span>&lt;Integer&gt; result = Iterables.transform(strings,lengthFunction);<span class="comment">//result：[3,4]</span></div></pre></td></tr></table></figure></p>
-<h3 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h3><p>这个是用来做条件判断的特殊函数式结构，它的返回值固定成了boolean值。如下：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Predicate&lt;<span class="keyword">String</span>&gt; allCaps = <span class="keyword">new</span> Predicate&lt;<span class="keyword">String</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">boolean</span> apply(<span class="keyword">String</span> <span class="keyword">string</span>) &#123;</div><div class="line">    <span class="built_in">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="keyword">string</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这样我们在过滤一个数组的时候，传入这个函数，Guava就会自动根据它返回的结果，决定要不要留下数组中的每个元素：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; strings = Lists.newArrayList(<span class="string">"dbc"</span>,<span class="string">"DBC"</span>);</div><div class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">String</span>&gt; result = Iterables.filter(strings,allCaps);<span class="comment">//result:["DBC"]</span></div></pre></td></tr></table></figure></p>
-<p>所有的Function和Predicate都支持嵌套调用，只要使用<code>Functions</code>和<code>Predicates</code>中提供的方法即可。<code>Predicates</code>还提供了一些预置的逻辑判断供我们使用，比如<code>contains</code>、<code>not</code>、<code>in</code>之类的。</p>
-<p>官方文档介绍的不多，我也不多介绍了。想要使用函数式，还是乖乖升级到JDK8吧，或者使用kotlin也可以。</p>
+</li>
+<li>ServiceManager：如果你有很多servcie要管理，可以使用这个ServiceManager来集中管理，比如一下子全部运行，一下子全部停止等。</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>Guava提供了很多好用的字符串工具类：</p>
+<ul>
+<li>Joiner：这个很好懂吧，看名字就知道是字符串拼接的。例子如下：<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Joiner joiner = Joiner.<span class="keyword">on</span>(<span class="string">"; "</span>).skipNulls();</div><div class="line"><span class="keyword">return</span> joiner.<span class="keyword">join</span>(<span class="string">"Harry"</span>, <span class="literal">null</span>, <span class="string">"Ron"</span>, <span class="string">"Hermione"</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意这个类是不可变的，每一次修改都会生成新的类，所以链式调用时小心点儿。不过好处也是有的，可以声明成静态变量，然后给多线程共用。</p>
+<ul>
+<li>Splitter：有拼接就有拆分，这个用来方便地拆分，不会引起歧义。话说我才知道JDK的原生方法<code>String.split</code>原来可以这么坑，比如：<br><code>&quot;,a,,b,&quot;.split(&quot;,&quot;)</code>拆分后的结果是什么？<br>我一直以为是<code>&quot;&quot;, &quot;a&quot;, &quot;&quot;, &quot;b&quot;, &quot;&quot;</code>，结果却被告知是<code>&quot;&quot;, &quot;a&quot;, &quot;&quot;, &quot;b&quot;</code>，因为末尾的空字符串会被省略掉，卧槽，以前都不知道。<br>使用Guava版本的就不会有这种歧义，因为你在创建Splitter的时候，可以指定行为。</li>
+<li>CharMatcher：这个有点儿类似于<code>Predicate</code>，实际上它就是实现的<code>Predicate&lt;Character&gt;</code>，主要是用来处理字符串的，做一些断言，过滤，转换的操作，例子如下：<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span> noControl = CharMatcher.javaIsoControl().removeFrom(<span class="built_in">string</span>); <span class="comment">// remove control characters</span></div><div class="line"><span class="built_in">String</span> theDigits = CharMatcher.digit().retainFrom(<span class="built_in">string</span>); <span class="comment">// only the digits</span></div><div class="line"><span class="built_in">String</span> spaced = CharMatcher.whitespace().trimAndCollapseFrom(<span class="built_in">string</span>, <span class="string">' '</span>);</div><div class="line">  <span class="comment">// trim whitespace at ends, and replace/collapse whitespace into single spaces</span></div><div class="line"><span class="built_in">String</span> noDigits = CharMatcher.javaDigit().replaceFrom(<span class="built_in">string</span>, <span class="string">"*"</span>); <span class="comment">// star out all digits</span></div><div class="line"><span class="built_in">String</span> lowerAndDigit = CharMatcher.javaDigit().<span class="literal">or</span>(CharMatcher.javaLowerCase()).retainFrom(<span class="built_in">string</span>);</div><div class="line">  <span class="comment">// eliminate all characters that aren't digits or lowercase</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意，这个方法不认识Unicode编码，只认识char，所以不要妄想它能很好地处理中文。中文在它眼里就是多个字符的char。</p>
+<ul>
+<li>Charsets：这个不重要，就是让你使用这个来替代直接使用字符串<code>&quot;UTF-8&quot;</code>来声明字符集类型，如果是JDK7，已经有官方的实现了，可以使用<code>StandardCharsets</code></li>
+<li>CaseFormat：转换一些大小写或者格式，比如驼峰命名法的转换：<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, <span class="string">"CONSTANT_NAME"</span>)); <span class="regexp">//</span> returns <span class="string">"constantName"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在编程的时候，尤其是框架编程者，感觉还是蛮有用的</p>
+<h2 id="基本类型工具包"><a href="#基本类型工具包" class="headerlink" title="基本类型工具包"></a>基本类型工具包</h2><p>本来还有个拼internetDomainName的工具类，实现感觉鸡肋，就不介绍了。<br>这一节其实也没什么好介绍的，前面有提到过，Guava几乎为所有的类型都提供了工具类，只要在类型名字后面加个s就行了。<br>比如你想看String这个类有什么好用的方法，直接敲Strings就行了。同样地，基本类型int，敲Ints，byte就敲Bytes。以此类推。<br>还贴心地提供了无符号的基本类型，比如：UnsignedInts、UnsignedLongs等。</p>
+<h2 id="开闭区间"><a href="#开闭区间" class="headerlink" title="开闭区间"></a>开闭区间</h2><p>提供一个叫做Range的类来实现开闭区间。<br>用法如下：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Range.closed(<span class="number">1</span>, <span class="number">3</span>).contains(<span class="number">2</span>); <span class="comment">// returns true</span></div><div class="line">Range.closed(<span class="number">1</span>, <span class="number">3</span>).contains(<span class="number">4</span>); <span class="comment">// returns false</span></div><div class="line">Range.lessThan(<span class="number">5</span>).contains(<span class="number">5</span>); <span class="comment">// returns false</span></div><div class="line">Range.closed(<span class="number">1</span>, <span class="number">4</span>).containsAll(Ints.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// returns true</span></div></pre></td></tr></table></figure></p>
+<p>其他的用法就不赘述了</p>
+<h2 id="IO工具类"><a href="#IO工具类" class="headerlink" title="IO工具类"></a>IO工具类</h2><p>IO操作基本上分两种，一种是字节型的，一种是字符型的。<br>于是Guava给出了两种工具类。<code>ByteStreams</code>用来搞定字节型，比如<code>InputStream</code>或者<code>OutputStream</code>。而<code>CharStreams</code>用来搞定字符型，比如<code>Reader</code>或者<code>Writer</code>。<br>注意这两个工具类不负责打开流和关闭流，只负责提供便利的方法，比如我曾经就使用到一个很方便的方法：<code>long copy(InputStream, OutputStream)</code>，真爽啊，把一个流的内容直接搞到另一个流里去。</p>
+<p>然后，Guava给出了两种类来负责维护流，包括打开和妥善关闭，<code>Sources</code>负责读取的流，<code>sinks</code>负责写入的流。<br>它们每个都有字节型和字符型两个版本。你可以使用<code>openStream()</code>来打开一个流，爽歪歪，在调用它自己的一些方法的时候，关闭流的事儿不需要你来处理。<br>注意每次调用都会打开一个新的流。</p>
+<p>还有一个叫做<code>Closer</code>的辅助类来帮助你关闭流，但是强迫我们抓取所有的异常，我觉得挺不好的，就不介绍了。</p>
+<h2 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h2><p>有个<code>Hashing</code>提供哈希函数来帮助你实现各种哈希运算。<br>还给你提供一个<code>BloomFilter</code>工具类来实现BloomFilter算法，这种算法使用紧凑的结构来允许你测验某个东西在不在某个海量的数据集中，当然，缺点是，不在是百分百正确的，但是告诉你在数据集中这件事却是概率性的，可能在也可能不在。</p>
+<h2 id="其他一些功能"><a href="#其他一些功能" class="headerlink" title="其他一些功能"></a>其他一些功能</h2><p>Guava提供了一个EventBus的功能，来实现发布-订阅风格的消息机制。<br>还提供了IntMath、LongMath等数学工具类。<br>虽然针对泛型蛋疼的类型擦除问题，提出了一个TypeToken，但是我看了一下感觉用起来很麻烦，是个鸡肋。<br>针对反射包的工具类<code>invokable</code>倒是有一些很有用的方法，比如判别方法是不是public的等等。还有一个<code>Reflection</code>工具类也有一些针对反射很有用的方法，比如实现动态代理。<br>而<code>ClassPath</code>则是一个用来帮助处理classPath的工具类。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，Guava还是很强大的，但是也有一些奇怪的东西混在里面。我想这可能和Guava的开发者自身有关，有些比较优秀，有些则有些稚嫩。<br>只能说，我们在用的时候，取自己所需，怎么方便怎么用。不要一味地崇拜，也不要拒绝已有的优秀的工具。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -315,8 +343,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-06-03T08:20:05.398Z" itemprop="datePublished">
-					2017年6月3日 16:20
+				<time datetime="2017-06-03T11:33:18.306Z" itemprop="datePublished">
+					2017年6月3日 19:33
 				</time>
 			</p>
             <p>
@@ -327,13 +355,9 @@
         </div>		
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2017/06/03/guava-5/" style="float: left;">
-        ← Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）
-    </a>
     
-    
-    <a class="pull-right" href="/2017/05/25/guava-3/">
-        Guava框架官方文档学习——第三章 缓存 →
+    <a class="pull-right" href="/2017/06/03/guava-4/">
+        Guava框架官方文档学习——第四章 函数式编程 →
     </a>
     
 </nav>
@@ -348,8 +372,8 @@
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 /*
 var disqus_config = function () {
-this.page.url = /2017/06/03/guava-4/;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = 1496461529; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.url = /2017/06/03/guava-5/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1496477794; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 */
 (function() { // DON'T EDIT BELOW THIS LINE
