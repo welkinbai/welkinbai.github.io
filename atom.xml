@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-01T15:53:56.385Z</updated>
+  <updated>2017-06-03T07:27:43.373Z</updated>
   <id>/</id>
   
   <author>
@@ -16,14 +16,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Guava框架官方文档学习——第四章 函数式编程</title>
+    <link href="/2017/06/03/guava-4/"/>
+    <id>/2017/06/03/guava-4/</id>
+    <published>2017-06-03T03:45:29.000Z</published>
+    <updated>2017-06-03T07:27:43.373Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章主要介绍Guava提供的函数式编程工具类。<br><a id="more"></a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a></p>
+<h2 id="警告！！"><a href="#警告！！" class="headerlink" title="警告！！"></a>警告！！</h2><p>在jdk8以前，函数式编程都只能通过丑陋冗长尴尬的匿名内部类来实现。<br>所以你们懂得，即使是Guava提供的函数式工具类，滥用的后果就是，丑陋、不可读、冗长。<br>比如下面这个：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt; lengthFunction = <span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">Predicate&lt;<span class="built_in">String</span>&gt; allCaps = <span class="literal">new</span> Predicate&lt;<span class="built_in">String</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">boolean</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="built_in">string</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">Multiset&lt;<span class="built_in">Integer</span>&gt; lengths = HashMultiset.create(</div><div class="line">  Iterables.transform(Iterables.filter(strings, allCaps), lengthFunction));</div></pre></td></tr></table></figure></p>
+<p>还有下面这个：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Multiset&lt;<span class="built_in">Integer</span>&gt; lengths = HashMultiset.create(</div><div class="line">  FluentIterable.from(strings)</div><div class="line">    .filter(<span class="literal">new</span> Predicate&lt;<span class="built_in">String</span>&gt;() &#123;</div><div class="line">       <span class="keyword">public</span> <span class="built_in">boolean</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">         <span class="keyword">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="built_in">string</span>);</div><div class="line">       &#125;</div><div class="line">     &#125;)</div><div class="line">    .transform(<span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">       <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">         <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">       &#125;</div><div class="line">     &#125;));</div></pre></td></tr></table></figure></p>
+<p>然而不用Guava的函数式编程工具，你只需要：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Multiset&lt;Integer&gt; </span>lengths = HashMultiset.create()<span class="comment">;</span></div><div class="line"><span class="symbol">for</span> (<span class="keyword">String </span><span class="keyword">string </span>: <span class="keyword">strings) </span>&#123;</div><div class="line">  <span class="meta">if</span> (CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="keyword">string)) </span>&#123;</div><div class="line">    lengths.<span class="keyword">add(string.length());</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>哎哟，居然比用函数式还简短，而且很好懂。这也是为什么Guava呼吁大家不要用它的函数式编程工具类了。除非以下几种情况：</p>
+<ul>
+<li>使用函数式编程以后，真的能缩短代码行数，那些用静态import以及另开一个类用常量保存functions的方法，并不能缩短代码行数，那些移到别的地方去的代码，也要算上行数才行。</li>
+<li>为了效率，比如有些方法会返回给你一个视图，为了使用这些返回视图的高效方法，你可以使用函数式编程。但是，正如《Effective Java》这本书说的，任何优化不要想当然，等你用完你认为会快的方法后，最好做个测试，用数字来证明你是对的。</li>
+</ul>
+<h2 id="Functions和predicates"><a href="#Functions和predicates" class="headerlink" title="Functions和predicates"></a>Functions和predicates</h2><p>讲真我一开始接触到Guava的函数式时，直观的感觉就是这玩意儿好晦涩，什么玩意儿，为什么要从右往左读等等。<br>说实话在JDK7以及以下的版本上，很难见到更便利更新颖的写法，因此Guava的函数式实现只能勉强接受了。<br>主要是两个接口，分别简单介绍一下。</p>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><p>第一个接口名字很好懂，就叫函数。<br>函数式编程其实就是将我们在编程的过程中，遇到的<code>y=f(x)</code>这样的逻辑关系编写成一个一个的函数，并且可以作为参数、变量来使用。<br>一个函数最主要的就是由三部分组成：入参x，函数逻辑，结果y<br>所以Guava的函数接口总结下来就是这样：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt; lengthFunction = <span class="literal">new</span> Function&lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="built_in">Integer</span> apply(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">string</span>.length();</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在这里，我们的入参就是一个<code>String</code>，而结果就是一个<code>Integer</code>，函数的逻辑就是匿名内部类apply方法实现的<code>string.length()</code>。<br>可以看到，由于实现一个函数，我们至少要写5行代码，而实际上，真正使用的时候，少不了函数相互之间的连接、嵌套等，这导致使用函数式编程的时候，会有大量此类定义一个函数的模板代码产生。<br>当我们使用的时候，可以把这个函数传给<code>Iterables.transform()</code>这样的方法，然后Guava就会针对一个可迭代对象的每个元素使用函数，得到结果，最终生成一个经过该函数转换的可迭代对象。<br>比如：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; strings = Lists.newArrayList(<span class="string">"acb"</span>,<span class="string">"aaad"</span>);</div><div class="line"><span class="built_in">Iterable</span>&lt;Integer&gt; result = Iterables.transform(strings,lengthFunction);<span class="comment">//result：[3,4]</span></div></pre></td></tr></table></figure></p>
+<h3 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h3><p>这个是用来做条件判断的特殊函数式结构，它的返回值固定成了boolean值。如下：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Predicate&lt;<span class="keyword">String</span>&gt; allCaps = <span class="keyword">new</span> Predicate&lt;<span class="keyword">String</span>&gt;() &#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">boolean</span> apply(<span class="keyword">String</span> <span class="keyword">string</span>) &#123;</div><div class="line">    <span class="built_in">return</span> CharMatcher.JAVA_UPPER_CASE.matchesAllOf(<span class="keyword">string</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这样我们在过滤一个数组的时候，传入这个函数，Guava就会自动根据它返回的结果，决定要不要留下数组中的每个元素：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; strings = Lists.newArrayList(<span class="string">"dbc"</span>,<span class="string">"DBC"</span>);</div><div class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">String</span>&gt; result = Iterables.filter(strings,allCaps);<span class="comment">//result:["DBC"]</span></div></pre></td></tr></table></figure></p>
+<p>所有的Function和Predicate都支持嵌套调用，只要使用<code>Functions</code>和<code>Predicates</code>中提供的方法即可。<code>Predicates</code>还提供了一些预置的逻辑判断供我们使用，比如<code>contains</code>、<code>not</code>、<code>in</code>之类的。</p>
+<p>官方文档介绍的不多，我也不多介绍了。想要使用函数式，还是乖乖升级到JDK8吧，或者使用kotlin也可以。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章主要介绍Guava提供的函数式编程工具类。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Guava" scheme="/tags/Guava/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Guava框架官方文档学习——第三章 缓存</title>
     <link href="/2017/05/25/guava-3/"/>
     <id>/2017/05/25/guava-3/</id>
     <published>2017-05-25T14:09:27.000Z</published>
-    <updated>2017-06-01T15:53:56.385Z</updated>
+    <updated>2017-06-03T06:39:44.792Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍Guava提供的有关缓存方面的工具。本来第三章应该对应官方文档的话，是介绍Guava实现的一整套有向图无向图的工具类，但是考虑到图模型在我们日常开发中较少用到(web开发中)，所以暂缓到后面有时间再补充。<br><a id="more"></a></p>
-<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a></p>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>Guava的官方文档一上来就怼给你一个例子，我也学学：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LoadingCache&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt; graphs = CacheBuilder.newBuilder()</div><div class="line">       .maximumSize(<span class="number">1000</span>)</div><div class="line">       .expireAfterWrite(<span class="number">10</span>, TimeUnit.MINUTES)</div><div class="line">       .removalListener(MY_LISTENER)</div><div class="line">       .build(</div><div class="line">           <span class="keyword">new</span> CacheLoader&lt;<span class="built_in">Key</span>, <span class="keyword">Graph</span>&gt;() &#123;</div><div class="line">             public <span class="keyword">Graph</span> <span class="keyword">load</span>(<span class="built_in">Key</span> <span class="built_in">key</span>) throws AnyException &#123;</div><div class="line">               <span class="keyword">return</span> createExpensiveGraph(<span class="built_in">key</span>);</div><div class="line">             &#125;</div><div class="line">           &#125;);</div></pre></td></tr></table></figure></p>
 <h2 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h2><p>缓存这个不用说了，很多情况下我们的确需要缓存。<br>Guava文档说了，它提供的缓存比较像<code>ConcurrentMap</code>，但是也是有区别的，我们从上面的例子就能看出来区别，Guava提供的可以设定缓存的过期时间，时间一到entry就被自动移除了，还允许你注册监听器Listener，移除的时候告诉你一声，做点儿额外的逻辑。<br>总之，总的来说，下面这些情况同时满足时，Guava提供的缓存比较适合你：</p>
 <ul>
@@ -204,10 +243,10 @@ content
     <link href="/2017/05/07/guava-2/"/>
     <id>/2017/05/07/guava-2/</id>
     <published>2017-05-07T10:18:50.000Z</published>
-    <updated>2017-05-25T14:14:30.863Z</updated>
+    <updated>2017-06-03T06:40:01.570Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要介绍Guava框架给我们带来的有关集合的系列工具类和新的集合类型。<br><a id="more"></a></p>
-<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a></p>
 <h2 id="第一节-不可变的集合们"><a href="#第一节-不可变的集合们" class="headerlink" title="第一节 不可变的集合们"></a>第一节 不可变的集合们</h2><p>关于不可变的概念和好处，请看这篇文章：<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>Guava为我们提供了一系列的不可变集合类，每个都有方便地方法来获得实例。下面先罗列出它们：</p>
 <table>
 <thead>
@@ -536,10 +575,10 @@ content
     <link href="/2017/05/03/guava-1/"/>
     <id>/2017/05/03/guava-1/</id>
     <published>2017-05-03T14:03:29.000Z</published>
-    <updated>2017-05-25T14:14:43.528Z</updated>
+    <updated>2017-06-03T06:40:11.173Z</updated>
     
     <content type="html"><![CDATA[<p>Guava是谷歌出品的一款JAVA工具框架，提供了很多丰富的工具类来弥补JAVA这门语言的不足之处。可以说将Guava就像是JAVA武侠世界的一本绝世秘籍，学会了它程序员可以轻松应对很多场景，用最少的代码实现业务逻辑。<br><a id="more"></a></p>
-<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a></p>
+<h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a></p>
 <h2 id="第一节-使用和避免Null"><a href="#第一节-使用和避免Null" class="headerlink" title="第一节 使用和避免Null"></a>第一节 使用和避免Null</h2><blockquote>
 <p>“I call it my billion-dollar mistake.” - Sir C. A. R. Hoare, on his invention of the null reference</p>
 </blockquote>
@@ -1919,33 +1958,6 @@ content
     
     
       <category term="MyBatis" scheme="/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>fiddler抓包https教程</title>
-    <link href="/2016/12/08/fiddler-https/"/>
-    <id>/2016/12/08/fiddler-https/</id>
-    <published>2016-12-08T09:17:57.000Z</published>
-    <updated>2016-12-08T13:03:16.456Z</updated>
-    
-    <content type="html"><![CDATA[<p>本教程教大家如何使用fiddler来抓包http和https请求<br><a id="more"></a></p>
-<h4 id="一、打开Fiddler4"><a href="#一、打开Fiddler4" class="headerlink" title="一、打开Fiddler4"></a>一、打开Fiddler4</h4><p>选择Tools-&gt;Telerik Fiddler Options<br>点选HTTPS选项卡做如下配置：<br><img src="/2016/12/08/fiddler-https/1.png" alt="1.png" title=""><br>点选Connections选项卡做如下配置：<br><img src="/2016/12/08/fiddler-https/2.png" alt="2.png" title=""><br>点击OK。</p>
-<h4 id="二、手机端的配置"><a href="#二、手机端的配置" class="headerlink" title="二、手机端的配置"></a>二、手机端的配置</h4><p>打开自己手机，连接QingQing_Dev的wifi。<br>连接后进入该wifi的详情，为该wifi配置http代理：<br><img src="/2016/12/08/fiddler-https/3.png" alt="3.png" title=""><br>此时如果配置成功，应该已经可以抓取到http请求。</p>
-<h4 id="三、安装证书抓取https请求"><a href="#三、安装证书抓取https请求" class="headerlink" title="三、安装证书抓取https请求"></a>三、安装证书抓取https请求</h4><p>想要抓取https请求，在前面配置的基础上，使用手机浏览器访问http代理中配置的地址和端口<br>比如上图中是192.168.1.104:8888<br>你应该能看到如下网页：<br><img src="/2016/12/08/fiddler-https/4.png" alt="4.png" title=""><br>点击网页中的下载链接，下载Fiddler提供的根证书，并安装。<br>Iphone用户应该在下载后立刻能够看到如下安装界面：<br><img src="/2016/12/08/fiddler-https/5.png" alt="5.png" title=""><br>选择安装，安装后就能成功地抓取https请求了。<br>如果想要抓取电脑端的https请求，只需在fiddler中导出根证书到桌面：<br><img src="/2016/12/08/fiddler-https/6.png" alt="6.png" title=""><br>然后双击安装即可。</p>
-<p>注意：fiddler的根证书在不用的时候记得删掉，否则你的电脑和手机有被入侵的风险</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本教程教大家如何使用fiddler来抓包http和https请求&lt;br&gt;
-    
-    </summary>
-    
-      <category term="教程" scheme="/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-      <category term="fiddler" scheme="/tags/fiddler/"/>
     
   </entry>
   
