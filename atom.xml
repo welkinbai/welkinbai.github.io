@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-04T03:11:44.153Z</updated>
+  <updated>2017-06-04T09:47:07.247Z</updated>
   <id>/</id>
   
   <author>
@@ -14,6 +14,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式——第一章</title>
+    <link href="/2017/06/04/design-pattern-1/"/>
+    <id>/2017/06/04/design-pattern-1/</id>
+    <published>2017-06-04T08:05:00.000Z</published>
+    <updated>2017-06-04T09:47:07.247Z</updated>
+    
+    <content type="html"><![CDATA[<p>终于，我们要开始讨论设计模式了。<br>如果不知道什么是设计模式，不妨先看我的另一篇文章——有趣的反面模式。<br>设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。<br><a id="more"></a></p>
+<p>现在业内，针对设计模式一词的态度基本上分为两类：<br>第一类会觉得设计模式是个好东西，面试的时候会问求职者，平时工作的时候也会想方设法用起来，谈起设计模式似乎就是高大上的代名词。<br>第二类会对设计模式深恶痛绝，觉得它提高了语言学习的门槛，编造多余的技术名词，还有人觉得设计模式害人不浅，根本没什么用或者反而会产生不良作用。设计模式就是毒瘤。</p>
+<h2 id="我怎么看？"><a href="#我怎么看？" class="headerlink" title="我怎么看？"></a>我怎么看？</h2><p>我认为上面两类看法都是错误的。<br>设计模式的确是个好东西，但是设计模式并不是什么银弹或者万能钥匙，设计模式就是很普通的概念，和面向对象编程，或者和数据结构一样，不过是编程领域的某个方面而已，如果要把编程编写成一本大百科全书，那么里面必然有属于设计模式的一个章节。</p>
+<p>设计模式之所以会产生两极分化的看法，和设计模式本身异常复杂，很难被掌握有一定关系。它需要的不是简单机械的公式，也不是什么非0即1的算法，设计模式是一种经验，更是一种哲学。<br>编程在我看来，最难的不是什么算法，也不是什么数据结构或者语言用法，编程最难的在于程序员的内心，程序员的思维，他们对这个真实世界的抽象能力，他们对当前乃至未来的程序世界的架构能力。<br>显然，学习设计模式和这些能力有关。设计模式考验程序员的抽象能力，更考验程序员的架构能力。它提供给你许多许多的方法，原则，教条，经验，规律，而难点在于当你面对困难时，你并不知道该怎样选择。<br>我经常面对忘我学习而把食物放冷的困境，我的第一想法是凑合吃吃，但这样对胃不好，我的第二想法是拿去用锅热热，但是这样非常麻烦，我还要洗锅。尽管在半年前我已经买了微波炉，但是我经常忘记这件事，然后总是在准备起身去热食物的过程中看到它，然后想起来，哦，原来这里有一种更简单的办法。<br>设计模式的困境就是如此，我们有近百种设计模式，可是程序员的能力有限，他总是在事后才想起来，哦，有这么一种通用方法，可以解决我的问题。<br>有些人并不是这样，他们天生喜欢装饰自己，让自己显得比别人厉害，于是他们总是在事前就拿起设计模式，往自己将要写的代码上生搬硬套。别人问起来，总是拿设计模式的名气当做自己的挡箭牌。数月之后，危机显现，于是设计模式就变成了害人不浅的东西，被人人唾弃。<br>那些喷设计模式提高了语言学习门槛的，我也不能赞同。我认为设计模式并没有提高语言学习的门槛，而是编程语言本来就不是一件容易的事，不是学会了写ifelse之类的语法结构，就算是学会了编程。从某种意义上讲，设计模式是编程的进阶，当你学习编程学到一定深度时，设计模式讨论的问题，就不可避免地出现在你面前。就算前人没有总结出设计模式，你仍然要面对它们，面对这些通用的，经常会出现的情况。</p>
+<h2 id="这篇文章的目的是什么？"><a href="#这篇文章的目的是什么？" class="headerlink" title="这篇文章的目的是什么？"></a>这篇文章的目的是什么？</h2><p>这篇文章的目的很简单：</p>
+<ul>
+<li>讲解所有流行的设计模式都是怎么回事，如何去应用这些设计模式</li>
+<li>讲解什么情况下，才需要用这种设计模式</li>
+<li>讲解用了某种设计模式，代价是什么，副作用是什么</li>
+</ul>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章">设计模式——第一章</a>
+<h2 id="第一条-API网关模式"><a href="#第一条-API网关模式" class="headerlink" title="第一条 API网关模式"></a>第一条 API网关模式</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
+<h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br><img src="/2017/06/04/design-pattern-1/apigateway.jpg" alt="apigateway.jpg" title=""></p>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
+<li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
+<li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
+<li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。<h3 id="坏处"><a href="#坏处" class="headerlink" title="坏处"></a>坏处</h3></li>
+<li>增加了复杂度</li>
+<li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
+<li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。<h2 id="第二条-抽象文档模式"><a href="#第二条-抽象文档模式" class="headerlink" title="第二条 抽象文档模式"></a>第二条 抽象文档模式</h2></li>
+</ol>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;终于，我们要开始讨论设计模式了。&lt;br&gt;如果不知道什么是设计模式，不妨先看我的另一篇文章——有趣的反面模式。&lt;br&gt;设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）</title>
@@ -1874,86 +1953,6 @@ content
     <summary type="html">
     
       &lt;p&gt;为了测试MyBatis的一些特性，我在github上创建了一个项目。本文记载一些在测试过程中发现的官方文档并没有特别指出的问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MyBatis" scheme="/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MyBatis整合Spring框架</title>
-    <link href="/2016/12/28/mybatis-spring/"/>
-    <id>/2016/12/28/mybatis-spring/</id>
-    <published>2016-12-28T13:41:48.000Z</published>
-    <updated>2017-02-19T07:56:04.231Z</updated>
-    
-    <content type="html"><![CDATA[<p>本章主要介绍MyBatis与Spring框架的整合。<br><a id="more"></a><br>说实话，想要完美的终结MyBatis系列文章，少不了要介绍如何将MyBatis整合进Spring。虽然在第一篇中我已经提到了一些，但是不够详细。<br>关于Spring，想必熟悉JAVA的人都不陌生，它已经拿下了JAVA框架世界的头牌宝座，无人能与之争锋了。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/12/03/mybatis-intro/" title="MyBatis介绍">MyBatis介绍</a><br>2.<a href="/2016/12/08/mybatis-mapper/" title="MyBatis Mapper映射文件中的SQL配置">MyBatis Mapper映射文件中的SQL配置</a><br>3.<a href="/2016/12/21/mybatis-dynamic/" title="MyBatis 动态SQL">MyBatis 动态SQL</a><br>4.<a href="/2016/12/28/mybatis-spring/" title="MyBatis整合Spring框架">MyBatis整合Spring框架</a><br>5.<a href="/2017/01/15/mybatis-test/" title="MyBatis的测试项目">MyBatis的测试项目</a></p>
-<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><p>想要将MyBatis和Spring整合到一起，让他们协作，需要新加入一个依赖包：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>这个包是MyBatis社区产物，官方给的解释是，Spring3已经做完了的时候，MyBatis3还没做完，因此非常可惜，Spring官方并没有原生支持MyBatis。于是MyBatis社区就自己实现了一个包，来整合两者。似乎这个包工作的很好，Spring在后续的版本里也干脆就没再支持MyBatis。</p>
-<p>这里在引入前对一下自己的版本：</p>
-<table>
-<thead>
-<tr>
-<th>MyBatis-Spring</th>
-<th>MyBatis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.0.0 and 1.0.1</td>
-<td>3.0.1 to 3.0.5    </td>
-</tr>
-<tr>
-<td>1.0.2</td>
-<td>3.0.6    </td>
-</tr>
-<tr>
-<td>1.1.0 or higher</td>
-<td>3.1.0 or higher    </td>
-</tr>
-<tr>
-<td>1.3.0 or higher</td>
-<td>3.4.0 or higher    </td>
-</tr>
-</tbody>
-</table>
-<h2 id="二、QuickStart-Demo（快速开始的例子）"><a href="#二、QuickStart-Demo（快速开始的例子）" class="headerlink" title="二、QuickStart Demo（快速开始的例子）"></a>二、QuickStart Demo（快速开始的例子）</h2><p>我在第一篇文章里有介绍过，和Spring整合起来其实其他的都没变，只是获得<code>SqlSessionFactory</code>的方法变了。<br>以前需要自己在JAVA代码里获得，现在只需要配置一下，Spring直接帮你注入。然后用AOP拦截你的Mapper接口，使你用的时候也无需使用<code>SqlSession</code>，直接使用Mapper接口。<br>废话不多说，看demo:<br>第一步、在Spring配置文件中加上这一行：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>第二步、定义一个这样的接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</div><div class="line">  <span class="meta">@Select</span>(<span class="string">"SELECT * FROM users WHERE id = #&#123;userId&#125;"</span>)</div><div class="line">  <span class="function">User <span class="title">getUser</span><span class="params">(@Param(<span class="string">"userId"</span>)</span> String userId)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>第三步、在Spirng配置文件中再加上这一行：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userMapper"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperInterface"</span> <span class="attr">value</span>=<span class="string">"org.mybatis.spring.sample.mapper.UserMapper"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sqlSessionFactory"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>第四步、配置好了，你可以这么用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooServiceImpl</span> <span class="keyword">implements</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">	</div><div class="line"><span class="keyword">private</span> UserMapper userMapper;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserMapper</span><span class="params">(UserMapper userMapper)</span> </span>&#123;</div><div class="line">  <span class="keyword">this</span>.userMapper = userMapper;</div><div class="line">&#125;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">public</span> User <span class="title">doSomeBusinessStuff</span><span class="params">(String userId)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.userMapper.getUser(userId);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>解释一下，第一步在Spring配置文件增加的sqlSessionFactory配置就是告诉Spring自动注入sqlSessionFactory的。你必须为它指定一个dataSource，相信如果你的项目本来就使用Spring，那DataSource应该已经配置过了，任何可以被Spring用的DataSource都可以。<br>这个Bean还有一些功能，比如妥善地帮你在查询结束后关掉SqlSession，总之，你不需要关心任何框架层面的东西，只需要写你的Mapper就行了。<br>第二步是我之前文章讲过的Mapper接口。<br>第三步是告诉Spring，我这里有个Mapper，你要帮我变成一个Bean，并且用sqlSessionFactory来创建，我随时要用。到后面会讲，你可以配置告诉Spring去扫描某个路径下所有的Mapper，默认把它们都注入成bean。<br>然后第四步，你可以使用Spring的依赖注入，将你的Mapper注入到任何地方，然后使用它的方法来查询数据。虽然你没有实现这个接口，但是MyBatis会帮你实现，然后查询出数据。</p>
-<h2 id="三、配置详解"><a href="#三、配置详解" class="headerlink" title="三、配置详解"></a>三、配置详解</h2><p>下面详细地介绍一下配置，上面的demo只是列出了最简单的情况。</p>
-<h3 id="1-SqlSessionFactoryBean"><a href="#1-SqlSessionFactoryBean" class="headerlink" title="1.SqlSessionFactoryBean"></a>1.SqlSessionFactoryBean</h3><p>我们刚才讲到，整合的最核心部分就是在Spring的配置文件里加上下面这句话：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>实际上，这只是最小集，还有一些属性可以配置：</p>
-<ul>
-<li><code>configLocation</code>：用来指定你的mybatis的配置文件放在哪儿，需要注意的是，在第一篇文章里讲到的配置文件里，environment相关的节点都不需要指定，因为指定也没用。</li>
-<li><code>configuration</code>:从1.3.0版本起，支持直接使用这个节点来修改MyBatis的配置，你就不需要外部的xml文件了</li>
-<li><code>mapperLocations</code>: 非常重要的配置，指定你的mapper的xml映射文件都放在哪儿，如果和接口没有放在一个目录下，那你必须要指定这个值，你可以使用ant风格的路径来指定，你还可以指定多个。</li>
-<li><code>databaseIdProvider</code>：用来指定使用哪个类型的数据库源，之前已经介绍过了，不详细介绍，下面有例子</li>
-</ul>
-<p>最大集可能长这个样子：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"vendorProperties"</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertiesFactoryBean"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"SQL Server"</span>&gt;</span>sqlserver<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"DB2"</span>&gt;</span>db2<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"Oracle"</span>&gt;</span>oracle<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"MySQL"</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"databaseIdProvider"</span> <span class="attr">class</span>=<span class="string">"org.apache.ibatis.mapping.VendorDatabaseIdProvider"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"properties"</span> <span class="attr">ref</span>=<span class="string">"vendorProperties"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperLocations"</span> <span class="attr">value</span>=<span class="string">"classpath*:sample/config/mappers/**/*.xml"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span> <span class="attr">value</span>=<span class="string">"classpath:sample/config/mybatisconfig.xml"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseIdProvider"</span> <span class="attr">ref</span>=<span class="string">"databaseIdProvider"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="2-事务"><a href="#2-事务" class="headerlink" title="2.事务"></a>2.事务</h3><p>最神奇的地方来了，使用了mybatis-spring的包以后，你什么都不用改，MyBatis直接就用起你的Spring的事务管理器啦，简直棒呆：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>上面举例的是Spring通常配置事务管理器的方式。注意，此处的dataSource和之前我们配置给SqlSessionFactoryBean的必须一致，否则事务失效。<br>然后你就可以尽情地使用Spring的声明式事务了，不管是AOP还是注解，都可以起作用，事务结束的时候，MyBatis会自动提交或者回滚。<br>需要注意的是，如果你使用spring的事务，那么你就不能再做任何手工的诸如<code>SqlSession.commit()</code>这种事，如果你做了，会抛错。<br>任何不在事务范围之内的查询，都会自动提交。</p>
-<h3 id="3-自动扫描Mapper"><a href="#3-自动扫描Mapper" class="headerlink" title="3.自动扫描Mapper"></a>3.自动扫描Mapper</h3><p>前面demo里第三步，我们需要告诉Spring我有哪些Mapper，并且使用MapperFactoryBean这个强大的类来处理Mapper，尽管如此，你可能有几百万个Mapper（夸张的修辞手法），难道都要一个一个配置？<br>Spring有个自动扫描的概念，如果你熟悉Spring，你肯定知道，我们还可能有几百万个Bean，不可能每个都配置在xml里，因此Spring本来就支持自动扫描注解来注入Bean。<br>MyBatis-spring的开发者们沿用了这一做法，你只需要在Spring的配置文件里加入一行代码（当然还要增加一下xml命名空间）：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">  <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">  <span class="attr">xmlns:mybatis</span>=<span class="string">"http://mybatis.org/schema/mybatis-spring"</span></div><div class="line">  <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></div><div class="line">  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">  http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd"&gt;</div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">mybatis:scan</span> <span class="attr">base-package</span>=<span class="string">"org.mybatis.spring.sample.mapper"</span> /&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>以下是一些要点：</p>
-<ul>
-<li>你可以使用逗号或者分号分隔多个包名</li>
-<li>扫描是递归的</li>
-<li>不想把指定包下面所有的接口都扫描进去？使用<code>annotation</code>属性指定有特殊的注解才扫描，使用<code>marker-interface</code>属性，可以指定拥有特殊的父接口的那些接口才扫描</li>
-<li>想更改扫描到的mapper的bean的名字？在mapper上使用<code>org.springframework.stereotype.Component</code>或者<code>javax.inject.Named</code>注解</li>
-</ul>
-<p>还有另外两种自动扫描的配置方法，此处就不介绍了，详情请见官网。</p>
-<p>没啦，愉快地结束。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本章主要介绍MyBatis与Spring框架的整合。&lt;br&gt;
     
     </summary>
     

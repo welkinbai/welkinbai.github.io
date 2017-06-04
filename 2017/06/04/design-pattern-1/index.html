@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: 教程 | Dawn</title>
+  <title>设计模式——第一章 | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -75,7 +75,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -242,14 +242,10 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-							
-							
-								<h2><strong>NO <span>PAIN</span>,NO <span>GAIN</span>.</strong></h2>
-                                <p>成功是成功者的里程碑，失败是失败者的墓志铭</p>				    			
-							    
-                            
-							    
-                            
+								
+								<h2>第一章</h2>
+                                <p>设计模式</p>
+																
 							
                             </div>
                         </div>
@@ -266,96 +262,150 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-<section id="services">
+<section id="intro">
     <div class="container">
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2016/12/08/fiddler-https/">fiddler抓包https教程</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-12-08T09:17:57.000Z" itemprop="datePublished">
-          2016年12月8日
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-06-04T08:05:00.000Z" itemprop="datePublished">
+          2017年6月4日
       </time>	  
     
     
     | 
-    <a href='/tags/fiddler/'>fiddler</a>
+    <a href='/tags/设计模式/'>设计模式</a>
     
     
 	
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>本教程教大家如何使用fiddler来抓包http和https请求<br>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/12/08/fiddler-https/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>设计模式——第一章</h1>				
             </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#我怎么看？"><span class="toc-text">我怎么看？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这篇文章的目的是什么？"><span class="toc-text">这篇文章的目的是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一条-API网关模式"><span class="toc-text">第一条 API网关模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处"><span class="toc-text">坏处</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二条-抽象文档模式"><span class="toc-text">第二条 抽象文档模式</span></a></li></ol>
+</div>
+			
+      		<p>终于，我们要开始讨论设计模式了。<br>如果不知道什么是设计模式，不妨先看我的另一篇文章——有趣的反面模式。<br>设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。<br><a id="more"></a></p>
+<p>现在业内，针对设计模式一词的态度基本上分为两类：<br>第一类会觉得设计模式是个好东西，面试的时候会问求职者，平时工作的时候也会想方设法用起来，谈起设计模式似乎就是高大上的代名词。<br>第二类会对设计模式深恶痛绝，觉得它提高了语言学习的门槛，编造多余的技术名词，还有人觉得设计模式害人不浅，根本没什么用或者反而会产生不良作用。设计模式就是毒瘤。</p>
+<h2 id="我怎么看？"><a href="#我怎么看？" class="headerlink" title="我怎么看？"></a>我怎么看？</h2><p>我认为上面两类看法都是错误的。<br>设计模式的确是个好东西，但是设计模式并不是什么银弹或者万能钥匙，设计模式就是很普通的概念，和面向对象编程，或者和数据结构一样，不过是编程领域的某个方面而已，如果要把编程编写成一本大百科全书，那么里面必然有属于设计模式的一个章节。</p>
+<p>设计模式之所以会产生两极分化的看法，和设计模式本身异常复杂，很难被掌握有一定关系。它需要的不是简单机械的公式，也不是什么非0即1的算法，设计模式是一种经验，更是一种哲学。<br>编程在我看来，最难的不是什么算法，也不是什么数据结构或者语言用法，编程最难的在于程序员的内心，程序员的思维，他们对这个真实世界的抽象能力，他们对当前乃至未来的程序世界的架构能力。<br>显然，学习设计模式和这些能力有关。设计模式考验程序员的抽象能力，更考验程序员的架构能力。它提供给你许多许多的方法，原则，教条，经验，规律，而难点在于当你面对困难时，你并不知道该怎样选择。<br>我经常面对忘我学习而把食物放冷的困境，我的第一想法是凑合吃吃，但这样对胃不好，我的第二想法是拿去用锅热热，但是这样非常麻烦，我还要洗锅。尽管在半年前我已经买了微波炉，但是我经常忘记这件事，然后总是在准备起身去热食物的过程中看到它，然后想起来，哦，原来这里有一种更简单的办法。<br>设计模式的困境就是如此，我们有近百种设计模式，可是程序员的能力有限，他总是在事后才想起来，哦，有这么一种通用方法，可以解决我的问题。<br>有些人并不是这样，他们天生喜欢装饰自己，让自己显得比别人厉害，于是他们总是在事前就拿起设计模式，往自己将要写的代码上生搬硬套。别人问起来，总是拿设计模式的名气当做自己的挡箭牌。数月之后，危机显现，于是设计模式就变成了害人不浅的东西，被人人唾弃。<br>那些喷设计模式提高了语言学习门槛的，我也不能赞同。我认为设计模式并没有提高语言学习的门槛，而是编程语言本来就不是一件容易的事，不是学会了写ifelse之类的语法结构，就算是学会了编程。从某种意义上讲，设计模式是编程的进阶，当你学习编程学到一定深度时，设计模式讨论的问题，就不可避免地出现在你面前。就算前人没有总结出设计模式，你仍然要面对它们，面对这些通用的，经常会出现的情况。</p>
+<h2 id="这篇文章的目的是什么？"><a href="#这篇文章的目的是什么？" class="headerlink" title="这篇文章的目的是什么？"></a>这篇文章的目的是什么？</h2><p>这篇文章的目的很简单：</p>
+<ul>
+<li>讲解所有流行的设计模式都是怎么回事，如何去应用这些设计模式</li>
+<li>讲解什么情况下，才需要用这种设计模式</li>
+<li>讲解用了某种设计模式，代价是什么，副作用是什么</li>
+</ul>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章">设计模式——第一章</a>
+<h2 id="第一条-API网关模式"><a href="#第一条-API网关模式" class="headerlink" title="第一条 API网关模式"></a>第一条 API网关模式</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
+<h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br><img src="/2017/06/04/design-pattern-1/apigateway.jpg" alt="apigateway.jpg" title=""></p>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
+<li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
+<li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
+<li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。<h3 id="坏处"><a href="#坏处" class="headerlink" title="坏处"></a>坏处</h3></li>
+<li>增加了复杂度</li>
+<li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
+<li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。<h2 id="第二条-抽象文档模式"><a href="#第二条-抽象文档模式" class="headerlink" title="第二条 抽象文档模式"></a>第二条 抽象文档模式</h2></li>
+</ol>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2016/04/23/buildBlog/">Hexo博客建设教程以及使用U盘漫游生产环境</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-04-23T04:00:54.000Z" itemprop="datePublished">
-          2016年4月23日
-      </time>	  
-    
-    
-    | 
-    <a href='/tags/教程/'>教程</a>,
-    
-    <a href='/tags/Hexo/'>Hexo</a>
-    
-    
-	
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
                       
-                        <p>今天打算把U盘里的博客生产环境做一份到我的笔记本电脑上，正好做的过程中可以从头再记录一遍这个博客的建设过程。<br>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/04/23/buildBlog/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-      
-      <nav class="pagination" role="pagination">
-          
-          
-        </nav>    
-    </div>
-</section> 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
-        </div>
+			</p>
+			<p>最后修改：
+				<time datetime="2017-06-04T09:47:07.247Z" itemprop="datePublished">
+					2017年6月4日 17:47
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/06/03/guava-5/">
+        Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等） →
+    </a>
+    
+</nav>
+
+        
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/06/04/design-pattern-1/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1496563500; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://dawn-2.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+s.setAttribute('async', 'async');
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
