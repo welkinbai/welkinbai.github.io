@@ -7,8 +7,24 @@
     </url>
 
     <url>
+        <loc>/2015/12/20/my-new-post/</loc>
+        <lastmod>2017-06-04T03:14:48.302Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2016/03/01/myplan/</loc>
+        <lastmod>2017-06-04T03:14:22.170Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/06/03/guava-5/</loc>
-        <lastmod>2017-06-03T11:33:18.306Z</lastmod>
+        <lastmod>2017-06-04T03:11:44.153Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -49,22 +65,6 @@
     <url>
         <loc>/2017/05/19/technology-report/</loc>
         <lastmod>2017-06-02T12:54:07.093Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2015/12/20/my-new-post/</loc>
-        <lastmod>2017-05-06T13:11:11.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2016/03/01/myplan/</loc>
-        <lastmod>2017-05-03T13:27:44.027Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

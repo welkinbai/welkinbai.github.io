@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-03T11:33:18.306Z</updated>
+  <updated>2017-06-04T03:11:44.153Z</updated>
   <id>/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="/2017/06/03/guava-5/"/>
     <id>/2017/06/03/guava-5/</id>
     <published>2017-06-03T08:16:34.000Z</published>
-    <updated>2017-06-03T11:33:18.306Z</updated>
+    <updated>2017-06-04T03:11:44.153Z</updated>
     
     <content type="html"><![CDATA[<p>本章把剩下的部分一笔带过，主要集中讲Guava还提供哪些功能，有个大概认知，具体使用，看文末附上的官方javadoc文档。<br><a id="more"></a></p>
 <h2 id="系列文章目录"><a href="#系列文章目录" class="headerlink" title="系列文章目录"></a>系列文章目录</h2><p>1.<a href="/2017/05/03/guava-1/" title="Guava框架官方文档学习——第一章 基础工具包">Guava框架官方文档学习——第一章 基础工具包</a><br>2.<a href="/2017/05/07/guava-2/" title="Guava框架官方文档学习——第二章 集合">Guava框架官方文档学习——第二章 集合</a><br>3.<a href="/2017/05/25/guava-3/" title="Guava框架官方文档学习——第三章 缓存">Guava框架官方文档学习——第三章 缓存</a><br>4.<a href="/2017/06/03/guava-4/" title="Guava框架官方文档学习——第四章 函数式编程">Guava框架官方文档学习——第四章 函数式编程</a><br>5.<a href="/2017/06/03/guava-5/" title="Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）">Guava框架官方文档学习——终章 剩下的部分（并发、字符串、基本类型、反射等）</a></p>
@@ -67,6 +67,7 @@
 <h2 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h2><p>有个<code>Hashing</code>提供哈希函数来帮助你实现各种哈希运算。<br>还给你提供一个<code>BloomFilter</code>工具类来实现BloomFilter算法，这种算法使用紧凑的结构来允许你测验某个东西在不在某个海量的数据集中，当然，缺点是，不在是百分百正确的，但是告诉你在数据集中这件事却是概率性的，可能在也可能不在。</p>
 <h2 id="其他一些功能"><a href="#其他一些功能" class="headerlink" title="其他一些功能"></a>其他一些功能</h2><p>Guava提供了一个EventBus的功能，来实现发布-订阅风格的消息机制。<br>还提供了IntMath、LongMath等数学工具类。<br>虽然针对泛型蛋疼的类型擦除问题，提出了一个TypeToken，但是我看了一下感觉用起来很麻烦，是个鸡肋。<br>针对反射包的工具类<code>invokable</code>倒是有一些很有用的方法，比如判别方法是不是public的等等。还有一个<code>Reflection</code>工具类也有一些针对反射很有用的方法，比如实现动态代理。<br>而<code>ClassPath</code>则是一个用来帮助处理classPath的工具类。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，Guava还是很强大的，但是也有一些奇怪的东西混在里面。我想这可能和Guava的开发者自身有关，有些比较优秀，有些则有些稚嫩。<br>只能说，我们在用的时候，取自己所需，怎么方便怎么用。不要一味地崇拜，也不要拒绝已有的优秀的工具。</p>
+<a href="http://google.github.io/guava/releases/snapshot/api/docs/overview-summary.html" title="[extends]" target="_blank" rel="external">Guava官方文档</a>
 ]]></content>
     
     <summary type="html">
