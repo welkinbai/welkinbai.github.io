@@ -245,5 +245,5 @@ $(document).ready(function($) {
 				$submenu.slideUp(200);
 			}
 		});
-	$('.container img').attr("data-action","zoom");
+	$('#intro img').attr("data-action","zoom");
 });

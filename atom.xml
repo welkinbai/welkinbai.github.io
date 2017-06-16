@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-15T15:03:00.594Z</updated>
+  <updated>2017-06-16T15:18:11.158Z</updated>
   <id>/</id>
   
   <author>
@@ -20,11 +20,12 @@
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-06-15T15:03:00.594Z</updated>
+    <updated>2017-06-16T15:18:11.158Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
 <h2 id="一、顶层结构"><a href="#一、顶层结构" class="headerlink" title="一、顶层结构"></a>一、顶层结构</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。<br><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""></p>
+<p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
