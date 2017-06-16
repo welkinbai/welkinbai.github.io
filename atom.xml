@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-13T14:14:34.586Z</updated>
+  <updated>2017-06-15T15:03:00.594Z</updated>
   <id>/</id>
   
   <author>
@@ -16,13 +16,72 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JDK源码学习——集合框架</title>
+    <link href="/2017/06/15/jdk-collection/"/>
+    <id>/2017/06/15/jdk-collection/</id>
+    <published>2017-06-15T13:14:32.000Z</published>
+    <updated>2017-06-15T15:03:00.594Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
+<h2 id="一、顶层结构"><a href="#一、顶层结构" class="headerlink" title="一、顶层结构"></a>一、顶层结构</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。<br><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""></p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JDK源码学习" scheme="/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式——第一章</title>
     <link href="/2017/06/04/design-pattern-1/"/>
     <id>/2017/06/04/design-pattern-1/</id>
     <published>2017-06-04T08:05:00.000Z</published>
-    <updated>2017-06-13T14:14:34.586Z</updated>
+    <updated>2017-06-15T13:12:49.520Z</updated>
     
-    <content type="html"><![CDATA[<p>终于，我们要开始讨论设计模式了。<br>如果不知道什么是设计模式，不妨先看我的另一篇文章——有趣的反面模式。<br>设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<p>终于，我们要开始讨论设计模式了。<br>如果不知道什么是设计模式，不妨先看我的另一篇文章——<a href="/2017/01/18/anti-pattern/" title="有趣的反面模式">有趣的反面模式</a>。<br>设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。<br><a id="more"></a></p>
 <p>现在业内，针对设计模式一词的态度基本上分为两类：<br>第一类，会觉得设计模式是个好东西，面试的时候会问求职者，平时工作的时候也会想方设法用起来，谈起设计模式似乎就是高大上的代名词。<br>第二类，会对设计模式深恶痛绝，觉得它提高了语言学习的门槛，编造多余的技术名词，还有人觉得设计模式害人不浅，根本没什么用或者反而会产生不良作用。设计模式就是毒瘤。</p>
 <h2 id="我怎么看？"><a href="#我怎么看？" class="headerlink" title="我怎么看？"></a>我怎么看？</h2><p>我认为上面两类看法都是错误的。<br>设计模式的确是个好东西，但是设计模式并不是什么银弹或者万能钥匙，设计模式就是很普通的概念，和面向对象编程，或者和数据结构一样，不过是编程领域的某个方面而已，如果要把编程编写成一本大百科全书，那么里面必然有属于设计模式的一个章节。</p>
 <p>设计模式之所以会产生两极分化的看法，和设计模式本身异常复杂，很难被掌握有一定关系。它需要的不是简单机械的公式，也不是什么非0即1的算法，设计模式是一种经验，更是一种哲学。<br>编程在我看来，最难的不是什么算法，也不是什么数据结构或者语言用法，编程最难的在于程序员的内心，程序员的思维，他们对这个真实世界的抽象能力，他们对当前乃至未来的程序世界的架构能力。<br>显然，学习设计模式和这些能力有关。设计模式考验程序员的抽象能力，更考验程序员的架构能力。它提供给你许多许多的方法，原则，教条，经验，规律，而难点在于当你面对困难时，你并不知道该怎样选择。</p>
@@ -242,7 +301,7 @@ content
     
     <summary type="html">
     
-      &lt;p&gt;终于，我们要开始讨论设计模式了。&lt;br&gt;如果不知道什么是设计模式，不妨先看我的另一篇文章——有趣的反面模式。&lt;br&gt;设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。&lt;br&gt;
+      &lt;p&gt;终于，我们要开始讨论设计模式了。&lt;br&gt;如果不知道什么是设计模式，不妨先看我的另一篇文章——&lt;a href=&quot;/2017/01/18/anti-pattern/&quot; title=&quot;有趣的反面模式&quot;&gt;有趣的反面模式&lt;/a&gt;。&lt;br&gt;设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。&lt;br&gt;
     
     </summary>
     
@@ -2051,74 +2110,6 @@ content
     
     
       <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MyBatis的测试项目</title>
-    <link href="/2017/01/15/mybatis-test/"/>
-    <id>/2017/01/15/mybatis-test/</id>
-    <published>2017-01-15T07:35:41.000Z</published>
-    <updated>2017-01-15T07:49:09.552Z</updated>
-    
-    <content type="html"><![CDATA[<p>为了测试MyBatis的一些特性，我在github上创建了一个项目。本文记载一些在测试过程中发现的官方文档并没有特别指出的问题。<br><a id="more"></a></p>
-<p>项目路径：<a href="https://github.com/welkinbai/learn-mybatis" title="external" target="_blank" rel="external">welkinbai/learn-mybatis</a><br>这是一个长期项目，每次抽空做一点儿，或者遇到问题再来补充，因此代码还不是特别全。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/12/03/mybatis-intro/" title="MyBatis介绍">MyBatis介绍</a><br>2.<a href="/2016/12/08/mybatis-mapper/" title="MyBatis Mapper映射文件中的SQL配置">MyBatis Mapper映射文件中的SQL配置</a><br>3.<a href="/2016/12/21/mybatis-dynamic/" title="MyBatis 动态SQL">MyBatis 动态SQL</a><br>4.<a href="/2016/12/28/mybatis-spring/" title="MyBatis整合Spring框架">MyBatis整合Spring框架</a><br>5.<a href="/2017/01/15/mybatis-test/" title="MyBatis的测试项目">MyBatis的测试项目</a></p>
-<h2 id="记录如下："><a href="#记录如下：" class="headerlink" title="记录如下："></a><strong>记录如下</strong>：</h2><p>（Mybatis版本为3.4.1）：<br>1.autoMappingBehavior</p>
-<ul>
-<li>当设为<code>NONE</code>时，如果你是用resultType直接定义返回的对象来自动映射，那么返回Null。如果使用resultMap来定义返回的对象，但是在resultMap节点中并不将对象的所有属性都显式地声明出来，那么没有显式声明的属性为Null。</li>
-<li>当设置为<code>PARTIAL</code>时，如果你是用resultType直接定义返回的对象来自动映射，那么返回映射了属性值的对象，但是，嵌套的对象是Null。有趣的地方来了，如果我将某个列的别名改成<code>嵌套对象.嵌套对象属性名</code>的形式，那么这个列的值会被自动设置到嵌套对象上去，可见此处如果想要值映射到嵌套对象上，就要在列别名处使用点号表达式来显式指定。如果使用resultMap来定义返回的对象，但是不将对象所有属性都显式地声明出来，神奇的事情发生了，那些没有显式声明的属性都为Null，也就是说，这种情况下自动映射无效。但是，当你在rusultMap节点上再使用autoMapping=”true”时，属性值都被自动映射成功了！也就是说全局设置和resultMap节点上的设置，两者的作用并不等同。</li>
-<li>当设置为<code>FULL</code>时，如果你是用resultType直接定义返回的对象来自动映射，那么返回映射了属性值的对象，但是，嵌套的对象是Null，除非你更改列名，用点号表达式指定列名为嵌套对象的属性值，那么是可以自动映射的。如果使用resultMap来定义返回的对象，简直令人不解，那些没有显式声明的属性也都自动映射了，而且嵌套对象也会被映射，堪称完全地自动映射，但是要注意的是，这种自动映射就是僵硬地根据列名来映射，如果列名不用点号表达式，而恰巧父对象和子对象有同名属性，那么列名会被映射到父子对象的同名属性上，如果有多个同名的列名，那么只取最前面那个列的值填充到同名属性上，可能解释的不是很清楚，要你自己实践才能彻底明白。</li>
-</ul>
-<p>2.逻辑分页还是物理分页<br>MyBatis支持使用一个叫做RowBounds的对象传给mapper来进行逻辑分页：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">List&lt;LogType&gt; <span class="title">getLogsBySortASC</span>(<span class="params">RowBounds rb</span>)</span>;</div><div class="line"><span class="comment">//RowBounds第一个参数表示起始行，第二个表示取多少行</span></div><div class="line">loggerMapper.getLogsBySortASC(<span class="keyword">new</span> RowBounds(<span class="number">0</span>,<span class="number">10</span>));</div></pre></td></tr></table></figure></p>
-<p>但是根据我查到的资料，人们都诟病说逻辑分页实际上还是没有解决大结果集撑爆内存的问题，因为它是拿到结果在本地之后，再进行分页的。（也许指定fetchSize能够解决这个问题）<br>如果想要使得MyBatis支持物理分页，那就自己在SQL语句中指定Limit和偏移量，也可以使用MyBatis的插件功能，使用github上别人写好的分页插件：<br>比如<code>com.github.pagehelper.PageHelper</code></p>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为了测试MyBatis的一些特性，我在github上创建了一个项目。本文记载一些在测试过程中发现的官方文档并没有特别指出的问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MyBatis" scheme="/tags/MyBatis/"/>
     
   </entry>
   
