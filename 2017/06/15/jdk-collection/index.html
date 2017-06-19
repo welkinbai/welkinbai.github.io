@@ -290,12 +290,25 @@
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构"><span class="toc-text">一、顶层结构</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a></li></ol>
 </div>
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
-<h2 id="一、顶层结构"><a href="#一、顶层结构" class="headerlink" title="一、顶层结构"></a>一、顶层结构</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。<br><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""></p>
+<h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。<br><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
+<ul>
+<li>Collection有一个<strong>父接口</strong><code>Iterable</code>，该接口从更高层意义抽象一种可以被迭代子模式迭代的对象，由于Collection所代表的含义是集合，集合是肯定可以被迭代的，所以它有一个父接口<code>Iterable</code>。同时，由于该接口的关系，我们才可以使用foreach这种类型的迭代方式去迭代Collection。</li>
+<li>Collection有四个<strong>子接口</strong>，分别是<code>BeanContext</code>、<code>List</code>、<code>Queue</code>、<code>Set</code>。<ul>
+<li>BeanContext：该接口和JAVA的Beans包有关系，JavaBean曾是一种可视化Java类的尝试，但是现在感觉，整个JavaBean都没什么应用了，但是JavaBean这个概念却被广泛地应用起来。比如Spring框架就借鉴了JavaBean的一些思想，发明了自己的Bean。至于为什么会放在Collection下面，就不深究了，毕竟Java的Beans包暂时应用不是很广泛。</li>
+<li>List：这就是大名鼎鼎的列表接口了。</li>
+<li>Queue：队列接口，我们不经常使用的一个接口，从名字就知道，它主要定义队列这种数据结构。</li>
+<li>Set：主要定义不含有重复元素的集合，即不含有两个内部元素a,b满足a.equals(b)且至多只有一个null元素的集合。</li>
+</ul>
+</li>
+<li>Collection还有六个<strong>实现类</strong>，分别是<code>AbstractCollection</code>、<code>CheckedCollection</code>、<code>CollectionView</code>、<code>SynchronizedCollection</code>、<code>UnmodifiableCollection</code>、<code>ValuesView</code>。其中带有<code>Abstract</code>、<code>View</code>字样的是抽象类，其余是普通类。这六个实现类相当于将集合从下面一个层次分成了6种不同功能或者类型的集合。我们常用到的集合子类们大多都是继承自<code>AbstractCollection</code>。而带有View的集合则主要是用来给Map提供视图的。然后我们还有<code>CheckedCollection</code>，用来包装普通的Collection提供类型安全机制，当错误的类型插入该集合时，立即抛出类型转换错误。<code>SynchronizedCollection</code>是Collections类提供的实现类，它包装普通的集合以支持并发操作，其内部使用了对象锁所以性能较差。<code>UnmodifiableCollection</code>也是Collections类提供的，包装普通的集合以产生不可变的集合，在介绍Guava的时候已经介绍过不可变集合的好处。</li>
+<li>还可以看到，Collection<strong>依赖</strong>了五个类，被86个类<strong>关联</strong>，被231个类<strong>依赖</strong></li>
+</ul>
+<p>除了类之间关系的结构图以外，我们还可以看一下该接口内部的结构图：<br><img src="/2017/06/15/jdk-collection/collection_inner.png" alt="collection_inner.png" title=""></p>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
@@ -341,8 +354,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-06-16T15:18:11.158Z" itemprop="datePublished">
-					2017年6月16日 23:18
+				<time datetime="2017-06-19T15:13:40.910Z" itemprop="datePublished">
+					2017年6月19日 23:13
 				</time>
 			</p>
             <p>
