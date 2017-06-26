@@ -8,7 +8,15 @@
 
     <url>
         <loc>/2017/06/15/jdk-collection/</loc>
-        <lastmod>2017-06-19T15:13:40.910Z</lastmod>
+        <lastmod>2017-06-26T15:39:15.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/06/04/design-pattern-1/</loc>
+        <lastmod>2017-06-20T15:11:02.740Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,14 +25,6 @@
     <url>
         <loc>/2015/12/20/my-new-post/</loc>
         <lastmod>2017-06-16T15:13:12.166Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/06/04/design-pattern-1/</loc>
-        <lastmod>2017-06-15T13:12:49.520Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

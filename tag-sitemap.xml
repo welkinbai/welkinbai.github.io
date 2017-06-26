@@ -93,13 +93,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-        <lastmod>2017-06-15T13:12:49.520Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
         <lastmod>2017-06-16T15:13:12.166Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -114,8 +107,15 @@
     </url>
 
     <url>
+        <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+        <lastmod>2017-06-20T15:11:02.740Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2017-06-19T15:13:40.910Z</lastmod>
+        <lastmod>2017-06-26T15:39:15.936Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

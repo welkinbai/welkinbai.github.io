@@ -290,12 +290,13 @@
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、抽象层结构（AbstractCollection）"><span class="toc-text">二、抽象层结构（AbstractCollection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-1"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li></ol></li></ol>
 </div>
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
-<h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。<br><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
+<h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
+<h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
 <li>Collection有一个<strong>父接口</strong><code>Iterable</code>，该接口从更高层意义抽象一种可以被迭代子模式迭代的对象，由于Collection所代表的含义是集合，集合是肯定可以被迭代的，所以它有一个父接口<code>Iterable</code>。同时，由于该接口的关系，我们才可以使用foreach这种类型的迭代方式去迭代Collection。</li>
 <li>Collection有四个<strong>子接口</strong>，分别是<code>BeanContext</code>、<code>List</code>、<code>Queue</code>、<code>Set</code>。<ul>
@@ -305,11 +306,46 @@
 <li>Set：主要定义不含有重复元素的集合，即不含有两个内部元素a,b满足a.equals(b)且至多只有一个null元素的集合。</li>
 </ul>
 </li>
-<li>Collection还有六个<strong>实现类</strong>，分别是<code>AbstractCollection</code>、<code>CheckedCollection</code>、<code>CollectionView</code>、<code>SynchronizedCollection</code>、<code>UnmodifiableCollection</code>、<code>ValuesView</code>。其中带有<code>Abstract</code>、<code>View</code>字样的是抽象类，其余是普通类。这六个实现类相当于将集合从下面一个层次分成了6种不同功能或者类型的集合。我们常用到的集合子类们大多都是继承自<code>AbstractCollection</code>。而带有View的集合则主要是用来给Map提供视图的。然后我们还有<code>CheckedCollection</code>，用来包装普通的Collection提供类型安全机制，当错误的类型插入该集合时，立即抛出类型转换错误。<code>SynchronizedCollection</code>是Collections类提供的实现类，它包装普通的集合以支持并发操作，其内部使用了对象锁所以性能较差。<code>UnmodifiableCollection</code>也是Collections类提供的，包装普通的集合以产生不可变的集合，在介绍Guava的时候已经介绍过不可变集合的好处。</li>
+<li>Collection还有六个<strong>子类</strong>，分别是<code>AbstractCollection</code>、<code>CheckedCollection</code>、<code>CollectionView</code>、<code>SynchronizedCollection</code>、<code>UnmodifiableCollection</code>、<code>ValuesView</code>。其中带有<code>Abstract</code>、<code>View</code>字样的是抽象类，其余是普通类。这六个实现类相当于将集合从下面一个层次分成了6种不同功能或者类型的集合。我们常用到的集合子类们大多都是继承自<code>AbstractCollection</code>。而带有View的集合则主要是用来给Map提供视图的。然后我们还有<code>CheckedCollection</code>，用来包装普通的Collection提供类型安全机制，当错误的类型插入该集合时，立即抛出类型转换错误。<code>SynchronizedCollection</code>是Collections类提供的实现类，它包装普通的集合以支持并发操作，其内部使用了对象锁所以性能较差。<code>UnmodifiableCollection</code>也是Collections类提供的，包装普通的集合以产生不可变的集合，在介绍Guava的时候已经介绍过不可变集合的好处。</li>
 <li>还可以看到，Collection<strong>依赖</strong>了五个类，被86个类<strong>关联</strong>，被231个类<strong>依赖</strong></li>
 </ul>
-<p>除了类之间关系的结构图以外，我们还可以看一下该接口内部的结构图：<br><img src="/2017/06/15/jdk-collection/collection_inner.png" alt="collection_inner.png" title=""></p>
-<p>【未完待续】</p>
+<h3 id="内部结构"><a href="#内部结构" class="headerlink" title="内部结构"></a>内部结构</h3><p>除了类之间关系的结构图以外，我们还可以看一下该接口内部的结构图：<br><img src="/2017/06/15/jdk-collection/collection_inner.png" alt="collection_inner.png" title=""><br>其中，empty其实不是properties，我这个uml生成软件错误识别成了properties，因为collection有一个<code>isEmpty()</code>方法。<br>我们可以看到：</p>
+<ul>
+<li>Collection接口定义了一个接口必须有的基础功能，如下：<ul>
+<li>添加（add,addAll）</li>
+<li>是否为空（isEmpty）</li>
+<li>是否包含元素或者另一个集合（contains,containsAll）</li>
+<li>清除所有元素（clear）</li>
+<li>获得迭代器（iterator）</li>
+<li>移除元素或者移除同时在另一个集合中的元素（remove,removeAll）</li>
+<li>获得当前集合大小（size）</li>
+<li>转换为Array即数组（toArray），其中，有参数的版本会将元素放入参数传入的数组中，如果放不下，就新创建一个运行时类型相同的array返回</li>
+<li>还有一些JDK1.8所特供的方法(parallelStream、removeIf、spliterator、stream)</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、抽象层结构（AbstractCollection）"><a href="#二、抽象层结构（AbstractCollection）" class="headerlink" title="二、抽象层结构（AbstractCollection）"></a>二、抽象层结构（AbstractCollection）</h2><p>下面我们进入抽象层，首先是最常见的java.util.AbstractCollection，它是一个抽象类。</p>
+<h3 id="关系结构-1"><a href="#关系结构-1" class="headerlink" title="关系结构"></a>关系结构</h3><p>该抽象类的关系结构比较简单。<br>向上：它实现了Collection接口<br>向下：它有15个子类<br>向左：它没有被其他类用到<br>向右：它仅使用了Iterator和String</p>
+<h3 id="内部结构-1"><a href="#内部结构-1" class="headerlink" title="内部结构"></a>内部结构</h3><p>它的内部结构如下：<br><img src="/2017/06/15/jdk-collection/abstractCollection_inner.png" alt="abstractCollection_inner.png" title=""><br>作为Collection接口的骨骼实现，它的内部结构应该与Collection非常相似。<br>所谓骨骼实现，就是某个抽象类给接口中的一些方法提供通用默认实现，后续实现类去实现接口的时候，继承该抽象类，这样只需覆盖自己关心的几个方法就可实现接口。<br>下面就每个方法进行解析：</p>
+<ul>
+<li>isEmpty()：直接调用size()来和0做比较，返回结果</li>
+<li>add(E)：直接抛出UnsupportedOperationException。其返回值是boolean，true代表元素添加成功</li>
+<li>addAll(Collection)：基本上就是遍历传进来的集合，然后针对每个元素调用add方法，一旦有add返回了true，就返回ture。</li>
+<li>clear()：通过迭代器来逐个删除元素，很差的性能，所以绝大多数实现都会覆盖这个默认方法。如果迭代器没有实现remove方法，会抛出UnsupportedOperationException</li>
+<li>contains(Object)：使用迭代器，然后逐个比较元素</li>
+<li>containsAll(Collection)：遍历入参集合的元素，并逐个调用contains，一旦有false的，直接返回false</li>
+<li>iterator()：抽象方法，没实现</li>
+<li>remove(Object)：使用迭代器来遍历元素，找到与入参equals的元素，调用迭代器的remove方法来删除。如果迭代器没有实现remove方法，会抛出UnsupportedOperationException。</li>
+<li>removeAll(Collection)：使用迭代器遍历元素，然后每个元素都调用入参集合的contains方法来判断是不是在入参集合中，在的话，就调用迭代器的remove方法来删除，同样可能抛出上面那个异常。一旦有删除操作，就返回true，否则false。</li>
+<li>retainAll(Collection)：和上面一样，遍历元素，调用contains方法来判断元素是否在入参集合中，但是此处是不在的话，就删除。在的话，会留下。一旦发生删除操作，返回true，否则false。</li>
+<li>size()：抽象方法，没实现</li>
+<li><p>toArray()：该方法挺复杂的，贴在下面：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCollection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span>&#123;</div><div class="line"><span class="comment">//...</span></div><div class="line">    <span class="keyword">public</span> Object[] toArray() &#123;</div><div class="line">        <span class="comment">// Estimate size of array; be prepared to see more or fewer elements</span></div><div class="line">        Object[] r = <span class="keyword">new</span> Object[size()];</div><div class="line">        Iterator&lt;E&gt; it = iterator();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (! it.hasNext()) <span class="comment">// fewer elements than expected</span></div><div class="line">                <span class="keyword">return</span> Arrays.copyOf(r, i);</div><div class="line">            r[i] = it.next();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> it.hasNext() ? finishToArray(r, it) : r;</div><div class="line">    &#125;</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  首先新数组的大小是通过size获得的，然后遍历新数组，同时遍历集合，将每个元素放入新数组中。<br>  如果集合中的元素比新数组大小小（这发生在size方法刚刚返回大小之后，有人从集合中删除了元素），就提前返回新数组。<br>  在遍历结束后，如果集合中的元素和新数组大小相等，就返回新数组。<br>  如果遍历结束后，集合中仍然有元素，即迭代器hasNext返回true，说明在遍历期间，有人向集合添加了元素。此时会调用finishToArray(r, it)来处理。<br>  finishToArray代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCollection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span>&#123;</div><div class="line"><span class="comment">//...</span></div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; T[] finishToArray(T[] r, Iterator&lt;?&gt; it) &#123;</div><div class="line">        <span class="keyword">int</span> i = r.length;</div><div class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">            <span class="keyword">int</span> cap = r.length;</div><div class="line">            <span class="keyword">if</span> (i == cap) &#123;</div><div class="line">                <span class="keyword">int</span> newCap = cap + (cap &gt;&gt; <span class="number">1</span>) + <span class="number">1</span>;</div><div class="line">                <span class="comment">// overflow-conscious code</span></div><div class="line">                <span class="keyword">if</span> (newCap - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</div><div class="line">                    newCap = hugeCapacity(cap + <span class="number">1</span>);</div><div class="line">                r = Arrays.copyOf(r, newCap);</div><div class="line">            &#125;</div><div class="line">            r[i++] = (T)it.next();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// trim if overallocated</span></div><div class="line">        <span class="keyword">return</span> (i == r.length) ? r : Arrays.copyOf(r, i);</div><div class="line">    &#125;</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  继续使用迭代器遍历集合，然后新数组在遍历的过程中动态扩容，扩容公式是：现在容量+现在容量/2+1。<br>  每扩容一次，就要发生一次数组的全拷贝，注意，Arrays.copyOf方法底层是一个native方法。<br>  我们可以看到，作者对溢出数组极大值的情况做了特殊处理。由于数组的下标是由int类型标识的，所以此处设定了一个数组极大值<code>MAX_ARRAY_SIZE</code>，它等于int极大值-8。<br>  在扩容后大小超过数组极大值时，就重新处理扩容大小。具体做法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError</div><div class="line">            (<span class="string">"Required array size too large"</span>);</div><div class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</div><div class="line">        Integer.MAX_VALUE :</div><div class="line">        MAX_ARRAY_SIZE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  即如果刚好容量是int极大值，那么+1之后，它就会变成负数，所以一上来就判断它是不是变成负数了，变成负数说明容量超出了，扩容失败，抛出OutOfMemoryError。<br>  如果容量+1之后，比数组极大值大，那就使用int极大值，如果不是，就使用数组极大值。<br>  这番处理后，扩容的大小至少不会超出int极大值导致接下来拷贝数组失败。<br>  最后，我们还能看到在finishToArray方法返回的时候，还检验扩容是否多了，如果多扩容了，就把多余空间通过数组全量copy给剪掉。<br>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -344,6 +380,8 @@ content
 {% raw %}
 content
 {% endraw %}<br><br></div>
+</li>
+</ul>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -354,8 +392,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-06-19T15:13:40.910Z" itemprop="datePublished">
-					2017年6月19日 23:13
+				<time datetime="2017-06-26T15:39:15.936Z" itemprop="datePublished">
+					2017年6月26日 23:39
 				</time>
 			</p>
             <p>
@@ -368,7 +406,7 @@ content
     
     
     <a class="pull-right" href="/2017/06/04/design-pattern-1/">
-        设计模式——第一章 →
+        设计模式——第一章 序言以及创建型模式 →
     </a>
     
 </nav>
