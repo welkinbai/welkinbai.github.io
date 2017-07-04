@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-06-26T15:39:15.936Z</updated>
+  <updated>2017-07-04T15:52:16.545Z</updated>
   <id>/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-06-26T15:39:15.936Z</updated>
+    <updated>2017-07-04T15:52:16.545Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
@@ -74,7 +74,64 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCollection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span>&#123;</div><div class="line"><span class="comment">//...</span></div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; T[] finishToArray(T[] r, Iterator&lt;?&gt; it) &#123;</div><div class="line">        <span class="keyword">int</span> i = r.length;</div><div class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">            <span class="keyword">int</span> cap = r.length;</div><div class="line">            <span class="keyword">if</span> (i == cap) &#123;</div><div class="line">                <span class="keyword">int</span> newCap = cap + (cap &gt;&gt; <span class="number">1</span>) + <span class="number">1</span>;</div><div class="line">                <span class="comment">// overflow-conscious code</span></div><div class="line">                <span class="keyword">if</span> (newCap - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</div><div class="line">                    newCap = hugeCapacity(cap + <span class="number">1</span>);</div><div class="line">                r = Arrays.copyOf(r, newCap);</div><div class="line">            &#125;</div><div class="line">            r[i++] = (T)it.next();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// trim if overallocated</span></div><div class="line">        <span class="keyword">return</span> (i == r.length) ? r : Arrays.copyOf(r, i);</div><div class="line">    &#125;</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>  继续使用迭代器遍历集合，然后新数组在遍历的过程中动态扩容，扩容公式是：现在容量+现在容量/2+1。<br>  每扩容一次，就要发生一次数组的全拷贝，注意，Arrays.copyOf方法底层是一个native方法。<br>  我们可以看到，作者对溢出数组极大值的情况做了特殊处理。由于数组的下标是由int类型标识的，所以此处设定了一个数组极大值<code>MAX_ARRAY_SIZE</code>，它等于int极大值-8。<br>  在扩容后大小超过数组极大值时，就重新处理扩容大小。具体做法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError</div><div class="line">            (<span class="string">"Required array size too large"</span>);</div><div class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</div><div class="line">        Integer.MAX_VALUE :</div><div class="line">        MAX_ARRAY_SIZE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  即如果刚好容量是int极大值，那么+1之后，它就会变成负数，所以一上来就判断它是不是变成负数了，变成负数说明容量超出了，扩容失败，抛出OutOfMemoryError。<br>  如果容量+1之后，比数组极大值大，那就使用int极大值，如果不是，就使用数组极大值。<br>  这番处理后，扩容的大小至少不会超出int极大值导致接下来拷贝数组失败。<br>  最后，我们还能看到在finishToArray方法返回的时候，还检验扩容是否多了，如果多扩容了，就把多余空间通过数组全量copy给剪掉。<br>【未完待续】</p>
+<p>  即如果刚好容量是int极大值，那么+1之后，它就会变成负数，所以一上来就判断它是不是变成负数了，变成负数说明容量超出了，扩容失败，抛出OutOfMemoryError。<br>  如果容量+1之后，比数组极大值大，那就使用int极大值，如果不是，就使用数组极大值。<br>  这番处理后，扩容的大小至少不会超出int极大值导致接下来拷贝数组失败。<br>  最后，我们还能看到在finishToArray方法返回的时候，还检验扩容是否多了，如果多扩容了，就把多余空间通过数组全量copy给剪掉。</p>
+</li>
+</ul>
+<h2 id="三、List接口"><a href="#三、List接口" class="headerlink" title="三、List接口"></a>三、List接口</h2><p>在讲完AbstractCollection之后，按理说还有几个抽象层的类要讲，但是他们大多数是为了实现某个功能，并不是集合框架通用的抽象层，等讲到相应的实现类时，再讲它们。<br>现在我们进入集合框架最常用最重要的一个接口，<strong>List接口</strong>。</p>
+<h3 id="关系结构-2"><a href="#关系结构-2" class="headerlink" title="关系结构"></a>关系结构</h3><img src="/2017/06/15/jdk-collection/List.png" alt="List.png" title="">
+<p>如上图。<br>其中我们常用的有子抽象类<strong>AbstractList</strong>以及最著名的子类<strong>ArrayList</strong><br>还可以看到，子类中有几个子类是以成员类（memberClass）的方式存在的。</p>
+<h3 id="内部结构-2"><a href="#内部结构-2" class="headerlink" title="内部结构"></a>内部结构</h3><img src="/2017/06/15/jdk-collection/List_inner.png" alt="List_inner.png" title="">
+<p>由于这是一个继承Collection接口的List接口，我们只需要关注它和Collection接口不一样的地方，也即额外提供的一些功能，如下图：<br><img src="/2017/06/15/jdk-collection/diff_collection_list.png" alt="diff_collection_list.png" title=""><br>右边箭头指出的方法都是List新增加的。<br>下面一一分析：</p>
+<ul>
+<li>可以看到，List和顶层集合最主要的区别在于，List定义的集合是有序集合，它内部的元素一般都和一个Index值挂钩，所以它额外提供了add,addAll,get,set,indexOf,lastIndexOf,remove这7个和index密切相关的方法。允许用户通过index来进行一系列操作</li>
+<li>listIterator会返回一个允许用户双向迭代集合的迭代器，并且可以在迭代过程中修改元素，删除元素，获得下一个或者上一个元素的index。</li>
+<li>sort方法在1.8以前是没有的，只能使用Collections类提供的方法来排序，1.8之后，可以直接使用该方法来排序。</li>
+<li>subList方法会得到一个从某个index开始到某个index结束的子List视图，左边闭区间右边是开区间，由于是视图，一些修改会反映到原List上。</li>
+</ul>
+<h2 id="四、AbstractList抽象层"><a href="#四、AbstractList抽象层" class="headerlink" title="四、AbstractList抽象层"></a>四、AbstractList抽象层</h2><h3 id="关系结构-3"><a href="#关系结构-3" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/abstractList.png" alt="abstractList.png" title=""><br>可以看到：</p>
+<ul>
+<li>该抽象类继承了<strong>AbstractCollection</strong></li>
+<li>改抽象类有两个成员类，分别实现了迭代器和List专有的双向迭代器</li>
+</ul>
+<h3 id="内部结构-3"><a href="#内部结构-3" class="headerlink" title="内部结构"></a>内部结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/abstractList_inner.png" alt="abstractList_inner.png" title=""><br>有以下要点：</p>
+<ul>
+<li>由于实现了List接口，所以该类多出的方法和List接口对比Collection多出的方法大致相同。</li>
+<li>该类并没有实现增删改查等功能，交给底层实现类实现，该类主要实现一些基于增删改查的额外方法和两类迭代器的构建方法</li>
+<li>modCount主要用来给快速失败的迭代器用的，该值记录了List修改的次数，这样迭代器迭代的时候会检查该值，如果发现迭代期间值变了，那么就抛出异常快速失败，避免并发修改问题。当然，这也不是百分百靠谱的，毕竟有可能在一个线程检查完之后，另一个线程立刻修改了List。这种情况也会抛出异常或者干脆修改成功。</li>
+<li>subList方法在此处实现，会根据List是不是实现了RandomAccess接口来决定返回哪种子视图，如果实现了，返回的是RandomAccessSubList，虽然这种子视图和普通的SubList在逻辑上没有任何区别，但是它实现了RandomAccess接口，作为一个标识，说明实现该接口的List具有随机访问元素的能力，通常这种访问能力都是常数时间，比如ArrayList。</li>
+<li>在AbstractList的javadoc里说明，这个抽象类更适合那些能随机访问元素的子类，比如ArrayList。而类似LinkedList这种，应该实现AbstractSequentialList比较好。</li>
+</ul>
+<h2 id="五、实现层（ArrayList）"><a href="#五、实现层（ArrayList）" class="headerlink" title="五、实现层（ArrayList）"></a>五、实现层（ArrayList）</h2><p>List接口的实现其实有很多,即使只是利用AbstractList骨架来实现的也有19个。<br>但是经典的实现还是要数ArrayList，它是Java中最常用的类型，一个实现List接口的可变数组实现。</p>
+<h3 id="关系结构-4"><a href="#关系结构-4" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/arraylist.png" alt="arraylist.png" title=""><br>它的外部关系结构如下：</p>
+<ul>
+<li>向上：它继承了AbstractList骨架类，这样可以少做很多事儿。作为约束，它实现了List接口。同时作为标识，它还实现了Cloneable、RandomAccess、Serializable三个接口，声明它是可以被克隆的，可序列化的，可随机访问元素的。</li>
+<li>向下：它有9个子类，绝大多数都是存放特殊元素或者有一些特殊功能的ArrayList。</li>
+<li>向左：它被113个类关联，21个类依赖</li>
+<li>向右：它依赖12个类，关联1个类</li>
+</ul>
+<h3 id="内部结构-4"><a href="#内部结构-4" class="headerlink" title="内部结构"></a>内部结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/arraylist_inner.png" alt="arraylist_inner.png" title=""><br>下面我们一一分析：</p>
+<ul>
+<li>首先我们要知道，ArrayList在内部是使用原生的数组来保存元素的，由于原生数组是定长的，所以ArrayList有初始容量，并且随着使用自动扩容。（注意，remove操作可不会让它再自动缩容，扩了就是扩了）</li>
+<li><code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code>是一个空的数组，看名字就知道，它是一个常量，当ArrayList刚刚创建的时候，其内部的elementData会被设成这个常量。在后续的任何一次扩容操作中，只要发现elementData等于这个常量，就明白要扩容的大小必须不小于默认的容量。</li>
+<li><code>EMPTY_ELEMENTDATA</code>也是一个空的数组，也是常量，可能有人会疑惑怎么会有两个空的数组，这个数组和上面的不同，它代表的就是容量为0的时候的状态，不一定是最初初始化的时候elementData变成这个常量，也有可能是后期，在trimToSize的时候，变成的。和上面区分开，是因为上面的空数组还担负着标识作用，告诉扩容处的代码要扩容的大小是默认大小。如果混用，可能扩容代码会扩容错误的大小。</li>
+<li><code>DEFAULT_CAPACITY</code>即数组的默认大小，写死了为10，注意，并不是ArrayList一创建，数组大小就为10，而是在第一次扩容的时候，才变成10的。</li>
+<li><code>MAX_ARRAY_SIZE</code>是之前提到过的，数组大小最大值，它被写死为int最大值减8，javadoc解释说之所以这么设置是因为有些jvm实现可能会在array的前面保留一些头信息，从而用掉了一些空间，因此数组大小的最大值并不是int的最大值。</li>
+<li>关于构造方法，要注意的是<code>ArrayList(int)</code>这个方法会直接创建传入的int大小的数组来作为内部数组，如果传入的是0，那就直接用EMPTY_ELEMENTDATA这个常量，小于0直接就抛错了。<br>至于<code>ArrayList(Collection)</code>这个版本，主要是依靠Collection接口之前介绍过的<code>toArray()</code>方法来直接得到内部数组，依赖不同的实现这个方法的效率也有不同。在传入的是<code>java.util.Arrays.ArrayList</code>这个类的情况下，得到的数组可能不是<code>Object[]</code>，而是<code>T[]</code>，因此代码还做了特殊处理，具体代码如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">        elementData = c.toArray();</div><div class="line">        <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</div><div class="line">            <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></div><div class="line">            <span class="keyword">if</span> (elementData.getClass() != Object[].class)</div><div class="line">                elementData = Arrays.copyOf(elementData, size, Object[].class);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// replace with empty array.</span></div><div class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>add</code>方法，比较简单，就是一上来先确认数组容量够不够，需不需要扩容，然后将内部的数组size记录的位置设置成传入的参数。扩容逻辑：<ul>
+<li>先看内部的数组是不是我们提到过的<code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code>，如果是，说明是第一次扩容，就取size+1和<code>DEFAULT_CAPACITY</code>中最大的一个作为目标扩容大小。如果不是，取size+1</li>
+<li>modCount加1，用来在并发修改的时候快速失败</li>
+<li>判断目标扩容大小是不是比当前内部数组的长度大，不是就说明不需要扩容</li>
+<li>扩容算法是：新容量=旧容量+旧容量的一半</li>
+<li>如果新容量&lt;目标扩容大小，那新容量就使用目标扩容大小</li>
+<li>如果新容量比数组大小极大值大了，就进入特殊处理流程，该流程和之间提到过的一致。</li>
+<li>用<code>Arrays.copyOf(Object[],int)</code>方法来创建新容量的数组，这是一次数组全拷贝过程，底层是native代码。</li>
+</ul>
+</li>
+</ul>
+<p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -109,8 +166,6 @@ content
 {% raw %}
 content
 {% endraw %}<br><br></div>
-</li>
-</ul>
 ]]></content>
     
     <summary type="html">
