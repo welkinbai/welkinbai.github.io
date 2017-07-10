@@ -58,10 +58,11 @@ $(document).ready(function($) {
 			outDuration: 800,
 			linkElement: '.animsition-link',
 			//e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
-			loading: false,
-			loadingParentElement: '.container', //animsition wrapper element
+			loading: true,
+			loadingParentElement: 'body', //animsition wrapper element
 			timeout: true,
 			timeoutCountdown: 3000,
+			onLoadEvent: true,
 			loadingClass: 'animsition-loading',
 			unSupportCss: ['animation-duration',
 				'-webkit-animation-duration',

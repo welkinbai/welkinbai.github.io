@@ -422,13 +422,15 @@ this.page.url = /2016/11/11/mysql-query/;  // Replace PAGE_URL with your page's 
 this.page.identifier = 1478848514; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 */
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://dawn-2.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-s.setAttribute('async', 'async');
-(d.head || d.body).appendChild(s);
-})();
+$(window).load(function($) {
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://dawn-2.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	s.setAttribute('async', 'async');
+	(d.head || d.body).appendChild(s);
+	})();	
+});
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <!-- disqus end -->
