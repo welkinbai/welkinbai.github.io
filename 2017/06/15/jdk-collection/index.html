@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>JDK源码学习——集合框架 | Dawn</title>
+  <title>Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -283,7 +283,7 @@
     
 	
 </span>
-                <h1>JDK源码学习——集合框架</h1>				
+                <h1></h1>				
             </div>
         </div>		
         <div class="col-md-8 col-md-offset-2">
@@ -294,7 +294,7 @@
 </div>
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title=""></a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -401,6 +401,10 @@
 <li>用<code>Arrays.copyOf(Object[],int)</code>方法来创建新容量的数组，这是一次数组全拷贝过程，底层是native代码。</li>
 </ul>
 </li>
+<li><code>add</code>还有一个给定位置index来插入的方法，不过要注意，整个ArrayList在非末尾位置的插入和删除操作性能都很差，因为每次插入或者删除，都要把后面的元素移动一遍，这种移动操作是通过拷贝数组来实现的，性能代价很高。</li>
+<li><code>contains</code>内部使用indexOf来判断是否含有某个元素，indexOf则就是简单粗暴的全遍历元素然后逐个比较来返回index。</li>
+<li>比较离奇的是，<code>rangeCheck</code>方法和<code>rangeCheckForAdd</code>两个方法，唯一的区别是，后者还判断了index是否小于0，如果小于0，就抛Exception。后者仅用于Add方法和AddAll方法，然而，remove方法却没有判断是否小于0，这真是奇怪，为什么不都用<code>rangeCheckForAdd</code>呢？（后来仔细研究了一下，是提前报错防止额外的扩容操作，由于扩容操作只发生在Add和AddAll两个方法中，所以这两个方法需要对小于0的情况提前抛出错误以免扩容后才抛出，其他方法不用，其他方法由原生数组去处理小于0的情况即可）</li>
+<li>remove</li>
 </ul>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
@@ -447,8 +451,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-07-04T15:52:16.545Z" itemprop="datePublished">
-					2017年7月4日 23:52
+				<time datetime="2017-07-06T16:25:41.038Z" itemprop="datePublished">
+					2017年7月7日 00:25
 				</time>
 			</p>
             <p>
