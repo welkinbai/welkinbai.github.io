@@ -9,20 +9,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E6%95%99%E7%A8%8B/</loc>
-        <lastmod>2016-11-17T14:04:42.971Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>/tags/Hexo/</loc>
-        <lastmod>2016-11-17T14:04:42.971Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/fiddler/</loc>
         <lastmod>2016-12-08T13:03:16.456Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -100,22 +86,36 @@
     </url>
 
     <url>
+        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2017-07-10T13:40:16.251Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E6%95%99%E7%A8%8B/</loc>
+        <lastmod>2017-07-10T15:48:59.162Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/Hexo/</loc>
+        <lastmod>2017-07-10T15:48:59.162Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
-        <lastmod>2017-07-10T13:37:16.346Z</lastmod>
+        <lastmod>2017-07-10T15:53:27.073Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
-        <lastmod>2017-07-10T13:37:16.346Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2017-07-10T13:40:16.251Z</lastmod>
+        <lastmod>2017-07-10T15:53:27.073Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
