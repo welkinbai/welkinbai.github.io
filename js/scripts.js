@@ -58,7 +58,7 @@ $(document).ready(function($) {
 			outDuration: 800,
 			linkElement: '.animsition-link',
 			//e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
-			loading: true,
+			loading: false,
 			loadingParentElement: '.container', //animsition wrapper element
 			timeout: true,
 			timeoutCountdown: 3000,
