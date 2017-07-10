@@ -61,7 +61,7 @@ $(document).ready(function($) {
 			loading: true,
 			loadingParentElement: 'body', //animsition wrapper element
 			timeout: true,
-			timeoutCountdown: 5000,
+			timeoutCountdown: 1,
 			loadingClass: 'animsition-loading',
 			unSupportCss: ['animation-duration',
 				'-webkit-animation-duration',
