@@ -60,6 +60,8 @@ $(document).ready(function($) {
 			//e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
 			loading: true,
 			loadingParentElement: 'body', //animsition wrapper element
+			timeout: true,
+			timeoutCountdown: 5000,
 			loadingClass: 'animsition-loading',
 			unSupportCss: ['animation-duration',
 				'-webkit-animation-duration',
