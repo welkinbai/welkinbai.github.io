@@ -93,20 +93,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E6%95%99%E7%A8%8B/</loc>
-        <lastmod>2017-07-10T15:48:59.162Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>/tags/Hexo/</loc>
-        <lastmod>2017-07-10T15:48:59.162Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
         <lastmod>2017-07-10T15:53:27.073Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -116,6 +102,20 @@
     <url>
         <loc>/tags/%E7%BD%AE%E9%A1%B6/</loc>
         <lastmod>2017-07-10T15:53:27.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E6%95%99%E7%A8%8B/</loc>
+        <lastmod>2017-07-10T15:56:58.910Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/Hexo/</loc>
+        <lastmod>2017-07-10T15:56:58.910Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
