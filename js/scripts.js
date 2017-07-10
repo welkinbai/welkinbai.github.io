@@ -59,9 +59,9 @@ $(document).ready(function($) {
 			linkElement: '.animsition-link',
 			//e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
 			loading: true,
-			loadingParentElement: 'body', //animsition wrapper element
+			loadingParentElement: 'section#intro', //animsition wrapper element
 			timeout: true,
-			timeoutCountdown: 1,
+			timeoutCountdown: 3000,
 			loadingClass: 'animsition-loading',
 			unSupportCss: ['animation-duration',
 				'-webkit-animation-duration',
