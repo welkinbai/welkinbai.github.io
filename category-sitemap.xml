@@ -35,13 +35,6 @@
     </url>
 
     <url>
-        <loc>/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2017-07-10T13:40:16.251Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/categories/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</loc>
         <lastmod>2017-07-10T15:53:27.073Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,6 +44,13 @@
     <url>
         <loc>/categories/%E6%95%99%E7%A8%8B/</loc>
         <lastmod>2017-07-10T15:56:58.910Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2017-07-11T14:38:56.061Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

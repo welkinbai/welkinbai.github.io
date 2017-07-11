@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
-        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/Spring/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -38,6 +31,13 @@
 
     <url>
         <loc>/tags/IOC%E5%AE%B9%E5%99%A8/</loc>
+        <lastmod>2017-02-19T07:56:04.234Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E4%B8%8A%E7%BA%BF/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -79,20 +79,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-        <lastmod>2017-06-20T15:11:02.740Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2017-07-10T13:40:16.251Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</loc>
         <lastmod>2017-07-10T15:53:27.073Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -116,6 +102,20 @@
     <url>
         <loc>/tags/Hexo/</loc>
         <lastmod>2017-07-10T15:56:58.910Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2017-07-11T14:04:21.143Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+        <lastmod>2017-07-11T14:38:56.061Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

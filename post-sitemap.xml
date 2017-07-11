@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>/2017/06/04/design-pattern-1/</loc>
+        <lastmod>2017-07-11T14:38:56.061Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/06/15/jdk-collection/</loc>
+        <lastmod>2017-07-11T14:04:21.143Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2016/04/23/buildBlog/</loc>
         <lastmod>2017-07-10T15:56:58.910Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,22 +33,6 @@
     <url>
         <loc>/2015/12/20/my-new-post/</loc>
         <lastmod>2017-07-10T15:53:27.073Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/06/15/jdk-collection/</loc>
-        <lastmod>2017-07-10T13:40:16.251Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/06/04/design-pattern-1/</loc>
-        <lastmod>2017-06-20T15:11:02.740Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -199,7 +199,7 @@
     </url>
 
     <url>
-        <loc>/2016/01/23/rollout-version-1/</loc>
+        <loc>/2016/04/06/spring-ioc/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -207,7 +207,7 @@
     </url>
 
     <url>
-        <loc>/2016/04/06/spring-ioc/</loc>
+        <loc>/2016/01/23/rollout-version-1/</loc>
         <lastmod>2017-02-19T07:56:04.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

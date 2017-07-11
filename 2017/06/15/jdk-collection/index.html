@@ -404,7 +404,8 @@
 <li><code>add</code>还有一个给定位置index来插入的方法，不过要注意，整个ArrayList在非末尾位置的插入和删除操作性能都很差，因为每次插入或者删除，都要把后面的元素移动一遍，这种移动操作是通过拷贝数组来实现的，性能代价很高。</li>
 <li><code>contains</code>内部使用indexOf来判断是否含有某个元素，indexOf则就是简单粗暴的全遍历元素然后逐个比较来返回index。</li>
 <li>比较离奇的是，<code>rangeCheck</code>方法和<code>rangeCheckForAdd</code>两个方法，唯一的区别是，后者还判断了index是否小于0，如果小于0，就抛Exception。后者仅用于Add方法和AddAll方法，然而，remove方法却没有判断是否小于0，这真是奇怪，为什么不都用<code>rangeCheckForAdd</code>呢？（后来仔细研究了一下，是提前报错防止额外的扩容操作，由于扩容操作只发生在Add和AddAll两个方法中，所以这两个方法需要对小于0的情况提前抛出错误以免扩容后才抛出，其他方法不用，其他方法由原生数组去处理小于0的情况即可）</li>
-<li>remove</li>
+<li><code>remove</code>系列的方法没什么好讲的，就是遍历，通过比较来找出要删除的元素，然后将该元素后面所有的元素往前移动1位，将末尾的元素设为null。<br>唯一有趣一些的方法是<code>removeAll(collection)</code>和<code>retainAll(collection)</code>，一个将两个集合交集的元素都删掉，一个只将有交集的元素留下其余删掉。发现它们底层方法是一样的，都是<code>batchRemove(collection,boolean)</code>，只不过第二个入参一个为false一个为true，即在利用contain判别元素是否在交集之后，对元素去留的处理不同。在batchRemove中还使用到了try-finally语句，保证即使在遍历的过程中，contains方法抛出异常了，也能把已经删掉的元素正确处理给删掉。</li>
+<li><code>trimToSize</code>方法就是用来给用户主动地将内部数组缩容的，因为在大容量的ArrayList使用时，扩容一次就是整个容量的一半，可能并不需要这么多容量，因此主动地调用此方法来截断内部数组到当前size。</li>
 </ul>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
@@ -451,8 +452,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-07-10T13:40:16.251Z" itemprop="datePublished">
-					2017年7月10日 21:40
+				<time datetime="2017-07-11T14:04:21.143Z" itemprop="datePublished">
+					2017年7月11日 22:04
 				</time>
 			</p>
             <p>
