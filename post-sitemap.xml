@@ -8,7 +8,15 @@
 
     <url>
         <loc>/2017/06/04/design-pattern-1/</loc>
-        <lastmod>2017-07-14T16:36:01.567Z</lastmod>
+        <lastmod>2017-07-19T15:37:40.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/07/19/design-pattern-2/</loc>
+        <lastmod>2017-07-19T15:29:34.376Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
