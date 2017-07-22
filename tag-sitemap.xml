@@ -51,13 +51,6 @@
     </url>
 
     <url>
-        <loc>/tags/%E6%8A%80%E6%9C%AF%E5%91%A8%E6%8A%A5/</loc>
-        <lastmod>2017-06-02T12:54:07.093Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/Guava/</loc>
         <lastmod>2017-06-04T03:11:44.153Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -100,13 +93,6 @@
     </url>
 
     <url>
-        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2017-07-11T14:04:21.143Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>/tags/Effective-Java/</loc>
         <lastmod>2017-07-14T16:31:13.800Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -114,8 +100,29 @@
     </url>
 
     <url>
+        <loc>/tags/%E6%8A%80%E6%9C%AF%E5%91%A8%E6%8A%A5/</loc>
+        <lastmod>2017-07-22T07:28:49.070Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-        <lastmod>2017-07-19T15:37:40.307Z</lastmod>
+        <lastmod>2017-07-22T07:29:41.006Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2017-07-22T07:30:12.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/</loc>
+        <lastmod>2017-07-22T07:30:12.811Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

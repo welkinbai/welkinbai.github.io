@@ -7,6 +7,30 @@
     </url>
 
     <url>
+        <loc>/2017/06/15/jdk-collection/</loc>
+        <lastmod>2017-07-22T07:30:12.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/07/19/design-pattern-2/</loc>
+        <lastmod>2017-07-22T07:29:41.006Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/05/19/technology-report/</loc>
+        <lastmod>2017-07-22T07:28:49.070Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>/2017/06/04/design-pattern-1/</loc>
         <lastmod>2017-07-19T15:37:40.307Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -15,24 +39,8 @@
     </url>
 
     <url>
-        <loc>/2017/07/19/design-pattern-2/</loc>
-        <lastmod>2017-07-19T15:29:34.376Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>/2017/04/24/effective-java-9/</loc>
         <lastmod>2017-07-14T16:31:13.800Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/06/15/jdk-collection/</loc>
-        <lastmod>2017-07-11T14:04:21.143Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -97,14 +105,6 @@
     <url>
         <loc>/2017/06/03/guava-4/</loc>
         <lastmod>2017-06-03T08:20:05.398Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/05/19/technology-report/</loc>
-        <lastmod>2017-06-02T12:54:07.093Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

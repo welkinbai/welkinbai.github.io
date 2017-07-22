@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-19T15:29:34.376Z</updated>
+  <updated>2017-07-22T07:29:41.006Z</updated>
   <id>/</id>
   
   <author>
@@ -16,15 +16,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>设计模式——第二章 结构型模式</title>
+    <title>设计模式——第二章 结构型模式（未完成）</title>
     <link href="/2017/07/19/design-pattern-2/"/>
     <id>/2017/07/19/design-pattern-2/</id>
     <published>2017-07-19T15:17:19.000Z</published>
-    <updated>2017-07-19T15:29:34.376Z</updated>
+    <updated>2017-07-22T07:29:41.006Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论结构型设计模式，即介绍一些为了达到某种目的，而使用的特殊代码结构。</p>
 <a id="more"></a>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式（未完成）">设计模式——第二章 结构型模式（未完成）</a></p>
 <h2 id="第一条-抽象文档模式（Abstract-Document）"><a href="#第一条-抽象文档模式（Abstract-Document）" class="headerlink" title="第一条 抽象文档模式（Abstract Document）"></a>第一条 抽象文档模式（Abstract Document）</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在运行时想要动态地修改一个对象的属性，将对象用树状结构组织起来，构建一个松耦合的系统，即使将对象的属性都塞进一个Map里，仍然能在维护它的时候做到类型安全。</p>
 <h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>看下面两张图<br><img src="/2017/07/19/design-pattern-2/abstract-document-base.png" alt="abstract-document-base.png" title=""><br><img src="/2017/07/19/design-pattern-2/abstract-document.png" alt="abstract-document.png" title=""><br>这两张图可能描述的让你不是很明白，我解释一下：<br>首先我们有一个车（car），这个车有型号（model），有价格（price），还有部件(Part)，其中，部件是一个对象，有可能是轮子，也有可能是门之类的，它们也有自己的型号和价格。型号和价格都是值域，不是对象。<br>无论是车还是车的部件，都相当于一个Document，所以它们都实现了Document接口，Document接口规定它们拥有设置域的值或者得到域的值的能力。无论如何，这些域全部都保存在内部的一个Map里，因此，我们的车或者车的部件比较特殊，型号啊，价格啊这些域，都没有定义在类里，是运行时动态加入进去的。<br>然后注意了，我们这里Document还有一个方法叫children，其实只有车这个对象使用这个方法才有意义，使用它可以得到它的children，也即部件。当然，得到的是一个类型已经转换好的视图，你对这个视图的任何操作，都会反应到原始的Part部件对象上。<br>我们有个AbstractDocument抽象类，不知道这个设计模式是不是这么来的，主要的存取逻辑都在这个抽象类里。<br>另外，第二张图还演示了我们有三个接口，分别可以获得价格、型号、部件。它们的目的是在获得的时候，能够使用类型安全的方法来获得域。</p>
 <h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><p>好处在适用场景已经说了：</p>
@@ -89,79 +89,109 @@
 </ol>
 <h3 id="推荐等级-★★★★-1"><a href="#推荐等级-★★★★-1" class="headerlink" title="推荐等级 ★★★★"></a>推荐等级 ★★★★</h3><p>四颗星，这意味着你可以在适用场景下使用该模式，前提是你必须知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。</p>
 <a href="http://java-design-patterns.com/patterns/bridge/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第四条-合成模式（Composite）"><a href="#第四条-合成模式（Composite）" class="headerlink" title="第四条 合成模式（Composite）"></a>第四条 合成模式（Composite）</h2><h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><p>你有一个部分到整体的层级结构，比如字母-单词-句子-段落就是一个典型的部分到整体的层级结构。<br>你希望用户，或者调用者感知不到部分和整体的区别，把它们当成同一种东西对待和处理。</p>
+<h3 id="如何做-3"><a href="#如何做-3" class="headerlink" title="如何做"></a>如何做</h3><p>下面就是一个字母-单词-句子的例子：<br><img src="/2017/07/19/design-pattern-2/composite.png" alt="composite.png" title=""><br>解释一下：<br>这个模式其实挺简单，就是我们整个层级结构的每个部分都继承同一个抽象类。<br>然后客户端只需要感知这个抽象类就好了。<br>而抽象类的功能就是我们这个名字的由来，<strong>合成</strong>。对，它有add方法，表明把一个部分加入到内部的数组里。<br>于是，我们的单词通过这种方法加了一系列的字母到内部，而句子对象又通过同样的方法加了一系列的单词到内部。<br>最终客户端的Messenger类就从字母到单词到句子把这句话组装起来。然后App类得到的是一个<strong>LetterComposite</strong>对象，调用它的Print方法来打印结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</div><div class="line">	</div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(App.class);</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Program entry point</div><div class="line">   * </div><div class="line">   * <span class="doctag">@param</span> args command line args</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    LOGGER.info(<span class="string">"Message from the orcs: "</span>);</div><div class="line">   </div><div class="line">    LetterComposite orcMessage = <span class="keyword">new</span> Messenger().messageFromOrcs();</div><div class="line">    orcMessage.print();</div><div class="line">   </div><div class="line">    LOGGER.info(<span class="string">"\n"</span>);</div><div class="line">   </div><div class="line">    LOGGER.info(<span class="string">"Message from the elves: "</span>);</div><div class="line">   </div><div class="line">    LetterComposite elfMessage = <span class="keyword">new</span> Messenger().messageFromElves();</div><div class="line">    elfMessage.print();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这有什么好处呢？<br>注意！虽然字母单词句子三者有层级关系，它们却没有使用继承的方式来串连起来，它们使用的是组合！！然后，通过构造方法，单词只接受字母的数组，句子只接受单词的数组，将层级关系构建起来。不一定非要用继承才能构建层级关系！！<br>而我们共同的抽象父类<strong>LetterComposite</strong>则直接屏蔽了字母单词句子三者的区别，让客户端感知不到！<br>在我们的演示代码中，Messenger类最终输出的是一句话，但是如果它输出改成了一个单词，客户端即App类完全不需要修改代码，也感知不到区别。</p>
+<h3 id="好处-3"><a href="#好处-3" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>不用继承也能代表类之间的层级关系！而且能够指定依赖的顺序。</li>
+<li>客户端感知不到自己获得的是整体还是部分，而是把它们当做同一种结构来对待。</li>
+</ol>
+<h3 id="坏处-3"><a href="#坏处-3" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>要求程序员在使用该模式时不能生搬硬套，一定要目标对象们是一个部分到整体的层级关系，而我们的调用者不需要关心得到的是部分还是整体也能正常运作。如果不满足这种情况，是不能乱用这个模式的。</li>
+<li>我们在上面的例子里，虽然字母单词句子三者是层级关系，但是，它们是有共同点的，它们的共同点就是都支持打印到控制台里！！它们都是message因此可以被Messenger一视同仁地组装起来放回给客户端！！换言之，完全不相干没有共同点的整体和部分是不能使用该模式的。<br>举个例子：橡胶、轮胎、汽车就是部分到整体的关系，它们三者都支持被创造，在这种情况下可以使用该模式。但是如果我们客户端关心的不是它们能不能被创造，我们客户端关心的是要能drive，能开这个东西，你就不能用抽象类去统一它们，因为只有汽车能被开，橡胶和轮胎都是不能被drive的！！！</li>
+<li>一言蔽之，该模式场景有限，容易被用错。</li>
+</ol>
+<h3 id="真实世界的例子-1"><a href="#真实世界的例子-1" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><p>讲真，我觉得处理Html这种格式的文档时，肯定可以使用这种模式。<br>因为Html就是由一大堆有层级关系的嵌套标签组成的，但是所有的标签都有一些共性，比如都有名字，有属性，有父标签，有子标签们，都支持一些共同的属性。如果我们的客户端不需要辨别要处理的是哪种标签，只是想要得到标签的名字和其子标签的名字，那就可以用这种模式来抽象。</p>
+<h3 id="推荐等级-★★★"><a href="#推荐等级-★★★" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
+<a href="http://java-design-patterns.com/patterns/composite/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第五条-装饰器模式（Decorator）"><a href="#第五条-装饰器模式（Decorator）" class="headerlink" title="第五条 装饰器模式（Decorator）"></a>第五条 装饰器模式（Decorator）</h2><h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><p>大名鼎鼎的装饰器模式，似乎不用我说读者应该也有耳闻。<br>顾名思义，装饰器模式就是用来装饰已经存在的对象，动态地为目标对象修改已存在的功能的。<br>装饰器模式也是组合优于继承的典范之一。要知道，修改目标对象已经存在的功能应该是继承最重要的特性之一，当然，这是静态的。而装饰器模式避开继承的缺点，使用组合来为目标对象修改已存在的功能，这是动态完成的。<br>有时，我们的目标类在第三方Jar包里，而且已经定义为Final，无法继承，同时，我们又想来修改目标类的功能，就要用到这种模式。</p>
+<p>注意，使用装饰器，最好目标类有自己的接口，我们装饰器也来实现该接口，调用方通过接口来调用，这样的情形下，装饰器才能与调用方无痛地结合起来使用。如果目标类没有自己的接口，那么装饰器装饰对象之后，所有原先使用目标类而需要修改功能的地方，要感知到装饰器类的存在，这样是很鸡肋的，这种情况不适合用装饰器。亦即，装饰器是面向接口编程领域的应用，丧失接口和抽象类的场景，装饰器也无能为力。最好的情况是，不要让客户端感知到装饰器的存在。</p>
+<h3 id="如何做-4"><a href="#如何做-4" class="headerlink" title="如何做"></a>如何做</h3><p>举个例子如下图：<br><img src="/2017/07/19/design-pattern-2/decorator.png" alt="decorator.png" title=""><br>这个图是实例代码中的例子，Troll是一个接口，它定义巨魔这种怪兽。如上面所说，一个高层的接口是装饰器赖以实现的要素之一。<br>而我们已经有一个叫做<strong>SimpleTroll</strong>的普通巨魔类，并定义了攻击、得到攻击力量、逃离战斗三种方法。<br>然后我们有了一个装饰器类，叫做<strong>TrollDecorator</strong>，它实现了巨魔接口，所以也是一种巨魔，但是它的构造方法入参会传入一个巨魔，并在内部保有这个巨魔对象，这是它与普通巨魔不同的地方。<br>它也有攻击、得到攻击力量、逃离战斗三种方法，然后每个方法内部其实都直接调用了内部巨魔对象的对应方法。在例子中，这个类的作用主要是为了实现装饰器这一模式的骨架，作为骨架类来供真正的装饰器类使用。想象一下，假如我们的巨魔有50个方法，如果没有该骨架类，恐怕每加一个装饰器，你就要把50个方法都写一遍。现在，你只需要继承骨架类，把你想要修改的方法覆盖掉就好了。<br>最后，我们有一个<strong>拿棒子的巨魔(ClubbedTroll)</strong>，它的攻击方法会挥舞大棒，和普通的巨魔不一样，同时，它的得到攻击力量比普通巨魔多10点。这个类就是真正的装饰器类啦。<br>注意，装饰器之所以叫装饰器，就是它一定要有装饰的目标类才行，所以我们这个地方可以看到，拿棒子的巨魔不能凭空建造，你要把一个普通巨魔传入该类的构造函数，才能得到拿棒子的巨魔。经过装饰之后，虽然是两个类，也有两个对象，但是它们其实意图是想要代表同一个物体。就像你还是你，只不过给你穿了个裙子，穿裙子之后的你最好不要和穿裙子之前的你混着用，会有逻辑问题。同样的，我们最好在得到装饰器装饰之后的对象后，不要再同时使用装饰前的对象，因为装饰器归根结底，还是修改的装饰前对象的状态。</p>
+<h3 id="好处-4"><a href="#好处-4" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>动态地装饰目标对象，修改目标对象的方法或者功能，却不影响其他对象。</li>
+<li>随时可以撤销装饰，得到原始对象</li>
+<li>在无法子类化目标对象时，完成继承的任务。</li>
+</ol>
+<h3 id="坏处-4"><a href="#坏处-4" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>装饰器可以说没什么特别大的坏处，因为它完全无害地，毫无破坏性</li>
+<li>装饰器装饰的目标对象所实现的接口，可千万不能变，一变装饰器就要跟着变。装饰器的目标对象也最好不要变。不过，这在设计模式应用的比较好的项目中来说，是很好满足的。</li>
+</ol>
+<h3 id="真实世界的例子-2"><a href="#真实世界的例子-2" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><p>java.io.InputStream, java.io.OutputStream, java.io.Reader and java.io.Writer<br>java.util.Collections#synchronizedXXX()<br>java.util.Collections#unmodifiableXXX()<br>java.util.Collections#checkedXXX()</p>
+<h3 id="推荐等级-★★★★★"><a href="#推荐等级-★★★★★" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
+<a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
 <hr>
 <p>下面这些都是之前写的，本来没想归类的，所以按顺序写，现在又想归类分开章节写，所以就把已经写好的先罗列在这里，等有了相应章节再写。</p>
-<h2 id="第一条-API网关模式（API-Gateway）"><a href="#第一条-API网关模式（API-Gateway）" class="headerlink" title="第一条 API网关模式（API Gateway）"></a>第一条 API网关模式（API Gateway）</h2><h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
-<h3 id="如何做-3"><a href="#如何做-3" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br><img src="/2017/07/19/design-pattern-2/apigateway.jpg" alt="apigateway.jpg" title=""></p>
-<h3 id="好处-3"><a href="#好处-3" class="headerlink" title="好处"></a>好处</h3><ol>
+<h2 id="第一条-API网关模式（API-Gateway）"><a href="#第一条-API网关模式（API-Gateway）" class="headerlink" title="第一条 API网关模式（API Gateway）"></a>第一条 API网关模式（API Gateway）</h2><h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
+<h3 id="如何做-5"><a href="#如何做-5" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br><img src="/2017/07/19/design-pattern-2/apigateway.jpg" alt="apigateway.jpg" title=""></p>
+<h3 id="好处-5"><a href="#好处-5" class="headerlink" title="好处"></a>好处</h3><ol>
 <li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
 <li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
 <li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
 <li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。</li>
 </ol>
-<h3 id="坏处-3"><a href="#坏处-3" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<h3 id="坏处-5"><a href="#坏处-5" class="headerlink" title="坏处"></a>坏处</h3><ol>
 <li>增加了复杂度</li>
 <li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
 <li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。</li>
 </ol>
-<h3 id="推荐等级-★★★★★"><a href="#推荐等级-★★★★★" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
+<h3 id="推荐等级-★★★★★-1"><a href="#推荐等级-★★★★★-1" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
 <a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第四条-异步方法调用（Async-Method-Invocation）"><a href="#第四条-异步方法调用（Async-Method-Invocation）" class="headerlink" title="第四条 异步方法调用（Async Method Invocation）"></a>第四条 异步方法调用（Async Method Invocation）</h2><h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话异步方法调用太普遍了，太基础了，以至于看到它的时候，我感觉它根本不应该算个设计模式。<br>当我们需要一些操作并行执行时，我们使用异步方法。尤其是服务器应用，在处理用户的请求时，如果不需要立即告诉用户结果，可以将耗费时间的计算过程进行异步处理，立即返回http请求，减少用户的等待时间。<br>注意，不是所有的时候都是并行好于单线程，并行执行由于多线程的复杂性，是有额外开销的，还有编程错误的风险，死锁的可能性，如果只是很简单的任务，不应该动不动就异步化。就算异步化了，也要用数字说话，如果异步化了以后就快了几毫秒，甚至还慢了，那就毫无意义。</p>
-<h3 id="如何做-4"><a href="#如何做-4" class="headerlink" title="如何做"></a>如何做</h3><p>在JAVA中，ExecutorService框架就是干这事儿的，尽管用就对了。<br>不过设计模式的github仓库还是给出了一个自己的实现，可以点击下面相关链接来查看。就不详述了。</p>
-<h3 id="好处-4"><a href="#好处-4" class="headerlink" title="好处"></a>好处</h3><ol>
+<h2 id="第四条-异步方法调用（Async-Method-Invocation）"><a href="#第四条-异步方法调用（Async-Method-Invocation）" class="headerlink" title="第四条 异步方法调用（Async Method Invocation）"></a>第四条 异步方法调用（Async Method Invocation）</h2><h3 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话异步方法调用太普遍了，太基础了，以至于看到它的时候，我感觉它根本不应该算个设计模式。<br>当我们需要一些操作并行执行时，我们使用异步方法。尤其是服务器应用，在处理用户的请求时，如果不需要立即告诉用户结果，可以将耗费时间的计算过程进行异步处理，立即返回http请求，减少用户的等待时间。<br>注意，不是所有的时候都是并行好于单线程，并行执行由于多线程的复杂性，是有额外开销的，还有编程错误的风险，死锁的可能性，如果只是很简单的任务，不应该动不动就异步化。就算异步化了，也要用数字说话，如果异步化了以后就快了几毫秒，甚至还慢了，那就毫无意义。</p>
+<h3 id="如何做-6"><a href="#如何做-6" class="headerlink" title="如何做"></a>如何做</h3><p>在JAVA中，ExecutorService框架就是干这事儿的，尽管用就对了。<br>不过设计模式的github仓库还是给出了一个自己的实现，可以点击下面相关链接来查看。就不详述了。</p>
+<h3 id="好处-6"><a href="#好处-6" class="headerlink" title="好处"></a>好处</h3><ol>
 <li>让你的多个任务并行进行，充分利用多核CPU的优势</li>
 <li>让你的用户不必无意义地等待</li>
 <li>使用回调可在结果计算好的时候立即通知你，主线程不需要等待结果，也不需要轮询结果</li>
 </ol>
-<h3 id="坏处-4"><a href="#坏处-4" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<h3 id="坏处-6"><a href="#坏处-6" class="headerlink" title="坏处"></a>坏处</h3><ol>
 <li>多线程意味着复杂度，意味着并发问题，意味着无止境的锁</li>
 <li>并发任务的数量不是无限的，线程数在任何操作系统中都是有上限的</li>
 <li>要小心处理好失败重试的机制问题，当然成功后的回调也有可能因程序错误丢失。程序的数据一致性有可能难以保证。</li>
 </ol>
-<h3 id="推荐等级-★★★"><a href="#推荐等级-★★★" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
+<h3 id="推荐等级-★★★-1"><a href="#推荐等级-★★★-1" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
 <a href="http://java-design-patterns.com/patterns/async-method-invocation/" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第五条-阻止模式（Balking）"><a href="#第五条-阻止模式（Balking）" class="headerlink" title="第五条 阻止模式（Balking）"></a>第五条 阻止模式（Balking）</h2><h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><p>其实这个模式我感觉也是我们平时常用的技巧，但是并没有意识到它是一个设计模式。<br>该模式首先是多线程程序才会有的，在一个对象的状态不对时，会阻止其他线程执行一些特定的代码。<br>或者说，某个对象的某些状态转换过程，同一时间只能由一个线程执行。</p>
-<h3 id="如何做-5"><a href="#如何做-5" class="headerlink" title="如何做"></a>如何做</h3><img src="/2017/07/19/design-pattern-2/balking.png" alt="balking.png" title="">
+<h2 id="第五条-阻止模式（Balking）"><a href="#第五条-阻止模式（Balking）" class="headerlink" title="第五条 阻止模式（Balking）"></a>第五条 阻止模式（Balking）</h2><h3 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h3><p>其实这个模式我感觉也是我们平时常用的技巧，但是并没有意识到它是一个设计模式。<br>该模式首先是多线程程序才会有的，在一个对象的状态不对时，会阻止其他线程执行一些特定的代码。<br>或者说，某个对象的某些状态转换过程，同一时间只能由一个线程执行。</p>
+<h3 id="如何做-7"><a href="#如何做-7" class="headerlink" title="如何做"></a>如何做</h3><img src="/2017/07/19/design-pattern-2/balking.png" alt="balking.png" title="">
 <p>如图，我们有一个洗衣机类，洗衣机有两个状态，可以洗衣服和正在洗衣服。<br>然后我们有下面这段代码：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> &#123;</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(App.<span class="keyword">class</span>);</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">   * <span class="doctag">@param</span> args the command line arguments - not used</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String... args) &#123;</div><div class="line">    <span class="keyword">final</span> WashingMachine washingMachine = <span class="keyword">new</span> WashingMachine();</div><div class="line">    ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">      executorService.execute(<span class="string">washingMachine:</span>:wash);</div><div class="line">    &#125;</div><div class="line">    executorService.shutdown();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      executorService.awaitTermination(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      LOGGER.error(<span class="string">"ERROR: Waiting on executor service shutdown!"</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我们开启了三个线程，同时去执行洗衣机的洗衣服方法。（这里是JDK8的代码，双冒号代表引用某个方法）<br>我们规定，当洗衣机的状态为可以洗衣服时，才能执行洗衣服方法，如果状态已经是洗衣服中，那么就不能执行：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * Method responsible for washing</div><div class="line">   * if the object is in appropriate state</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">wash</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">      LOGGER.info(<span class="string">"&#123;&#125;: Actual machine state: &#123;&#125;"</span>, Thread.currentThread().getName(), getWashingMachineState());</div><div class="line">      <span class="keyword">if</span> (washingMachineState == WashingMachineState.WASHING) &#123;</div><div class="line">        LOGGER.<span class="keyword">error</span>(<span class="string">"ERROR: Cannot wash if the machine has been already washing!"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      washingMachineState = WashingMachineState.WASHING;</div><div class="line">    &#125;</div><div class="line">    LOGGER.info(<span class="string">"&#123;&#125;: Doing the washing"</span>, Thread.currentThread().getName());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Thread.sleep(<span class="number">50</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      ie.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    endOfWashing();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
 <p>使用状态和锁来保证洗衣机在错误的状态下，不响应洗衣服的请求，并记录错误日志。</p>
-<h3 id="好处-5"><a href="#好处-5" class="headerlink" title="好处"></a>好处</h3><ol>
+<h3 id="好处-7"><a href="#好处-7" class="headerlink" title="好处"></a>好处</h3><ol>
 <li>利用锁来保护了判断逻辑，确保多线程情况下，只有某一个线程能成功地洗衣服，其他线程都只能无功而返。</li>
 </ol>
-<h3 id="坏处-5"><a href="#坏处-5" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<h3 id="坏处-7"><a href="#坏处-7" class="headerlink" title="坏处"></a>坏处</h3><ol>
 <li>只适用于多线程程序，不能混用</li>
 <li>pattern太小，算不上一种设计模式，如果这也算设计模式，那么try-catch语句算不算(笑)</li>
 </ol>
 <h3 id="推荐等级-★★"><a href="#推荐等级-★★" class="headerlink" title="推荐等级 ★★"></a>推荐等级 ★★</h3><p>两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。</p>
 <a href="http://java-design-patterns.com/patterns/balking/" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第八条-业务委托模式（Business-Delegate）"><a href="#第八条-业务委托模式（Business-Delegate）" class="headerlink" title="第八条 业务委托模式（Business Delegate）"></a>第八条 业务委托模式（Business Delegate）</h2><h3 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h3><p>本模式主要是在展示层和业务层之间增加一层抽象层，将展示层和业务层之间的紧耦合变成松耦合。<br>使用本模式可以让你自由地操纵多个业务service的调用逻辑，service的查找和调用都将被封装，由静态过程变成动态过程。</p>
-<h3 id="如何做-6"><a href="#如何做-6" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/business-delegate.png" alt="business-delegate.png" title=""><br>BusinessDelegate是我们的核心类——委托类。<br>Client这里模拟的是我们的客户端，转换到Web开发场景，我们可以把Client等同于Controller的角色。<br>在我们的程序开始后，Client首先要有委托类，然后其doTask方法就是执行委托类的doTask方法。<br>委托类并不真的执行业务逻辑，而是利用其内部的BusinessLookup和Client传给它的ServiceType去查找要处理业务的Service，比如JmsService或者EjbService。<br>找到后，再调用相应的业务Service的doProcessing方法真正去处理业务。</p>
-<h3 id="好处-6"><a href="#好处-6" class="headerlink" title="好处"></a>好处</h3><ol>
+<h2 id="第八条-业务委托模式（Business-Delegate）"><a href="#第八条-业务委托模式（Business-Delegate）" class="headerlink" title="第八条 业务委托模式（Business Delegate）"></a>第八条 业务委托模式（Business Delegate）</h2><h3 id="适用场景-8"><a href="#适用场景-8" class="headerlink" title="适用场景"></a>适用场景</h3><p>本模式主要是在展示层和业务层之间增加一层抽象层，将展示层和业务层之间的紧耦合变成松耦合。<br>使用本模式可以让你自由地操纵多个业务service的调用逻辑，service的查找和调用都将被封装，由静态过程变成动态过程。</p>
+<h3 id="如何做-8"><a href="#如何做-8" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/business-delegate.png" alt="business-delegate.png" title=""><br>BusinessDelegate是我们的核心类——委托类。<br>Client这里模拟的是我们的客户端，转换到Web开发场景，我们可以把Client等同于Controller的角色。<br>在我们的程序开始后，Client首先要有委托类，然后其doTask方法就是执行委托类的doTask方法。<br>委托类并不真的执行业务逻辑，而是利用其内部的BusinessLookup和Client传给它的ServiceType去查找要处理业务的Service，比如JmsService或者EjbService。<br>找到后，再调用相应的业务Service的doProcessing方法真正去处理业务。</p>
+<h3 id="好处-8"><a href="#好处-8" class="headerlink" title="好处"></a>好处</h3><ol>
 <li>展示层和业务层解耦。随时可以更换底层业务逻辑，而不需要改动展示层的内容。</li>
 </ol>
-<h3 id="坏处-6"><a href="#坏处-6" class="headerlink" title="坏处"></a>坏处</h3><p>暂时还没想到，欢迎补充</p>
-<h3 id="推荐等级-★★★★★-1"><a href="#推荐等级-★★★★★-1" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，在适用场景下，尽可能地使用该模式</p>
+<h3 id="坏处-8"><a href="#坏处-8" class="headerlink" title="坏处"></a>坏处</h3><p>暂时还没想到，欢迎补充</p>
+<h3 id="推荐等级-★★★★★-2"><a href="#推荐等级-★★★★★-2" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，在适用场景下，尽可能地使用该模式</p>
 <a href="http://java-design-patterns.com/patterns/business-delegate/" target="_blank" rel="external">相关链接—含代码</a>
 <h2 id="第九条-缓存和回调（cache-amp-callback）"><a href="#第九条-缓存和回调（cache-amp-callback）" class="headerlink" title="第九条 缓存和回调（cache&amp;callback）"></a>第九条 缓存和回调（cache&amp;callback）</h2><p>缓存和回调竟然也被列入到设计模式中，我认为这两种用法太过常见，就不细讲了。<br>直接把链接给出：<br><a href="http://java-design-patterns.com/patterns/caching/" target="_blank" rel="external">缓存相关链接—含代码</a><br><a href="http://java-design-patterns.com/patterns/callback/" target="_blank" rel="external">回调相关链接—含代码</a></p>
-<h2 id="第四条-责任链模式（Chain-of-responsibility）"><a href="#第四条-责任链模式（Chain-of-responsibility）" class="headerlink" title="第四条 责任链模式（Chain of responsibility）"></a>第四条 责任链模式（Chain of responsibility）</h2><h3 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<h2 id="第四条-责任链模式（Chain-of-responsibility）"><a href="#第四条-责任链模式（Chain-of-responsibility）" class="headerlink" title="第四条 责任链模式（Chain of responsibility）"></a>第四条 责任链模式（Chain of responsibility）</h2><h3 id="适用场景-9"><a href="#适用场景-9" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
 <li>责任链模式实际上是一种用来解耦请求方和处理方的模式</li>
 <li>当请求方发出请求时，可能不止有一个对象要去处理请求，并且事先并不知道谁要处理这个请求，请求的处理者是动态决定的。</li>
 <li>当请求方发出请求时，并不关心请求究竟被谁执行了，即请求方与处理方是解耦的</li>
 <li>可以处理请求的一组对象是被动态地指定的</li>
 </ol>
-<h3 id="如何做-7"><a href="#如何做-7" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/chain_1.png" alt="chain_1.png" title=""><br>在图中，我们有一个请求方<code>OrcKing</code>，即兽王。与其说是请求方，不如说是发号施令者。<br>最左边我们可以看到，<code>RequestType</code>定义我们的兽王有三种命令可以发布，保护城堡(DEFEND_CASTLE)、审问犯人(TORTURE_PRISONER)、收税(COLLECT_TAX)。<br>然后我们的兽王，有个<code>buildChain()</code>方法，该方法会在构造函数中调用，目的是创建一个<code>RequestHandler</code>然后保存在内部域中。<br>我们有三个命令的处理方，即兽王的三个手下，兽族战士(OrcSoldier)、兽族指挥官(OrcCommander)、兽族官员(OrcOfficer)。它们都继承自抽象类<code>RequestHandler</code>。<br>每个处理方的构造函数，都会传入另一个处理方，这边是责任链构造的关键点。<br>我们兽王在使用<code>buildChain()</code>方法的时候，责任链的构造代码是下面这样的：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> void buildChain() &#123;</div><div class="line">    chain = <span class="keyword">new</span> <span class="type">OrcCommander</span>(<span class="keyword">new</span> <span class="type">OrcOfficer</span>(<span class="keyword">new</span> <span class="type">OrcSoldier</span>(<span class="literal">null</span>)));</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="如何做-9"><a href="#如何做-9" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/chain_1.png" alt="chain_1.png" title=""><br>在图中，我们有一个请求方<code>OrcKing</code>，即兽王。与其说是请求方，不如说是发号施令者。<br>最左边我们可以看到，<code>RequestType</code>定义我们的兽王有三种命令可以发布，保护城堡(DEFEND_CASTLE)、审问犯人(TORTURE_PRISONER)、收税(COLLECT_TAX)。<br>然后我们的兽王，有个<code>buildChain()</code>方法，该方法会在构造函数中调用，目的是创建一个<code>RequestHandler</code>然后保存在内部域中。<br>我们有三个命令的处理方，即兽王的三个手下，兽族战士(OrcSoldier)、兽族指挥官(OrcCommander)、兽族官员(OrcOfficer)。它们都继承自抽象类<code>RequestHandler</code>。<br>每个处理方的构造函数，都会传入另一个处理方，这边是责任链构造的关键点。<br>我们兽王在使用<code>buildChain()</code>方法的时候，责任链的构造代码是下面这样的：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> void buildChain() &#123;</div><div class="line">    chain = <span class="keyword">new</span> <span class="type">OrcCommander</span>(<span class="keyword">new</span> <span class="type">OrcOfficer</span>(<span class="keyword">new</span> <span class="type">OrcSoldier</span>(<span class="literal">null</span>)));</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
 <p>可以看到，最终兽王内部的域拿到的其实是兽族指挥官的引用，因此，当兽王下令的时候，它使用<code>makeRequest(Request)</code>方法，会优先将命令传达给兽族指挥官。<br>兽族指挥官此时会检查命令的类型，他只能处理保护城堡这种命令，如果它发现自己处理不了，就将命令丢给构造函数传进来的那个人，也就是我们的兽族官员。<br>兽族官员也会检查命令的类型，他只能处理审问犯人的命令，如果发现不是审问犯人的命令，他就再将命令继续往下传，传给兽族战士。以此类推，直到责任链的末尾。</p>
-<h3 id="好处-7"><a href="#好处-7" class="headerlink" title="好处"></a>好处</h3><ol>
+<h3 id="好处-9"><a href="#好处-9" class="headerlink" title="好处"></a>好处</h3><ol>
 <li>请求和处理方解耦</li>
 <li>稍加改造，在处理之后，处理方仍然将请求传递下去，请求就可以被多个处理方处理，类似广播一样，所有的处理方都能感知到请求并选择是否处理</li>
 </ol>
-<h3 id="坏处-7"><a href="#坏处-7" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<h3 id="坏处-9"><a href="#坏处-9" class="headerlink" title="坏处"></a>坏处</h3><ol>
 <li>如果责任链太长，效率会降低，如果一个请求只需要给某一个处理方处理，而这个处理方总是在责任链的最后，程序效率会变差。</li>
 <li>责任链对先后顺序敏感，如果有些处理对顺序有要求，则责任链很容易不满足需求。比如，ABCD四个处理类，要求A必须在C之前执行，B必须在A之前执行，C又必须在B之前执行</li>
 <li>责任链上所有的类都被耦合在了一起，其中一个类出错，有可能影响后面所有类的行为。</li>
 <li>对于需要有个回答的请求，责任链可能比较吃力，也许结合回调模式能够做到</li>
 </ol>
-<h3 id="真实世界的例子-1"><a href="#真实世界的例子-1" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><ul>
+<h3 id="真实世界的例子-3"><a href="#真实世界的例子-3" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><ul>
 <li>java.util.logging.Logger#log()</li>
 <li>Apache Commons Chain</li>
 <li>javax.servlet.Filter#doFilter()</li>
@@ -216,17 +246,19 @@ content
     
       <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
+      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
   </entry>
   
   <entry>
-    <title>JDK源码学习——集合框架</title>
+    <title>JDK源码学习——集合框架（未完成）</title>
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-07-11T14:04:21.143Z</updated>
+    <updated>2017-07-22T07:30:12.811Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架">JDK源码学习——集合框架</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（未完成）">JDK源码学习——集合框架（未完成）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -386,6 +418,8 @@ content
     
     
       <category term="JDK源码学习" scheme="/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
     
   </entry>
   
@@ -799,7 +833,7 @@ content
     <link href="/2017/05/19/technology-report/"/>
     <id>/2017/05/19/technology-report/</id>
     <published>2017-05-19T08:04:19.000Z</published>
-    <updated>2017-06-02T12:54:07.093Z</updated>
+    <updated>2017-07-22T07:28:49.070Z</updated>
     
     <content type="html"><![CDATA[<p>由于在公司负责每周收集后端技术文章分享给大家，感觉分享的东西也可以放在我自己的博客上分享给浏览博客的人。<br><a id="more"></a></p>
 <h2 id="第一期"><a href="#第一期" class="headerlink" title="第一期"></a>第一期</h2><h3 id="技术文章"><a href="#技术文章" class="headerlink" title="技术文章"></a>技术文章</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.<u><a href="https://juejin.im/post/58b3a93c1b69e60058b49767" title="[external]" target="_blank" rel="external">基于Redis的分布式锁到底安全吗？</a></u></h4><p>你有没有想过，Redis实现分布式的锁真的安全吗？<br>对此，Redis的原作者antirez的结论是，只要按照他提出的Redlock规范来实现，就是安全的。然而分布式系统的专家Martin Kleppmann则不赞同，他写了一篇博客揭露Redlock实现的漏洞，就这样，两位大师在著名的论坛Hacker News上开始了激烈的讨论，众多分布式系统专家都参与其中。本文忠实地记录了讨论过程，看完绝对令你受益匪浅。</p>
@@ -876,8 +910,6 @@ content
     
       <category term="转载分享" scheme="/categories/%E8%BD%AC%E8%BD%BD%E5%88%86%E4%BA%AB/"/>
     
-    
-      <category term="置顶" scheme="/tags/%E7%BD%AE%E9%A1%B6/"/>
     
       <category term="技术周报" scheme="/tags/%E6%8A%80%E6%9C%AF%E5%91%A8%E6%8A%A5/"/>
     
