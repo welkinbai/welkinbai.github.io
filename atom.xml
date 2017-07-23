@@ -255,7 +255,7 @@ content
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-07-22T07:30:12.811Z</updated>
+    <updated>2017-07-23T06:44:18.696Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（未完成）">JDK源码学习——集合框架（未完成）</a>
@@ -323,7 +323,7 @@ content
 <li>sort方法在1.8以前是没有的，只能使用Collections类提供的方法来排序，1.8之后，可以直接使用该方法来排序。</li>
 <li>subList方法会得到一个从某个index开始到某个index结束的子List视图，左边闭区间右边是开区间，由于是视图，一些修改会反映到原List上。</li>
 </ul>
-<h2 id="四、AbstractList抽象层"><a href="#四、AbstractList抽象层" class="headerlink" title="四、AbstractList抽象层"></a>四、AbstractList抽象层</h2><h3 id="关系结构-3"><a href="#关系结构-3" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/abstractList.png" alt="abstractList.png" title=""><br>可以看到：</p>
+<h2 id="四、AbstractList抽象层（可随机访问元素的List）"><a href="#四、AbstractList抽象层（可随机访问元素的List）" class="headerlink" title="四、AbstractList抽象层（可随机访问元素的List）"></a>四、AbstractList抽象层（可随机访问元素的List）</h2><h3 id="关系结构-3"><a href="#关系结构-3" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/abstractList.png" alt="abstractList.png" title=""><br>可以看到：</p>
 <ul>
 <li>该抽象类继承了<strong>AbstractCollection</strong></li>
 <li>改抽象类有两个成员类，分别实现了迭代器和List专有的双向迭代器</li>
@@ -336,7 +336,7 @@ content
 <li>subList方法在此处实现，会根据List是不是实现了RandomAccess接口来决定返回哪种子视图，如果实现了，返回的是RandomAccessSubList，虽然这种子视图和普通的SubList在逻辑上没有任何区别，但是它实现了RandomAccess接口，作为一个标识，说明实现该接口的List具有随机访问元素的能力，通常这种访问能力都是常数时间，比如ArrayList。</li>
 <li>在AbstractList的javadoc里说明，这个抽象类更适合那些能随机访问元素的子类，比如ArrayList。而类似LinkedList这种，应该实现AbstractSequentialList比较好。</li>
 </ul>
-<h2 id="五、实现层（ArrayList）"><a href="#五、实现层（ArrayList）" class="headerlink" title="五、实现层（ArrayList）"></a>五、实现层（ArrayList）</h2><p>List接口的实现其实有很多,即使只是利用AbstractList骨架来实现的也有19个。<br>但是经典的实现还是要数ArrayList，它是Java中最常用的类型，一个实现List接口的可变数组实现。</p>
+<h2 id="五、AbstractList实现层（ArrayList）"><a href="#五、AbstractList实现层（ArrayList）" class="headerlink" title="五、AbstractList实现层（ArrayList）"></a>五、AbstractList实现层（ArrayList）</h2><p>List接口的实现其实有很多,即使只是利用AbstractList骨架来实现的也有19个。<br>但是经典的实现还是要数ArrayList，它是Java中最常用的类型，一个实现List接口的可变数组实现。</p>
 <h3 id="关系结构-4"><a href="#关系结构-4" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/arraylist.png" alt="arraylist.png" title=""><br>它的外部关系结构如下：</p>
 <ul>
 <li>向上：它继承了AbstractList骨架类，这样可以少做很多事儿。作为约束，它实现了List接口。同时作为标识，它还实现了Cloneable、RandomAccess、Serializable三个接口，声明它是可以被克隆的，可序列化的，可随机访问元素的。</li>
@@ -370,6 +370,36 @@ content
 <li>比较离奇的是，<code>rangeCheck</code>方法和<code>rangeCheckForAdd</code>两个方法，唯一的区别是，后者还判断了index是否小于0，如果小于0，就抛Exception。后者仅用于Add方法和AddAll方法，然而，remove方法却没有判断是否小于0，这真是奇怪，为什么不都用<code>rangeCheckForAdd</code>呢？（后来仔细研究了一下，是提前报错防止额外的扩容操作，由于扩容操作只发生在Add和AddAll两个方法中，所以这两个方法需要对小于0的情况提前抛出错误以免扩容后才抛出，其他方法不用，其他方法由原生数组去处理小于0的情况即可）</li>
 <li><code>remove</code>系列的方法没什么好讲的，就是遍历，通过比较来找出要删除的元素，然后将该元素后面所有的元素往前移动1位，将末尾的元素设为null。<br>唯一有趣一些的方法是<code>removeAll(collection)</code>和<code>retainAll(collection)</code>，一个将两个集合交集的元素都删掉，一个只将有交集的元素留下其余删掉。发现它们底层方法是一样的，都是<code>batchRemove(collection,boolean)</code>，只不过第二个入参一个为false一个为true，即在利用contain判别元素是否在交集之后，对元素去留的处理不同。在batchRemove中还使用到了try-finally语句，保证即使在遍历的过程中，contains方法抛出异常了，也能把已经删掉的元素正确处理给删掉。</li>
 <li><code>trimToSize</code>方法就是用来给用户主动地将内部数组缩容的，因为在大容量的ArrayList使用时，扩容一次就是整个容量的一半，可能并不需要这么多容量，因此主动地调用此方法来截断内部数组到当前size。</li>
+</ul>
+<p>在java.util.Arrays类里面还声明了一个名字一模一样的ArrayList，但是它没有实现add、remove等方法，所以它是一个定长数组。在<code>Arrays.toList(T...)</code>这个方法里使用该数组。至于为什么要费劲心思做成定长的数组，还真是不知道。</p>
+<h2 id="六、AbstractList实现层（Vector）"><a href="#六、AbstractList实现层（Vector）" class="headerlink" title="六、AbstractList实现层（Vector）"></a>六、AbstractList实现层（Vector）</h2><p>除了ArrayList以外，另一种Collection框架提供的，可随机访问元素的可变数组实现就是Vector，该类历史久远，是早于ArrayList的可变数组实现。<br>看源码的话，Vector几乎和ArrayList一模一样，但是还是有以下一些区别：</p>
+<ol>
+<li>最大的区别，Vector是线程安全的，几乎所有读取和访问的方法都加了<code>synchronized</code>关键字，由于加在方法级别上，锁是对象锁，只要线程进了对象的任何一个加锁方法，其他所有的加锁方法其他线程都进不去。加锁释放锁也有额外开销。所以该类的性能远差于ArrayList。</li>
+<li>Vector的出现比List接口都早，这直接导致该类拥有一些重复功能的方法，一个是在1.2版本之前就有的原始方法，一个是在1.2版本List接口诞生之后，实现该接口时加的方法。用户使用的时候会很迷惑到底用哪个。</li>
+<li>Vector比ArrayList多个构造函数，主要是支持用户传入扩容的时候可以扩多大，只要传入的int&gt;0，每次扩容的时候就用用户传入的大小。如果用户没传或者传负值，那就按默认的。它扩容的默认算法也和ArrayList不一样，Arraylist是扩到当前大小的1.5倍。Vector直接扩到当前的大小的2倍。</li>
+</ol>
+<p>除了这些区别，该类几乎和ArrayList一模一样。<br>由于之后出了并发包，有了更好的并发解决方案，所以任何场景都不建议使用该类。除非是老旧的JDK版本。</p>
+<h2 id="七、AbstractSequentialList抽象层（按顺序访问的List）"><a href="#七、AbstractSequentialList抽象层（按顺序访问的List）" class="headerlink" title="七、AbstractSequentialList抽象层（按顺序访问的List）"></a>七、AbstractSequentialList抽象层（按顺序访问的List）</h2><p>这个抽象类是那种必须按顺序访问的List的骨架实现类，比如链表或者队列这种数据结构，典型特征是没法按序号直接访问到元素，必须从两头按顺序遍历找到元素。而AbstractList是数组的骨架实现，这种可直接按序号访问元素，访问元素的时间复杂度是O（1）。<br>这个类并没有直接从头搞一套，而是继承了AbstractList，然后把那些按序号访问元素的方法都覆盖了，提供使用ListIterator来访问元素的骨架方法。<br>我们如果想要自己实现类似链表队列这样的结构，只需要继承该类，然后实现ListIterator中的相关方法就好了。当然，还要实现一个size方法。<br>由于该抽象层比较简单，就不细讲了。</p>
+<h2 id="八、AbstractSequentialList实现层（LinkedList）"><a href="#八、AbstractSequentialList实现层（LinkedList）" class="headerlink" title="八、AbstractSequentialList实现层（LinkedList）"></a>八、AbstractSequentialList实现层（LinkedList）</h2><p>要说按顺序访问的列表中，谁最出名，肯定要数LinkedList了，它是我们常用数据结构链表的实现。当然，LinkedList还提供了一些有用的方法，可以让我们把链表当做栈和队列来使用，因为它们和链表的区别就在于它们有自己独有的获取元素的位置和顺序。</p>
+<h3 id="关系结构-5"><a href="#关系结构-5" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/linkedlist.png" alt="linkedlist.png" title=""><br>解释如下：</p>
+<ul>
+<li>向上：该类继承了AbstractSequentialList骨架实现。当然，虽然继承了骨架实现，但是实际上它还是提供了很多自己独有的方法，并且把该实现的方法一个不拉都实现了。另外，它还实现了4个接口，分别是List、Serializable、Cloneable、Deque。其他不用多说，Deque是”double ended queue”即双端队列的简称，代表了LinkedList还可以用作双端队列的实现。</li>
+<li>向下：该类只有一个子类，由于是sun包里的内容，不属于java核心内容，就不介绍了。</li>
+</ul>
+<h3 id="内部结构-5"><a href="#内部结构-5" class="headerlink" title="内部结构"></a>内部结构</h3><img src="/2017/06/15/jdk-collection/linkedlist_inner.png" alt="linkedlist_inner.png" title="">
+<p>解释如下：</p>
+<ul>
+<li>linkedlist实现的是可变长度的双向链表结构，而且从代码来看，链表的长度是无限长的。</li>
+<li><p>linkedlist中链表的每个节点主要有一个私有成员类Node来定义，它的代码很简短，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">        E item;</div><div class="line">        Node&lt;E&gt; next;</div><div class="line">        Node&lt;E&gt; prev;</div><div class="line">	</div><div class="line">        Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</div><div class="line">            <span class="keyword">this</span>.item = element;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">            <span class="keyword">this</span>.prev = prev;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>linkedlist提供的方法主要划分成两大块，一大块是为了实现List而提供的，另一大块是为了实现Deque接口提供的。还有一些零散的额外方法。</p>
+</li>
+<li>可以看到，linkedlist内部主要维护了first、last这两个代表头和尾的域，还有size代表链表当前的节点大小。由于不需要考虑扩容的事，所以没有容量之类的变量。</li>
+<li>linkedlist也存在迭代器，而且迭代器也是遵循快速失败的，所以它还有个变量modCount，没有在上图中列出来，这个变量定义在AbstractList里。</li>
+<li>List接口定义的方法无外乎就是get、add、set、remove、contains、indexOf、lastIndexOf等这些增删改查元素的方法，所有入参是Object的，LinkedList都会直接从链表头开始遍历去一个一个比，除了add方法直接插入链表尾以外，其他方法都是先获得位置，再做事情。而入参还传了index的，都是看index值靠近链表头还是链表尾，靠近哪一边，就从哪一边开始遍历以找到相应的位置来做事情。我们可以看到，链表所有这些List接口的方法，大多数都有着O（n）这样的线性时间复杂度，和ArrayList相比，性能要弱一些。但是，add方法和remove方法在添加删除元素的时候，不需要吧元素位置后面所有的元素复制一遍，这种优势一定程度上弥补了遍历的损失，因此，对于频繁添加和删除元素的操作，尤其是从链表头添加删除元素的操作，LinkedList有着无可比拟的优势。 </li>
+<li>Deque接口定义了一些与List接口重复的方法，但是也有一些额外的方法，其中addFirst、addList、removeFirst、removeList就是典型，因为队列这种数据结构更加关心的是从两头存取数据，所以这些方法单独定义是很有必要的。<br>Deque接口不光定义队列，还同时支持有界队列和无界队列两种。我们这里介绍的LinkedList没有大小限制，所以是无界队列。因此，Deque接口额外的offer方法行为和add一模一样。如果是有界队列，add方法添加不进去了会抛错，offer方法添加不进去只会返回false，<br>peek方法则在不删除的情况下获取队头元素。poll方法在删除的情况下获取队头元素。pop和poll逻辑一样，而Push和add逻辑不同，它从队头插入元素，add从队尾插入。pop和push这两个方法完全是为了兼容栈这种队列的变体。<br>上述介绍的方法都提供一个first版本和last版本，可以让用户自由地选择究竟从什么地方获取或者插入元素。</li>
+<li>Deque接口还定义了一种额外的迭代器DescendingIterator，从名字就知道，它和普通迭代器的区别就是迭代元素的顺序是相反的，从后往前迭代。</li>
 </ul>
 <p>【未完待续】</p>
 <div style="display:none;"><br>
@@ -417,9 +447,9 @@ content
       <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="JDK源码学习" scheme="/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
+      <category term="JDK源码学习" scheme="/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -444,7 +474,7 @@ content
 <li>讲解用了某种设计模式，代价是什么，副作用是什么</li>
 </ul>
 <p>另外，这篇文章是基于JAVA设计模式的官方网站，github知名代码仓库<a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="external">java-design-patterns</a>来编写的。尽量保证权威性。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式（未完成）">设计模式——第二章 结构型模式（未完成）</a></p>
 <hr>
 <p>第一章主要关注创建对象使用的模式，即创建型模式。</p>
 <h2 id="推荐等级介绍"><a href="#推荐等级介绍" class="headerlink" title="推荐等级介绍"></a>推荐等级介绍</h2><p>每个模式后面都会有推荐等级，下面统一介绍一下推荐等级含义：<br><strong>★</strong>：一颗星，说明你应该尽量避免使用这种设计模式，它是小众设计模式，其复杂度远大于其带来的收益。<br><strong>★★</strong>：两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。<br><strong>★★★</strong>：三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。<br><strong>★★★★</strong>：四颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。<br><strong>★★★★★</strong>：五颗星，代表在适用场景下，你应该尽量使用该设计模式</p>
