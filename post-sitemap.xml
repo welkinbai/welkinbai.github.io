@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>/2017/06/15/jdk-collection/</loc>
-        <lastmod>2017-07-23T06:44:18.696Z</lastmod>
+        <loc>/2017/07/30/design-pattern-3/</loc>
+        <lastmod>2017-07-30T13:56:25.688Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,23 @@
 
     <url>
         <loc>/2017/07/19/design-pattern-2/</loc>
-        <lastmod>2017-07-22T07:29:41.006Z</lastmod>
+        <lastmod>2017-07-30T13:55:19.542Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/06/04/design-pattern-1/</loc>
+        <lastmod>2017-07-30T13:54:30.950Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>/2017/06/15/jdk-collection/</loc>
+        <lastmod>2017-07-27T15:44:18.405Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -25,14 +41,6 @@
     <url>
         <loc>/2017/05/19/technology-report/</loc>
         <lastmod>2017-07-22T07:28:49.070Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>/2017/06/04/design-pattern-1/</loc>
-        <lastmod>2017-07-19T15:37:40.307Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

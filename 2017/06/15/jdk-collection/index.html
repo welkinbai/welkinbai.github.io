@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>JDK源码学习——集合框架（未完成） | Dawn</title>
+  <title>JDK源码学习——集合框架（一）（未完成） | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -100,7 +100,7 @@
 				  	
 				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(16)</small></a></li>
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(17)</small></a></li>
 				    
 				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
 				    
@@ -154,7 +154,7 @@
 				    
 				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
 				    
-				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(3)</small></a></li>
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(4)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -242,8 +242,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_6.jpg) no-repeat center center fixed;background-size: cover">
-             
+				<div class="container-fluid element-img" style="background: url(/img/bg_5.jpg) no-repeat center center fixed;background-size: cover">
+			 
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -287,18 +287,18 @@
     
 	
 </span>
-                <h1>JDK源码学习——集合框架（未完成）</h1>				
+                <h1>JDK源码学习——集合框架（一）（未完成）</h1>				
             </div>
         </div>		
         <div class="col-md-8 col-md-offset-2">
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、抽象层结构（AbstractCollection）"><span class="toc-text">二、抽象层结构（AbstractCollection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-1"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、List接口"><span class="toc-text">三、List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-2"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-2"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AbstractList抽象层（可随机访问元素的List）"><span class="toc-text">四、AbstractList抽象层（可随机访问元素的List）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-3"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-3"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、AbstractList实现层（ArrayList）"><span class="toc-text">五、AbstractList实现层（ArrayList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-4"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-4"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、AbstractList实现层（Vector）"><span class="toc-text">六、AbstractList实现层（Vector）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、AbstractSequentialList抽象层（按顺序访问的List）"><span class="toc-text">七、AbstractSequentialList抽象层（按顺序访问的List）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、AbstractSequentialList实现层（LinkedList）"><span class="toc-text">八、AbstractSequentialList实现层（LinkedList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-5"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-5"><span class="toc-text">内部结构</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、抽象层结构（AbstractCollection）"><span class="toc-text">二、抽象层结构（AbstractCollection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-1"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、List接口"><span class="toc-text">三、List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-2"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-2"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AbstractList抽象层（可随机访问元素的List）"><span class="toc-text">四、AbstractList抽象层（可随机访问元素的List）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-3"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-3"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、AbstractList实现层（ArrayList）"><span class="toc-text">五、AbstractList实现层（ArrayList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-4"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-4"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、AbstractList实现层（Vector）"><span class="toc-text">六、AbstractList实现层（Vector）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、AbstractSequentialList抽象层（按顺序访问的List）"><span class="toc-text">七、AbstractSequentialList抽象层（按顺序访问的List）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、AbstractSequentialList实现层（LinkedList）"><span class="toc-text">八、AbstractSequentialList实现层（LinkedList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-5"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-5"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、Set接口"><span class="toc-text">九、Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-6"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-6"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、AbstractSet抽象层"><span class="toc-text">十、AbstractSet抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一、AbstractSet实现层（HashSet）"><span class="toc-text">十一、AbstractSet实现层（HashSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二、AbstractSet实现层-LinkedHashSet"><span class="toc-text">十二、AbstractSet实现层(LinkedHashSet)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十三、SortedSet接口"><span class="toc-text">十三、SortedSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四、NavigableSet接口"><span class="toc-text">十四、NavigableSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五、Navigableset实现层（TreeSet）"><span class="toc-text">十五、Navigableset实现层（TreeSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六、Queue接口"><span class="toc-text">十六、Queue接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十七、AbstractQueue抽象层"><span class="toc-text">十七、AbstractQueue抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十八、"><span class="toc-text">十八、</span></a></li></ol>
 </div>
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（未完成）">JDK源码学习——集合框架（未完成）</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）（未完成）">JDK源码学习——集合框架（一）（未完成）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -410,6 +410,7 @@
 <li>比较离奇的是，<code>rangeCheck</code>方法和<code>rangeCheckForAdd</code>两个方法，唯一的区别是，后者还判断了index是否小于0，如果小于0，就抛Exception。后者仅用于Add方法和AddAll方法，然而，remove方法却没有判断是否小于0，这真是奇怪，为什么不都用<code>rangeCheckForAdd</code>呢？（后来仔细研究了一下，是提前报错防止额外的扩容操作，由于扩容操作只发生在Add和AddAll两个方法中，所以这两个方法需要对小于0的情况提前抛出错误以免扩容后才抛出，其他方法不用，其他方法由原生数组去处理小于0的情况即可）</li>
 <li><code>remove</code>系列的方法没什么好讲的，就是遍历，通过比较来找出要删除的元素，然后将该元素后面所有的元素往前移动1位，将末尾的元素设为null。<br>唯一有趣一些的方法是<code>removeAll(collection)</code>和<code>retainAll(collection)</code>，一个将两个集合交集的元素都删掉，一个只将有交集的元素留下其余删掉。发现它们底层方法是一样的，都是<code>batchRemove(collection,boolean)</code>，只不过第二个入参一个为false一个为true，即在利用contain判别元素是否在交集之后，对元素去留的处理不同。在batchRemove中还使用到了try-finally语句，保证即使在遍历的过程中，contains方法抛出异常了，也能把已经删掉的元素正确处理给删掉。</li>
 <li><code>trimToSize</code>方法就是用来给用户主动地将内部数组缩容的，因为在大容量的ArrayList使用时，扩容一次就是整个容量的一半，可能并不需要这么多容量，因此主动地调用此方法来截断内部数组到当前size。</li>
+<li>该实现是非线程安全的</li>
 </ul>
 <p>在java.util.Arrays类里面还声明了一个名字一模一样的ArrayList，但是它没有实现add、remove等方法，所以它是一个定长数组。在<code>Arrays.toList(T...)</code>这个方法里使用该数组。至于为什么要费劲心思做成定长的数组，还真是不知道。</p>
 <h2 id="六、AbstractList实现层（Vector）"><a href="#六、AbstractList实现层（Vector）" class="headerlink" title="六、AbstractList实现层（Vector）"></a>六、AbstractList实现层（Vector）</h2><p>除了ArrayList以外，另一种Collection框架提供的，可随机访问元素的可变数组实现就是Vector，该类历史久远，是早于ArrayList的可变数组实现。<br>看源码的话，Vector几乎和ArrayList一模一样，但是还是有以下一些区别：</p>
@@ -440,8 +441,73 @@
 <li>List接口定义的方法无外乎就是get、add、set、remove、contains、indexOf、lastIndexOf等这些增删改查元素的方法，所有入参是Object的，LinkedList都会直接从链表头开始遍历去一个一个比，除了add方法直接插入链表尾以外，其他方法都是先获得位置，再做事情。而入参还传了index的，都是看index值靠近链表头还是链表尾，靠近哪一边，就从哪一边开始遍历以找到相应的位置来做事情。我们可以看到，链表所有这些List接口的方法，大多数都有着O（n）这样的线性时间复杂度，和ArrayList相比，性能要弱一些。但是，add方法和remove方法在添加删除元素的时候，不需要吧元素位置后面所有的元素复制一遍，这种优势一定程度上弥补了遍历的损失，因此，对于频繁添加和删除元素的操作，尤其是从链表头添加删除元素的操作，LinkedList有着无可比拟的优势。 </li>
 <li>Deque接口定义了一些与List接口重复的方法，但是也有一些额外的方法，其中addFirst、addList、removeFirst、removeList就是典型，因为队列这种数据结构更加关心的是从两头存取数据，所以这些方法单独定义是很有必要的。<br>Deque接口不光定义队列，还同时支持有界队列和无界队列两种。我们这里介绍的LinkedList没有大小限制，所以是无界队列。因此，Deque接口额外的offer方法行为和add一模一样。如果是有界队列，add方法添加不进去了会抛错，offer方法添加不进去只会返回false，<br>peek方法则在不删除的情况下获取队头元素。poll方法在删除的情况下获取队头元素。pop和poll逻辑一样，而Push和add逻辑不同，它从队头插入元素，add从队尾插入。pop和push这两个方法完全是为了兼容栈这种队列的变体。<br>上述介绍的方法都提供一个first版本和last版本，可以让用户自由地选择究竟从什么地方获取或者插入元素。</li>
 <li>Deque接口还定义了一种额外的迭代器DescendingIterator，从名字就知道，它和普通迭代器的区别就是迭代元素的顺序是相反的，从后往前迭代。</li>
+<li>该实现是非线程安全的</li>
 </ul>
-<p>【未完待续】</p>
+<h2 id="九、Set接口"><a href="#九、Set接口" class="headerlink" title="九、Set接口"></a>九、Set接口</h2><p>Set接口是Collection接口下面的另一个细分接口，它定义了一个包含不重复元素的集合。</p>
+<h3 id="关系结构-6"><a href="#关系结构-6" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/set.png" alt="set.png" title=""><br>解释如下：</p>
+<ul>
+<li>向上：该接口继承Collection接口，后面我们会看到，它与Collection接口相比，内部几乎没有任何变化，只是把Collection接口的方法又都声明了一遍。但是在Collection接口的基础之上，它主要对添加元素的方法声明了限制条件：重复的元素不能被添加</li>
+<li>向下：该接口和List接口不同，List接口下面的接口都是sun包里的，而Set接口下面还有一个java包里的<code>SortedSet</code>接口，我们不需要关注sun包的东西，因为Java核心的代码都在java包里。另外我们可以看到，与Collection呼应，Set下面也有一堆与之相对应的实现类。有SynchronizedCollection就有SynchronizedSet。</li>
+</ul>
+<h3 id="内部结构-6"><a href="#内部结构-6" class="headerlink" title="内部结构"></a>内部结构</h3><p>上面说到过，Set接口的内部结构几乎和Collection接口一模一样，不像List额外定义了一些方法，Set都没有额外定义的方法。但是如果打开它的注释，会看到所有Set的方法，注释都有修改过，声明会抛出的Exception以及抛出的条件也和Collection完全不一样。所以说完全就是从约定的角度来实现Set与Collection的不同之处。</p>
+<h2 id="十、AbstractSet抽象层"><a href="#十、AbstractSet抽象层" class="headerlink" title="十、AbstractSet抽象层"></a>十、AbstractSet抽象层</h2><p>在JDK中，几乎每一个接口都伴随一个抽象类作为骨架结构，帮助人们更好更快地实现想要实现的接口。<br>Set接口也不例外，它有一个AbstractSet抽象类。<br>这个抽象类有40个子类，相比之下，AbstractList才有26个。可见该类使用之频繁。当然，之所以多出这么多主要一个因素是它的子类会在后面要介绍的Map中用到。</p>
+<p>打开该类，惊奇地发现其内部结构竟然非常简单，只有<strong>3个方法</strong>。原因在于它继承了<code>AbstractCollection</code>抽象类。而上面讲到过，Set接口和Collection接口几乎一模一样，这里充分利用了面向对象继承带来的好处。<br>至于其实现的3个方法：<br>equal、hashCode主要是因为Set这种结构可以更高效地利用size来比较，更快速地判断不相等的情况，而hashCode在改动equals方法时必须同时实现（Effective Java这本书有讲到）<br>removeAll方法也是因为作者要充分利用Set的特性提供更高效的删除方法，根据两者的体积，取体积小的一方遍历并比较，在两者体积相差较大时，得到更好的效率。</p>
+<h2 id="十一、AbstractSet实现层（HashSet）"><a href="#十一、AbstractSet实现层（HashSet）" class="headerlink" title="十一、AbstractSet实现层（HashSet）"></a>十一、AbstractSet实现层（HashSet）</h2><p>由于进度缓慢，从这里开始就不特别详细地去讲了。只罗列要点：</p>
+<ol>
+<li>HashSet是Set最典型最有名的实现，它继承了AbstractSet，而AbstractSet又继承了AbstarctCollection。</li>
+<li>HashSet令人惊奇的是，它居然背后是用HashMap实现的！也就是说，它的内部有一个HashMap，来保存每一个元素。由于HashMap的键肯定是唯一的，同一个对象会被映射成同一个键，所以利用HashMap的键就能做到不重复的元素了。至于键对应的值，直接是一个由内部静态不可变常量保存的Object对象。</li>
+<li>由于HashMap添加和删除键，返回size，contains方法都是常数时间，所以，HashSet的这些方法也是常数时间。</li>
+<li>但是！迭代HashSet是线性时间，而且与内部的HashMap容量大小成正相关，所以文档有提到，一开始不要把HashSet的容量声明的太大，或者loadFactor因子设置的太小。这个到HashMap介绍的时候会详细讲。</li>
+<li>HashSet简直就是HashMap的组合包装类，其自身没有任何能力，几乎所有方法都是调HashMap的方法来完成。</li>
+<li>该实现是非线程安全的</li>
+</ol>
+<h2 id="十二、AbstractSet实现层-LinkedHashSet"><a href="#十二、AbstractSet实现层-LinkedHashSet" class="headerlink" title="十二、AbstractSet实现层(LinkedHashSet)"></a>十二、AbstractSet实现层(LinkedHashSet)</h2><p>LinkedHashSet继承了HashSet，目的是将元素按第一次插入的顺序排列，在遍历的时候就可以按照第一次插入顺序遍历到元素，保证每次遍历的顺序一致。（所谓第一次插入，指集合中不存在此元素时的第一次插入）<br>怎么实现呢？居然直接把内部的HashMap换成LinkedHashMap就搞定了。真是再一次享受到面向对象的好处呀。<br>值得一提的是，它换LinkedHashMap的方式也很有意思，由于内部的Map是在构造方法初始化的，所以它的父类HashSet专门为它提供了一个构造方法（外部不可见的），其内部初始化Map用的是LinkedHashMap:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">       map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>其中，参数dummy什么事儿也没做，为什么会这样呢？因为已经有了HashSet(int,float)这样的构造方法了，为了能给子类提供一个特别版的，它就多写了一个冗余的参数，区分方法签名。<br>LinkedHashSet调用的时候，dummy就直接传ture。它的所有的构造方法都调用的是这一个父类的构造方法，只不过入参有所不同。<br>该实现是非线程安全的。</p>
+<h2 id="十三、SortedSet接口"><a href="#十三、SortedSet接口" class="headerlink" title="十三、SortedSet接口"></a>十三、SortedSet接口</h2><p>和List不同，Set还有一个子接口SortedSet需要留意。</p>
+<ol>
+<li>看名字就知道，这个接口定义：<strong>元素不重复且按照某种规律排序的集合</strong></li>
+<li>和LinkedHashSet相比，这个接口可以自定义元素排序规则，而LinkedHashSet就定死了是元素第一次插入时的顺序</li>
+<li>该接口定义了一些有用的方法，它的注释文档还定义了实现该接口必须提供的4种构造方法，由于接口没法限制构造方法，所以写在了javaDoc里</li>
+<li>基本上，自定义排序规则是通过比较器comparator来完成的，或者元素类型实现Comparable接口</li>
+<li>和Set相比新方法有：<ol>
+<li>comparator：获取内部的比较器</li>
+<li>subSet(from,to)：获取子集合的视图（半闭半开区间）</li>
+<li>headSet(to)：获取子集合的视图(比to小的)</li>
+<li>tailSet(from)：同上，比from大的都算，包括from</li>
+<li>first,last：获取第一个，最后一个元素</li>
+</ol>
+</li>
+</ol>
+<h2 id="十四、NavigableSet接口"><a href="#十四、NavigableSet接口" class="headerlink" title="十四、NavigableSet接口"></a>十四、NavigableSet接口</h2><p>从JDK1.6版本起，又多了一个NavigableSet接口。</p>
+<ol>
+<li>该接口主要作用是额外定义一些查找元素的方法，虽然SortedSet接口定义了元素有顺序这件事，但是只支持获取第一个或者最后一个元素，这肯定不行。这个接口提供了一系列根据某个元素获得它上一个，下一个元素的方法，还要诸如获得拥有相同元素的逆序Set，从两头poll即取回并删除元素的操作等。</li>
+<li>该接口新方法有：<ol>
+<li>lower，higher：获得比入参元素小或者大的第一个元素，如果没有返回null</li>
+<li>floor，ceiling：获得小于等于入参元素或者大于等于的第一个元素，如果没有返回null</li>
+<li>pollFirst，pollLast：取出并删除第一个，最后一个元素</li>
+<li>descendingSet：获得一个顺序相反的Set的视图</li>
+<li>descendingIterator：获取相反顺序的迭代器</li>
+<li>subSet(from,boolean,to,boolean)：和SortedSet相比，这个方法允许你自定义区间是开区间还是闭区间，类似的还有headSet和tailSet也做了相似改变</li>
+</ol>
+</li>
+</ol>
+<h2 id="十五、Navigableset实现层（TreeSet）"><a href="#十五、Navigableset实现层（TreeSet）" class="headerlink" title="十五、Navigableset实现层（TreeSet）"></a>十五、Navigableset实现层（TreeSet）</h2><p>TreeSet是早于NavigableSet接口就存在的类，1.6版本之后修改为实现NavigableSet接口，目测以前实现的是SortedSet接口。</p>
+<ol>
+<li>果然不出所料，其底层是一个NavigableMap，构造方法里面直接就new的是一个TreeMap，所以所有的方法其功能都由TreeMap来提供。包括传入的比较器也直接传给底层的TreeMap</li>
+<li>其同样继承了AbstractSet骨架类</li>
+<li>该实现是非线程安全的</li>
+<li>名称的由来是因为内部的TreeMap其数据结构是树，这个到TreeMap章节再详细介绍</li>
+</ol>
+<h2 id="十六、Queue接口"><a href="#十六、Queue接口" class="headerlink" title="十六、Queue接口"></a>十六、Queue接口</h2><p>Collection底下的三大接口（List，Set，Queue）到这里都提到了。本来是四大接口的，但是BeanContext历史原因实在没什么人气，就不讲了。<br>Queue主要定义队列这种特殊的集合，队列一般都是从两头插入元素的，典型地是从一头插入另一头取出。即先进先出（FIFO）。而栈是一种特殊的队列，它是后进先出（LIFO）的。本接口定义的队列既可以是无界队列，即一直可以往里面插入元素，也可以是有界队列，即容量满了就不能插入了。<br>本接口主要定义了下面一些方法：</p>
+<ul>
+<li>add,offer：添加元素到队列，一般都是队尾。无界队列这两个方法是等效的，有界队列，add在队满会报错，offer队满只会返回false。</li>
+<li>remove,poll：从队列中删除一个元素，一般都是队头。同样地，无界队列这两个方法是等效的，有界队列，remove在队空时报错，poll队空时返回null。正因为如此，Queue通常不允许元素为null，因为这个方法返回null时无法判断是队空还是返回的就是null元素（LinkedList除外）</li>
+<li>element，peek：从队列中获取一个元素，但是不删除，一般从队头获取。无界队列这两个方法是等效的，有界队列，队空时element会报错，peek会返回null</li>
+</ul>
+<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。</p>
+<h2 id="十七、AbstractQueue抽象层"><a href="#十七、AbstractQueue抽象层" class="headerlink" title="十七、AbstractQueue抽象层"></a>十七、AbstractQueue抽象层</h2><p>这个抽象类提供Queue的骨架实现，它约定元素不能包含null。我们的LinkedList包含了null，因此就没继承这个抽象类。<br>上面的方法中，它只实现了add,remove,element，以及clear。其他的都留给实现者实现，因此，实现者要自己保证元素不能是null，这个类限制不了。<br>实现add等这些方法的步骤也很简单，就是调用它对应的那个不会抛Exception的版本，如果返回false或者null，就直接抛Exception。<br>其中，clear方法很有意思，它的实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (poll() != <span class="keyword">null</span>)</div><div class="line">        ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>充分利用现有的方法来实现clear操作。</p>
+<h2 id="十八、"><a href="#十八、" class="headerlink" title="十八、"></a>十八、</h2><p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -486,8 +552,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-07-23T06:44:18.696Z" itemprop="datePublished">
-					2017年7月23日 14:44
+				<time datetime="2017-07-27T15:44:18.405Z" itemprop="datePublished">
+					2017年7月27日 23:44
 				</time>
 			</p>
             <p>
@@ -499,7 +565,7 @@ content
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2017/07/19/design-pattern-2/" style="float: left;">
-        ← 设计模式——第二章 结构型模式（未完成）
+        ← 设计模式——第二章 结构型模式
     </a>
     
     

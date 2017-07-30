@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-22T07:29:41.006Z</updated>
+  <updated>2017-07-30T13:56:25.688Z</updated>
   <id>/</id>
   
   <author>
@@ -16,15 +16,155 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>设计模式——第二章 结构型模式（未完成）</title>
+    <title>设计模式——第三章 行为型模式（未完成）</title>
+    <link href="/2017/07/30/design-pattern-3/"/>
+    <id>/2017/07/30/design-pattern-3/</id>
+    <published>2017-07-30T13:48:39.000Z</published>
+    <updated>2017-07-30T13:56:25.688Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章主要讨论行为型设计模式，即为了某些应用场景或者实现某个目的，我们的类有一些比较特殊的行为。该类设计模式也是比较难以理解的设计模式类型之一。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a><br>3.<a href="/2017/07/30/design-pattern-3/" title="设计模式——第三章 行为型模式（未完成）">设计模式——第三章 行为型模式（未完成）</a></p>
+<hr>
+<p>下面这些都是之前写的，本来没想归类的，所以按顺序写，现在又想归类分开章节写，所以就把已经写好的先罗列在这里，等有了相应章节再剪切过去。</p>
+<h2 id="第一条-API网关模式（API-Gateway）"><a href="#第一条-API网关模式（API-Gateway）" class="headerlink" title="第一条 API网关模式（API Gateway）"></a>第一条 API网关模式（API Gateway）</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
+<h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br></p>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
+<li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
+<li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
+<li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。</li>
+</ol>
+<h3 id="坏处"><a href="#坏处" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>增加了复杂度</li>
+<li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
+<li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。</li>
+</ol>
+<h3 id="推荐等级-★★★★★"><a href="#推荐等级-★★★★★" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
+<a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第四条-异步方法调用（Async-Method-Invocation）"><a href="#第四条-异步方法调用（Async-Method-Invocation）" class="headerlink" title="第四条 异步方法调用（Async Method Invocation）"></a>第四条 异步方法调用（Async Method Invocation）</h2><h3 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话异步方法调用太普遍了，太基础了，以至于看到它的时候，我感觉它根本不应该算个设计模式。<br>当我们需要一些操作并行执行时，我们使用异步方法。尤其是服务器应用，在处理用户的请求时，如果不需要立即告诉用户结果，可以将耗费时间的计算过程进行异步处理，立即返回http请求，减少用户的等待时间。<br>注意，不是所有的时候都是并行好于单线程，并行执行由于多线程的复杂性，是有额外开销的，还有编程错误的风险，死锁的可能性，如果只是很简单的任务，不应该动不动就异步化。就算异步化了，也要用数字说话，如果异步化了以后就快了几毫秒，甚至还慢了，那就毫无意义。</p>
+<h3 id="如何做-1"><a href="#如何做-1" class="headerlink" title="如何做"></a>如何做</h3><p>在JAVA中，ExecutorService框架就是干这事儿的，尽管用就对了。<br>不过设计模式的github仓库还是给出了一个自己的实现，可以点击下面相关链接来查看。就不详述了。</p>
+<h3 id="好处-1"><a href="#好处-1" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>让你的多个任务并行进行，充分利用多核CPU的优势</li>
+<li>让你的用户不必无意义地等待</li>
+<li>使用回调可在结果计算好的时候立即通知你，主线程不需要等待结果，也不需要轮询结果</li>
+</ol>
+<h3 id="坏处-1"><a href="#坏处-1" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>多线程意味着复杂度，意味着并发问题，意味着无止境的锁</li>
+<li>并发任务的数量不是无限的，线程数在任何操作系统中都是有上限的</li>
+<li>要小心处理好失败重试的机制问题，当然成功后的回调也有可能因程序错误丢失。程序的数据一致性有可能难以保证。</li>
+</ol>
+<h3 id="推荐等级-★★★"><a href="#推荐等级-★★★" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
+<a href="http://java-design-patterns.com/patterns/async-method-invocation/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第五条-阻止模式（Balking）"><a href="#第五条-阻止模式（Balking）" class="headerlink" title="第五条 阻止模式（Balking）"></a>第五条 阻止模式（Balking）</h2><h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><p>其实这个模式我感觉也是我们平时常用的技巧，但是并没有意识到它是一个设计模式。<br>该模式首先是多线程程序才会有的，在一个对象的状态不对时，会阻止其他线程执行一些特定的代码。<br>或者说，某个对象的某些状态转换过程，同一时间只能由一个线程执行。</p>
+<h3 id="如何做-2"><a href="#如何做-2" class="headerlink" title="如何做"></a>如何做</h3>
+<p>如图，我们有一个洗衣机类，洗衣机有两个状态，可以洗衣服和正在洗衣服。<br>然后我们有下面这段代码：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> &#123;</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(App.<span class="keyword">class</span>);</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">   * <span class="doctag">@param</span> args the command line arguments - not used</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String... args) &#123;</div><div class="line">    <span class="keyword">final</span> WashingMachine washingMachine = <span class="keyword">new</span> WashingMachine();</div><div class="line">    ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">      executorService.execute(<span class="string">washingMachine:</span>:wash);</div><div class="line">    &#125;</div><div class="line">    executorService.shutdown();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      executorService.awaitTermination(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      LOGGER.error(<span class="string">"ERROR: Waiting on executor service shutdown!"</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们开启了三个线程，同时去执行洗衣机的洗衣服方法。（这里是JDK8的代码，双冒号代表引用某个方法）<br>我们规定，当洗衣机的状态为可以洗衣服时，才能执行洗衣服方法，如果状态已经是洗衣服中，那么就不能执行：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * Method responsible for washing</div><div class="line">   * if the object is in appropriate state</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">wash</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">      LOGGER.info(<span class="string">"&#123;&#125;: Actual machine state: &#123;&#125;"</span>, Thread.currentThread().getName(), getWashingMachineState());</div><div class="line">      <span class="keyword">if</span> (washingMachineState == WashingMachineState.WASHING) &#123;</div><div class="line">        LOGGER.<span class="keyword">error</span>(<span class="string">"ERROR: Cannot wash if the machine has been already washing!"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      washingMachineState = WashingMachineState.WASHING;</div><div class="line">    &#125;</div><div class="line">    LOGGER.info(<span class="string">"&#123;&#125;: Doing the washing"</span>, Thread.currentThread().getName());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Thread.sleep(<span class="number">50</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      ie.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    endOfWashing();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>使用状态和锁来保证洗衣机在错误的状态下，不响应洗衣服的请求，并记录错误日志。</p>
+<h3 id="好处-2"><a href="#好处-2" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>利用锁来保护了判断逻辑，确保多线程情况下，只有某一个线程能成功地洗衣服，其他线程都只能无功而返。</li>
+</ol>
+<h3 id="坏处-2"><a href="#坏处-2" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>只适用于多线程程序，不能混用</li>
+<li>pattern太小，算不上一种设计模式，如果这也算设计模式，那么try-catch语句算不算(笑)</li>
+</ol>
+<h3 id="推荐等级-★★"><a href="#推荐等级-★★" class="headerlink" title="推荐等级 ★★"></a>推荐等级 ★★</h3><p>两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。</p>
+<a href="http://java-design-patterns.com/patterns/balking/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第八条-业务委托模式（Business-Delegate）"><a href="#第八条-业务委托模式（Business-Delegate）" class="headerlink" title="第八条 业务委托模式（Business Delegate）"></a>第八条 业务委托模式（Business Delegate）</h2><h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><p>本模式主要是在展示层和业务层之间增加一层抽象层，将展示层和业务层之间的紧耦合变成松耦合。<br>使用本模式可以让你自由地操纵多个业务service的调用逻辑，service的查找和调用都将被封装，由静态过程变成动态过程。</p>
+<h3 id="如何做-3"><a href="#如何做-3" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><br>BusinessDelegate是我们的核心类——委托类。<br>Client这里模拟的是我们的客户端，转换到Web开发场景，我们可以把Client等同于Controller的角色。<br>在我们的程序开始后，Client首先要有委托类，然后其doTask方法就是执行委托类的doTask方法。<br>委托类并不真的执行业务逻辑，而是利用其内部的BusinessLookup和Client传给它的ServiceType去查找要处理业务的Service，比如JmsService或者EjbService。<br>找到后，再调用相应的业务Service的doProcessing方法真正去处理业务。</p>
+<h3 id="好处-3"><a href="#好处-3" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>展示层和业务层解耦。随时可以更换底层业务逻辑，而不需要改动展示层的内容。</li>
+</ol>
+<h3 id="坏处-3"><a href="#坏处-3" class="headerlink" title="坏处"></a>坏处</h3><p>暂时还没想到，欢迎补充</p>
+<h3 id="推荐等级-★★★★★-1"><a href="#推荐等级-★★★★★-1" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，在适用场景下，尽可能地使用该模式</p>
+<a href="http://java-design-patterns.com/patterns/business-delegate/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第九条-缓存和回调（cache-amp-callback）"><a href="#第九条-缓存和回调（cache-amp-callback）" class="headerlink" title="第九条 缓存和回调（cache&amp;callback）"></a>第九条 缓存和回调（cache&amp;callback）</h2><p>缓存和回调竟然也被列入到设计模式中，我认为这两种用法太过常见，就不细讲了。<br>直接把链接给出：<br><a href="http://java-design-patterns.com/patterns/caching/" target="_blank" rel="external">缓存相关链接—含代码</a><br><a href="http://java-design-patterns.com/patterns/callback/" target="_blank" rel="external">回调相关链接—含代码</a></p>
+<h2 id="第四条-责任链模式（Chain-of-responsibility）"><a href="#第四条-责任链模式（Chain-of-responsibility）" class="headerlink" title="第四条 责任链模式（Chain of responsibility）"></a>第四条 责任链模式（Chain of responsibility）</h2><h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li>责任链模式实际上是一种用来解耦请求方和处理方的模式</li>
+<li>当请求方发出请求时，可能不止有一个对象要去处理请求，并且事先并不知道谁要处理这个请求，请求的处理者是动态决定的。</li>
+<li>当请求方发出请求时，并不关心请求究竟被谁执行了，即请求方与处理方是解耦的</li>
+<li>可以处理请求的一组对象是被动态地指定的</li>
+</ol>
+<h3 id="如何做-4"><a href="#如何做-4" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><br>在图中，我们有一个请求方<code>OrcKing</code>，即兽王。与其说是请求方，不如说是发号施令者。<br>最左边我们可以看到，<code>RequestType</code>定义我们的兽王有三种命令可以发布，保护城堡(DEFEND_CASTLE)、审问犯人(TORTURE_PRISONER)、收税(COLLECT_TAX)。<br>然后我们的兽王，有个<code>buildChain()</code>方法，该方法会在构造函数中调用，目的是创建一个<code>RequestHandler</code>然后保存在内部域中。<br>我们有三个命令的处理方，即兽王的三个手下，兽族战士(OrcSoldier)、兽族指挥官(OrcCommander)、兽族官员(OrcOfficer)。它们都继承自抽象类<code>RequestHandler</code>。<br>每个处理方的构造函数，都会传入另一个处理方，这边是责任链构造的关键点。<br>我们兽王在使用<code>buildChain()</code>方法的时候，责任链的构造代码是下面这样的：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> void buildChain() &#123;</div><div class="line">    chain = <span class="keyword">new</span> <span class="type">OrcCommander</span>(<span class="keyword">new</span> <span class="type">OrcOfficer</span>(<span class="keyword">new</span> <span class="type">OrcSoldier</span>(<span class="literal">null</span>)));</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，最终兽王内部的域拿到的其实是兽族指挥官的引用，因此，当兽王下令的时候，它使用<code>makeRequest(Request)</code>方法，会优先将命令传达给兽族指挥官。<br>兽族指挥官此时会检查命令的类型，他只能处理保护城堡这种命令，如果它发现自己处理不了，就将命令丢给构造函数传进来的那个人，也就是我们的兽族官员。<br>兽族官员也会检查命令的类型，他只能处理审问犯人的命令，如果发现不是审问犯人的命令，他就再将命令继续往下传，传给兽族战士。以此类推，直到责任链的末尾。</p>
+<h3 id="好处-4"><a href="#好处-4" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>请求和处理方解耦</li>
+<li>稍加改造，在处理之后，处理方仍然将请求传递下去，请求就可以被多个处理方处理，类似广播一样，所有的处理方都能感知到请求并选择是否处理</li>
+</ol>
+<h3 id="坏处-4"><a href="#坏处-4" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>如果责任链太长，效率会降低，如果一个请求只需要给某一个处理方处理，而这个处理方总是在责任链的最后，程序效率会变差。</li>
+<li>责任链对先后顺序敏感，如果有些处理对顺序有要求，则责任链很容易不满足需求。比如，ABCD四个处理类，要求A必须在C之前执行，B必须在A之前执行，C又必须在B之前执行</li>
+<li>责任链上所有的类都被耦合在了一起，其中一个类出错，有可能影响后面所有类的行为。</li>
+<li>对于需要有个回答的请求，责任链可能比较吃力，也许结合回调模式能够做到</li>
+</ol>
+<h3 id="真实世界的例子"><a href="#真实世界的例子" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><ul>
+<li>java.util.logging.Logger#log()</li>
+<li>Apache Commons Chain</li>
+<li>javax.servlet.Filter#doFilter()</li>
+</ul>
+<h3 id="推荐等级-★★★★"><a href="#推荐等级-★★★★" class="headerlink" title="推荐等级 ★★★★"></a>推荐等级 ★★★★</h3><p>四颗星，这意味着你可以在适用场景下使用该模式，前提是你必须知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。</p>
+<a href="http://java-design-patterns.com/patterns/chain/" target="_blank" rel="external">相关链接—含代码</a>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章主要讨论行为型设计模式，即为了某些应用场景或者实现某个目的，我们的类有一些比较特殊的行为。该类设计模式也是比较难以理解的设计模式类型之一。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式——第二章 结构型模式</title>
     <link href="/2017/07/19/design-pattern-2/"/>
     <id>/2017/07/19/design-pattern-2/</id>
     <published>2017-07-19T15:17:19.000Z</published>
-    <updated>2017-07-22T07:29:41.006Z</updated>
+    <updated>2017-07-30T13:55:19.542Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讨论结构型设计模式，即介绍一些为了达到某种目的，而使用的特殊代码结构。</p>
 <a id="more"></a>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式（未完成）">设计模式——第二章 结构型模式（未完成）</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a><br>3.<a href="/2017/07/30/design-pattern-3/" title="设计模式——第三章 行为型模式（未完成）">设计模式——第三章 行为型模式（未完成）</a></p>
 <h2 id="第一条-抽象文档模式（Abstract-Document）"><a href="#第一条-抽象文档模式（Abstract-Document）" class="headerlink" title="第一条 抽象文档模式（Abstract Document）"></a>第一条 抽象文档模式（Abstract Document）</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在运行时想要动态地修改一个对象的属性，将对象用树状结构组织起来，构建一个松耦合的系统，即使将对象的属性都塞进一个Map里，仍然能在维护它的时候做到类型安全。</p>
 <h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>看下面两张图<br><img src="/2017/07/19/design-pattern-2/abstract-document-base.png" alt="abstract-document-base.png" title=""><br><img src="/2017/07/19/design-pattern-2/abstract-document.png" alt="abstract-document.png" title=""><br>这两张图可能描述的让你不是很明白，我解释一下：<br>首先我们有一个车（car），这个车有型号（model），有价格（price），还有部件(Part)，其中，部件是一个对象，有可能是轮子，也有可能是门之类的，它们也有自己的型号和价格。型号和价格都是值域，不是对象。<br>无论是车还是车的部件，都相当于一个Document，所以它们都实现了Document接口，Document接口规定它们拥有设置域的值或者得到域的值的能力。无论如何，这些域全部都保存在内部的一个Map里，因此，我们的车或者车的部件比较特殊，型号啊，价格啊这些域，都没有定义在类里，是运行时动态加入进去的。<br>然后注意了，我们这里Document还有一个方法叫children，其实只有车这个对象使用这个方法才有意义，使用它可以得到它的children，也即部件。当然，得到的是一个类型已经转换好的视图，你对这个视图的任何操作，都会反应到原始的Part部件对象上。<br>我们有个AbstractDocument抽象类，不知道这个设计模式是不是这么来的，主要的存取逻辑都在这个抽象类里。<br>另外，第二张图还演示了我们有三个接口，分别可以获得价格、型号、部件。它们的目的是在获得的时候，能够使用类型安全的方法来获得域。</p>
 <h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><p>好处在适用场景已经说了：</p>
@@ -119,120 +259,48 @@
 <h3 id="真实世界的例子-2"><a href="#真实世界的例子-2" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><p>java.io.InputStream, java.io.OutputStream, java.io.Reader and java.io.Writer<br>java.util.Collections#synchronizedXXX()<br>java.util.Collections#unmodifiableXXX()<br>java.util.Collections#checkedXXX()</p>
 <h3 id="推荐等级-★★★★★"><a href="#推荐等级-★★★★★" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
 <a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
-<hr>
-<p>下面这些都是之前写的，本来没想归类的，所以按顺序写，现在又想归类分开章节写，所以就把已经写好的先罗列在这里，等有了相应章节再写。</p>
-<h2 id="第一条-API网关模式（API-Gateway）"><a href="#第一条-API网关模式（API-Gateway）" class="headerlink" title="第一条 API网关模式（API Gateway）"></a>第一条 API网关模式（API Gateway）</h2><h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
-<h3 id="如何做-5"><a href="#如何做-5" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br><img src="/2017/07/19/design-pattern-2/apigateway.jpg" alt="apigateway.jpg" title=""></p>
+<h2 id="第六条-门面模式（facade）"><a href="#第六条-门面模式（facade）" class="headerlink" title="第六条 门面模式（facade）"></a>第六条 门面模式（facade）</h2><h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><p>门面模式顾名思义，就是为一个系统提供一个公共的接口，用户可以使用该接口很轻松地操作该系统而不需要关心系统的实现细节。另一方面，门面模式有利于系统的扩展性和兼容性。<br>尤其是在系统类特别多特别复杂的时候，为用户提供一个简单的操作界面是很有必要的。用户只需要使用门面模式相关的类就能获知系统支持的所有功能点，而不需要理解系统的全面。</p>
+<h3 id="如何做-5"><a href="#如何做-5" class="headerlink" title="如何做"></a>如何做</h3><p>很简单，只要用一个类把系统的复杂逻辑都封装起来提供给用户即可。既可以是带有一系列静态方法的工具类，也可以是普通类。<br>个人感觉门面模式的实现没有统一的规范，只要能够达到目的即可，其中的一种实现方式见下面代码链接</p>
 <h3 id="好处-5"><a href="#好处-5" class="headerlink" title="好处"></a>好处</h3><ol>
-<li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
-<li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
-<li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
-<li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。</li>
+<li>为一个庞大而复杂的系统提供了一个简单的操作和使用的方式</li>
+<li>提高系统的扩展性和兼容性</li>
 </ol>
-<h3 id="坏处-5"><a href="#坏处-5" class="headerlink" title="坏处"></a>坏处</h3><ol>
-<li>增加了复杂度</li>
-<li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
-<li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。</li>
-</ol>
+<h3 id="坏处-5"><a href="#坏处-5" class="headerlink" title="坏处"></a>坏处</h3><p>门面模式没有太多的坏处，但是使用者要注意不要把系统的内部细节或者是用户不需要知道的东西暴露在门面模式中，因为一旦发布，门面模式相关的类是很难修改的。</p>
 <h3 id="推荐等级-★★★★★-1"><a href="#推荐等级-★★★★★-1" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
-<a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第四条-异步方法调用（Async-Method-Invocation）"><a href="#第四条-异步方法调用（Async-Method-Invocation）" class="headerlink" title="第四条 异步方法调用（Async Method Invocation）"></a>第四条 异步方法调用（Async Method Invocation）</h2><h3 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话异步方法调用太普遍了，太基础了，以至于看到它的时候，我感觉它根本不应该算个设计模式。<br>当我们需要一些操作并行执行时，我们使用异步方法。尤其是服务器应用，在处理用户的请求时，如果不需要立即告诉用户结果，可以将耗费时间的计算过程进行异步处理，立即返回http请求，减少用户的等待时间。<br>注意，不是所有的时候都是并行好于单线程，并行执行由于多线程的复杂性，是有额外开销的，还有编程错误的风险，死锁的可能性，如果只是很简单的任务，不应该动不动就异步化。就算异步化了，也要用数字说话，如果异步化了以后就快了几毫秒，甚至还慢了，那就毫无意义。</p>
-<h3 id="如何做-6"><a href="#如何做-6" class="headerlink" title="如何做"></a>如何做</h3><p>在JAVA中，ExecutorService框架就是干这事儿的，尽管用就对了。<br>不过设计模式的github仓库还是给出了一个自己的实现，可以点击下面相关链接来查看。就不详述了。</p>
+<a href="http://java-design-patterns.com/patterns/facade/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第七条-享元模式（FlyWeight）"><a href="#第七条-享元模式（FlyWeight）" class="headerlink" title="第七条 享元模式（FlyWeight）"></a>第七条 享元模式（FlyWeight）</h2><h3 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h3><p>有时候有些对象代表的含义在全局是唯一的，不需要重复创建实例，比如英文字母，总共就只有26个，那么代表英文字母的对象，有26个就可以了。<br>另外，这些对象内部不维护一些状态，或者状态是在创建后被维护的，可以轻易地被共享。<br>享元模式就是为了将这些对象共享起来，不要每次使用的时候都重复创建，进而提高性能。</p>
+<h3 id="如何做-6"><a href="#如何做-6" class="headerlink" title="如何做"></a>如何做</h3><p>最主要的是和工厂模式结合，在工厂类内部构建一个对象池将对象缓存起来，下一次获取相同对象时，就直接返回</p>
 <h3 id="好处-6"><a href="#好处-6" class="headerlink" title="好处"></a>好处</h3><ol>
-<li>让你的多个任务并行进行，充分利用多核CPU的优势</li>
-<li>让你的用户不必无意义地等待</li>
-<li>使用回调可在结果计算好的时候立即通知你，主线程不需要等待结果，也不需要轮询结果</li>
+<li>创建大量重复的对象对于系统来说可能是非常昂贵费时的操作，如果恰好是不必要的操作，那么该模式为我们提高了大幅度性能</li>
 </ol>
 <h3 id="坏处-6"><a href="#坏处-6" class="headerlink" title="坏处"></a>坏处</h3><ol>
-<li>多线程意味着复杂度，意味着并发问题，意味着无止境的锁</li>
-<li>并发任务的数量不是无限的，线程数在任何操作系统中都是有上限的</li>
-<li>要小心处理好失败重试的机制问题，当然成功后的回调也有可能因程序错误丢失。程序的数据一致性有可能难以保证。</li>
+<li>一些在创建之初就维护状态的对象较难使用享元模式。虽然是相同的类，对象却完全不同，这种情况下使用享元模式可能会比较混乱，最好使用枚举来定义对象的类型。即使如此，将对象不同的状态或者参数从外部传入工厂类中也是非常大的负担，因此，最好对象的状态能够在工厂模式返回后维护，即构造方法构造对象之后维护，如果做不到这一点，享元模式就用不起来。</li>
+<li>使用享元模式维护之后，对象在后续的使用过程中，绝对不可以再依赖==操作符来做一些逻辑。你使用工厂类返回的对象，只要类型相同，一定是同一个对象，无论你拿它们分别做什么用途，对象永远是同一个。</li>
+<li>由于共享了对象，多线程程序使用享元模式时，绝对不能用在内部有状态的对象身上，否则会引发混乱。</li>
 </ol>
 <h3 id="推荐等级-★★★-1"><a href="#推荐等级-★★★-1" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
-<a href="http://java-design-patterns.com/patterns/async-method-invocation/" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第五条-阻止模式（Balking）"><a href="#第五条-阻止模式（Balking）" class="headerlink" title="第五条 阻止模式（Balking）"></a>第五条 阻止模式（Balking）</h2><h3 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h3><p>其实这个模式我感觉也是我们平时常用的技巧，但是并没有意识到它是一个设计模式。<br>该模式首先是多线程程序才会有的，在一个对象的状态不对时，会阻止其他线程执行一些特定的代码。<br>或者说，某个对象的某些状态转换过程，同一时间只能由一个线程执行。</p>
-<h3 id="如何做-7"><a href="#如何做-7" class="headerlink" title="如何做"></a>如何做</h3><img src="/2017/07/19/design-pattern-2/balking.png" alt="balking.png" title="">
-<p>如图，我们有一个洗衣机类，洗衣机有两个状态，可以洗衣服和正在洗衣服。<br>然后我们有下面这段代码：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> &#123;</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(App.<span class="keyword">class</span>);</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">   * <span class="doctag">@param</span> args the command line arguments - not used</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String... args) &#123;</div><div class="line">    <span class="keyword">final</span> WashingMachine washingMachine = <span class="keyword">new</span> WashingMachine();</div><div class="line">    ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">      executorService.execute(<span class="string">washingMachine:</span>:wash);</div><div class="line">    &#125;</div><div class="line">    executorService.shutdown();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      executorService.awaitTermination(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      LOGGER.error(<span class="string">"ERROR: Waiting on executor service shutdown!"</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们开启了三个线程，同时去执行洗衣机的洗衣服方法。（这里是JDK8的代码，双冒号代表引用某个方法）<br>我们规定，当洗衣机的状态为可以洗衣服时，才能执行洗衣服方法，如果状态已经是洗衣服中，那么就不能执行：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * Method responsible for washing</div><div class="line">   * if the object is in appropriate state</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">wash</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">      LOGGER.info(<span class="string">"&#123;&#125;: Actual machine state: &#123;&#125;"</span>, Thread.currentThread().getName(), getWashingMachineState());</div><div class="line">      <span class="keyword">if</span> (washingMachineState == WashingMachineState.WASHING) &#123;</div><div class="line">        LOGGER.<span class="keyword">error</span>(<span class="string">"ERROR: Cannot wash if the machine has been already washing!"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      washingMachineState = WashingMachineState.WASHING;</div><div class="line">    &#125;</div><div class="line">    LOGGER.info(<span class="string">"&#123;&#125;: Doing the washing"</span>, Thread.currentThread().getName());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Thread.sleep(<span class="number">50</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      ie.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    endOfWashing();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>使用状态和锁来保证洗衣机在错误的状态下，不响应洗衣服的请求，并记录错误日志。</p>
-<h3 id="好处-7"><a href="#好处-7" class="headerlink" title="好处"></a>好处</h3><ol>
-<li>利用锁来保护了判断逻辑，确保多线程情况下，只有某一个线程能成功地洗衣服，其他线程都只能无功而返。</li>
+<a href="http://java-design-patterns.com/patterns/flyweight/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第八条-代理模式（proxy）"><a href="#第八条-代理模式（proxy）" class="headerlink" title="第八条 代理模式（proxy）"></a>第八条 代理模式（proxy）</h2><h3 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话代理模式也算不上一种设计模式，因为代理本来就是互联网开发领域一类很重要的概念，其用途和广泛程度远超设计模式。<br>比如我们经常会接触到的代理服务器，反向代理。代理这种概念也远超设计模式，生活中也很常见，比如国务院的发言人就是一个代理，他代替国家权力机关发表言论。<br>要说代理模式在设计模式中的作用，大概分成以下几种：</p>
+<ol>
+<li>权限控制</li>
+<li>懒加载</li>
+<li>日志框架</li>
+<li>记录对象引用的次数等（Mock框架）</li>
+<li>面向切面编程</li>
+<li>声明式事务</li>
+<li>还有其他很多很多应用场景</li>
 </ol>
-<h3 id="坏处-7"><a href="#坏处-7" class="headerlink" title="坏处"></a>坏处</h3><ol>
-<li>只适用于多线程程序，不能混用</li>
-<li>pattern太小，算不上一种设计模式，如果这也算设计模式，那么try-catch语句算不算(笑)</li>
-</ol>
-<h3 id="推荐等级-★★"><a href="#推荐等级-★★" class="headerlink" title="推荐等级 ★★"></a>推荐等级 ★★</h3><p>两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。</p>
-<a href="http://java-design-patterns.com/patterns/balking/" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第八条-业务委托模式（Business-Delegate）"><a href="#第八条-业务委托模式（Business-Delegate）" class="headerlink" title="第八条 业务委托模式（Business Delegate）"></a>第八条 业务委托模式（Business Delegate）</h2><h3 id="适用场景-8"><a href="#适用场景-8" class="headerlink" title="适用场景"></a>适用场景</h3><p>本模式主要是在展示层和业务层之间增加一层抽象层，将展示层和业务层之间的紧耦合变成松耦合。<br>使用本模式可以让你自由地操纵多个业务service的调用逻辑，service的查找和调用都将被封装，由静态过程变成动态过程。</p>
-<h3 id="如何做-8"><a href="#如何做-8" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/business-delegate.png" alt="business-delegate.png" title=""><br>BusinessDelegate是我们的核心类——委托类。<br>Client这里模拟的是我们的客户端，转换到Web开发场景，我们可以把Client等同于Controller的角色。<br>在我们的程序开始后，Client首先要有委托类，然后其doTask方法就是执行委托类的doTask方法。<br>委托类并不真的执行业务逻辑，而是利用其内部的BusinessLookup和Client传给它的ServiceType去查找要处理业务的Service，比如JmsService或者EjbService。<br>找到后，再调用相应的业务Service的doProcessing方法真正去处理业务。</p>
-<h3 id="好处-8"><a href="#好处-8" class="headerlink" title="好处"></a>好处</h3><ol>
-<li>展示层和业务层解耦。随时可以更换底层业务逻辑，而不需要改动展示层的内容。</li>
-</ol>
-<h3 id="坏处-8"><a href="#坏处-8" class="headerlink" title="坏处"></a>坏处</h3><p>暂时还没想到，欢迎补充</p>
-<h3 id="推荐等级-★★★★★-2"><a href="#推荐等级-★★★★★-2" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，在适用场景下，尽可能地使用该模式</p>
-<a href="http://java-design-patterns.com/patterns/business-delegate/" target="_blank" rel="external">相关链接—含代码</a>
-<h2 id="第九条-缓存和回调（cache-amp-callback）"><a href="#第九条-缓存和回调（cache-amp-callback）" class="headerlink" title="第九条 缓存和回调（cache&amp;callback）"></a>第九条 缓存和回调（cache&amp;callback）</h2><p>缓存和回调竟然也被列入到设计模式中，我认为这两种用法太过常见，就不细讲了。<br>直接把链接给出：<br><a href="http://java-design-patterns.com/patterns/caching/" target="_blank" rel="external">缓存相关链接—含代码</a><br><a href="http://java-design-patterns.com/patterns/callback/" target="_blank" rel="external">回调相关链接—含代码</a></p>
-<h2 id="第四条-责任链模式（Chain-of-responsibility）"><a href="#第四条-责任链模式（Chain-of-responsibility）" class="headerlink" title="第四条 责任链模式（Chain of responsibility）"></a>第四条 责任链模式（Chain of responsibility）</h2><h3 id="适用场景-9"><a href="#适用场景-9" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
-<li>责任链模式实际上是一种用来解耦请求方和处理方的模式</li>
-<li>当请求方发出请求时，可能不止有一个对象要去处理请求，并且事先并不知道谁要处理这个请求，请求的处理者是动态决定的。</li>
-<li>当请求方发出请求时，并不关心请求究竟被谁执行了，即请求方与处理方是解耦的</li>
-<li>可以处理请求的一组对象是被动态地指定的</li>
-</ol>
-<h3 id="如何做-9"><a href="#如何做-9" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><img src="/2017/07/19/design-pattern-2/chain_1.png" alt="chain_1.png" title=""><br>在图中，我们有一个请求方<code>OrcKing</code>，即兽王。与其说是请求方，不如说是发号施令者。<br>最左边我们可以看到，<code>RequestType</code>定义我们的兽王有三种命令可以发布，保护城堡(DEFEND_CASTLE)、审问犯人(TORTURE_PRISONER)、收税(COLLECT_TAX)。<br>然后我们的兽王，有个<code>buildChain()</code>方法，该方法会在构造函数中调用，目的是创建一个<code>RequestHandler</code>然后保存在内部域中。<br>我们有三个命令的处理方，即兽王的三个手下，兽族战士(OrcSoldier)、兽族指挥官(OrcCommander)、兽族官员(OrcOfficer)。它们都继承自抽象类<code>RequestHandler</code>。<br>每个处理方的构造函数，都会传入另一个处理方，这边是责任链构造的关键点。<br>我们兽王在使用<code>buildChain()</code>方法的时候，责任链的构造代码是下面这样的：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> void buildChain() &#123;</div><div class="line">    chain = <span class="keyword">new</span> <span class="type">OrcCommander</span>(<span class="keyword">new</span> <span class="type">OrcOfficer</span>(<span class="keyword">new</span> <span class="type">OrcSoldier</span>(<span class="literal">null</span>)));</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>可以看到，最终兽王内部的域拿到的其实是兽族指挥官的引用，因此，当兽王下令的时候，它使用<code>makeRequest(Request)</code>方法，会优先将命令传达给兽族指挥官。<br>兽族指挥官此时会检查命令的类型，他只能处理保护城堡这种命令，如果它发现自己处理不了，就将命令丢给构造函数传进来的那个人，也就是我们的兽族官员。<br>兽族官员也会检查命令的类型，他只能处理审问犯人的命令，如果发现不是审问犯人的命令，他就再将命令继续往下传，传给兽族战士。以此类推，直到责任链的末尾。</p>
-<h3 id="好处-9"><a href="#好处-9" class="headerlink" title="好处"></a>好处</h3><ol>
-<li>请求和处理方解耦</li>
-<li>稍加改造，在处理之后，处理方仍然将请求传递下去，请求就可以被多个处理方处理，类似广播一样，所有的处理方都能感知到请求并选择是否处理</li>
-</ol>
-<h3 id="坏处-9"><a href="#坏处-9" class="headerlink" title="坏处"></a>坏处</h3><ol>
-<li>如果责任链太长，效率会降低，如果一个请求只需要给某一个处理方处理，而这个处理方总是在责任链的最后，程序效率会变差。</li>
-<li>责任链对先后顺序敏感，如果有些处理对顺序有要求，则责任链很容易不满足需求。比如，ABCD四个处理类，要求A必须在C之前执行，B必须在A之前执行，C又必须在B之前执行</li>
-<li>责任链上所有的类都被耦合在了一起，其中一个类出错，有可能影响后面所有类的行为。</li>
-<li>对于需要有个回答的请求，责任链可能比较吃力，也许结合回调模式能够做到</li>
-</ol>
-<h3 id="真实世界的例子-3"><a href="#真实世界的例子-3" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><ul>
-<li>java.util.logging.Logger#log()</li>
-<li>Apache Commons Chain</li>
-<li>javax.servlet.Filter#doFilter()</li>
+<h3 id="如何做-7"><a href="#如何做-7" class="headerlink" title="如何做"></a>如何做</h3><p>在下面给出的代码链接里，这种模式也没有什么稀奇的，就是组合而已。<br>有一个叫做proxy的代理类，它的构造函数接受一个它要代理的对象，然后用组合的方式维护被代理的对象在内部。外部调用代理对象，代理对象再调用它内部的被代理对象的相应方法。<br>代理模式的实现，和装饰器可以说没什么太大区别。如果非要说区别的话，就是代理模式是不需要接口的，客户端是感知到它的存在的。</p>
+<h3 id="好处-7"><a href="#好处-7" class="headerlink" title="好处"></a>好处</h3><p>代理的好处主要来源于其目的，当代理这种模式被使用的时候，一定是有目的的，为了实现某个目的而使用的。比如做权限控制，做对象的懒加载，做日志框架等等。</p>
+<h3 id="坏处-7"><a href="#坏处-7" class="headerlink" title="坏处"></a>坏处</h3><p>要说代理模式有什么坏处，那就是被滥用的坏处，除此之外没什么过多坏处。<br>使用代理模式，肯定是为了实现某种目的，如果没来由的使用代理模式，肯定是不对的。</p>
+<h3 id="推荐等级-★★★-2"><a href="#推荐等级-★★★-2" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
+<a href="http://java-design-patterns.com/patterns/proxy/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="本章节略过的设计模式们"><a href="#本章节略过的设计模式们" class="headerlink" title="本章节略过的设计模式们"></a>本章节略过的设计模式们</h2><p>关于结构型，本章节略过的设计模式有：</p>
+<ul>
+<li>Event Aggregator：事件聚合器，目的在于将事件统一放在一个地方管理，其他订阅事件的类只需要和事件聚合器打交道即可，而不用和每一个发布事件的类打交道。略过的原因是因为代码例子欠佳，且现在有很多标准的管理事件的库，以发布/订阅模式来提供事件机制，不需要我们自己使用设计模式来解决类似问题。</li>
+<li>Servant：没有什么太大用处，将不能放在父类的通用代码逻辑放在另一个类里实在算不上一个设计模式。</li>
+<li>Service Locator：很鸡肋的设计模式，定位Service并缓存Service，在我们日常开发中很少用到。由于Spring等IOC容器的存在，这种模式就更没有必要使用和学习了。</li>
 </ul>
-<h3 id="推荐等级-★★★★-2"><a href="#推荐等级-★★★★-2" class="headerlink" title="推荐等级 ★★★★"></a>推荐等级 ★★★★</h3><p>四颗星，这意味着你可以在适用场景下使用该模式，前提是你必须知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。</p>
-<a href="http://java-design-patterns.com/patterns/chain/" target="_blank" rel="external">相关链接—含代码</a>
-<p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
 ]]></content>
     
     <summary type="html">
@@ -246,19 +314,17 @@ content
     
       <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
-    
   </entry>
   
   <entry>
-    <title>JDK源码学习——集合框架（未完成）</title>
+    <title>JDK源码学习——集合框架（一）（未完成）</title>
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-07-23T06:44:18.696Z</updated>
+    <updated>2017-07-27T15:44:18.405Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（未完成）">JDK源码学习——集合框架（未完成）</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）（未完成）">JDK源码学习——集合框架（一）（未完成）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -370,6 +436,7 @@ content
 <li>比较离奇的是，<code>rangeCheck</code>方法和<code>rangeCheckForAdd</code>两个方法，唯一的区别是，后者还判断了index是否小于0，如果小于0，就抛Exception。后者仅用于Add方法和AddAll方法，然而，remove方法却没有判断是否小于0，这真是奇怪，为什么不都用<code>rangeCheckForAdd</code>呢？（后来仔细研究了一下，是提前报错防止额外的扩容操作，由于扩容操作只发生在Add和AddAll两个方法中，所以这两个方法需要对小于0的情况提前抛出错误以免扩容后才抛出，其他方法不用，其他方法由原生数组去处理小于0的情况即可）</li>
 <li><code>remove</code>系列的方法没什么好讲的，就是遍历，通过比较来找出要删除的元素，然后将该元素后面所有的元素往前移动1位，将末尾的元素设为null。<br>唯一有趣一些的方法是<code>removeAll(collection)</code>和<code>retainAll(collection)</code>，一个将两个集合交集的元素都删掉，一个只将有交集的元素留下其余删掉。发现它们底层方法是一样的，都是<code>batchRemove(collection,boolean)</code>，只不过第二个入参一个为false一个为true，即在利用contain判别元素是否在交集之后，对元素去留的处理不同。在batchRemove中还使用到了try-finally语句，保证即使在遍历的过程中，contains方法抛出异常了，也能把已经删掉的元素正确处理给删掉。</li>
 <li><code>trimToSize</code>方法就是用来给用户主动地将内部数组缩容的，因为在大容量的ArrayList使用时，扩容一次就是整个容量的一半，可能并不需要这么多容量，因此主动地调用此方法来截断内部数组到当前size。</li>
+<li>该实现是非线程安全的</li>
 </ul>
 <p>在java.util.Arrays类里面还声明了一个名字一模一样的ArrayList，但是它没有实现add、remove等方法，所以它是一个定长数组。在<code>Arrays.toList(T...)</code>这个方法里使用该数组。至于为什么要费劲心思做成定长的数组，还真是不知道。</p>
 <h2 id="六、AbstractList实现层（Vector）"><a href="#六、AbstractList实现层（Vector）" class="headerlink" title="六、AbstractList实现层（Vector）"></a>六、AbstractList实现层（Vector）</h2><p>除了ArrayList以外，另一种Collection框架提供的，可随机访问元素的可变数组实现就是Vector，该类历史久远，是早于ArrayList的可变数组实现。<br>看源码的话，Vector几乎和ArrayList一模一样，但是还是有以下一些区别：</p>
@@ -400,8 +467,73 @@ content
 <li>List接口定义的方法无外乎就是get、add、set、remove、contains、indexOf、lastIndexOf等这些增删改查元素的方法，所有入参是Object的，LinkedList都会直接从链表头开始遍历去一个一个比，除了add方法直接插入链表尾以外，其他方法都是先获得位置，再做事情。而入参还传了index的，都是看index值靠近链表头还是链表尾，靠近哪一边，就从哪一边开始遍历以找到相应的位置来做事情。我们可以看到，链表所有这些List接口的方法，大多数都有着O（n）这样的线性时间复杂度，和ArrayList相比，性能要弱一些。但是，add方法和remove方法在添加删除元素的时候，不需要吧元素位置后面所有的元素复制一遍，这种优势一定程度上弥补了遍历的损失，因此，对于频繁添加和删除元素的操作，尤其是从链表头添加删除元素的操作，LinkedList有着无可比拟的优势。 </li>
 <li>Deque接口定义了一些与List接口重复的方法，但是也有一些额外的方法，其中addFirst、addList、removeFirst、removeList就是典型，因为队列这种数据结构更加关心的是从两头存取数据，所以这些方法单独定义是很有必要的。<br>Deque接口不光定义队列，还同时支持有界队列和无界队列两种。我们这里介绍的LinkedList没有大小限制，所以是无界队列。因此，Deque接口额外的offer方法行为和add一模一样。如果是有界队列，add方法添加不进去了会抛错，offer方法添加不进去只会返回false，<br>peek方法则在不删除的情况下获取队头元素。poll方法在删除的情况下获取队头元素。pop和poll逻辑一样，而Push和add逻辑不同，它从队头插入元素，add从队尾插入。pop和push这两个方法完全是为了兼容栈这种队列的变体。<br>上述介绍的方法都提供一个first版本和last版本，可以让用户自由地选择究竟从什么地方获取或者插入元素。</li>
 <li>Deque接口还定义了一种额外的迭代器DescendingIterator，从名字就知道，它和普通迭代器的区别就是迭代元素的顺序是相反的，从后往前迭代。</li>
+<li>该实现是非线程安全的</li>
 </ul>
-<p>【未完待续】</p>
+<h2 id="九、Set接口"><a href="#九、Set接口" class="headerlink" title="九、Set接口"></a>九、Set接口</h2><p>Set接口是Collection接口下面的另一个细分接口，它定义了一个包含不重复元素的集合。</p>
+<h3 id="关系结构-6"><a href="#关系结构-6" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/set.png" alt="set.png" title=""><br>解释如下：</p>
+<ul>
+<li>向上：该接口继承Collection接口，后面我们会看到，它与Collection接口相比，内部几乎没有任何变化，只是把Collection接口的方法又都声明了一遍。但是在Collection接口的基础之上，它主要对添加元素的方法声明了限制条件：重复的元素不能被添加</li>
+<li>向下：该接口和List接口不同，List接口下面的接口都是sun包里的，而Set接口下面还有一个java包里的<code>SortedSet</code>接口，我们不需要关注sun包的东西，因为Java核心的代码都在java包里。另外我们可以看到，与Collection呼应，Set下面也有一堆与之相对应的实现类。有SynchronizedCollection就有SynchronizedSet。</li>
+</ul>
+<h3 id="内部结构-6"><a href="#内部结构-6" class="headerlink" title="内部结构"></a>内部结构</h3><p>上面说到过，Set接口的内部结构几乎和Collection接口一模一样，不像List额外定义了一些方法，Set都没有额外定义的方法。但是如果打开它的注释，会看到所有Set的方法，注释都有修改过，声明会抛出的Exception以及抛出的条件也和Collection完全不一样。所以说完全就是从约定的角度来实现Set与Collection的不同之处。</p>
+<h2 id="十、AbstractSet抽象层"><a href="#十、AbstractSet抽象层" class="headerlink" title="十、AbstractSet抽象层"></a>十、AbstractSet抽象层</h2><p>在JDK中，几乎每一个接口都伴随一个抽象类作为骨架结构，帮助人们更好更快地实现想要实现的接口。<br>Set接口也不例外，它有一个AbstractSet抽象类。<br>这个抽象类有40个子类，相比之下，AbstractList才有26个。可见该类使用之频繁。当然，之所以多出这么多主要一个因素是它的子类会在后面要介绍的Map中用到。</p>
+<p>打开该类，惊奇地发现其内部结构竟然非常简单，只有<strong>3个方法</strong>。原因在于它继承了<code>AbstractCollection</code>抽象类。而上面讲到过，Set接口和Collection接口几乎一模一样，这里充分利用了面向对象继承带来的好处。<br>至于其实现的3个方法：<br>equal、hashCode主要是因为Set这种结构可以更高效地利用size来比较，更快速地判断不相等的情况，而hashCode在改动equals方法时必须同时实现（Effective Java这本书有讲到）<br>removeAll方法也是因为作者要充分利用Set的特性提供更高效的删除方法，根据两者的体积，取体积小的一方遍历并比较，在两者体积相差较大时，得到更好的效率。</p>
+<h2 id="十一、AbstractSet实现层（HashSet）"><a href="#十一、AbstractSet实现层（HashSet）" class="headerlink" title="十一、AbstractSet实现层（HashSet）"></a>十一、AbstractSet实现层（HashSet）</h2><p>由于进度缓慢，从这里开始就不特别详细地去讲了。只罗列要点：</p>
+<ol>
+<li>HashSet是Set最典型最有名的实现，它继承了AbstractSet，而AbstractSet又继承了AbstarctCollection。</li>
+<li>HashSet令人惊奇的是，它居然背后是用HashMap实现的！也就是说，它的内部有一个HashMap，来保存每一个元素。由于HashMap的键肯定是唯一的，同一个对象会被映射成同一个键，所以利用HashMap的键就能做到不重复的元素了。至于键对应的值，直接是一个由内部静态不可变常量保存的Object对象。</li>
+<li>由于HashMap添加和删除键，返回size，contains方法都是常数时间，所以，HashSet的这些方法也是常数时间。</li>
+<li>但是！迭代HashSet是线性时间，而且与内部的HashMap容量大小成正相关，所以文档有提到，一开始不要把HashSet的容量声明的太大，或者loadFactor因子设置的太小。这个到HashMap介绍的时候会详细讲。</li>
+<li>HashSet简直就是HashMap的组合包装类，其自身没有任何能力，几乎所有方法都是调HashMap的方法来完成。</li>
+<li>该实现是非线程安全的</li>
+</ol>
+<h2 id="十二、AbstractSet实现层-LinkedHashSet"><a href="#十二、AbstractSet实现层-LinkedHashSet" class="headerlink" title="十二、AbstractSet实现层(LinkedHashSet)"></a>十二、AbstractSet实现层(LinkedHashSet)</h2><p>LinkedHashSet继承了HashSet，目的是将元素按第一次插入的顺序排列，在遍历的时候就可以按照第一次插入顺序遍历到元素，保证每次遍历的顺序一致。（所谓第一次插入，指集合中不存在此元素时的第一次插入）<br>怎么实现呢？居然直接把内部的HashMap换成LinkedHashMap就搞定了。真是再一次享受到面向对象的好处呀。<br>值得一提的是，它换LinkedHashMap的方式也很有意思，由于内部的Map是在构造方法初始化的，所以它的父类HashSet专门为它提供了一个构造方法（外部不可见的），其内部初始化Map用的是LinkedHashMap:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">       map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>其中，参数dummy什么事儿也没做，为什么会这样呢？因为已经有了HashSet(int,float)这样的构造方法了，为了能给子类提供一个特别版的，它就多写了一个冗余的参数，区分方法签名。<br>LinkedHashSet调用的时候，dummy就直接传ture。它的所有的构造方法都调用的是这一个父类的构造方法，只不过入参有所不同。<br>该实现是非线程安全的。</p>
+<h2 id="十三、SortedSet接口"><a href="#十三、SortedSet接口" class="headerlink" title="十三、SortedSet接口"></a>十三、SortedSet接口</h2><p>和List不同，Set还有一个子接口SortedSet需要留意。</p>
+<ol>
+<li>看名字就知道，这个接口定义：<strong>元素不重复且按照某种规律排序的集合</strong></li>
+<li>和LinkedHashSet相比，这个接口可以自定义元素排序规则，而LinkedHashSet就定死了是元素第一次插入时的顺序</li>
+<li>该接口定义了一些有用的方法，它的注释文档还定义了实现该接口必须提供的4种构造方法，由于接口没法限制构造方法，所以写在了javaDoc里</li>
+<li>基本上，自定义排序规则是通过比较器comparator来完成的，或者元素类型实现Comparable接口</li>
+<li>和Set相比新方法有：<ol>
+<li>comparator：获取内部的比较器</li>
+<li>subSet(from,to)：获取子集合的视图（半闭半开区间）</li>
+<li>headSet(to)：获取子集合的视图(比to小的)</li>
+<li>tailSet(from)：同上，比from大的都算，包括from</li>
+<li>first,last：获取第一个，最后一个元素</li>
+</ol>
+</li>
+</ol>
+<h2 id="十四、NavigableSet接口"><a href="#十四、NavigableSet接口" class="headerlink" title="十四、NavigableSet接口"></a>十四、NavigableSet接口</h2><p>从JDK1.6版本起，又多了一个NavigableSet接口。</p>
+<ol>
+<li>该接口主要作用是额外定义一些查找元素的方法，虽然SortedSet接口定义了元素有顺序这件事，但是只支持获取第一个或者最后一个元素，这肯定不行。这个接口提供了一系列根据某个元素获得它上一个，下一个元素的方法，还要诸如获得拥有相同元素的逆序Set，从两头poll即取回并删除元素的操作等。</li>
+<li>该接口新方法有：<ol>
+<li>lower，higher：获得比入参元素小或者大的第一个元素，如果没有返回null</li>
+<li>floor，ceiling：获得小于等于入参元素或者大于等于的第一个元素，如果没有返回null</li>
+<li>pollFirst，pollLast：取出并删除第一个，最后一个元素</li>
+<li>descendingSet：获得一个顺序相反的Set的视图</li>
+<li>descendingIterator：获取相反顺序的迭代器</li>
+<li>subSet(from,boolean,to,boolean)：和SortedSet相比，这个方法允许你自定义区间是开区间还是闭区间，类似的还有headSet和tailSet也做了相似改变</li>
+</ol>
+</li>
+</ol>
+<h2 id="十五、Navigableset实现层（TreeSet）"><a href="#十五、Navigableset实现层（TreeSet）" class="headerlink" title="十五、Navigableset实现层（TreeSet）"></a>十五、Navigableset实现层（TreeSet）</h2><p>TreeSet是早于NavigableSet接口就存在的类，1.6版本之后修改为实现NavigableSet接口，目测以前实现的是SortedSet接口。</p>
+<ol>
+<li>果然不出所料，其底层是一个NavigableMap，构造方法里面直接就new的是一个TreeMap，所以所有的方法其功能都由TreeMap来提供。包括传入的比较器也直接传给底层的TreeMap</li>
+<li>其同样继承了AbstractSet骨架类</li>
+<li>该实现是非线程安全的</li>
+<li>名称的由来是因为内部的TreeMap其数据结构是树，这个到TreeMap章节再详细介绍</li>
+</ol>
+<h2 id="十六、Queue接口"><a href="#十六、Queue接口" class="headerlink" title="十六、Queue接口"></a>十六、Queue接口</h2><p>Collection底下的三大接口（List，Set，Queue）到这里都提到了。本来是四大接口的，但是BeanContext历史原因实在没什么人气，就不讲了。<br>Queue主要定义队列这种特殊的集合，队列一般都是从两头插入元素的，典型地是从一头插入另一头取出。即先进先出（FIFO）。而栈是一种特殊的队列，它是后进先出（LIFO）的。本接口定义的队列既可以是无界队列，即一直可以往里面插入元素，也可以是有界队列，即容量满了就不能插入了。<br>本接口主要定义了下面一些方法：</p>
+<ul>
+<li>add,offer：添加元素到队列，一般都是队尾。无界队列这两个方法是等效的，有界队列，add在队满会报错，offer队满只会返回false。</li>
+<li>remove,poll：从队列中删除一个元素，一般都是队头。同样地，无界队列这两个方法是等效的，有界队列，remove在队空时报错，poll队空时返回null。正因为如此，Queue通常不允许元素为null，因为这个方法返回null时无法判断是队空还是返回的就是null元素（LinkedList除外）</li>
+<li>element，peek：从队列中获取一个元素，但是不删除，一般从队头获取。无界队列这两个方法是等效的，有界队列，队空时element会报错，peek会返回null</li>
+</ul>
+<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。</p>
+<h2 id="十七、AbstractQueue抽象层"><a href="#十七、AbstractQueue抽象层" class="headerlink" title="十七、AbstractQueue抽象层"></a>十七、AbstractQueue抽象层</h2><p>这个抽象类提供Queue的骨架实现，它约定元素不能包含null。我们的LinkedList包含了null，因此就没继承这个抽象类。<br>上面的方法中，它只实现了add,remove,element，以及clear。其他的都留给实现者实现，因此，实现者要自己保证元素不能是null，这个类限制不了。<br>实现add等这些方法的步骤也很简单，就是调用它对应的那个不会抛Exception的版本，如果返回false或者null，就直接抛Exception。<br>其中，clear方法很有意思，它的实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (poll() != <span class="keyword">null</span>)</div><div class="line">        ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>充分利用现有的方法来实现clear操作。</p>
+<h2 id="十八、"><a href="#十八、" class="headerlink" title="十八、"></a>十八、</h2><p>【未完待续】</p>
 <div style="display:none;"><br>
 //引用块
 {% blockquote [author[, source]] [link] [source_link_title] %}
@@ -458,7 +590,7 @@ content
     <link href="/2017/06/04/design-pattern-1/"/>
     <id>/2017/06/04/design-pattern-1/</id>
     <published>2017-06-04T08:05:00.000Z</published>
-    <updated>2017-07-19T15:37:40.307Z</updated>
+    <updated>2017-07-30T13:54:30.950Z</updated>
     
     <content type="html"><![CDATA[<p>终于，我们要开始讨论设计模式了。<br>如果不知道什么是设计模式，不妨先看我的另一篇文章——<a href="/2017/01/18/anti-pattern/" title="有趣的反面模式">有趣的反面模式</a>。<br>设计模式就是与反面模式相对的正面模式，它是一系列好的编程实践的集合，是一瓶瓶灵丹妙药，吃对了延年益寿，乱吃或者吃错了那就是走火入魔，毒火攻心。<br><a id="more"></a></p>
 <p>现在业内，针对设计模式一词的态度基本上分为两类：<br>第一类，会觉得设计模式是个好东西，面试的时候会问求职者，平时工作的时候也会想方设法用起来，谈起设计模式似乎就是高大上的代名词。<br>第二类，会对设计模式深恶痛绝，觉得它提高了语言学习的门槛，编造多余的技术名词，还有人觉得设计模式害人不浅，根本没什么用或者反而会产生不良作用。设计模式就是毒瘤。</p>
@@ -474,7 +606,7 @@ content
 <li>讲解用了某种设计模式，代价是什么，副作用是什么</li>
 </ul>
 <p>另外，这篇文章是基于JAVA设计模式的官方网站，github知名代码仓库<a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="external">java-design-patterns</a>来编写的。尽量保证权威性。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式（未完成）">设计模式——第二章 结构型模式（未完成）</a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a><br>3.<a href="/2017/07/30/design-pattern-3/" title="设计模式——第三章 行为型模式（未完成）">设计模式——第三章 行为型模式（未完成）</a></p>
 <hr>
 <p>第一章主要关注创建对象使用的模式，即创建型模式。</p>
 <h2 id="推荐等级介绍"><a href="#推荐等级介绍" class="headerlink" title="推荐等级介绍"></a>推荐等级介绍</h2><p>每个模式后面都会有推荐等级，下面统一介绍一下推荐等级含义：<br><strong>★</strong>：一颗星，说明你应该尽量避免使用这种设计模式，它是小众设计模式，其复杂度远大于其带来的收益。<br><strong>★★</strong>：两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。<br><strong>★★★</strong>：三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。<br><strong>★★★★</strong>：四颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。<br><strong>★★★★★</strong>：五颗星，代表在适用场景下，你应该尽量使用该设计模式</p>
@@ -2315,107 +2447,6 @@ content
     
     
       <category term="Mysql" scheme="/tags/Mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《Effective Java》读书笔记——第一章 创建和销毁对象</title>
-    <link href="/2017/01/19/effective-java-1/"/>
-    <id>/2017/01/19/effective-java-1/</id>
-    <published>2017-01-19T14:40:59.000Z</published>
-    <updated>2017-04-30T05:25:09.595Z</updated>
-    
-    <content type="html"><![CDATA[<p>本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。<br><a id="more"></a><br>本系列是著名JAVA必读书籍之一的《Effective JAVA》的读书笔记，注意，本书不适合没有JAVA基础或者编程经验的人阅读。属于高级教程。</p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/01/19/effective-java-1/" title="《Effective Java》读书笔记——第一章 创建和销毁对象">《Effective Java》读书笔记——第一章 创建和销毁对象</a><br>2.<a href="/2017/02/11/effective-java-2/" title="《Effective Java》读书笔记——第二章 所有对象通用方法">《Effective Java》读书笔记——第二章 所有对象通用方法</a><br>3.<a href="/2017/02/19/effective-java-3/" title="《Effective Java》读书笔记——第三章 类和接口">《Effective Java》读书笔记——第三章 类和接口</a><br>4.<a href="/2017/03/02/effective-java-4/" title="《Effective Java》读书笔记——第四章 泛型">《Effective Java》读书笔记——第四章 泛型</a><br>5.<a href="/2017/03/12/effective-java-5/" title="《Effective Java》读书笔记——第五章 枚举和注解">《Effective Java》读书笔记——第五章 枚举和注解</a><br>6.<a href="/2017/03/21/effective-java-6/" title="《Effective Java》读书笔记——第六章 方法">《Effective Java》读书笔记——第六章 方法</a><br>7.<a href="/2017/04/16/effective-java-7/" title="《Effective Java》读书笔记——第七章 通用程序设计">《Effective Java》读书笔记——第七章 通用程序设计</a><br>8.<a href="/2017/04/18/effective-java-8/" title="《Effective Java》读书笔记——第八章 异常">《Effective Java》读书笔记——第八章 异常</a><br>9.<a href="/2017/04/24/effective-java-9/" title="《Effective Java》读书笔记——第九章 并发">《Effective Java》读书笔记——第九章 并发</a><br>10.<a href="/2017/04/30/effective-java-10/" title="《Effective Java》读书笔记——第十章 序列化">《Effective Java》读书笔记——第十章 序列化</a></p>
-<h2 id="第一条-用静态工厂方法代替构造器"><a href="#第一条-用静态工厂方法代替构造器" class="headerlink" title="第一条 用静态工厂方法代替构造器"></a>第一条 用静态工厂方法代替构造器</h2><h3 id="静态工厂方法大概长下面这样："><a href="#静态工厂方法大概长下面这样：" class="headerlink" title="静态工厂方法大概长下面这样："></a>静态工厂方法大概长下面这样：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> MyClass(arg1, arg2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>为什么要用上面的方法来获得对象的实例呢？用构造器不就好了吗？<br>理由有如下几点：</p>
-<ol>
-<li>静态工厂方法有名称！构造器必须和类同名，这意味着，两个或者两个以上的构造器存在的时候，你只能通过它们的参数来区分它们。而很多时候，调用者会不小心把参数的顺序搞混！<br>如果使用带有合适名称的静态工厂方法，一切就都迎刃而解咯。</li>
-<li>静态工厂方法可以用来返回缓存的对象实例。如果你调用了构造器，不管你愿意或者不愿意，构造器都将扔给你一个新对象。静态工厂方法可以编写地更加灵活，使得针对同样的入参，总是返回同一个对象。<br>可以参考Boolean.valueOf(boolean)</li>
-<li>可以返回原返回类型的任何子类型的对象，从而拥有更大灵活性。<br>举例：<ul>
-<li>比如Collections类，该类可以返回一些不可变的集合对象，这些对象都以私有内部类的形式定义，而由于该类的构造器被私有化，因此任何人都不能去new一个Collections类，所以它为我们提供一系列静态工程方法的同时，防止任何人去修改它本身和它返回的东西。<br>Collections使用静态工厂方法的模式值得我们借鉴。当我们为某个接口提供预设的实现而又不想让这实现公有化时，可以使用这种模式来仅仅返回实例。</li>
-<li>静态工厂方法除了可以返回私有的子对象以外，还可以根据情况，动态地返回子对象。比如EnumSet，竟然根据枚举类型的大小返回不同的结果，如果元素&lt;=64个，就返回RegularEnumSet，超过了就使用JumboEnumSet的实例。    </li>
-</ul>
-</li>
-<li>静态工厂方法可以做类型推导，从而在创建参数化类型实例的时候，是代码更简洁，比如：</li>
-</ol>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; m = <span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt;();</div></pre></td></tr></table></figure>
-<p>注：书中在举例的时候，JAVA才出到1.6版本，因此才会提及这个特性，实际上，类型推导在1.7版本JDK已经帮我们实现了，后面的new语句不需要再声明类型，只需要<code>new HashMap&lt;&gt;()</code>就可以了。<br>可以用静态工厂方法：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K,V&gt; HashMap&lt;K,V&gt; <span class="keyword">new</span><span class="type">Instance</span>()&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="type">HashMap</span>&lt;K,V&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>来这样做类型推导:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; m = HashMap.newInstance();</div></pre></td></tr></table></figure></p>
-<p>注：虽然1.6版本的JAVA集合框架都没有实现类型推导，但是谷歌著名的GUAVA工具框架用静态工厂方法帮我们实现了。</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>任何设计都有其缺点，静态工厂方法也是有缺点的，缺点如下：</p>
-<ol>
-<li>静态工厂方法要想实现上面优点中的第3点，返回内部类或者子类，首先，该内部类或者子类需要有public或者protected类型的构造器才行，这就导致我们无法做到任何人只能通过我们提供的静态工厂方法来获得实例，他们也可以想办法使用其他办法获得。另一方面也意味着没有非私有化构造器的类是不能用静态工厂方法来返回的，也就无法像Collections那样方便地提供一系列方法返回实例了。</li>
-<li>静态工厂方法和其他静态方法没有任何区别，调用者只能依靠名字来区分它们。为了解决这个问题，我们必须遵守好的命名规范，尽可能地告诉调用者，我这是静态工厂方法，用我这个方法，是可以得到某某某的实例的：<ul>
-<li>valueof</li>
-<li>of</li>
-<li>getInstance</li>
-<li>newInstance</li>
-<li>getType</li>
-<li>newType</li>
-</ul>
-</li>
-</ol>
-<h2 id="第二条-遇到多个构造器参数时考虑使用构建器（Builder）"><a href="#第二条-遇到多个构造器参数时考虑使用构建器（Builder）" class="headerlink" title="第二条 遇到多个构造器参数时考虑使用构建器（Builder）"></a>第二条 遇到多个构造器参数时考虑使用构建器（Builder）</h2><p>本条主要是讲遇到一个对象有几十个域（Field）时，构造器的入参可多达几十个，前面第一条的静态工厂方法也无法解决这个问题。<br>书中先给出了一系列我们平常最喜欢用的、拙劣的实现手段。</p>
-<h3 id="层叠构造器"><a href="#层叠构造器" class="headerlink" title="层叠构造器"></a>层叠构造器</h3><p>就是那种一堆构造器，每个构造器都比上一个多一个入参，最终有一个非常全面的构造器，包含所有的入参。代码如下：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">ClassForShowTelescopingConstructor</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field1;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field2;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field3;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field4;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, field2, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2, <span class="keyword">int</span> field3</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>(field1, field2, field3, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowTelescopingConstructor</span>(<span class="params"><span class="keyword">int</span> field1, <span class="keyword">int</span> field2, <span class="keyword">int</span> field3, <span class="keyword">int</span> field4</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">            <span class="keyword">this</span>.field2 = field2;</div><div class="line">            <span class="keyword">this</span>.field3 = field3;</div><div class="line">            <span class="keyword">this</span>.field4 = field4;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>如果你曾经为写出上面这样的代码而沾沾自喜，觉得很厉害的样子，那你就可以抽自己一嘴巴子了，作者已经抽过了T_T<br>这个模式有两个致命缺点：</p>
-<ol>
-<li>随着参数的增加，排列组合的可能性几何增长，你根本不可能提供所有的参数的排列的构造器，于是调用者不得不调用距离他想要的构造器最相近的那一个，然后把多余的参数都塞上0、null这种状态。即便真的巧合遇到他想要的，但是他还是不知道，你已经背地里帮他把其他的参数都塞了一堆0、null这样的数值进去了……这真的是一种好的做法吗？</li>
-<li>数量繁多的构造器在IDE的自动补全列表里会撑开一个长长的名字一模一样的名单，调用者不得不小心翼翼并猜测哪个才是他想要的，或者干脆点进去看一眼源代码，否则，他极有可能搞混两个类型相同参数的顺序，或者调用到了他根本不想要的那一个。而这一切编译器不会提前发现错误……</li>
-</ol>
-<h3 id="JavaBean模式"><a href="#JavaBean模式" class="headerlink" title="JavaBean模式"></a>JavaBean模式</h3><p>这是当今Web领域最流行的一种构造对象的方式。<br>不可否认，至少这种模式已经能够解决上面层叠构造器的麻烦，为我们提供一个清晰可读的代码：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">ClassForShowJavaBean</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field1;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field2;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field3;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> field4;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ClassForShowJavaBean</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField1</span>(<span class="params"><span class="keyword">int</span> field1</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField2</span>(<span class="params"><span class="keyword">int</span> field2</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field2 = field2;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField3</span>(<span class="params"><span class="keyword">int</span> field3</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field3 = field3;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setField4</span>(<span class="params"><span class="keyword">int</span> field4</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.field4 = field4;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line"><span class="keyword">class</span> <span class="title">ClassMain</span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">            ClassForShowJavaBean classForShowJavaBean = <span class="keyword">new</span> ClassForShowJavaBean();</div><div class="line">            classForShowJavaBean.setField1(<span class="number">1</span>);</div><div class="line">            classForShowJavaBean.setField2(<span class="number">2</span>);</div><div class="line">            classForShowJavaBean.setField3(<span class="number">3</span>);</div><div class="line">            classForShowJavaBean.setField4(<span class="number">4</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>由于Spring框架和JSON的流行，这种模式现在在Web项目中很常见。但是书中还是指出了不足的地方：</p>
-<ol>
-<li>这种方法没法保证调用者在对象完全构造完毕的时候才使用对象，构造的过程是分离的，分很多步，而这可能导致对象处于一种不一致的状态，使用不一致状态的对象可能导致难以察觉的错误。（其实简单点儿说就是，这种模式没法一次就构造出可以使用的对象，需要分成多步，从而造成不一致性）</li>
-<li>这种方法导致无法轻易将类做成不可变的对象，因为它要求我们必须提供Setter方法，从而给予外人改变其域值的机会，这在多线程程序中会有问题。</li>
-</ol>
-<h3 id="Builder模式"><a href="#Builder模式" class="headerlink" title="Builder模式"></a>Builder模式</h3><p>这是设计模式中非常著名的一种模式，它长下面这个样子：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForShowBuilder</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> int field1;</div><div class="line">    <span class="keyword">private</span> int field2;</div><div class="line">    <span class="keyword">private</span> int field3;</div><div class="line">    <span class="keyword">private</span> int field4;</div><div class="line">	</div><div class="line">    <span class="keyword">private</span> ClassForShowBuilder(Builder builder) &#123;</div><div class="line">        <span class="keyword">this</span>.field1 = builder.field1;</div><div class="line">        <span class="keyword">this</span>.field2 = builder.field2;</div><div class="line">        <span class="keyword">this</span>.field3 = builder.field3;</div><div class="line">        <span class="keyword">this</span>.field4 = builder.field4;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="keyword">public</span> static <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> int field1;</div><div class="line">        <span class="keyword">private</span> int field2;</div><div class="line">        <span class="keyword">private</span> int field3;</div><div class="line">        <span class="keyword">private</span> int field4;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder(int field1) &#123;</div><div class="line">            <span class="keyword">this</span>.field1 = field1;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field2(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field2 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field3(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field3 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="keyword">public</span> Builder field4(int <span class="keyword">val</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.field4 = <span class="keyword">val</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> ClassForShowBuilder build()&#123;</div><div class="line">            <span class="keyword">return</span> new ClassForShowBuilder(<span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>调用起来非常简洁：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="type">ClassMain</span> &#123;</span></div><div class="line">        public static void main(<span class="type">String</span>[] <span class="title">args</span>) &#123;</div><div class="line">            <span class="type">ClassForShowBuilder</span> classBuilded = new <span class="type">ClassForShowBuilder</span>.<span class="type">Builder</span>(1).field2(2).field3(3).field4(4).build();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>用这种模式即解决了层叠构造器糟糕的可读性，又解决了JavaBean的安全隐患，我们得到了不可变的对象。<br>还可以在构建的过程中，检查入参的合法性，或者最终build()方法构造对象时，检查拷贝之后的参数的合法性。<br>注意：使用这种模式的时候，构建器Builder的Setter方法不能有顺序依赖。<br>另外，构建器随着参数数目的增加，缺点也是很显然的：太过冗长（好在现在IDE可以为我们自动生成构建器类）</p>
-<h2 id="第三条-单例模式的三种实现方法"><a href="#第三条-单例模式的三种实现方法" class="headerlink" title="第三条 单例模式的三种实现方法"></a>第三条 单例模式的三种实现方法</h2><p>什么是单例，顾名思义，单个实例的意思。就是采取一种手段让类的实例在整个ClassLoader范围内只拥有一个，任何调用者调用的都是同一个对象，一些系统级的组件通常会使用单例模式。<br>本书在该节介绍了单例模式的三种实现方法，让我来一一介绍:</p>
-<h3 id="私有构造器加公有final域"><a href="#私有构造器加公有final域" class="headerlink" title="私有构造器加公有final域"></a>私有构造器加公有final域</h3><p>实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForSingleton</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton INSTANCE = <span class="keyword">new</span> ClassForSingleton();</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">ClassForSingleton</span><span class="params">()</span></span>&#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>私有的构造器导致除了类本身任何人没有机会调用构造器，就没有机会创建实例对象。<br>公有静态final域则保证了在类被第一次加载的时候，调用私有构造器得到一个实例，并且是全局可访问的唯一实例。<br>然后我们就可以通过<code>ClassForSingleton.INSTANCE</code>来获得单例啦。</p>
-<h3 id="私有构造器加静态工厂方法"><a href="#私有构造器加静态工厂方法" class="headerlink" title="私有构造器加静态工厂方法"></a>私有构造器加静态工厂方法</h3><p>实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassForSingleton</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton INSTANCE = <span class="keyword">new</span> ClassForSingleton();</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">ClassForSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (INSTANCE != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"the class is singleton!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ClassForSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> INSTANCE;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>和刚才的区别在于我们的静态final域变成私有的了，外部不能直接调用，想要调用就要使用静态工厂方法。<br>这个模式的好处是我们可以在晚些时候修改静态工厂方法的内部实现，为单例的获取过程添加更多逻辑，比如为每个线程提供单例而非整个ClassLoader范围，再比如后悔了，不要单例了，也是可以做到的。而这些改变不需要调用方做任何随之进行的改变。<br>还有个优势是能够很好地支持泛型，做类型推导，这在之前已经讲过了。</p>
-<p>细心的你肯定发现了，这里的私有构造器也有一些变化，这种变化也可以用在上一种方法里。为什么要检测INSTANCE是否为空呢？我们不是已经使用私有构造器阻止任何人来创建实例了吗？难道有人能够跨越<code>private</code>这个声明的权限，从类以外的地方调用私有构造器？<br>还真有……JAVA的反射机制为各种各样的框架开发者提供了便利，弥补了一些JAVA语言本身的缺陷，然而，也带来了安全隐患，它给不怀好意的人一种途径，可以从外部调用某个类的私有方法。<br>想要真正实现单例，你还要注意序列化问题。<br>如果你的单例是个可序列化的单例，那么你必须实现<code>Serializable</code>接口，然而，实现了这个接口后，单例便被破坏。如何避免这一情况？书中给出了方法，但是第77条时还会再重复，我不打算写出。下面有一种更好的办法可以实现真正防御力顶天的单例。</p>
-<h3 id="枚举单例，单例中的战斗例！"><a href="#枚举单例，单例中的战斗例！" class="headerlink" title="枚举单例，单例中的战斗例！"></a>枚举单例，单例中的战斗例！</h3><p>实现如下：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">enum</span> <span class="title">EnumForSingleton</span>&#123;</span></div><div class="line">        INSTANCE;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>看见了没？什么叫做简洁……它是单例，它不可被反射攻击，它也不可被序列化手段攻击，它坚如磐石。<br>这种神一般的单例实现仅有两个问题：</p>
-<ol>
-<li>你的应用程序必须使用JDK1.5或以上的版本（这年头还有人使用1.5以下的嘛？使用1.5以下的版本也太……）</li>
-<li>如果在编译期时你还不知道单例的那个唯一实例是什么样子的，那么使用这种方式也没法实现单例。</li>
-</ol>
-<h2 id="第四条-使用私有构造器来防止实例化"><a href="#第四条-使用私有构造器来防止实例化" class="headerlink" title="第四条 使用私有构造器来防止实例化"></a>第四条 使用私有构造器来防止实例化</h2><p>实在不明白这一条为什么不放在上一条的前面。<br>这一条其实解释起来就一句话：<br>在诸如Collections、Math等只包含静态方法和静态域的类中，显式地使用私有构造器来阻止人们实例化这个类，因为这个类的作用就是让人们通过<code>类名.方法名</code>的形式调用写好的过程方法的。人们不需要也不应该去实例化这些类。<br>个人认为，除了一些保存全局常量的类，还有一些工具类，其他任何类都不应该被构建成这种只包含静态方法和静态域的类，从而滥用静态方法和静态变量。<br>尤其是静态方法，臭名昭著地破坏面向对象地编程模式，使得JAVA的代码变得过于C化，滥用静态方法会让程序员不自觉地开始使用面向过程地方式编写程序。</p>
-<h2 id="第五条-避免创建多余的对象"><a href="#第五条-避免创建多余的对象" class="headerlink" title="第五条 避免创建多余的对象"></a>第五条 避免创建多余的对象</h2><p>书中列举了如下几种情况：</p>
-<h3 id="String字面量"><a href="#String字面量" class="headerlink" title="String字面量"></a>String字面量</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">String</span> a = <span class="keyword">new</span> <span class="keyword">String</span>(<span class="string">"test"</span>)</div></pre></td></tr></table></figure>
-<p>像上面这样的写法就是错误的，字面量<code>&quot;test&quot;</code>本身就是一个String的实例，而且由于JAVA设计者认为String会被经常使用到，所以做了一个对象池，所有的<code>&quot;test&quot;</code>字面量都是代表的同一个对象，同一个实例，同一块内存地址，没必要用上面的代码新建对象。<br>永远直接使用<code>&quot;xxx&quot;</code>的形式来得到String对象。</p>
-<h3 id="重用不可变对象"><a href="#重用不可变对象" class="headerlink" title="重用不可变对象"></a>重用不可变对象</h3><p>使用静态工厂方法，在调用方获取对象的时候返回已经创建过的不可变对象，比如<code>Boolean.valueof()</code>方法就会返回已经创建好的<code>Boolean.True</code>或者<code>Boolean.False</code></p>
-<h3 id="重用可变的但是已知不会被修改的对象"><a href="#重用可变的但是已知不会被修改的对象" class="headerlink" title="重用可变的但是已知不会被修改的对象"></a>重用可变的但是已知不会被修改的对象</h3><p>书中举例Calendar对象，很多人在使用这个对象的时候，不小心把<code>Calendar.getInstance()</code>方法写在了循环体的里面，那真是一种糟糕的做法。<br>如果最终得到的Date是个确定的，不会变的日期，为什么不写在循环体的外面呢？</p>
-<h3 id="适配器对象-view对象"><a href="#适配器对象-view对象" class="headerlink" title="适配器对象/view对象"></a>适配器对象/view对象</h3><p>Map接口中有个<code>keySet()</code>方法返回的就是一个适配器对象或者叫做视图对象（view），如果看源代码你会发现，每次使用该方法，返回的对象都是同一个。</p>
-<h3 id="自动装箱带来的祸害"><a href="#自动装箱带来的祸害" class="headerlink" title="自动装箱带来的祸害"></a>自动装箱带来的祸害</h3><p>考虑下面的代码：<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) &#123;</div><div class="line">        Long <span class="keyword">sum</span> = <span class="number">0</span>L;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</div><div class="line">            <span class="keyword">sum</span> += i;</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="keyword">sum</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>这是一段计算所有int值的总和的代码，由于所有int值的总和超出了int可承受的范围，所以sum使用了long型。可惜，写错了一个字母。<br>sum的类型应该声明为基本类型long而不是装箱类型Long。<br>有什么问题呢？<br>在第4行代码处，每次做加法，都会生成一个Long对象，这个循环为我们生成了大约2的31次方个对象，而这些对象做完加法立即就被抛弃了。<br>改为long以后，性能可以提升好几倍。</p>
-<h2 id="第六条-消除过期的对象引用"><a href="#第六条-消除过期的对象引用" class="headerlink" title="第六条 消除过期的对象引用"></a>第六条 消除过期的对象引用</h2><p>JAVA这种语言一般情况下是不会出现内存泄漏问题的，但是这不代表程序员就可以不用管这件事。<br>当我们的对象内部持有过期的对象引用时，就会发生内存泄漏。</p>
-<h3 id="1-什么是过期的对象引用？"><a href="#1-什么是过期的对象引用？" class="headerlink" title="1.什么是过期的对象引用？"></a>1.什么是过期的对象引用？</h3><p>通常指的是对象内部的某个域，这个域所引用的对象你已经不需要了，但是没有及时地解除引用。<br>比如下面这个类：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class Stack &#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">Object</span>[] elements;</div><div class="line">	<span class="keyword">private</span> <span class="built_in">int</span> <span class="built_in">size</span> = <span class="number">0</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">16</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Stack() &#123;</div><div class="line">		elements = <span class="keyword">new</span> <span class="keyword">Object</span>[DEFAULT_INITIAL_CAPACITY];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> push(<span class="keyword">Object</span> e) &#123;</div><div class="line">		ensureCapacity();</div><div class="line">		elements[<span class="built_in">size</span>++] = e;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">Object</span> pop() &#123;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">size</span> == <span class="number">0</span>)</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</div><div class="line">		<span class="keyword">return</span> elements[--<span class="built_in">size</span>];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * Ensure space for at least one more element, roughly doubling the capacity</div><div class="line">	 * each time the array needs to grow.</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> <span class="keyword">void</span> ensureCapacity() &#123;</div><div class="line">		<span class="keyword">if</span> (elements.length == <span class="built_in">size</span>)</div><div class="line">			elements = Arrays.copyOf(elements, <span class="number">2</span> * <span class="built_in">size</span> + <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果Stack对象是一个存活时间很长的对象，那么它所持有的数组<code>elements</code>将和它的寿命一样长，然后，数组<code>elements</code>内部的对象，即使是已经被pop的对象（实际上它们还存在于数组中），寿命也会和它一样长。<br>既然你已经pop了数组的对象，那么光移动size指针是不够的，你还应该把数组中相应的位置清空，否则数组中相应的位置就持有一个过期的引用。</p>
-<h3 id="2-过期对象引用有什么危害？"><a href="#2-过期对象引用有什么危害？" class="headerlink" title="2.过期对象引用有什么危害？"></a>2.过期对象引用有什么危害？</h3><p>内存泄漏。原因很简单，垃圾回收机制不会回收仍然被引用的对象，即使这些对象你不需要了，但是垃圾回收机制可不知道，既然你还在引用它，那么有理由认为你还需要它。</p>
-<h3 id="3-如何避免这一情况？"><a href="#3-如何避免这一情况？" class="headerlink" title="3.如何避免这一情况？"></a>3.如何避免这一情况？</h3><p>书中指出，不必为这种情况过于担忧，有些人对每个对象的引用都小心翼翼地在不需要的时候置为Null，这完全没有必要，会令程序代码混乱。<br>事实上，这种过期的对象引用发生的地方是有规律可循的，一旦掌握规律，就可以在该小心的时候小心，该大胆的时候大胆。</p>
-<h3 id="4-过期对象引用的规律或常见来源"><a href="#4-过期对象引用的规律或常见来源" class="headerlink" title="4.过期对象引用的规律或常见来源"></a>4.过期对象引用的规律或常见来源</h3><ul>
-<li>上面举的例子之所以出现过期对象引用，是因为<code>Stack</code>类<strong><em>自己管理内存</em></strong>，所以如果你的类自己在内部拥有类似<code>array</code>、<code>List</code>、<code>Map</code>这种东西，那么就要小心了。</li>
-<li>缓存也是常见的原因，如果你要实现缓存，那么就要考虑所缓存的对象的存活时间</li>
-<li>监听器或者其他回调，如果注册了回调方法，通常如果你不显式地去取消注册，回调方法会在你写的类中积聚。事实上这条和上一条都是第一条的特殊情况，所谓的注册回调方法，不过是将回调方法放在类内部的某个<code>List</code>或者<code>Map</code>里而已。缓存也是如此。</li>
-</ul>
-<h2 id="第七条-避免使用终结方法"><a href="#第七条-避免使用终结方法" class="headerlink" title="第七条 避免使用终结方法"></a>第七条 避免使用终结方法</h2><p>我想题目已经说得很清楚了，避免使用<code>xxx.finalize()</code>方法，因为JVM不保证终结方法立刻执行，没人能保证终结方法在什么时候执行，不同JVM的实现可能终结方法执行的行为和时机完全不同。终结方法还有严重性能损失。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本章主要讨论创建和销毁对象的时候应该遵守的规则和注意的地方。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Effective Java" scheme="/tags/Effective-Java/"/>
     
   </entry>
   

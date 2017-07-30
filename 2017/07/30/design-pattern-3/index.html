@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>设计模式——第三章 行为型模式（未完成） | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  
+    <link rel="stylesheet" href="/css/zoom.css">
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(17)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(17)</small></a></li>
+				    
+				    <li><a href="/categories/转载分享/" class="animsition-link">转载分享<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(10)</small></a></li>
+				    
+				    <li><a href="/tags/Guava/" class="animsition-link">Guava<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/JDK源码学习/" class="animsition-link">JDK源码学习<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/技术周报/" class="animsition-link">技术周报<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(2)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(4)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_5.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第三章</h2>
+                                <p>行为型模式</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-07-30T13:48:39.000Z" itemprop="datePublished">
+          2017年7月30日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/设计模式/'>设计模式</a>,
+    
+    <a href='/tags/未完成/'>未完成</a>
+    
+    
+	
+</span>
+                <h1>设计模式——第三章 行为型模式（未完成）</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一条-API网关模式（API-Gateway）"><span class="toc-text">第一条 API网关模式（API Gateway）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处"><span class="toc-text">坏处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐等级-★★★★★"><span class="toc-text">推荐等级 ★★★★★</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四条-异步方法调用（Async-Method-Invocation）"><span class="toc-text">第四条 异步方法调用（Async Method Invocation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景-1"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做-1"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处-1"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处-1"><span class="toc-text">坏处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐等级-★★★"><span class="toc-text">推荐等级 ★★★</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五条-阻止模式（Balking）"><span class="toc-text">第五条 阻止模式（Balking）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景-2"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做-2"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处-2"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处-2"><span class="toc-text">坏处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐等级-★★"><span class="toc-text">推荐等级 ★★</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第八条-业务委托模式（Business-Delegate）"><span class="toc-text">第八条 业务委托模式（Business Delegate）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景-3"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做-3"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处-3"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处-3"><span class="toc-text">坏处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐等级-★★★★★-1"><span class="toc-text">推荐等级 ★★★★★</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第九条-缓存和回调（cache-amp-callback）"><span class="toc-text">第九条 缓存和回调（cache&callback）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四条-责任链模式（Chain-of-responsibility）"><span class="toc-text">第四条 责任链模式（Chain of responsibility）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#适用场景-4"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何做-4"><span class="toc-text">如何做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好处-4"><span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坏处-4"><span class="toc-text">坏处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#真实世界的例子"><span class="toc-text">真实世界的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐等级-★★★★"><span class="toc-text">推荐等级 ★★★★</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要讨论行为型设计模式，即为了某些应用场景或者实现某个目的，我们的类有一些比较特殊的行为。该类设计模式也是比较难以理解的设计模式类型之一。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2017/06/04/design-pattern-1/" title="设计模式——第一章 序言以及创建型模式">设计模式——第一章 序言以及创建型模式</a><br>2.<a href="/2017/07/19/design-pattern-2/" title="设计模式——第二章 结构型模式">设计模式——第二章 结构型模式</a><br>3.<a href="/2017/07/30/design-pattern-3/" title="设计模式——第三章 行为型模式（未完成）">设计模式——第三章 行为型模式（未完成）</a></p>
+<hr>
+<p>下面这些都是之前写的，本来没想归类的，所以按顺序写，现在又想归类分开章节写，所以就把已经写好的先罗列在这里，等有了相应章节再剪切过去。</p>
+<h2 id="第一条-API网关模式（API-Gateway）"><a href="#第一条-API网关模式（API-Gateway）" class="headerlink" title="第一条 API网关模式（API Gateway）"></a>第一条 API网关模式（API Gateway）</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>只有你使用微服务架构的时候，才需要使用这种设计模式</p>
+<h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>这种设计提倡你设计一个API网关，所有用户与服务器的交互，都要经过这个网关，然后这个网关来转发并回应用户的请求。如下图：<br></p>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>客户端不需要感知到服务器端到底分割了多少个微服务，甚至不需要感知到微服务这种架构的存在。更换微服务的结构、实现方式、甚至整个把某个微服务换掉，客户端不需要做任何改变（或者只有少量改变）。</li>
+<li>如果某个操作需要请求多个微服务才能完成，现在被收编成了一个API地址，只需要请求API一次即可完成。多次请求的路径被缩短了，缩短到了只有API和各个微服务之间的交互是多次请求的。</li>
+<li>微服务们与客户端彻底解耦，使得它们传输数据不再局限于http协议或者某种客户端才能接受的协议。只需要API网关服务支持就行了。</li>
+<li>减少了微服务的曝光度，用户或者黑客无法感知到内部微服务架构，也就无从下手。API网关也更容易针对网络攻击进行集中化的防御。</li>
+</ol>
+<h3 id="坏处"><a href="#坏处" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>增加了复杂度</li>
+<li>增加了响应时间损失，因为客户端与服务端交互的环节多了一个节点。虽然大多数情况下这种损失可忽略不计。</li>
+<li>将所有请求集中到单点，意味着API网关需要有承受所有流量的能力，吞吐量要足够大。还要有足够的可用性、可靠性。因为API网关一但挂掉，全站都将完蛋。将风险集中化了，而不是分散化。</li>
+</ol>
+<h3 id="推荐等级-★★★★★"><a href="#推荐等级-★★★★★" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，说明应该在适用场景下尽量使用该设计模式</p>
+<a href="http://java-design-patterns.com/patterns/api-gateway/" title="[external]" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第四条-异步方法调用（Async-Method-Invocation）"><a href="#第四条-异步方法调用（Async-Method-Invocation）" class="headerlink" title="第四条 异步方法调用（Async Method Invocation）"></a>第四条 异步方法调用（Async Method Invocation）</h2><h3 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h3><p>说实话异步方法调用太普遍了，太基础了，以至于看到它的时候，我感觉它根本不应该算个设计模式。<br>当我们需要一些操作并行执行时，我们使用异步方法。尤其是服务器应用，在处理用户的请求时，如果不需要立即告诉用户结果，可以将耗费时间的计算过程进行异步处理，立即返回http请求，减少用户的等待时间。<br>注意，不是所有的时候都是并行好于单线程，并行执行由于多线程的复杂性，是有额外开销的，还有编程错误的风险，死锁的可能性，如果只是很简单的任务，不应该动不动就异步化。就算异步化了，也要用数字说话，如果异步化了以后就快了几毫秒，甚至还慢了，那就毫无意义。</p>
+<h3 id="如何做-1"><a href="#如何做-1" class="headerlink" title="如何做"></a>如何做</h3><p>在JAVA中，ExecutorService框架就是干这事儿的，尽管用就对了。<br>不过设计模式的github仓库还是给出了一个自己的实现，可以点击下面相关链接来查看。就不详述了。</p>
+<h3 id="好处-1"><a href="#好处-1" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>让你的多个任务并行进行，充分利用多核CPU的优势</li>
+<li>让你的用户不必无意义地等待</li>
+<li>使用回调可在结果计算好的时候立即通知你，主线程不需要等待结果，也不需要轮询结果</li>
+</ol>
+<h3 id="坏处-1"><a href="#坏处-1" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>多线程意味着复杂度，意味着并发问题，意味着无止境的锁</li>
+<li>并发任务的数量不是无限的，线程数在任何操作系统中都是有上限的</li>
+<li>要小心处理好失败重试的机制问题，当然成功后的回调也有可能因程序错误丢失。程序的数据一致性有可能难以保证。</li>
+</ol>
+<h3 id="推荐等级-★★★"><a href="#推荐等级-★★★" class="headerlink" title="推荐等级 ★★★"></a>推荐等级 ★★★</h3><p>三颗星，代表你可以在适用场景使用它，但是前提是你知道如何熟练地使用该设计模式。在非必须的场景下，你绝对不能使用该模式。</p>
+<a href="http://java-design-patterns.com/patterns/async-method-invocation/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第五条-阻止模式（Balking）"><a href="#第五条-阻止模式（Balking）" class="headerlink" title="第五条 阻止模式（Balking）"></a>第五条 阻止模式（Balking）</h2><h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><p>其实这个模式我感觉也是我们平时常用的技巧，但是并没有意识到它是一个设计模式。<br>该模式首先是多线程程序才会有的，在一个对象的状态不对时，会阻止其他线程执行一些特定的代码。<br>或者说，某个对象的某些状态转换过程，同一时间只能由一个线程执行。</p>
+<h3 id="如何做-2"><a href="#如何做-2" class="headerlink" title="如何做"></a>如何做</h3>
+<p>如图，我们有一个洗衣机类，洗衣机有两个状态，可以洗衣服和正在洗衣服。<br>然后我们有下面这段代码：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> &#123;</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(App.<span class="keyword">class</span>);</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">   * <span class="doctag">@param</span> args the command line arguments - not used</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String... args) &#123;</div><div class="line">    <span class="keyword">final</span> WashingMachine washingMachine = <span class="keyword">new</span> WashingMachine();</div><div class="line">    ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">3</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">      executorService.execute(<span class="string">washingMachine:</span>:wash);</div><div class="line">    &#125;</div><div class="line">    executorService.shutdown();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      executorService.awaitTermination(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      LOGGER.error(<span class="string">"ERROR: Waiting on executor service shutdown!"</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们开启了三个线程，同时去执行洗衣机的洗衣服方法。（这里是JDK8的代码，双冒号代表引用某个方法）<br>我们规定，当洗衣机的状态为可以洗衣服时，才能执行洗衣服方法，如果状态已经是洗衣服中，那么就不能执行：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * Method responsible for washing</div><div class="line">   * if the object is in appropriate state</div><div class="line">   */</div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">wash</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">      LOGGER.info(<span class="string">"&#123;&#125;: Actual machine state: &#123;&#125;"</span>, Thread.currentThread().getName(), getWashingMachineState());</div><div class="line">      <span class="keyword">if</span> (washingMachineState == WashingMachineState.WASHING) &#123;</div><div class="line">        LOGGER.<span class="keyword">error</span>(<span class="string">"ERROR: Cannot wash if the machine has been already washing!"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      washingMachineState = WashingMachineState.WASHING;</div><div class="line">    &#125;</div><div class="line">    LOGGER.info(<span class="string">"&#123;&#125;: Doing the washing"</span>, Thread.currentThread().getName());</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Thread.sleep(<span class="number">50</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</div><div class="line">      ie.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    endOfWashing();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>使用状态和锁来保证洗衣机在错误的状态下，不响应洗衣服的请求，并记录错误日志。</p>
+<h3 id="好处-2"><a href="#好处-2" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>利用锁来保护了判断逻辑，确保多线程情况下，只有某一个线程能成功地洗衣服，其他线程都只能无功而返。</li>
+</ol>
+<h3 id="坏处-2"><a href="#坏处-2" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>只适用于多线程程序，不能混用</li>
+<li>pattern太小，算不上一种设计模式，如果这也算设计模式，那么try-catch语句算不算(笑)</li>
+</ol>
+<h3 id="推荐等级-★★"><a href="#推荐等级-★★" class="headerlink" title="推荐等级 ★★"></a>推荐等级 ★★</h3><p>两颗星，代表你最好不要刻意使用该模式，它太小众或者说不常见。它所解决的问题你不看设计模式也可以轻松解决。</p>
+<a href="http://java-design-patterns.com/patterns/balking/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第八条-业务委托模式（Business-Delegate）"><a href="#第八条-业务委托模式（Business-Delegate）" class="headerlink" title="第八条 业务委托模式（Business Delegate）"></a>第八条 业务委托模式（Business Delegate）</h2><h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><p>本模式主要是在展示层和业务层之间增加一层抽象层，将展示层和业务层之间的紧耦合变成松耦合。<br>使用本模式可以让你自由地操纵多个业务service的调用逻辑，service的查找和调用都将被封装，由静态过程变成动态过程。</p>
+<h3 id="如何做-3"><a href="#如何做-3" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><br>BusinessDelegate是我们的核心类——委托类。<br>Client这里模拟的是我们的客户端，转换到Web开发场景，我们可以把Client等同于Controller的角色。<br>在我们的程序开始后，Client首先要有委托类，然后其doTask方法就是执行委托类的doTask方法。<br>委托类并不真的执行业务逻辑，而是利用其内部的BusinessLookup和Client传给它的ServiceType去查找要处理业务的Service，比如JmsService或者EjbService。<br>找到后，再调用相应的业务Service的doProcessing方法真正去处理业务。</p>
+<h3 id="好处-3"><a href="#好处-3" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>展示层和业务层解耦。随时可以更换底层业务逻辑，而不需要改动展示层的内容。</li>
+</ol>
+<h3 id="坏处-3"><a href="#坏处-3" class="headerlink" title="坏处"></a>坏处</h3><p>暂时还没想到，欢迎补充</p>
+<h3 id="推荐等级-★★★★★-1"><a href="#推荐等级-★★★★★-1" class="headerlink" title="推荐等级 ★★★★★"></a>推荐等级 ★★★★★</h3><p>五颗星，在适用场景下，尽可能地使用该模式</p>
+<a href="http://java-design-patterns.com/patterns/business-delegate/" target="_blank" rel="external">相关链接—含代码</a>
+<h2 id="第九条-缓存和回调（cache-amp-callback）"><a href="#第九条-缓存和回调（cache-amp-callback）" class="headerlink" title="第九条 缓存和回调（cache&amp;callback）"></a>第九条 缓存和回调（cache&amp;callback）</h2><p>缓存和回调竟然也被列入到设计模式中，我认为这两种用法太过常见，就不细讲了。<br>直接把链接给出：<br><a href="http://java-design-patterns.com/patterns/caching/" target="_blank" rel="external">缓存相关链接—含代码</a><br><a href="http://java-design-patterns.com/patterns/callback/" target="_blank" rel="external">回调相关链接—含代码</a></p>
+<h2 id="第四条-责任链模式（Chain-of-responsibility）"><a href="#第四条-责任链模式（Chain-of-responsibility）" class="headerlink" title="第四条 责任链模式（Chain of responsibility）"></a>第四条 责任链模式（Chain of responsibility）</h2><h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li>责任链模式实际上是一种用来解耦请求方和处理方的模式</li>
+<li>当请求方发出请求时，可能不止有一个对象要去处理请求，并且事先并不知道谁要处理这个请求，请求的处理者是动态决定的。</li>
+<li>当请求方发出请求时，并不关心请求究竟被谁执行了，即请求方与处理方是解耦的</li>
+<li>可以处理请求的一组对象是被动态地指定的</li>
+</ol>
+<h3 id="如何做-4"><a href="#如何做-4" class="headerlink" title="如何做"></a>如何做</h3><p>如下图：<br><br>在图中，我们有一个请求方<code>OrcKing</code>，即兽王。与其说是请求方，不如说是发号施令者。<br>最左边我们可以看到，<code>RequestType</code>定义我们的兽王有三种命令可以发布，保护城堡(DEFEND_CASTLE)、审问犯人(TORTURE_PRISONER)、收税(COLLECT_TAX)。<br>然后我们的兽王，有个<code>buildChain()</code>方法，该方法会在构造函数中调用，目的是创建一个<code>RequestHandler</code>然后保存在内部域中。<br>我们有三个命令的处理方，即兽王的三个手下，兽族战士(OrcSoldier)、兽族指挥官(OrcCommander)、兽族官员(OrcOfficer)。它们都继承自抽象类<code>RequestHandler</code>。<br>每个处理方的构造函数，都会传入另一个处理方，这边是责任链构造的关键点。<br>我们兽王在使用<code>buildChain()</code>方法的时候，责任链的构造代码是下面这样的：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> void buildChain() &#123;</div><div class="line">    chain = <span class="keyword">new</span> <span class="type">OrcCommander</span>(<span class="keyword">new</span> <span class="type">OrcOfficer</span>(<span class="keyword">new</span> <span class="type">OrcSoldier</span>(<span class="literal">null</span>)));</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，最终兽王内部的域拿到的其实是兽族指挥官的引用，因此，当兽王下令的时候，它使用<code>makeRequest(Request)</code>方法，会优先将命令传达给兽族指挥官。<br>兽族指挥官此时会检查命令的类型，他只能处理保护城堡这种命令，如果它发现自己处理不了，就将命令丢给构造函数传进来的那个人，也就是我们的兽族官员。<br>兽族官员也会检查命令的类型，他只能处理审问犯人的命令，如果发现不是审问犯人的命令，他就再将命令继续往下传，传给兽族战士。以此类推，直到责任链的末尾。</p>
+<h3 id="好处-4"><a href="#好处-4" class="headerlink" title="好处"></a>好处</h3><ol>
+<li>请求和处理方解耦</li>
+<li>稍加改造，在处理之后，处理方仍然将请求传递下去，请求就可以被多个处理方处理，类似广播一样，所有的处理方都能感知到请求并选择是否处理</li>
+</ol>
+<h3 id="坏处-4"><a href="#坏处-4" class="headerlink" title="坏处"></a>坏处</h3><ol>
+<li>如果责任链太长，效率会降低，如果一个请求只需要给某一个处理方处理，而这个处理方总是在责任链的最后，程序效率会变差。</li>
+<li>责任链对先后顺序敏感，如果有些处理对顺序有要求，则责任链很容易不满足需求。比如，ABCD四个处理类，要求A必须在C之前执行，B必须在A之前执行，C又必须在B之前执行</li>
+<li>责任链上所有的类都被耦合在了一起，其中一个类出错，有可能影响后面所有类的行为。</li>
+<li>对于需要有个回答的请求，责任链可能比较吃力，也许结合回调模式能够做到</li>
+</ol>
+<h3 id="真实世界的例子"><a href="#真实世界的例子" class="headerlink" title="真实世界的例子"></a>真实世界的例子</h3><ul>
+<li>java.util.logging.Logger#log()</li>
+<li>Apache Commons Chain</li>
+<li>javax.servlet.Filter#doFilter()</li>
+</ul>
+<h3 id="推荐等级-★★★★"><a href="#推荐等级-★★★★" class="headerlink" title="推荐等级 ★★★★"></a>推荐等级 ★★★★</h3><p>四颗星，这意味着你可以在适用场景下使用该模式，前提是你必须知道如何熟练地使用该设计模式。在非必须的场景下，应该先尝试不使用该设计模式，若发现不使用无法满足需求，再使用。</p>
+<a href="http://java-design-patterns.com/patterns/chain/" target="_blank" rel="external">相关链接—含代码</a>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-07-30T13:56:25.688Z" itemprop="datePublished">
+					2017年7月30日 21:56
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/07/19/design-pattern-2/">
+        设计模式——第二章 结构型模式 →
+    </a>
+    
+</nav>
+
+        
+        <div class="col-md-8 col-md-offset-2"><p>本站评论框使用disqus，需要翻墙使用，请谅解，欢迎推荐更好用的第三方评论框（不需备案无广告的）</p></div>
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/07/30/design-pattern-3/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1501422519; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+$(window).load(function($) {
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://dawn-2.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	s.setAttribute('async', 'async');
+	(d.head || d.body).appendChild(s);
+	})();	
+});
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<script src="/js/zoom-vanilla.min.js"></script><!-- Theme scripts -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
