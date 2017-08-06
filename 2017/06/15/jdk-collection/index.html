@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>JDK源码学习——集合框架（一）（未完成） | Dawn</title>
+  <title>JDK源码学习——集合框架（一） | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -148,7 +148,7 @@
 				    
 				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
 				    
-				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(2)</small></a></li>
+				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(1)</small></a></li>
 				    
 				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
 				    
@@ -280,25 +280,23 @@
     
     
     | 
-    <a href='/tags/未完成/'>未完成</a>,
-    
     <a href='/tags/JDK源码学习/'>JDK源码学习</a>
     
     
 	
 </span>
-                <h1>JDK源码学习——集合框架（一）（未完成）</h1>				
+                <h1>JDK源码学习——集合框架（一）</h1>				
             </div>
         </div>		
         <div class="col-md-8 col-md-offset-2">
 			
 			<div id="toc" class="toc-article">
     <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、抽象层结构（AbstractCollection）"><span class="toc-text">二、抽象层结构（AbstractCollection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-1"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、List接口"><span class="toc-text">三、List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-2"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-2"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AbstractList抽象层（可随机访问元素的List）"><span class="toc-text">四、AbstractList抽象层（可随机访问元素的List）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-3"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-3"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、AbstractList实现层（ArrayList）"><span class="toc-text">五、AbstractList实现层（ArrayList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-4"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-4"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、AbstractList实现层（Vector）"><span class="toc-text">六、AbstractList实现层（Vector）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、AbstractSequentialList抽象层（按顺序访问的List）"><span class="toc-text">七、AbstractSequentialList抽象层（按顺序访问的List）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、AbstractSequentialList实现层（LinkedList）"><span class="toc-text">八、AbstractSequentialList实现层（LinkedList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-5"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-5"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、Set接口"><span class="toc-text">九、Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-6"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-6"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、AbstractSet抽象层"><span class="toc-text">十、AbstractSet抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一、AbstractSet实现层（HashSet）"><span class="toc-text">十一、AbstractSet实现层（HashSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二、AbstractSet实现层-LinkedHashSet"><span class="toc-text">十二、AbstractSet实现层(LinkedHashSet)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十三、SortedSet接口"><span class="toc-text">十三、SortedSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四、NavigableSet接口"><span class="toc-text">十四、NavigableSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五、Navigableset实现层（TreeSet）"><span class="toc-text">十五、Navigableset实现层（TreeSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六、Queue接口"><span class="toc-text">十六、Queue接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十七、AbstractQueue抽象层"><span class="toc-text">十七、AbstractQueue抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十八、"><span class="toc-text">十八、</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、顶层结构（Collection接口）"><span class="toc-text">一、顶层结构（Collection接口）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、抽象层结构（AbstractCollection）"><span class="toc-text">二、抽象层结构（AbstractCollection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-1"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、List接口"><span class="toc-text">三、List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-2"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-2"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AbstractList抽象层（可随机访问元素的List）"><span class="toc-text">四、AbstractList抽象层（可随机访问元素的List）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-3"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-3"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、AbstractList实现层（ArrayList）"><span class="toc-text">五、AbstractList实现层（ArrayList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-4"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-4"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、AbstractList实现层（Vector）"><span class="toc-text">六、AbstractList实现层（Vector）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、AbstractSequentialList抽象层（按顺序访问的List）"><span class="toc-text">七、AbstractSequentialList抽象层（按顺序访问的List）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、AbstractSequentialList实现层（LinkedList）"><span class="toc-text">八、AbstractSequentialList实现层（LinkedList）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-5"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-5"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、Set接口"><span class="toc-text">九、Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系结构-6"><span class="toc-text">关系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-6"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、AbstractSet抽象层"><span class="toc-text">十、AbstractSet抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一、AbstractSet实现层（HashSet）"><span class="toc-text">十一、AbstractSet实现层（HashSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二、AbstractSet实现层-LinkedHashSet"><span class="toc-text">十二、AbstractSet实现层(LinkedHashSet)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十三、SortedSet接口"><span class="toc-text">十三、SortedSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四、NavigableSet接口"><span class="toc-text">十四、NavigableSet接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五、Navigableset实现层（TreeSet）"><span class="toc-text">十五、Navigableset实现层（TreeSet）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六、Queue接口"><span class="toc-text">十六、Queue接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十七、AbstractQueue抽象层"><span class="toc-text">十七、AbstractQueue抽象层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十八、AbstractQueue实现层（PriorityQueue）"><span class="toc-text">十八、AbstractQueue实现层（PriorityQueue）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插入操作"><span class="toc-text">插入操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除操作"><span class="toc-text">删除操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十九、AbstractQueue实现层（AsLIFOQueue）"><span class="toc-text">十九、AbstractQueue实现层（AsLIFOQueue）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二十、Deque接口"><span class="toc-text">二十、Deque接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二十一、Deque实现层-ArrayDeque"><span class="toc-text">二十一、Deque实现层(ArrayDeque)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊的掩码方法"><span class="toc-text">特殊的掩码方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
 </div>
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）（未完成）">JDK源码学习——集合框架（一）（未完成）</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -421,7 +419,7 @@
 </ol>
 <p>除了这些区别，该类几乎和ArrayList一模一样。<br>由于之后出了并发包，有了更好的并发解决方案，所以任何场景都不建议使用该类。除非是老旧的JDK版本。</p>
 <h2 id="七、AbstractSequentialList抽象层（按顺序访问的List）"><a href="#七、AbstractSequentialList抽象层（按顺序访问的List）" class="headerlink" title="七、AbstractSequentialList抽象层（按顺序访问的List）"></a>七、AbstractSequentialList抽象层（按顺序访问的List）</h2><p>这个抽象类是那种必须按顺序访问的List的骨架实现类，比如链表或者队列这种数据结构，典型特征是没法按序号直接访问到元素，必须从两头按顺序遍历找到元素。而AbstractList是数组的骨架实现，这种可直接按序号访问元素，访问元素的时间复杂度是O（1）。<br>这个类并没有直接从头搞一套，而是继承了AbstractList，然后把那些按序号访问元素的方法都覆盖了，提供使用ListIterator来访问元素的骨架方法。<br>我们如果想要自己实现类似链表队列这样的结构，只需要继承该类，然后实现ListIterator中的相关方法就好了。当然，还要实现一个size方法。<br>由于该抽象层比较简单，就不细讲了。</p>
-<h2 id="八、AbstractSequentialList实现层（LinkedList）"><a href="#八、AbstractSequentialList实现层（LinkedList）" class="headerlink" title="八、AbstractSequentialList实现层（LinkedList）"></a>八、AbstractSequentialList实现层（LinkedList）</h2><p>要说按顺序访问的列表中，谁最出名，肯定要数LinkedList了，它是我们常用数据结构链表的实现。当然，LinkedList还提供了一些有用的方法，可以让我们把链表当做栈和队列来使用，因为它们和链表的区别就在于它们有自己独有的获取元素的位置和顺序。</p>
+<h2 id="八、AbstractSequentialList实现层（LinkedList）"><a href="#八、AbstractSequentialList实现层（LinkedList）" class="headerlink" title="八、AbstractSequentialList实现层（LinkedList）"></a>八、AbstractSequentialList实现层（LinkedList）</h2><p>要说按顺序访问的列表中，谁最出名，肯定要数LinkedList了，它是我们常用数据结构链表的实现。当然，LinkedList还提供了一些有用的方法，可以让我们把链表当做栈和队列来使用，因为栈和队列相比链表，只是多了一些约束条件而已，本身的结构并不需要太大变化。</p>
 <h3 id="关系结构-5"><a href="#关系结构-5" class="headerlink" title="关系结构"></a>关系结构</h3><p>如下图：<br><img src="/2017/06/15/jdk-collection/linkedlist.png" alt="linkedlist.png" title=""><br>解释如下：</p>
 <ul>
 <li>向上：该类继承了AbstractSequentialList骨架实现。当然，虽然继承了骨架实现，但是实际上它还是提供了很多自己独有的方法，并且把该实现的方法一个不拉都实现了。另外，它还实现了4个接口，分别是List、Serializable、Cloneable、Deque。其他不用多说，Deque是”double ended queue”即双端队列的简称，代表了LinkedList还可以用作双端队列的实现。</li>
@@ -507,41 +505,38 @@
 <p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。</p>
 <h2 id="十七、AbstractQueue抽象层"><a href="#十七、AbstractQueue抽象层" class="headerlink" title="十七、AbstractQueue抽象层"></a>十七、AbstractQueue抽象层</h2><p>这个抽象类提供Queue的骨架实现，它约定元素不能包含null。我们的LinkedList包含了null，因此就没继承这个抽象类。<br>上面的方法中，它只实现了add,remove,element，以及clear。其他的都留给实现者实现，因此，实现者要自己保证元素不能是null，这个类限制不了。<br>实现add等这些方法的步骤也很简单，就是调用它对应的那个不会抛Exception的版本，如果返回false或者null，就直接抛Exception。<br>其中，clear方法很有意思，它的实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (poll() != <span class="keyword">null</span>)</div><div class="line">        ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>充分利用现有的方法来实现clear操作。</p>
-<h2 id="十八、"><a href="#十八、" class="headerlink" title="十八、"></a>十八、</h2><p>【未完待续】</p>
-<div style="display:none;"><br>
-//引用块
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
-//代码块
-```[language] [title] [url] [link text] code snippet```
-//插入引用块
-{% pullquote [class] %}
-content
-{% endpullquote %}
-//插入jsfiddle，可以在线演示JS代码的效果
-{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
-//Gist，将github上面的代码片段分享到博客中
-{% gist gist_id [filename] %}
-//插入另一个网页
-{% iframe url [width] [height] %}
-//插入制定大小的图片，应该是相对路径吧
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
-//插入连接，外部链接加target="_blank"属性
-{% link text url [external] [title] %}
-//插入source文件夹的代码文件
-{% include_code [title] [lang:language] path/to/file %}
-//引用本站其他文章
-{% post_path slug %}
-{% post_link slug [title] %}
-//引用文章的资源文件夹中的资源
-{% asset_path slug %}
-{% asset_img slug [title] %}
-{% asset_link slug [title] %}
-//避免解析
-{% raw %}
-content
-{% endraw %}<br><br></div>
+<h2 id="十八、AbstractQueue实现层（PriorityQueue）"><a href="#十八、AbstractQueue实现层（PriorityQueue）" class="headerlink" title="十八、AbstractQueue实现层（PriorityQueue）"></a>十八、AbstractQueue实现层（PriorityQueue）</h2><p>AbstractQueue的实现类几乎全部是jdk1.5新增的并发工具包里的内容，感觉队列这种数据结构在多线程和并发中作用重大。<br>由于后面还有并发工具包的专题，并发工具包的实现类全部跳过。<br>那么我们就剩下两个实现类了，其中一种就是典型的优先级队列的实现PriorityQueue。<br>PriorityQueue顾名思义，就是内部的元素有优先级。优先级队列在任务系统中非常有用，任务系统每次都从队头取数据来处理，保证优先级高的任务总是先被任务系统处理。<br>PriorityQueue有以下特性需要注意：</p>
+<ul>
+<li>它是无界队列</li>
+<li>它内部由一个自动扩容的数组来维护数据</li>
+<li>优先级队列的典型实现是二叉堆，该类也是如此，尽管数据维护在数组中，结构却使用的是二叉堆结构。该结构可使得元素的插入和删除操作有O（logN）的时间复杂度。（堆这种数据结构就不细讲了，在以后的文章里再介绍）</li>
+<li>优先级的定义主要依靠Comparator和Comparable接口来实现</li>
+<li>它是非线程安全的</li>
+<li>它内部数组的扩容算法是：如果小于64，容量增加1倍，如果大于64，容量增加0.5倍。</li>
+<li>在内部数组中，位于N处的元素其左子树根节点在2N+1处，右子树根节点在2N+2处。反过来说，一个位于N处的元素，其父节点在(N-1)/2或N/2-1的位置上，而JDK实现使用的是前者来获取父元素，因为int类型遇到小数会直接截取整数部分，因此即使是右子树，使用(N-1)/2也是可以获得父节点的，而另一个不行。</li>
+<li>该队列不允许Null元素</li>
+<li>该队列不允许更新某个位置的元素，</li>
+</ul>
+<h3 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h3><p>插入操作会将元素插入到队尾，但是为了保证堆这种数据结构，插入的元素会上浮，它会找到自己的父节点做比较，如果比父节点小，就将父节点下移，再继续比较父节点的父节点，直到找到一个位置，满足父节点大于等于它自己。然后插入至该位置。</p>
+<h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><p>删除操作主要是Poll方法，拿出队头元素来删除。但是队头删除之后，会破坏堆的数据结构，因此，会将最后一个元素取出，从队头也就是堆的根节点开始，下潜，取左右两个孩子中最大的一个上移为根节点，直到找到一个位置，该位置左右两个孩子都比这个元素大，就插入。该操作绝大多数情况下，最后一个元素都会从堆的根部开始，跑到堆的叶子节点去，平均时间复杂度都在O(LogN)，但是这样转一圈回到叶子节点后，整个堆的结构又恢复了。</p>
+<p>值得一提的是removeAt这个方法，一开始没看懂，后来才知道，它是为了配合iterator.remove才做了特殊逻辑。在删除数组某个位置的元素时，其实就是将最后一个元素拿出，然后插入到该位置，并对它执行下潜操作。这样其实和删除对头的操作是一样的，但是有时候，非常不幸地，队尾这个元素竟然比插入位置的左右子节点都小，那么有可能，它也比父节点小，因此还要再进行一次上浮操作，将父节点换下来。如果执行了上浮操作，removeAt方法就会返回该队尾元素，一开始我没懂为什么这么做，直到看到iterator.remove方法才发现，该方法调用了removeAt方法，这可就麻烦了，这意味着，在迭代的过程中一旦执行了删除操作，可能队尾的那个元素就上浮到已经迭代过的位置去了，那么我们的迭代器在后续的迭代过程中，就漏掉了那个元素。因此，它做了额外处理，removeAt方法将这个元素返回后，iterator就将该元素缓存起来，等迭代器迭代到数组末尾，它就再把缓存起来的元素逐个返回。</p>
+<h2 id="十九、AbstractQueue实现层（AsLIFOQueue）"><a href="#十九、AbstractQueue实现层（AsLIFOQueue）" class="headerlink" title="十九、AbstractQueue实现层（AsLIFOQueue）"></a>十九、AbstractQueue实现层（AsLIFOQueue）</h2><p>AbstractQueue的实现类中还有一个AsLIFOQueue不是并发包里的，而是Collections工具类提供的。<br>目的是实现一个后入先出的队列，我们不能自己实例化这个类，而是通过java.util.Collections#asLifoQueue(Deque)方法来得到这个类的实例。<br>实际上，Collections工具类提供的大多数实现类其实都是包装器设计模式的应用，这个类也是如此，它包装了Deque来提供后入先出这样的特性，实际上所有的方法底层都调用的是传入的Deque的方法。<br>由于只是一个简单的包装器，就不详细介绍了。</p>
+<h2 id="二十、Deque接口"><a href="#二十、Deque接口" class="headerlink" title="二十、Deque接口"></a>二十、Deque接口</h2><p>前面在介绍LinkedList的时候，已经介绍过了，Deque定义双端队列这种数据结构，是Queue接口的子接口，与普通的Queue接口相比，该接口额外提供了从队头添加元素以及从队尾获得元素的方法，总之就是队列的两头现在都可以自由地存取数据了。<br>同样地，和Queue一样，它有两个版本的添加和删除元素的方法，对于无界双端队列来说，这两个方法是一样的，比如前面介绍的LinkedList就是如此。而对于有界双端队列，一个方法会在失败的时候抛错，一个方法会返回false。<br>下面是Deque的内部结构，就不细讲了。<br><img src="/2017/06/15/jdk-collection/deque.png" alt="deque.png" title=""></p>
+<h2 id="二十一、Deque实现层-ArrayDeque"><a href="#二十一、Deque实现层-ArrayDeque" class="headerlink" title="二十一、Deque实现层(ArrayDeque)"></a>二十一、Deque实现层(ArrayDeque)</h2><p>前面提到，LinkedList实现了Deque接口，因为链表本身就可以作为双端队列来使用。<br>不过，链表作为队列使用的时候，效率却不如数组高，队列底层的数据结构，效率高的还是数组。<br>javaDoc中说，ArrayDeque作为队列使用的时候，比LinkedList要快，而作为栈来使用时，比Stack类要快（比Stack类快是很正常的，因为Stack类是继承了Vector类，而我们之前提到过，Vector类考虑了多线程问题，所以很慢）<br>因此，作为双端队列的正统实现，ArrayDeque才是双端队列的第一头牌。<br>它具有下面这些特性：</p>
+<ul>
+<li>非线程安全</li>
+<li>常数时间（添加和部分访问操作）或者线性时间复杂度（remove系列的操作，contains操作）</li>
+<li>内部基于自动扩容的数组实现</li>
+<li>扩容算法：两倍</li>
+<li>无界队列</li>
+<li>内部的数组是个循环数组，即维护了两个值，head代表队头，tail代表队尾，每次添加元素时，插入到队头就head-1，而插入到队尾就tail+1，并使用一种特殊的掩码方法保证不会发生数组越界。当head==tail时，说明槽位用光，就扩容2倍空间。</li>
+</ul>
+<h3 id="特殊的掩码方法"><a href="#特殊的掩码方法" class="headerlink" title="特殊的掩码方法"></a>特殊的掩码方法</h3><p>注意到ArrayDeque内部的数组初始化代码是这样的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">allocateElements</span><span class="params">(<span class="keyword">int</span> numElements)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> initialCapacity = MIN_INITIAL_CAPACITY;</div><div class="line">        <span class="comment">// Find the best power of two to hold elements.</span></div><div class="line">        <span class="comment">// Tests "&lt;=" because arrays aren't kept full.</span></div><div class="line">        <span class="keyword">if</span> (numElements &gt;= initialCapacity) &#123;</div><div class="line">            initialCapacity = numElements;</div><div class="line">            initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">1</span>);</div><div class="line">            initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">2</span>);</div><div class="line">            initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">4</span>);</div><div class="line">            initialCapacity |= (initialCapacity &gt;&gt;&gt;  <span class="number">8</span>);</div><div class="line">            initialCapacity |= (initialCapacity &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">            initialCapacity++;</div><div class="line">	</div><div class="line">            <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)   <span class="comment">// Too many elements, must back off</span></div><div class="line">                initialCapacity &gt;&gt;&gt;= <span class="number">1</span>;<span class="comment">// Good luck allocating 2 ^ 30 elements</span></div><div class="line">        &#125;</div><div class="line">        elements = <span class="keyword">new</span> Object[initialCapacity];</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>该方法保证了数组的容量一定是2的幂指数，不相信的人可以试试。<br>那么为什么要这么做？<br>首先，这样便于内存分配，因为内存分配的单位一般都是以2的指数幂为单位的。<br>其次，在后续的代码中我们经常会看到类似这种代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">head = (head - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<p>在head-1的时候，以及tail+1的时候，都和<code>elements.length-1</code>进行了与操作。为什么呢？<br>上面说到了内部的数组是个循环数组，如果我们每次都直接-1或者+1，早晚有一天会数组越界，head和tail也永远不会遇到一起。上面的与操作正是在数组越界的时候，将指针值通过掩码的方式移到另一边。<br>设想一下，如果elements.length每次都是一个2的指数幂，即二进制为10,100,1000,10000,100000这样的数字，减1之后呢？<br>就会变成01,011,0111,01111,011111。<br>和这样的二进制数进行与操作会怎样呢？<br>首先高位的符号位直接被干掉，所以负数就没有了。其次，只有被1覆盖到的位才会被保留下来，剩下的位都会被抹掉，而被1覆盖到的位即使全部为1，也才到elements.length-1而已。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是我写的最漫长的一篇文章了，首先做个自我检讨，文章架子拉的太大，什么都要写，导致严重拖稿。<br>以后写文章力求精确命中要点，不赘述过多细节。</p>
+<p>本章内容我们从集合框架最顶层的接口Collection入手，详细地剖析了Collection下面的三大接口List、Set、Queue。（第四个接口BeanContext略过了）<br>剖析的时候，分别从接口层、抽象层、实现层三个维度自上而下做了介绍。<br>也算是把java包里所有Collection的典型实现类都讲了一遍。</p>
+<p>接下来，要优先介绍Collections工具类提供的一系列有用的包装类。<br>然后则深入到集合框架另一个重要的分支Map接口中。<br>介绍完集合框架所有的基础类以后，肯定少不了要介绍并发工具包中的类，可以说，并发包与集合框架息息相关，很多新增的类都是Collection的实现类。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -552,8 +547,8 @@ content
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-07-27T15:44:18.405Z" itemprop="datePublished">
-					2017年7月27日 23:44
+				<time datetime="2017-08-06T14:02:27.101Z" itemprop="datePublished">
+					2017年8月6日 22:02
 				</time>
 			</p>
             <p>
