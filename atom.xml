@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-08-02T14:59:06.445Z</updated>
+  <updated>2017-08-08T15:30:54.107Z</updated>
   <id>/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JDK源码学习——集合框架（二）（未完成）</title>
+    <link href="/2017/08/08/jdk-collection-2/"/>
+    <id>/2017/08/08/jdk-collection-2/</id>
+    <published>2017-08-08T14:18:57.000Z</published>
+    <updated>2017-08-08T15:30:54.107Z</updated>
+    
+    <content type="html"><![CDATA[<p>本章主要讲Collections工具类以及该类提供的一些有用的成员类。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
+<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><p>Collections是一个静态工具类，构造方法已经私有化，故只能提供静态方法被调用，不能被实例化。看Guava的很多工具类也和这个一个，都是在目标类的结尾加s来代表工具类，比如Guava给List提供的工具类就叫Lists。<br>注意，本系列文章都使用JDK1.8作为源码学习，可能有些实现变化比较大。<br>它有如下比较有用的方法：</p>
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>用来针对List进行排序的，如果只传List，那么要求List里面包含的对象实现Comparable接口，如果还传了Comparator就无所谓，按照Comparator定义的规则排序。</p>
+<h3 id="binarySearch"><a href="#binarySearch" class="headerlink" title="binarySearch"></a>binarySearch</h3><p>顾名思义，二分查找来找到某个元素在List中的index。入参是已经自然排序的List和要查找的元素key。如果入参List没有排序，那么返回的结果是不确定的。<br>如果没有找到key，返回的一定是个负值，且为<code>-(insertPoint+1)</code>，此处，insertPoint指的是第一个比key大的元素的index，如果没有这样的元素那就是size。加一之后再取反，相当于是那个比key大的元素在数组中1-base开始算起的位置取负数。<br>有意思的是，该方法底层分成了两个方法，如果List实现了RandomAccess接口或者该List小于Collecions定义的一个常量BINARYSEARCH_THRESHOLD，就使用indexedBinarySearch，如果不满足这个条件，使用的是iteratorBinarySearch。<br>其中，BINARYSEARCH_THRESHOLD是5000，这是一个经验值，JDK的作者们总结经验得出来的。<br>下面给出那种不同算法的代码：<br>首是先是indexedBinarySearch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">indexedBinarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; list, T key)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> high = list.size()-<span class="number">1</span>;</div><div class="line"></div><div class="line">       <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">           <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">           Comparable&lt;? <span class="keyword">super</span> T&gt; midVal = list.get(mid);</div><div class="line">           <span class="keyword">int</span> cmp = midVal.compareTo(key);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">               low = mid + <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">               high = mid - <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span></div><div class="line">               <span class="keyword">return</span> mid; <span class="comment">// key found</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> -(low + <span class="number">1</span>);  <span class="comment">// key not found</span></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>然后是iteratorBinarySearch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">iteratorBinarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; list, T key)</span></span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> high = list.size()-<span class="number">1</span>;</div><div class="line">       ListIterator&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; i = list.listIterator();</div><div class="line"></div><div class="line">       <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">           <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">           Comparable&lt;? <span class="keyword">super</span> T&gt; midVal = get(i, mid);</div><div class="line">           <span class="keyword">int</span> cmp = midVal.compareTo(key);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">               low = mid + <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">               high = mid - <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span></div><div class="line">               <span class="keyword">return</span> mid; <span class="comment">// key found</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> -(low + <span class="number">1</span>);  <span class="comment">// key not found</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(ListIterator&lt;? extends T&gt; i, <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">       T obj = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">int</span> pos = i.nextIndex();</div><div class="line">       <span class="keyword">if</span> (pos &lt;= index) &#123;</div><div class="line">           <span class="keyword">do</span> &#123;</div><div class="line">               obj = i.next();</div><div class="line">           &#125; <span class="keyword">while</span> (pos++ &lt; index);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           <span class="keyword">do</span> &#123;</div><div class="line">               obj = i.previous();</div><div class="line">           &#125; <span class="keyword">while</span> (--pos &gt; index);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> obj;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，二分查找法挺简单的。就是拿目标元素和中间的元素去比较，找到目标元素有可能落入的区间，继续比较，直到找到目标元素。<br>理论上，这个算法有O(logN)的时间复杂度，比我们直接遍历一遍快多了。但是这只是indexedBinarySearch的情形。<br>如果我们的List不是那种可以直接用index获取元素的List，比如LinkedList，很遗憾，时间复杂度要算上取元素的时候遍历的，就应该是O(KlogN)，其中K是每次遍历获取元素要遍历的元素个数，N是数组长度。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本章主要讲Collections工具类以及该类提供的一些有用的成员类。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
+      <category term="JDK源码学习" scheme="/tags/JDK%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式——第三章 行为型模式（未完成）</title>
@@ -321,10 +388,11 @@ content
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-08-06T14:02:27.101Z</updated>
+    <updated>2017-08-08T14:27:47.422Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
+<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -341,7 +409,7 @@ content
 </ul>
 <h3 id="内部结构"><a href="#内部结构" class="headerlink" title="内部结构"></a>内部结构</h3><p>除了类之间关系的结构图以外，我们还可以看一下该接口内部的结构图：<br><img src="/2017/06/15/jdk-collection/collection_inner.png" alt="collection_inner.png" title=""><br>其中，empty其实不是properties，我这个uml生成软件错误识别成了properties，因为collection有一个<code>isEmpty()</code>方法。<br>我们可以看到：</p>
 <ul>
-<li>Collection接口定义了一个接口必须有的基础功能，如下：<ul>
+<li>Collection接口定义了一个集合必须有的基础功能，如下：<ul>
 <li>添加（add,addAll）</li>
 <li>是否为空（isEmpty）</li>
 <li>是否包含元素或者另一个集合（contains,containsAll）</li>
@@ -530,7 +598,7 @@ content
 <li>remove,poll：从队列中删除一个元素，一般都是队头。同样地，无界队列这两个方法是等效的，有界队列，remove在队空时报错，poll队空时返回null。正因为如此，Queue通常不允许元素为null，因为这个方法返回null时无法判断是队空还是返回的就是null元素（LinkedList除外）</li>
 <li>element，peek：从队列中获取一个元素，但是不删除，一般从队头获取。无界队列这两个方法是等效的，有界队列，队空时element会报错，peek会返回null</li>
 </ul>
-<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。</p>
+<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。但是要注意，和List相比，该接口没有Set方法或者Update方法，即不支持更新元素（Set接口也不支持更新元素，只有List接口支持）。</p>
 <h2 id="十七、AbstractQueue抽象层"><a href="#十七、AbstractQueue抽象层" class="headerlink" title="十七、AbstractQueue抽象层"></a>十七、AbstractQueue抽象层</h2><p>这个抽象类提供Queue的骨架实现，它约定元素不能包含null。我们的LinkedList包含了null，因此就没继承这个抽象类。<br>上面的方法中，它只实现了add,remove,element，以及clear。其他的都留给实现者实现，因此，实现者要自己保证元素不能是null，这个类限制不了。<br>实现add等这些方法的步骤也很简单，就是调用它对应的那个不会抛Exception的版本，如果返回false或者null，就直接抛Exception。<br>其中，clear方法很有意思，它的实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (poll() != <span class="keyword">null</span>)</div><div class="line">        ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>充分利用现有的方法来实现clear操作。</p>
 <h2 id="十八、AbstractQueue实现层（PriorityQueue）"><a href="#十八、AbstractQueue实现层（PriorityQueue）" class="headerlink" title="十八、AbstractQueue实现层（PriorityQueue）"></a>十八、AbstractQueue实现层（PriorityQueue）</h2><p>AbstractQueue的实现类几乎全部是jdk1.5新增的并发工具包里的内容，感觉队列这种数据结构在多线程和并发中作用重大。<br>由于后面还有并发工具包的专题，并发工具包的实现类全部跳过。<br>那么我们就剩下两个实现类了，其中一种就是典型的优先级队列的实现PriorityQueue。<br>PriorityQueue顾名思义，就是内部的元素有优先级。优先级队列在任务系统中非常有用，任务系统每次都从队头取数据来处理，保证优先级高的任务总是先被任务系统处理。<br>PriorityQueue有以下特性需要注意：</p>
@@ -543,7 +611,6 @@ content
 <li>它内部数组的扩容算法是：如果小于64，容量增加1倍，如果大于64，容量增加0.5倍。</li>
 <li>在内部数组中，位于N处的元素其左子树根节点在2N+1处，右子树根节点在2N+2处。反过来说，一个位于N处的元素，其父节点在(N-1)/2或N/2-1的位置上，而JDK实现使用的是前者来获取父元素，因为int类型遇到小数会直接截取整数部分，因此即使是右子树，使用(N-1)/2也是可以获得父节点的，而另一个不行。</li>
 <li>该队列不允许Null元素</li>
-<li>该队列不允许更新某个位置的元素，</li>
 </ul>
 <h3 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h3><p>插入操作会将元素插入到队尾，但是为了保证堆这种数据结构，插入的元素会上浮，它会找到自己的父节点做比较，如果比父节点小，就将父节点下移，再继续比较父节点的父节点，直到找到一个位置，满足父节点大于等于它自己。然后插入至该位置。</p>
 <h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><p>删除操作主要是Poll方法，拿出队头元素来删除。但是队头删除之后，会破坏堆的数据结构，因此，会将最后一个元素取出，从队头也就是堆的根节点开始，下潜，取左右两个孩子中最大的一个上移为根节点，直到找到一个位置，该位置左右两个孩子都比这个元素大，就插入。该操作绝大多数情况下，最后一个元素都会从堆的根部开始，跑到堆的叶子节点去，平均时间复杂度都在O(LogN)，但是这样转一圈回到叶子节点后，整个堆的结构又恢复了。</p>
@@ -2363,85 +2430,6 @@ content
     
     
       <category term="Effective Java" scheme="/tags/Effective-Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《高性能Mysql》读书笔记——Explain命令详解</title>
-    <link href="/2017/02/08/mysql-explain/"/>
-    <id>/2017/02/08/mysql-explain/</id>
-    <published>2017-02-08T08:27:26.000Z</published>
-    <updated>2017-02-27T15:49:49.172Z</updated>
-    
-    <content type="html"><![CDATA[<p>本章主要讲解Mysql中一个非常有用的命令<code>Explain</code>，该命令为我们解释Mysql在执行某条语句时的执行计划。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><p>1.<a href="/2016/08/15/mysql-intro/" title="《高性能Mysql》读书笔记——第一章Mysql架构和历史">《高性能Mysql》读书笔记——第一章Mysql架构和历史</a><br>2.<a href="/2016/08/26/mysql-benchmark/" title="《高性能Mysql》读书笔记——第二章Mysql基准测试">《高性能Mysql》读书笔记——第二章Mysql基准测试</a><br>3.<a href="/2016/08/29/mysql-basic/" title="Mysql基础知识汇总">Mysql基础知识汇总</a><br>4.<a href="/2016/10/14/mysql-datatype/" title="《高性能Mysql》读书笔记——第四章schema与数据类型优化">《高性能Mysql》读书笔记——第四章schema与数据类型优化</a><br>5.<a href="/2016/10/21/mysql-index/" title="《高性能Mysql》读书笔记——第五章创建高性能的索引">《高性能Mysql》读书笔记——第五章创建高性能的索引</a><br>6.<a href="/2016/11/11/mysql-query/" title="《高性能Mysql》读书笔记——第六章查询性能优化">《高性能Mysql》读书笔记——第六章查询性能优化</a><br>7.<a href="/2016/11/15/mysql-advance/" title="《高性能Mysql》读书笔记——第七章Mysql高级特性">《高性能Mysql》读书笔记——第七章Mysql高级特性</a><br>8.<a href="/2017/02/08/mysql-explain/" title="《高性能Mysql》读书笔记——Explain命令详解">《高性能Mysql》读书笔记——Explain命令详解</a></p>
-<h2 id="一、Explain简介"><a href="#一、Explain简介" class="headerlink" title="一、Explain简介"></a>一、Explain简介</h2><p>通过在要执行的SQL语句前增加<code>explain</code>这样的命令，Mysql不会执行SQL语句而是返回这个语句的执行计划的一些信息。<br>该命令在某些时候可以帮助我们快速地得知SQL语句有什么问题，有没有可以优化的地方。<br>但是请注意该命令返回的信息并不总是说出真相。<br>一个简单的explain语句可能像下面这样：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
-<p>它返回一行或者多行数据，每一个都是执行计划的一个步骤，而且是按照执行计划执行的顺序排列。<br>结果如下：<br><img src="/2017/02/08/mysql-explain/1.png" alt="1.png" title=""></p>
-<p>Explain命令有诸多限制，有时候甚至返回的结果与真相相差很远：</p>
-<ul>
-<li>没法告诉用户触发器、存储过程会对查询造成什么影响</li>
-<li>没法支持存储过程的解释</li>
-<li>不会告诉你查询执行中做的特定优化</li>
-<li>对内存排序和临时文件都使用”filesort”来表示，对磁盘和内存中的临时表都使用”Using temporary”来表示，导致用户没法详细地分清这些情况</li>
-<li>不能解释除了select以外的其他语句，比如update、insert、delete等（5.6版本之后貌似可以了）</li>
-</ul>
-<h2 id="二、Explain结果集中的列"><a href="#二、Explain结果集中的列" class="headerlink" title="二、Explain结果集中的列"></a>二、Explain结果集中的列</h2><h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>就是一个编号，代表子查询在SQL语句中的位置（官方文档也没有详细说明到底代表啥意思，但是感觉像是SELECT关键字出现在SQL语句中的位置）。<br>有时候id有可能都是1（关联查询中），有时候还有可能是Null(在使用union语句的时候)。</p>
-<h3 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h3><p>显示了查询的类型，是一个简单查询还是复杂查询，是哪种复杂查询。<br>可能出现的值有如下这些（5.6版本）：</p>
-<ul>
-<li>SIMPLE:简单查询，标识查询不包含任何子查询或者UNION语句</li>
-<li>PRIMARY:复杂查询的外层查询，一般都在第一行，代表这是一个复杂查询的最外层查询</li>
-<li>SUBQUERY:复杂查询的子查询，指不在FROM子句中的那些</li>
-<li>DEPENDENT SUBQUERY:复杂查询中，依赖外部查询的子查询</li>
-<li>DERIVED:在FROM子句中的子查询</li>
-<li>UNION:复杂查询中，UNION子句第二个或之后的子查询（第一个被标为PRIMARY）</li>
-<li>DEPENDENT UNION:复杂查询中，依赖外部查询的UNION子句查询</li>
-<li>UNION RESULT:复杂查询中，UNION的结果，这是一个从匿名临时表检索最终结果的查询</li>
-<li>MATERIALIZED:复杂查询中，物化视图子句</li>
-<li>UNCACHEABLE SUBQUERY:不可缓存的子查询</li>
-<li>UNCACHEABLE UNION:不可缓存的UNION子查询</li>
-</ul>
-<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><p>表示对应行的语句访问哪个表。<br>如果是关联查询，你会发现id都是1，但是从上往下的顺序还是代表了关联语句的执行顺序，有时你会看到explain的结果中的顺序与你想象的不一样，不用怀疑，语句的确是按照结果中的顺序执行的，引擎对你的语句进行了优化，因此执行顺序有了变更。<br>在FROM子句中有子查询时，该子查询的table字段一般的都是<derivedx>其中X指的是id，一般都是其后面一行的子查询的id。<br>另外UNION RESULT行的table会显示成<unionx,y……>,其中X,Y等指的是参与UNION的子句。</unionx,y……></derivedx></p>
-<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>这一列非常重要，表示了Mysql究竟采取何种方法来访问数据，通常能够在一定程度上反映查询语句的性能。<br>可能出现的值有如下这些，性能从最差到最优（5.6版本）：</p>
-<ul>
-<li>ALL：全表扫描，最惨的性能，从数据表中逐行查找数据。除非使用了LIMIT或者在Extra列中有”Using distinct/not exists”字样</li>
-<li>index：全表扫描的进阶版，按索引顺序全表扫描，通常性能和全表扫描没什么区别，除非Extra列中有”Using index”字样，那说明使用了覆盖索引，这种情况下要快于ALL，因为直接扫描索引就能获取数据，而索引通常比表小的多。如果所要查询的列是某个索引的一部分，通常会出现这种查询。</li>
-<li>range：范围扫描，比index强一些，因为它是从索引的某个点开始的，用不着遍历全部索引。一些带有BETWEEN，各种比较符号的语句容易出现这种类型，但是要特别注意IN和OR，这也会显示成range，但是其性能跟index差不多。</li>
-<li>index_subquery：索引替换子查询，如果有这样的语句<code>SELECT * FROM table WHERE value IN(SELECT key_column FROM table where xxx)</code>，IN后面的语句会被索引直接代替，来提高效率。</li>
-<li>unique_subquery：唯一索引替换子查询，和上面的相同，只不过是使用唯一索引来替换IN后面的子句</li>
-<li>index_merge：以前Mysql一次查询只能使用一个索引来优化，好像从5.5版本开始，Mysql支持多个索引同时优化，本质上是每个索引单独使用，再通过某种算法来合并结果。</li>
-<li>ref_or_null：类似于下面要介绍的ref类型，但是Mysql做了额外的搜索，为了找到那些包含NULL值的行，通常这样的语句比较容易出现这个类型：<code>SELECT * FROM ref_table WHERE key_column=expr OR key_column IS NULL</code>。</li>
-<li>fulltext：全文索引使用时会出现此类型。</li>
-<li>ref：当使用除了主键索引、唯一索引以外的索引来匹配值时，或者使用了最左前缀索引（包括唯一索引和主键的），就会出现这个类型。例子如下：<br><code>SELECT * FROM ref_table WHERE key_column=expr</code><br><code>SELECT * FROM ref_table,other_table WHERE ref_table.key_column=other_table.key_column</code><br><code>SELECT * FROM ref_table,other_table WHERE ref-table.key_column_part1=other_table.column AND ref_table.key_column_part2=1</code></li>
-<li>eq_ref：当使用了主键索引，唯一索引等只会唯一地找出一条记录的情况，这种类型就会出现，这种类型的性能相当好。</li>
-<li>const：当查询唯一地匹配一条记录，并且使用主键等于常数或者唯一索引等于某常数作为查询条件时，Mysql会视查询出来的值为常数，这种类型非常快。比如：<code>SELECT * FROM tbl_name WHERE primary_key = 1;</code></li>
-<li>system：表只有一行记录且为系统表，Mysql官方没有给出出现这个类型的例子</li>
-</ul>
-<h3 id="possible-key"><a href="#possible-key" class="headerlink" title="possible_key"></a>possible_key</h3><p>查询<strong><em>可能</em></strong>会用到的索引</p>
-<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p>显示查询最终使用到的索引，如果该索引没有出现在possible_key里，那么它可能是一个覆盖索引。<br>如果显示的是NULL，很遗憾没有任何索引被用到，说明查询的性能可能会很差。</p>
-<h3 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a>key_len</h3><p>显示查询时使用到的索引的字节数，根据这个值可以判断出来究竟使用了索引里的哪些列。<br>可以为NULL的列会比不能为NULL的列多一个字节。</p>
-<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>显示哪些列或者常量被用来跟key中显示的索引进行比较，从而获取结果。<br>如果显示func，则说明是某些function的结果被用来进行比较。</p>
-<h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><p>显示Mysql引擎认为它要获得结果预计要扫描的行数。这是一个估计值，可能不是很精确。<br>注意这个值<strong><em>不是</em></strong>结果集的行数，还要知道有很多优化手段没能影响这个值，因此可能最终执行时不必读取这么多行记录。<br>如果有多行结果，将多行的rows相乘可以得到一条完整语句执行预计要扫描的行数。</p>
-<h3 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a>filtered</h3><p>使用<code>EXPLAIN EXTENDED</code>才会显示的列，用百分比表示有多少行会被过滤出来去与之前的表关联<br>rows * filtered / 100 就能得到行数</p>
-<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><p>显示额外信息的列。有以下这些可能出现的字段：</p>
-<ul>
-<li>Using index：代表使用了覆盖索引。</li>
-<li>Using where：代表使用了where条件句中的条件进一步地过滤，如果没有显示这个而且查询类型是ALL或者index，那说明SQL写的很差，需要优化。除非你真的就想要全表扫描。</li>
-<li>Using temporary：代表为了得到结果，Mysql不得不创建一个临时表，将结果放在临时表里，在GROUP BY和ORDER BY使用的时候经常出现这个。</li>
-<li>Using filesort：代表索引不能满足排序的需求，于是一种文件排序算法被使用，至于使用的是哪种算法（一共有3种算法），是在内存还是磁盘上进行排序（结果集比较小的情况下可能在内存中完成排序），这个字段不会告诉你这些信息。</li>
-</ul>
-<p>可选字段非常之多，如果想要看完整的版本，请移步官方文档：<br><a href="https://dev.mysql.com/doc/refman/5.6/en/explain-output.html#explain-extra-information" title="external" target="_blank" rel="external">Mysql官方文档</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本章主要讲解Mysql中一个非常有用的命令&lt;code&gt;Explain&lt;/code&gt;，该命令为我们解释Mysql在执行某条语句时的执行计划。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Mysql" scheme="/tags/Mysql/"/>
     
   </entry>
   

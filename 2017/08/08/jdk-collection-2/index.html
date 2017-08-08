@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 上线 | Dawn</title>
+  <title>JDK源码学习——集合框架（二）（未完成） | Dawn</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -72,11 +72,13 @@
 
   
   
+    <link rel="stylesheet" href="/css/zoom.css">
+  
   <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -247,14 +249,10 @@
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                             <div>
 							
-							
-							
-								<h2><strong>NO <span>PAIN</span>,NO <span>GAIN</span>.</strong></h2>
-                                <p>成功是成功者的里程碑，失败是失败者的墓志铭</p>				    			
-							    
-                            
-							    
-                            
+								
+								<h2>集合框架</h2>
+                                <p>第二章</p>
+																
 							
                             </div>
                         </div>
@@ -271,60 +269,141 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-<section id="services">
+<section id="intro">
     <div class="container">
-      
-          <div class="row">        
-            <div class="col-md-8 col-md-offset-2 opening-statement wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-md-4">
-                    <h3><a href="/2016/01/23/rollout-version-1/">博客1.0版本正式上线</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2016-01-23T13:13:14.000Z" itemprop="datePublished">
-          2016年1月23日
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-08-08T14:18:57.000Z" itemprop="datePublished">
+          2017年8月8日
       </time>	  
     
     
     | 
-    <a href='/tags/置顶/'>置顶</a>,
+    <a href='/tags/未完成/'>未完成</a>,
     
-    <a href='/tags/上线/'>上线</a>
+    <a href='/tags/JDK源码学习/'>JDK源码学习</a>
     
     
 	
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h3 id="终于！博客1-0版本上线啦！！"><a href="#终于！博客1-0版本上线啦！！" class="headerlink" title="终于！博客1.0版本上线啦！！"></a>终于！博客1.0版本上线啦！！</h3><h4 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h4>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2016/01/23/rollout-version-1/">戳进去看看...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>JDK源码学习——集合框架（二）（未完成）</h1>				
             </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collections工具类"><span class="toc-text">Collections工具类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sort"><span class="toc-text">Sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binarySearch"><span class="toc-text">binarySearch</span></a></li></ol></li></ol>
+</div>
+			
+      		<p>本章主要讲Collections工具类以及该类提供的一些有用的成员类。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
+<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><p>Collections是一个静态工具类，构造方法已经私有化，故只能提供静态方法被调用，不能被实例化。看Guava的很多工具类也和这个一个，都是在目标类的结尾加s来代表工具类，比如Guava给List提供的工具类就叫Lists。<br>注意，本系列文章都使用JDK1.8作为源码学习，可能有些实现变化比较大。<br>它有如下比较有用的方法：</p>
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>用来针对List进行排序的，如果只传List，那么要求List里面包含的对象实现Comparable接口，如果还传了Comparator就无所谓，按照Comparator定义的规则排序。</p>
+<h3 id="binarySearch"><a href="#binarySearch" class="headerlink" title="binarySearch"></a>binarySearch</h3><p>顾名思义，二分查找来找到某个元素在List中的index。入参是已经自然排序的List和要查找的元素key。如果入参List没有排序，那么返回的结果是不确定的。<br>如果没有找到key，返回的一定是个负值，且为<code>-(insertPoint+1)</code>，此处，insertPoint指的是第一个比key大的元素的index，如果没有这样的元素那就是size。加一之后再取反，相当于是那个比key大的元素在数组中1-base开始算起的位置取负数。<br>有意思的是，该方法底层分成了两个方法，如果List实现了RandomAccess接口或者该List小于Collecions定义的一个常量BINARYSEARCH_THRESHOLD，就使用indexedBinarySearch，如果不满足这个条件，使用的是iteratorBinarySearch。<br>其中，BINARYSEARCH_THRESHOLD是5000，这是一个经验值，JDK的作者们总结经验得出来的。<br>下面给出那种不同算法的代码：<br>首是先是indexedBinarySearch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">indexedBinarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; list, T key)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> high = list.size()-<span class="number">1</span>;</div><div class="line"></div><div class="line">       <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">           <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">           Comparable&lt;? <span class="keyword">super</span> T&gt; midVal = list.get(mid);</div><div class="line">           <span class="keyword">int</span> cmp = midVal.compareTo(key);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">               low = mid + <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">               high = mid - <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span></div><div class="line">               <span class="keyword">return</span> mid; <span class="comment">// key found</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> -(low + <span class="number">1</span>);  <span class="comment">// key not found</span></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>然后是iteratorBinarySearch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">iteratorBinarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; list, T key)</span></span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> high = list.size()-<span class="number">1</span>;</div><div class="line">       ListIterator&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; i = list.listIterator();</div><div class="line"></div><div class="line">       <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">           <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">           Comparable&lt;? <span class="keyword">super</span> T&gt; midVal = get(i, mid);</div><div class="line">           <span class="keyword">int</span> cmp = midVal.compareTo(key);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">               low = mid + <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">               high = mid - <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span></div><div class="line">               <span class="keyword">return</span> mid; <span class="comment">// key found</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> -(low + <span class="number">1</span>);  <span class="comment">// key not found</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(ListIterator&lt;? extends T&gt; i, <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">       T obj = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">int</span> pos = i.nextIndex();</div><div class="line">       <span class="keyword">if</span> (pos &lt;= index) &#123;</div><div class="line">           <span class="keyword">do</span> &#123;</div><div class="line">               obj = i.next();</div><div class="line">           &#125; <span class="keyword">while</span> (pos++ &lt; index);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           <span class="keyword">do</span> &#123;</div><div class="line">               obj = i.previous();</div><div class="line">           &#125; <span class="keyword">while</span> (--pos &gt; index);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> obj;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，二分查找法挺简单的。就是拿目标元素和中间的元素去比较，找到目标元素有可能落入的区间，继续比较，直到找到目标元素。<br>理论上，这个算法有O(logN)的时间复杂度，比我们直接遍历一遍快多了。但是这只是indexedBinarySearch的情形。<br>如果我们的List不是那种可以直接用index获取元素的List，比如LinkedList，很遗憾，时间复杂度要算上取元素的时候遍历的，就应该是O(KlogN)，其中K是每次遍历获取元素要遍历的元素个数，N是数组长度。</p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-      
-      <nav class="pagination" role="pagination">
-          
-          
-        </nav>    
-    </div>
-</section> 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>本站所有标记原创内容均高质量手码，未经本人允许，谢绝转载！</p>
-        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-08-08T15:30:54.107Z" itemprop="datePublished">
+					2017年8月8日 23:30
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/07/30/design-pattern-3/">
+        设计模式——第三章 行为型模式（未完成） →
+    </a>
+    
+</nav>
+
+        
+        <div class="col-md-8 col-md-offset-2"><p>本站评论框使用disqus，需要翻墙使用，请谅解，欢迎推荐更好用的第三方评论框（不需备案无广告的）</p></div>
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/08/08/jdk-collection-2/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1502201937; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+$(window).load(function($) {
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://dawn-2.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	s.setAttribute('async', 'async');
+	(d.head || d.body).appendChild(s);
+	})();	
+});
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
@@ -394,6 +473,8 @@
 <script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
 <script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
 <script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<script src="/js/zoom-vanilla.min.js"></script><!-- Theme scripts -->
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 

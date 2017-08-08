@@ -100,7 +100,7 @@
 				  	
 				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
 				    
-				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(17)</small></a></li>
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(18)</small></a></li>
 				    
 				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
 				    
@@ -128,7 +128,7 @@
 				    
 				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
 				    
-				    <li><a href="/tags/JDK源码学习/" class="animsition-link">JDK源码学习<small>(1)</small></a></li>
+				    <li><a href="/tags/JDK源码学习/" class="animsition-link">JDK源码学习<small>(2)</small></a></li>
 				    
 				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
 				    
@@ -148,7 +148,7 @@
 				    
 				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
 				    
-				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(1)</small></a></li>
+				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(2)</small></a></li>
 				    
 				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
 				    
@@ -242,8 +242,8 @@
         <section id="hero" class="scrollme">
 		    
 			
-				<div class="container-fluid element-img" style="background: url(/img/bg_5.jpg) no-repeat center center fixed;background-size: cover">
-			 
+				<div class="container-fluid element-img" style="background: url(/img/bg_6.jpg) no-repeat center center fixed;background-size: cover">
+             
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
                         <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
@@ -297,6 +297,7 @@
 			
       		<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
 <h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
+<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
@@ -313,7 +314,7 @@
 </ul>
 <h3 id="内部结构"><a href="#内部结构" class="headerlink" title="内部结构"></a>内部结构</h3><p>除了类之间关系的结构图以外，我们还可以看一下该接口内部的结构图：<br><img src="/2017/06/15/jdk-collection/collection_inner.png" alt="collection_inner.png" title=""><br>其中，empty其实不是properties，我这个uml生成软件错误识别成了properties，因为collection有一个<code>isEmpty()</code>方法。<br>我们可以看到：</p>
 <ul>
-<li>Collection接口定义了一个接口必须有的基础功能，如下：<ul>
+<li>Collection接口定义了一个集合必须有的基础功能，如下：<ul>
 <li>添加（add,addAll）</li>
 <li>是否为空（isEmpty）</li>
 <li>是否包含元素或者另一个集合（contains,containsAll）</li>
@@ -502,7 +503,7 @@
 <li>remove,poll：从队列中删除一个元素，一般都是队头。同样地，无界队列这两个方法是等效的，有界队列，remove在队空时报错，poll队空时返回null。正因为如此，Queue通常不允许元素为null，因为这个方法返回null时无法判断是队空还是返回的就是null元素（LinkedList除外）</li>
 <li>element，peek：从队列中获取一个元素，但是不删除，一般从队头获取。无界队列这两个方法是等效的，有界队列，队空时element会报错，peek会返回null</li>
 </ul>
-<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。</p>
+<p>可以看到，和Collection相比，Queue接口主要定义了一些额外地增删查方法，来描绘出从两头插或者两头删，两头取这种特殊的集合画像。但是要注意，和List相比，该接口没有Set方法或者Update方法，即不支持更新元素（Set接口也不支持更新元素，只有List接口支持）。</p>
 <h2 id="十七、AbstractQueue抽象层"><a href="#十七、AbstractQueue抽象层" class="headerlink" title="十七、AbstractQueue抽象层"></a>十七、AbstractQueue抽象层</h2><p>这个抽象类提供Queue的骨架实现，它约定元素不能包含null。我们的LinkedList包含了null，因此就没继承这个抽象类。<br>上面的方法中，它只实现了add,remove,element，以及clear。其他的都留给实现者实现，因此，实现者要自己保证元素不能是null，这个类限制不了。<br>实现add等这些方法的步骤也很简单，就是调用它对应的那个不会抛Exception的版本，如果返回false或者null，就直接抛Exception。<br>其中，clear方法很有意思，它的实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (poll() != <span class="keyword">null</span>)</div><div class="line">        ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>充分利用现有的方法来实现clear操作。</p>
 <h2 id="十八、AbstractQueue实现层（PriorityQueue）"><a href="#十八、AbstractQueue实现层（PriorityQueue）" class="headerlink" title="十八、AbstractQueue实现层（PriorityQueue）"></a>十八、AbstractQueue实现层（PriorityQueue）</h2><p>AbstractQueue的实现类几乎全部是jdk1.5新增的并发工具包里的内容，感觉队列这种数据结构在多线程和并发中作用重大。<br>由于后面还有并发工具包的专题，并发工具包的实现类全部跳过。<br>那么我们就剩下两个实现类了，其中一种就是典型的优先级队列的实现PriorityQueue。<br>PriorityQueue顾名思义，就是内部的元素有优先级。优先级队列在任务系统中非常有用，任务系统每次都从队头取数据来处理，保证优先级高的任务总是先被任务系统处理。<br>PriorityQueue有以下特性需要注意：</p>
@@ -515,7 +516,6 @@
 <li>它内部数组的扩容算法是：如果小于64，容量增加1倍，如果大于64，容量增加0.5倍。</li>
 <li>在内部数组中，位于N处的元素其左子树根节点在2N+1处，右子树根节点在2N+2处。反过来说，一个位于N处的元素，其父节点在(N-1)/2或N/2-1的位置上，而JDK实现使用的是前者来获取父元素，因为int类型遇到小数会直接截取整数部分，因此即使是右子树，使用(N-1)/2也是可以获得父节点的，而另一个不行。</li>
 <li>该队列不允许Null元素</li>
-<li>该队列不允许更新某个位置的元素，</li>
 </ul>
 <h3 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h3><p>插入操作会将元素插入到队尾，但是为了保证堆这种数据结构，插入的元素会上浮，它会找到自己的父节点做比较，如果比父节点小，就将父节点下移，再继续比较父节点的父节点，直到找到一个位置，满足父节点大于等于它自己。然后插入至该位置。</p>
 <h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><p>删除操作主要是Poll方法，拿出队头元素来删除。但是队头删除之后，会破坏堆的数据结构，因此，会将最后一个元素取出，从队头也就是堆的根节点开始，下潜，取左右两个孩子中最大的一个上移为根节点，直到找到一个位置，该位置左右两个孩子都比这个元素大，就插入。该操作绝大多数情况下，最后一个元素都会从堆的根部开始，跑到堆的叶子节点去，平均时间复杂度都在O(LogN)，但是这样转一圈回到叶子节点后，整个堆的结构又恢复了。</p>
@@ -547,8 +547,8 @@
                       
 			</p>
 			<p>最后修改：
-				<time datetime="2017-08-06T14:02:27.101Z" itemprop="datePublished">
-					2017年8月6日 22:02
+				<time datetime="2017-08-08T14:27:47.422Z" itemprop="datePublished">
+					2017年8月8日 22:27
 				</time>
 			</p>
             <p>
