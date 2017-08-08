@@ -149,9 +149,9 @@ content
       <category term="学习笔记" scheme="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
-    
       <category term="设计模式" scheme="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="未完成" scheme="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
     
   </entry>
   
