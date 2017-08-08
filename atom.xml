@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-08-08T15:30:54.107Z</updated>
+  <updated>2017-08-08T15:32:26.004Z</updated>
   <id>/</id>
   
   <author>
@@ -20,11 +20,14 @@
     <link href="/2017/08/08/jdk-collection-2/"/>
     <id>/2017/08/08/jdk-collection-2/</id>
     <published>2017-08-08T14:18:57.000Z</published>
-    <updated>2017-08-08T15:30:54.107Z</updated>
+    <updated>2017-08-08T15:32:26.004Z</updated>
     
     <content type="html"><![CDATA[<p>本章主要讲Collections工具类以及该类提供的一些有用的成员类。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
-<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><ol>
+<li><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a></li>
+<li><a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+</li>
+</ol>
 <h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><p>Collections是一个静态工具类，构造方法已经私有化，故只能提供静态方法被调用，不能被实例化。看Guava的很多工具类也和这个一个，都是在目标类的结尾加s来代表工具类，比如Guava给List提供的工具类就叫Lists。<br>注意，本系列文章都使用JDK1.8作为源码学习，可能有些实现变化比较大。<br>它有如下比较有用的方法：</p>
 <h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>用来针对List进行排序的，如果只传List，那么要求List里面包含的对象实现Comparable接口，如果还传了Comparator就无所谓，按照Comparator定义的规则排序。</p>
 <h3 id="binarySearch"><a href="#binarySearch" class="headerlink" title="binarySearch"></a>binarySearch</h3><p>顾名思义，二分查找来找到某个元素在List中的index。入参是已经自然排序的List和要查找的元素key。如果入参List没有排序，那么返回的结果是不确定的。<br>如果没有找到key，返回的一定是个负值，且为<code>-(insertPoint+1)</code>，此处，insertPoint指的是第一个比key大的元素的index，如果没有这样的元素那就是size。加一之后再取反，相当于是那个比key大的元素在数组中1-base开始算起的位置取负数。<br>有意思的是，该方法底层分成了两个方法，如果List实现了RandomAccess接口或者该List小于Collecions定义的一个常量BINARYSEARCH_THRESHOLD，就使用indexedBinarySearch，如果不满足这个条件，使用的是iteratorBinarySearch。<br>其中，BINARYSEARCH_THRESHOLD是5000，这是一个经验值，JDK的作者们总结经验得出来的。<br>下面给出那种不同算法的代码：<br>首是先是indexedBinarySearch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">indexedBinarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; list, T key)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> high = list.size()-<span class="number">1</span>;</div><div class="line"></div><div class="line">       <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">           <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">           Comparable&lt;? <span class="keyword">super</span> T&gt; midVal = list.get(mid);</div><div class="line">           <span class="keyword">int</span> cmp = midVal.compareTo(key);</div><div class="line"></div><div class="line">           <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">               low = mid + <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">               high = mid - <span class="number">1</span>;</div><div class="line">           <span class="keyword">else</span></div><div class="line">               <span class="keyword">return</span> mid; <span class="comment">// key found</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> -(low + <span class="number">1</span>);  <span class="comment">// key not found</span></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
@@ -388,11 +391,14 @@ content
     <link href="/2017/06/15/jdk-collection/"/>
     <id>/2017/06/15/jdk-collection/</id>
     <published>2017-06-15T13:14:32.000Z</published>
-    <updated>2017-08-08T14:27:47.422Z</updated>
+    <updated>2017-08-08T15:32:37.127Z</updated>
     
     <content type="html"><![CDATA[<p>本文主要介绍JDK的核心模块之一——集合框架，其内部原理和结构。<br><a id="more"></a></p>
-<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a>
-<a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><ol>
+<li><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a></li>
+<li><a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）（未完成）">JDK源码学习——集合框架（二）（未完成）</a>
+</li>
+</ol>
 <h2 id="一、顶层结构（Collection接口）"><a href="#一、顶层结构（Collection接口）" class="headerlink" title="一、顶层结构（Collection接口）"></a>一、顶层结构（Collection接口）</h2><p>要说集合框架最顶层的结构，应该算是<code>Collection</code>接口和<code>Map</code>接口，虽然<code>Collection</code>接口还有更顶层的<code>Iterable</code>接口，但是我觉得该接口只是迭代子模式的实现，不能体现顶层的含义。</p>
 <h3 id="关系结构"><a href="#关系结构" class="headerlink" title="关系结构"></a>关系结构</h3><p><code>Collection</code>结构看下图：<br><img src="/2017/06/15/jdk-collection/collection.png" alt="collection.png" title=""><br>从结构图我们可以知道：</p>
 <ul>
