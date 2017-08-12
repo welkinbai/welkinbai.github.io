@@ -115,6 +115,11 @@ p#back-to-top a:hover{
     color:#000000;  
 }
 
+.copy p:not(.readMore) a, .copy p:not(.readMore) a:link{
+    font-size: 12px;
+    color: #767D84;
+}
+
 p:not(.readMore) a, p:not(.readMore) a:hover, p:not(.readMore) a:active, p:not(.readMore) a:focus, p:not(.readMore) a:visited, p:not(.readMore) a:link{
     color: #000000;
     text-decoration: underline;
@@ -137,3 +142,4 @@ p:not(.readMore) a, p:not(.readMore) a:hover, p:not(.readMore) a:active, p:not(.
 .blogroll-tagcloud{
     margin-bottom: 5%;
 }
+
