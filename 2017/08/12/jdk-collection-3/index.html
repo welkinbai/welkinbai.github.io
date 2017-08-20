@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+	  Modified by Welkin Bai.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>JDK源码学习——集合框架（三）（未完成） | Dawn</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Dawn">
+    <meta name="author" content="Welkin Bai">
+    <meta name="description" content="这是码农welkin的技术博客" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/monokai.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  
+    <link rel="stylesheet" href="/css/zoom.css">
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">主页</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">归档</a></li>
+            <!-- Dropdown Menu -->			
+			
+        	<li>
+        		<a class="sb-toggle-submenu">分类<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/关于博客/" class="animsition-link">关于博客<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/学习笔记/" class="animsition-link">学习笔记<small>(19)</small></a></li>
+				    
+				    <li><a href="/categories/技术探讨/" class="animsition-link">技术探讨<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/教程/" class="animsition-link">教程<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/读书笔记/" class="animsition-link">读书笔记<small>(17)</small></a></li>
+				    
+				    <li><a href="/categories/转载分享/" class="animsition-link">转载分享<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/非技术文章/" class="animsition-link">非技术文章<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+        	<li>
+        		<a class="sb-toggle-submenu">标签<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/tags/Effective-Java/" class="animsition-link">Effective Java<small>(10)</small></a></li>
+				    
+				    <li><a href="/tags/Guava/" class="animsition-link">Guava<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Hexo/" class="animsition-link">Hexo<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/IOC容器/" class="animsition-link">IOC容器<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/JDK源码学习/" class="animsition-link">JDK源码学习<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/MyBatis/" class="animsition-link">MyBatis<small>(5)</small></a></li>
+				    
+				    <li><a href="/tags/Mysql/" class="animsition-link">Mysql<small>(8)</small></a></li>
+				    
+				    <li><a href="/tags/Spring/" class="animsition-link">Spring<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/fiddler/" class="animsition-link">fiddler<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/redis/" class="animsition-link">redis<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/上线/" class="animsition-link">上线<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/技术周报/" class="animsition-link">技术周报<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/教程/" class="animsition-link">教程<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/更新日志/" class="animsition-link">更新日志<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/未完成/" class="animsition-link">未完成<small>(2)</small></a></li>
+				    
+				    <li><a href="/tags/置顶/" class="animsition-link">置顶<small>(3)</small></a></li>
+				    
+				    <li><a href="/tags/计划/" class="animsition-link">计划<small>(1)</small></a></li>
+				    
+				    <li><a href="/tags/设计模式/" class="animsition-link">设计模式<small>(4)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a href="/blogroll" class="animsition-link" title="link">云链接</a>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">关于</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>   
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Dawn</a></li>
+                            <li class="nolink"><span>—Welkin Bai的技术博客</span></li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>欢迎!</span></li>
+							
+							<li class="serach-div">
+								<form class="search" action="/search">
+									<input type="text" maxlength="20" placeholder="搜索" autocomplete="off" autocorrect="off" autocapitalize="off" style="outline: none;" class="st-default-search-input">
+								</form>
+							</li>
+							
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">菜单</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="菜单">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>                
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <!-- ============================ Hero Image =========================== -->
+
+        <section id="hero" class="scrollme">
+		    
+			
+				<div class="container-fluid element-img" style="background: url(/img/bg_5.jpg) no-repeat center center fixed;background-size: cover">
+			 
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                        <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                            <div>
+							
+								
+								<h2>第三章</h2>
+                                <p>集合框架</p>
+																
+							
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // .col-md-12 -->
+                </div>
+                <div class="herofade beige-dk"></div>
+            </div>
+        </section>
+
+        <!-- Height spacing helper -->
+        <div class="heightblock"></div>
+        <!-- // End height spacing helper -->
+
+        <!-- ============================ END Hero Image =========================== -->
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-08-12T14:36:26.000Z" itemprop="datePublished">
+          2017年8月12日
+      </time>	  
+    
+    
+    | 
+    <a href='/tags/未完成/'>未完成</a>,
+    
+    <a href='/tags/JDK源码学习/'>JDK源码学习</a>
+    
+    
+	
+</span>
+                <h1>JDK源码学习——集合框架（三）（未完成）</h1>				
+            </div>
+        </div>		
+        <div class="col-md-8 col-md-offset-2">
+			
+			<div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章索引"><span class="toc-text">系列文章索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map接口"><span class="toc-text">Map接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构"><span class="toc-text">内部结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractMap（抽象层）"><span class="toc-text">AbstractMap（抽象层）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap（实现层）"><span class="toc-text">HashMap（实现层）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构-1"><span class="toc-text">内部结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#底层结构"><span class="toc-text">底层结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是哈希碰撞（哈希冲突）？"><span class="toc-text">什么是哈希碰撞（哈希冲突）？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#链表哈希桶和红黑树哈希桶结构解决哈希碰撞"><span class="toc-text">链表哈希桶和红黑树哈希桶结构解决哈希碰撞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化table数组"><span class="toc-text">初始化table数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩容数组"><span class="toc-text">扩容数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get获取Value"><span class="toc-text">get获取Value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#put添加键值对"><span class="toc-text">put添加键值对</span></a></li></ol></li></ol></li></ol>
+</div>
+			
+      		<p>本文主要讨论JDK集合框架中的Map接口以及其所有相关的实现。<br><a id="more"></a></p>
+<h2 id="系列文章索引"><a href="#系列文章索引" class="headerlink" title="系列文章索引"></a>系列文章索引</h2><ol>
+<li><a href="/2017/06/15/jdk-collection/" title="JDK源码学习——集合框架（一）">JDK源码学习——集合框架（一）</a></li>
+<li><a href="/2017/08/08/jdk-collection-2/" title="JDK源码学习——集合框架（二）">JDK源码学习——集合框架（二）</a></li>
+<li><a href="/2017/08/12/jdk-collection-3/" title="JDK源码学习——集合框架（三）（未完成）">JDK源码学习——集合框架（三）（未完成）</a>
+</li>
+</ol>
+<h2 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h2><p>Map接口虽然也属于集合框架的一部分，但是其独特的数据结构使其与Collection分离开来，独成一派。<br>其实在其他语言中，这种结构被称为Dictionary，即字典。比如Python。<br>然后你会发现，Java里面真的有Dictionary这个类，而且的确和Map想要指定的意思一模一样。它在JDK1.0的时候就有了，在1.2的时候Map出现废除了Dictionary这个类，因为它是抽象类不是接口。<br>不管Dictionary还是Map，其实都要表达一个意思，就是：<strong>这个接口代表一种映射关系，从key到value，用户可以根据key很方便地取到value</strong><br>其实我们的List也是有映射关系的，就是对象的index和对象之间的映射关系，知道index，就能从List中拿到对象。<br>但是这里有局限性，那就是我们这里的key必须要是对象存放在内部数据结构中的相对位置index，而不是别的什么东西。index也只能用int来表示，扩展性太差，适用场景有限。<br>因此，Map诞生出来就是允许用户去通过其他的东西当做key，照样能够方便地存取value。</p>
+<h3 id="内部结构"><a href="#内部结构" class="headerlink" title="内部结构"></a>内部结构</h3><p>废话不多说，先给出方法图：<br><img src="/2017/08/12/jdk-collection-3/map_inner.png" alt="map_inner.png" title=""><br>解析如下：</p>
+<ul>
+<li>既然同是集合框架的一员，那还是有一些共通的地方的，比如clear，empty，remove，size，get，这几个方法，几乎是你有我有全都有的通用方法。</li>
+<li>compute系列是1.8新增加的，使用到了函数式的思想，将value通过function重新计算新值并更新到Map中</li>
+<li>entrySet，keySet，values，三个方法都是返回Map的视图，只不过从不同的维度，第一个是返回键值对，第二个是返回所有的键，第三个是返回所有的值。注意，既然是视图就是说修改了它们，原始的Map也会收到影响</li>
+<li>和List的add方法不同，Map插入元素用的是put方法，变更元素是用replace方法，不过很少用到这个方法，原因是JDK1.8才有这个方法，而且put方法也有同样的功效，它直接替换掉key对应的value，不管原先的值是什么，存在不存在。</li>
+<li><p>Map接口定义比较简单，但是文档里提到一些限制条件：</p>
+<ol>
+<li>Map用作key值的对象最好不要是可变对象，如果是可变对象而且它的变化会影响equals方法的结果，那Map的行为就是不确定的</li>
+<li><p>Map绝对不能把它自己当做Key，禁止这样做。当然了，接口定义和编译器都不能阻止你这么做，你完全可以这么写，于是我不信邪，就写了下面这个：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    Map&lt;Map, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    map.put(map, <span class="number">1</span>);</div><div class="line">    Integer result = map.get(map);</div><div class="line">    System.out.println(result);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 事实证明，的确不可以这么做，因为在get方法往出拿的时候，会计算hash值，但是由于循环引用，这个hash值永远都算不出来，最终程序抛出了java.lang.StackOverflowError。</p>
+</li>
+<li>Map接口支持key和value都为null，但是有些底层实现是可以做额外限制的，比如不支持value为null，不支持key为null等。</li>
+<li>Map里面还定义了一个成员接口Entry，这个接口代表Map内部存储的键值对</li>
+</ol>
+</li>
+</ul>
+<h2 id="AbstractMap（抽象层）"><a href="#AbstractMap（抽象层）" class="headerlink" title="AbstractMap（抽象层）"></a>AbstractMap（抽象层）</h2><p>秉持每一个接口都要有个骨架实现的好习惯，JDK为我们提供了AbstractMap。<br>几乎所有的方法都帮我们实现好了，如果你想要实现一个不可变的Map，继承这个类，然后实现entrySet方法，返回一个继承了AbstractSet的类，而且这个类也不能实现add,remove这些方法，它的迭代器也不能实现remove方法，这样就可以得到不可变Map了。<br>如果想要可变的Map，继承这个类，然后实现put方法和entrySet方法，这次entrySet返回的类可以实现修改相关的方法，迭代器也是，这样你就有可变的Map实现了。<br>其他一系列方法你都不用管，都帮你实现好了，但是如果你去看源码，会发现JDK总是在实现类里去覆盖抽象类已经实现好的方法，主要是因为抽象类不能提前获知你最终实现类用的哪种底层数据结构，所以它给出的默认实现方法都是比较笨的方法。具体的实现类，根据底层数据结构的不同，可能有一些算法能显著提升方法性能，这时候实现类就会覆盖掉抽象类的方法。</p>
+<h2 id="HashMap（实现层）"><a href="#HashMap（实现层）" class="headerlink" title="HashMap（实现层）"></a>HashMap（实现层）</h2><p>要说Map体系最出名的是谁？当属HashMap。<br>要说整个集合框架最出名的是谁？HashMap绝对是有力竞争者。<br>HashMap出名不是没有来由的，它在绝大多数JAVA项目里，使用频率非常之高。我想，应该仅次于ArrayList。<br>HashMap名字的由来，是因为它使用了哈希表来实现Map这种数据结构。有趣的是，和Dictionary一样，早在1.0版本，就有一个叫HashTable的类实现和HashMap一样的功能，然而这个类用了synchronized来做线程安全，性能很差，在1.2版本中，被HashMap替代掉了。<br>哈希表的使用允许HashMap在增删改查这些操作上拥有常数时间的时间复杂度，即O(1)的时间复杂度。当然这是最理想的情况，在发生哈希碰撞的时候，时间复杂度会退化，在1.8之前的版本最差的时间复杂度是O(N)，在1.8版本使用了红黑树之后，最差的时间复杂度是O(logN)。</p>
+<h3 id="内部结构-1"><a href="#内部结构-1" class="headerlink" title="内部结构"></a>内部结构</h3><p>HashMap继承了AbstractMap骨架实现，不过绝大多数已经被骨架实现完成的方法它都覆盖并且重新写了自己的版本。<br>HashMap实现了Map，Cloneable，Serializable三个接口。<br>它的内部方法图如下：<br><img src="/2017/08/12/jdk-collection-3/hashmap_inner_1.png" alt="hashmap_inner_1.png" title=""><br>其中，前面有+号的是公有方法，-号的是私有方法，~是受保护的方法。<br>可以看到HashMap的公有方法基本上与Map接口定义的一致。下面是一些需要特别注意的：</p>
+<ul>
+<li>HashMap不是线程安全的</li>
+<li>HashMap允许kay、value为Null，而我们上面提到的HashTable类不允许。</li>
+<li>使用put方法将一对key-value存入HashMap，使用get方法将key对应的value从HashMap中取出。注意，只能使用key去获取value，不能使用value去获取key，用value去获取key是比较麻烦的，也不是Map结构目标服务的情况。</li>
+</ul>
+<p>可以看到，HashMap通过实现Map接口，为用户提供了一系列简单又方便的操作方法，但是，其底层的实现结构一点儿也不简单，只不过这些技术细节都被屏蔽了。</p>
+<h3 id="底层结构"><a href="#底层结构" class="headerlink" title="底层结构"></a>底层结构</h3><p>HashMap的底层结构实际上是一个自动扩容的数组，也就是方法图中的table字段。<br>数组中的每个位置又被称为哈希桶，每个哈希桶都可能存放一对key-value组合，一对key-value组合在Map体系中被称为Entry。因此也可以说每个位置都可能存放着一个Entry。<br>在实际使用的过程中，不管是取出数据还是放入数据，数据在table中的位置都是由key这个对象的<code>hashCode()</code>方法返回的数值决定的。如果返回4，那么就在table这个数组index为4的哈希桶中去存取数据。</p>
+<h4 id="什么是哈希碰撞（哈希冲突）？"><a href="#什么是哈希碰撞（哈希冲突）？" class="headerlink" title="什么是哈希碰撞（哈希冲突）？"></a>什么是哈希碰撞（哈希冲突）？</h4><p>由于我们的数组长度是有限的，但是key这个对象的hash值返回的数字有可能是超出数组长度的，比如，table数组的长度为16，而我们的Key对象算出来的hash值为30，那么不可能去index为30的地方去寻找哈希桶去存放数据，也不能就为了这么一个独立的数据，就将数组扩容到30以上，如果hash值算出来是一万，难道就要扩容到一万不成？因此，JDK作者会使用特殊的方法，将超出的部分，从头算起，直到找到一个table数组长度范围之内的位置，比如上面30这个例子，可能算出来是（30-16=14），就在14这个位置的哈希桶去做事情了。<br>但是问题来了，如果又有一个Key对象，算出来Hash值是14怎么办？两个Entry都想要放在同一个哈希桶里，这个时候就称发生了哈希碰撞或者叫哈希冲突。</p>
+<h4 id="链表哈希桶和红黑树哈希桶结构解决哈希碰撞"><a href="#链表哈希桶和红黑树哈希桶结构解决哈希碰撞" class="headerlink" title="链表哈希桶和红黑树哈希桶结构解决哈希碰撞"></a>链表哈希桶和红黑树哈希桶结构解决哈希碰撞</h4><p>JDK在1.8之前，一直使用的解决哈希碰撞的办法就是使用链表，将两个或者多个冲突的Entry都放在同一个哈希桶里，然后用链表这种结构把它们串起来。<br>示意图如下：<br><img src="/2017/08/12/jdk-collection-3/hashmap_linkbin.png" alt="hashmap_linkbin.png" title=""><br>可以看到：</p>
+<ul>
+<li>我们的key-value对是随机地存放在table中的，没有顺序保证，而使用entrySet视图的迭代器遍历的时候，可是从table数组的0位开始往后遍历的。遍历出来的Entry顺序完全没有保障。</li>
+<li>当发生哈希碰撞的时候，哈希桶里存放的是一个key-value对，同时它们是链表的头节点，根据它们可以找到后续的节点，所有这些节点的key计算出来的hash值都是一样的，因此在get方法获取其中一个节点的时候，先通过hash值找到对于的哈希桶，然后遍历链表，再通过==和equals方法来判断所要获取的节点是哪一个。由于有遍历操作，而且如果哈希碰撞的情况很严重，那么链表可能很长，这就导致get方法的时间复杂度退化成了O(N)</li>
+</ul>
+<p>在使用链表的HashMap中，每个Entry都是由一个叫做Node的结构来代表的，它的源代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;</div><div class="line">	</div><div class="line">        Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">this</span>.hash = hash;</div><div class="line">            <span class="keyword">this</span>.key = key;</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span>        </span>&#123; <span class="keyword">return</span> key; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span>      </span>&#123; <span class="keyword">return</span> value; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> key + <span class="string">"="</span> + value; &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123;</div><div class="line">            V oldValue = value;</div><div class="line">            value = newValue;</div><div class="line">            <span class="keyword">return</span> oldValue;</div><div class="line">        &#125;</div><div class="line">	</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (o == <span class="keyword">this</span>)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Map.Entry) &#123;</div><div class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</div><div class="line">                <span class="keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;</div><div class="line">                    Objects.equals(value, e.getValue()))</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>可以知道，每个节点除了key，value以外，还会缓存hash值免得每次使用的时候都重算一遍，然后next就是链表的一部分了，代表下一个节点。我们从这个结构也可以知道，HashMap用来解决哈希碰撞的链表是个<strong><em>单向链表</em></strong><br>在JDK1.8版本中，HashMap的结构有了变化，当一个哈希桶中的节点数量超过了<code>TREEIFY_THRESHOLD</code>这个常量(默认是8)时，会把链表结构转化成红黑树结构。<br>如下图：<br><img src="/2017/08/12/jdk-collection-3/hashmap_treebin.png" alt="hashmap_treebin.png" title=""><br>红黑树是一个二叉平衡树，在最坏的情况下，插入删除查询节点的操作时间复杂度均在O(logN)，因此用它来替换链表可以在哈希桶里面节点太多的时候，显著提高性能。<br>不过这增加了内部实现的复杂度，害我研究很久才把这个结构看懂。有关红黑树的详细讲解，我们放到TreeMap这个实现类的介绍处，因为TreeMap也是基于红黑树来实现的，而且它的代码更加清晰一些。<br>还有一个常量<code>UNTREEIFY_THRESHOLD</code>，默认值是6，定义的是当节点少于这个值时，就把红黑树结构变回链表结构。</p>
+<h4 id="初始化table数组"><a href="#初始化table数组" class="headerlink" title="初始化table数组"></a>初始化table数组</h4><p>关于初始化table数组也有很多值得关注的地方。<br>首先我们知道有两个值，一个叫做initialCapacity，另一个叫做loadFactor。<br>initialCapacity定义了最初HashMap内部的table数组初始化的大小，如果用户不传，默认就是<code>DEFAULT_INITIAL_CAPACITY</code>，即16。<br>而loadFactor，翻译过来叫做负载因子的，则定义了当数组的容量用到百分之多少时，开始对数组进行扩容操作。这个值是一个float，单精度浮点数值。如果用户不传，默认就是<code>DEFAULT_LOAD_FACTOR</code>，即0.75f。<br>如果一开始initialCapacity取的很大，显然，我们数组一直就是够用的，扩容操作发生的可能性就小的多，但是这样就会浪费空间。如果我们的loadFactor取得很小，那么扩容操作就会很频繁，性能就会很差，但是如果取得太大，数组迟迟不扩容，就可能导致某些哈希桶里塞很多节点，性能同样好不到哪儿去。<br>所以，我们在初始化HashMap的时候，这两个数值都要取合适的值，一般容量要取预期会存入的Entry数量的1.2倍到1.5倍比较好。而loadFactor则保持默认不变。</p>
+<p>这里我们要特别注意的是，无论你传入的initialCapacity是多少，最终HashMap内部的table数组，其大小都必须是2的指数幂。如果你传入的是31，那么大小可能会被变成32，传入50，会被变成64等等。<br>不相信的话，可以看下面两段代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</div><div class="line">                                               initialCapacity);</div><div class="line">        <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">            initialCapacity = MAXIMUM_CAPACITY;</div><div class="line">        <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</div><div class="line">                                               loadFactor);</div><div class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">        <span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = cap - <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">2</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">4</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">8</span>;</div><div class="line">        n |= n &gt;&gt;&gt; <span class="number">16</span>;</div><div class="line">        <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>从上面的方法我们可以知道：</p>
+<ul>
+<li>你传入的容量不能超过<code>MAXIMUM_CAPACITY</code>，这个值并不是数组大小的最大值，我们在前面介绍过，数组大小最大值是<code>Integer.MAX_VALUE - 8</code>，而此处的最大值却是：1&lt;&lt;30， 也即2的30次方。和Ieteger.Max_VALUE的2的31次方-1比起来，小的多。</li>
+<li>tableSizeFor方法会先将你传入的数字减一，然后不断地与向右移位的值做或运算，这样做下来的结果再加1就会得到某个2的指数幂。这其实也很好理解，在之前的章节中，双端队列的实现类ArrayDeque已经使用过相似的技巧。为什么要这样做，在ArrayDeque处也解释过，这样做是为了通过-1来方便地生成掩码，从而处理越界的情况。在这里，我们的HashMap前面提起过，也存在类似的越界问题，当hash值算出来比数组的大小大的时候，要想办法把这个值最终转化成数组大小范围内的值，而这个办法就是通过掩码来实现的。可见后面的详细介绍。</li>
+<li>注意，整个初始化方法结束，都没有见到table数组真的被new出来，这和其他的比如ArrayList这类结构是一样的，底层结构并不是在构造函数执行之后就new的，而是在用户第一次使用诸如put、add这种方法的时候，才初始化底层结构的。</li>
+</ul>
+<h4 id="扩容数组"><a href="#扩容数组" class="headerlink" title="扩容数组"></a>扩容数组</h4><p>扩容数组主要是一个叫做resize的方法在做，实际上，该方法还负责真正地把table数组给new出来。下面是它的源代码，并附上中文注释：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> Node&lt;K, V&gt;[] resize() &#123;</div><div class="line">        Node&lt;K, V&gt;[] oldTab = table;<span class="comment">//获取旧table</span></div><div class="line">        <span class="keyword">int</span> oldCap = (oldTab == <span class="keyword">null</span>) ? <span class="number">0</span> : oldTab.length;<span class="comment">//旧table可能还没初始化，那么旧容量就是0</span></div><div class="line">        <span class="keyword">int</span> oldThr = threshold;<span class="comment">//threshold在没初始化前代表用户指定的容量，初始化后代表用户指定的容量*loadFactor</span></div><div class="line">        <span class="keyword">int</span> newCap, newThr = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (oldCap &gt; <span class="number">0</span>) &#123;<span class="comment">//大于零，说明table已经初始化过了</span></div><div class="line">            <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;<span class="comment">//已经无法再扩容了</span></div><div class="line">                threshold = Integer.MAX_VALUE;</div><div class="line">                <span class="keyword">return</span> oldTab;<span class="comment">//直接返回旧的</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;</div><div class="line">                    oldCap &gt;= DEFAULT_INITIAL_CAPACITY)<span class="comment">//新容量等于旧容量的2倍。如果新容量不大于最大容量，旧容量不小于默认初始化容量，就吧threshold也变两倍</span></div><div class="line">                newThr = oldThr &lt;&lt; <span class="number">1</span>; <span class="comment">// double threshold</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; <span class="number">0</span>) <span class="comment">//还没初始化过且老的threshold大于零，说明用户指定了初始化容量，就把新容量设为用户指定的</span></div><div class="line">            newCap = oldThr;</div><div class="line">        <span class="keyword">else</span> &#123;<span class="comment">//还没初始化过且用户没指定容量，就用默认的</span></div><div class="line">            newCap = DEFAULT_INITIAL_CAPACITY;</div><div class="line">            newThr = (<span class="keyword">int</span>) (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (newThr == <span class="number">0</span>) &#123;<span class="comment">//上面if条件句的3种情况，只有第二种才有可能是newThr等于零，即用户指定了初始化容量的情况，</span></div><div class="line">            <span class="comment">// 这种情况下要计算一下threshold，其中loadFactor可能用的用户指定的值。</span></div><div class="line">            <span class="comment">// 不对，我刚才发现，如果上面第一种情况里面的else if条件句不满足的话，也会在这里计算newThr</span></div><div class="line">            <span class="keyword">float</span> ft = (<span class="keyword">float</span>) newCap * loadFactor;</div><div class="line">            newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="keyword">float</span>) MAXIMUM_CAPACITY ?</div><div class="line">                    (<span class="keyword">int</span>) ft : Integer.MAX_VALUE);</div><div class="line">        &#125;</div><div class="line">        threshold = newThr;<span class="comment">//无论哪种情况，将算好的值回填回threshold域值中</span></div><div class="line">        <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"rawtypes"</span>, <span class="string">"unchecked"</span>&#125;)</div><div class="line">        Node&lt;K, V&gt;[] newTab = (Node&lt;K, V&gt;[]) <span class="keyword">new</span> Node[newCap];<span class="comment">//此处真正初始化了！如果是扩容，也是直接初始化了扩容后大小的数组</span></div><div class="line">        table = newTab;<span class="comment">//回填回table域</span></div><div class="line">        <span class="keyword">if</span> (oldTab != <span class="keyword">null</span>) &#123;<span class="comment">//不等于null说明不是初始化，有旧的table存在，要想办法把旧的table的节点都复制过来，由于容量现在大了，可能以前会碰撞的节点现在也许碰撞不上了，要rehash将他们分配到新的哈希桶里去</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; oldCap; ++j) &#123;<span class="comment">//遍历旧的table，因此扩容操作的时间复杂度至少有O(N)</span></div><div class="line">                Node&lt;K, V&gt; e;</div><div class="line">                <span class="keyword">if</span> ((e = oldTab[j]) != <span class="keyword">null</span>) &#123;</div><div class="line">                    oldTab[j] = <span class="keyword">null</span>;<span class="comment">//把旧的table中有东西的位置清空，可以帮助垃圾处理器更快地回收垃圾</span></div><div class="line">                    <span class="keyword">if</span> (e.next == <span class="keyword">null</span>)<span class="comment">//next为空说明这个哈希桶里装的既不是链表也不是树，就是一个普通的节点而已</span></div><div class="line">                        newTab[e.hash &amp; (newCap - <span class="number">1</span>)] = e;<span class="comment">//将该节点放到新的table数组中，newCap-1就是防止数组越界的掩码，这个下面会详细讲解。【难点一】</span></div><div class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)<span class="comment">//next不为空，那就要看看是不是个树节点了</span></div><div class="line">                        ((TreeNode&lt;K, V&gt;) e).split(<span class="keyword">this</span>, newTab, j, oldCap);<span class="comment">//是树节点，使用树节点的方法来将整个树里的节点们rehash</span></div><div class="line">                    <span class="keyword">else</span> &#123;<span class="comment">//只剩下一种可能了，就是哈希桶里是链表</span></div><div class="line">                        Node&lt;K, V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</div><div class="line">                        Node&lt;K, V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</div><div class="line">                        Node&lt;K, V&gt; next;</div><div class="line">                        <span class="keyword">do</span> &#123;<span class="comment">//遍历链表，时间复杂度上升到O(N*M),M为链表长度</span></div><div class="line">                            next = e.next;</div><div class="line">                            <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123;<span class="comment">//与运算，为0说明不需要把这个节点放到其他哈希桶中【难点二】</span></div><div class="line">                                <span class="keyword">if</span> (loTail == <span class="keyword">null</span>)<span class="comment">//第一次进这个if条件的时候loTail还没值</span></div><div class="line">                                    loHead = e;<span class="comment">//头指针指向第一个节点</span></div><div class="line">                                <span class="keyword">else</span></div><div class="line">                                    loTail.next = e;<span class="comment">//尾指针即最后一个节点的下一个指向e，即把e挂在链表最后</span></div><div class="line">                                loTail = e;<span class="comment">//尾指针指向当前遍历的节点</span></div><div class="line">                            &#125; <span class="keyword">else</span> &#123;<span class="comment">//说明这个节点要放到另一个哈希桶中</span></div><div class="line">                                <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)<span class="comment">//第一次进if时，这个hiTail还没值</span></div><div class="line">                                    hiHead = e;<span class="comment">//头指针指向第一个节点</span></div><div class="line">                                <span class="keyword">else</span></div><div class="line">                                    hiTail.next = e;<span class="comment">//尾指针的下一个是e，也就是把e挂在链表末尾</span></div><div class="line">                                hiTail = e;<span class="comment">//尾指针指向当前遍历的节点</span></div><div class="line">                            &#125;</div><div class="line">                        &#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);<span class="comment">//往下一个遍历，其实这里可以浓缩成((e=e.next)!=null),不需要提前赋值next。</span></div><div class="line">                        <span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;<span class="comment">//不等于null，说明我们有一些节点不需要放到其他哈希桶中，它们要留在原地</span></div><div class="line">                            loTail.next = <span class="keyword">null</span>;</div><div class="line">                            newTab[j] = loHead;<span class="comment">//留在原地，把链表头设给数组</span></div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;<span class="comment">//说明我们有一些节点需要放到其他哈希桶中，它们已经不适合呆在这里了</span></div><div class="line">                            hiTail.next = <span class="keyword">null</span>;</div><div class="line">                            newTab[j + oldCap] = hiHead;<span class="comment">//加上了oldCap，这是因为新table扩容了一倍，为什么会跑到加oldCap的哈希桶里去，见【难点二】</span></div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> newTab;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到，这个方法又臭又长，这主要是因为它又想要初始化内部的table，又想要承担扩容的工作。在《简洁代码之道》这本书里曾经写到过，我们要遵循单一职责的设计原则，一个方法尽量只做一件事。<br>不要以为JDK就有很漂亮的代码，此处的代码笔者认为写的非常糟糕，可读性很差。当然，虽然可读性很差，它却逻辑完美地处理了各种各样的情况，而且处理这些情况的代码还交织在一起，真是让人又爱又恨啊。</p>
+<p>首先第一个需要说明的点就是threshold这个域。它居然承担了两种含义，在初始化前，它用来保存用户传入的initialCapacity，在初始化后，它用来保存计算好的initialCapacity*loadFactor，这个值是下一次执行resize方法的信号，当size大于这个值时，就执行rezise。<br>我们在平时写代码的时候，可不要这么复用，虽然JDK作者这么复用，可以少一个域出来，对于这种底层被调用很多的类而言，少一个域的确能减少很多空间，但是我们不是JDK的作者，我们是上层应用，不需要牺牲可读性来做这种事。</p>
+<p>其余的代码中文注释都很详细了，可能唯一需要解释的就是标注难点一和难点二的地方。<br><strong>【难点一】</strong><br>难点一就是之前讲到过的作者如何解决hash值超出了数组大小的问题。在讲这个问题之前，要先说一个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> h;</div><div class="line">        <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>别看这个方法短小，但是在所有计算hash值的地方，作者都用到了这个方法。<br>我们可以知道：作者并没有简单地使用Key对象hashCode()方法返回的哈希值。作者将返回的哈希值的低16位和高16位做了异或运算。将运算后的结果返回了。<br>这是为什么呢？<br>这就要说到我们难点一处标记的代码了，在利用hash值去寻找哈希桶的时候，我们作者使用了这个语法：<code>e.hash &amp; (newCap - 1)</code><br>我们已经知道，newCap肯定是2的指数幂。因此它的二进制数肯定是1后面跟着一堆0，类似10、100、1000、10000这样的数。<br>然后看下图你就明白为什么这样做了：<br><img src="/2017/08/12/jdk-collection-3/hashmap_resize.png" alt="hashmap_resize.png" title=""><br>可以看到，我们的hash值是123，远远超过了数组容量16，因此作者利用数组容量-1得到掩码，即15。这个掩码有个特性，就是它去和其他数字做与运算的时候，会把其他数字的一些位数抹除成0。<br>我们例子里的容量是16，那么就希望最终算出来的数字小于16，也即二进制数的1只出现在最后四位上，怎么达到这一效果呢？就是用15这个掩码去做与运算，抹除掉后四位以外其他位上的1。<br>这样不管你的hash值有多大，最终得到的只是后4位形成的数字而已，而后四位即使全是1也才15，无论如何也不会超过16，自然也就不会数组越界了。<br><strong>到这里恐怕聪明的人立刻就会有这样的问题：如果在计算位置的时候，只用到了hash值的低4位，没有充分地将hash值的全部位数使用起来，这样很容易发生碰撞呀！</strong><br>没错，在数组容量小的时候，很多对象的hash值，其低4位可能都是相同的，这样太容易发生碰撞了，怎么办？于是就有了上面的hash那个方法，作者把高16位与低16位做了异或运算，将高16位的作用叠加在低16位上，想要以此来降低数组容量比较低时，哈希碰撞的概率。<br><strong>【难点二】</strong><br>难点二在讲如何判断旧的table中的某个节点，应该被移到新的哈希桶中。此处作者用到的语法是<code>(e.hash &amp; oldCap) == 0</code>。讲真这个我也是看了别人的分析才懂。<br>首先我们要知道一个前提：HashMap扩容的话，一定是2倍，这样才能保证扩容后，容量仍然是2的指数幂。<br>如果原来是10000，那么扩容后是多少？<br>答案是100000，就比原来多了一位。<br>这样的话，我想就很好理解了，新容量比旧容量<strong>多了一位</strong>哦！那么新容量的掩码就比旧容量多了一位！原来只有低4位起作用的话，现在第5位也要起作用！<br>以此推断，如果我们原来这个节点的hash值，第5位是个0，那么它和新的容量掩码做了与运算，结果和原容量掩码做与运算，是一样的。如果第5位是个1，结果就不一样了！就要放到新的哈希桶中。<br>见下图，此图我们假设新的容量是32，而旧容量是16：<br><img src="/2017/08/12/jdk-collection-3/hashmap_resize2.png" alt="hashmap_resize2.png" title=""><br>然后你再看作者使用的语法，就会发现，作者把oldCap当做掩码来用了，oldCap的1刚好就处在新增加的那个位上，所以用oldCap去和hash值做与运算，就只会留下那个位上的值，其他位数都被清0了。如此以来，如果等于0，就说明hash值相应位数上本来就是个0，新增加的位数没有对节点属于哪个哈希桶产生影响。</p>
+<h4 id="get获取Value"><a href="#get获取Value" class="headerlink" title="get获取Value"></a>get获取Value</h4><p>这个就比较简单了，就是计算用户传入的Key对象的hash值(经过hash方法处理之后的)，并利用hash值去找到对应的哈希桶，再从哈希桶里找到对应的节点。<br>代码以及中文注释如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        Node&lt;K,V&gt; e;</div><div class="line">        <span class="keyword">return</span> (e = getNode(hash(key), key)) == <span class="keyword">null</span> ? <span class="keyword">null</span> : e.value;<span class="comment">//hash方法会把高16位与低16位做异或运算</span></div><div class="line">    &#125;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> hash, Object key)</span> </span>&#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; <span class="keyword">int</span> n; K k;</div><div class="line">        <span class="keyword">if</span> ((tab = table) != <span class="keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="number">0</span> &amp;&amp;</div><div class="line">            (first = tab[(n - <span class="number">1</span>) &amp; hash]) != <span class="keyword">null</span>) &#123;<span class="comment">//table不能为空，长度不能为0，用hash值找到的哈希桶第一个节点不能为空，否则肯定没有，返回Null</span></div><div class="line">            <span class="keyword">if</span> (first.hash == hash &amp;&amp; <span class="comment">// always check first node</span></div><div class="line">                ((k = first.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">                <span class="keyword">return</span> first;<span class="comment">//第一个节点就满足要求，就不需要再找了，此时时间复杂度是O(1)</span></div><div class="line">            <span class="keyword">if</span> ((e = first.next) != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (first <span class="keyword">instanceof</span> TreeNode)<span class="comment">//说明哈希桶里装的是红黑树，利用红黑树的方法去找，此时时间复杂度最坏情况是O(logN)</span></div><div class="line">                    <span class="keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">                <span class="keyword">do</span> &#123;<span class="comment">//不是树，肯定就是链表了，遍历链表来找到节点，此时时间复杂度最坏情况是O(M)，M为链表节点数，JDK1.8中M&lt;8,其他版本M&lt;=size</span></div><div class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">                        <span class="keyword">return</span> e;</div><div class="line">                &#125; <span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="put添加键值对"><a href="#put添加键值对" class="headerlink" title="put添加键值对"></a>put添加键值对</h4><p>这个稍微复杂一些，但是直接看代码也能懂：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></div><div class="line">                   <span class="keyword">boolean</span> evict) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</div><div class="line">        <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)<span class="comment">//第一次调用put方法，执行resize来初始化</span></div><div class="line">            n = (tab = resize()).length;</div><div class="line">        <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)<span class="comment">//根据hash值找到的哈希桶没有放任何东西，这种情况最简单，直接新建节点就好</span></div><div class="line">            tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            Node&lt;K,V&gt; e; K k;</div><div class="line">            <span class="keyword">if</span> (p.hash == hash &amp;&amp;</div><div class="line">                ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))<span class="comment">//已经存在一模一样的Key值了，而且就在第一个</span></div><div class="line">                e = p;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)<span class="comment">//哈希桶里装的是树，调用树的插入节点的方法</span></div><div class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</div><div class="line">            <span class="keyword">else</span> &#123;<span class="comment">//只有可能是链表了</span></div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;<span class="comment">//遍历链表</span></div><div class="line">                    <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;<span class="comment">//链表遍历结束了还没能找到，只好新建一个节点</span></div><div class="line">                        p.next = newNode(hash, key, value, <span class="keyword">null</span>);</div><div class="line">                        <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">//之前遍历的节点数等于7了，再加上第一个节点就是8了，要把链表变成红黑树</span></div><div class="line">                            treeifyBin(tab, hash);<span class="comment">//链表变成红黑树</span></div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))<span class="comment">//在链表中找到了一模一样的key值，退出循环</span></div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    p = e;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">//说明之前有一样的key在Map中</span></div><div class="line">                V oldValue = e.value;<span class="comment">//取出旧的值</span></div><div class="line">                <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)<span class="comment">//onlyIfAbsent是false的情况下或者旧的值是Null情况下，就设置新值</span></div><div class="line">                    e.value = value;</div><div class="line">                afterNodeAccess(e);<span class="comment">//HashMap什么也没干，这是个钩子方法，给子类用的，子类可以在节点访问后添加自己的逻辑</span></div><div class="line">                <span class="keyword">return</span> oldValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ++modCount;</div><div class="line">        <span class="keyword">if</span> (++size &gt; threshold)<span class="comment">//size超过阈值了，进行resize</span></div><div class="line">            resize();</div><div class="line">        afterNodeInsertion(evict);<span class="comment">//HashMap什么也没干，给子类用的钩子方法</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>【未完待续】</p>
+<div style="display:none;"><br>
+//引用块
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+//代码块
+```[language] [title] [url] [link text] code snippet```
+//插入引用块
+{% pullquote [class] %}
+content
+{% endpullquote %}
+//插入jsfiddle，可以在线演示JS代码的效果
+{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+//Gist，将github上面的代码片段分享到博客中
+{% gist gist_id [filename] %}
+//插入另一个网页
+{% iframe url [width] [height] %}
+//插入制定大小的图片，应该是相对路径吧
+{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+//插入连接，外部链接加target="_blank"属性
+{% link text url [external] [title] %}
+//插入source文件夹的代码文件
+{% include_code [title] [lang:language] path/to/file %}
+//引用本站其他文章
+{% post_path slug %}
+{% post_link slug [title] %}
+//引用文章的资源文件夹中的资源
+{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+//避免解析
+{% raw %}
+content
+{% endraw %}<br><br></div>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+		<div class="col-md-8 col-md-offset-2">
+      		<p>作者：
+                        Welkin Bai
+                      
+			</p>
+			<p>最后修改：
+				<time datetime="2017-08-20T09:40:11.864Z" itemprop="datePublished">
+					2017年8月20日 17:40
+				</time>
+			</p>
+            <p>
+                <span id="busuanzi_container_page_pv" style='display:none'>
+                    总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                </span>
+            </p>		
+        </div>		
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/08/08/jdk-collection-2/">
+        JDK源码学习——集合框架（二） →
+    </a>
+    
+</nav>
+
+        
+        <div class="col-md-8 col-md-offset-2"><p>本站评论框使用disqus，需要翻墙使用，请谅解，欢迎推荐更好用的第三方评论框（不需备案无广告的）</p></div>
+		<div class="disqus">
+<!-- disqus评论框 start -->
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = /2017/08/12/jdk-collection-3/;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = 1502548586; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+$(window).load(function($) {
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://dawn-2.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	s.setAttribute('async', 'async');
+	(d.head || d.body).appendChild(s);
+	})();	
+});
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- disqus end -->
+</div>
+        <div class="youyan"></div>
+		
+        <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2015<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Welkin Bai. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran.</a> Modified By Welkin Bai.</p>
+                <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </div>
+            <div class="pvuv">
+                <span id="busuanzi_container_site_pv" style='display:none'>                
+                    总共被访问了<span id="busuanzi_value_site_pv"></span>次 
+                </span>
+                <span id="busuanzi_container_site_uv" style='display:none'>
+                    有<span id="busuanzi_value_site_uv"></span>个小伙伴路过
+                </span>         
+            </div>            
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+
+
+
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/jquery.cookie.js"></script><!-- Theme scripts -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<script src="/js/zoom-vanilla.min.js"></script><!-- Theme scripts -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>
